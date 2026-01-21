@@ -423,11 +423,36 @@ function showWorkCard(index) {
   });
 }
 
+// Hero dreamy color cycling
+const heroColorCycle = {
+  colors: ['cyber', 'ice', 'vapor', 'neon', 'gold', 'coral', 'royal', 'mint'],
+  currentIndex: 0,
+  lastChange: 0,
+  interval: 4000 // Change color every 4 seconds
+};
+
+function updateHeroColor(time) {
+  if (time - heroColorCycle.lastChange > heroColorCycle.interval) {
+    heroColorCycle.currentIndex = (heroColorCycle.currentIndex + 1) % heroColorCycle.colors.length;
+    heroColorCycle.lastChange = time;
+
+    const heroAscii = document.querySelector('.hero-ascii pre');
+    if (heroAscii) {
+      const colorName = heroColorCycle.colors[heroColorCycle.currentIndex];
+      const colors = ASCII.colors[colorName];
+      if (colors) {
+        heroAscii.style.color = colors.primary;
+      }
+    }
+  }
+}
+
 // Initialize hero and contact animations
 function initSpecialAnimations() {
+  // Hero always uses bokeh for dreamy effect
   animationState.hero = {
-    animation: ASCII.random(),
-    color: randomColor()
+    animation: 'bokeh',
+    color: heroColorCycle.colors[0]
   };
   animationState.contact = {
     animation: ASCII.random(),
@@ -491,22 +516,16 @@ function randomizeAnimations() {
     card.style.display = idx === currentWorkIndex ? 'block' : 'none';
   });
 
-  // Randomize hero and contact
+  // Hero always stays bokeh (color cycles automatically)
   animationState.hero = {
-    animation: ASCII.random(),
-    color: randomColor()
+    animation: 'bokeh',
+    color: heroColorCycle.colors[heroColorCycle.currentIndex]
   };
+  // Randomize contact
   animationState.contact = {
     animation: ASCII.random(),
     color: randomColor()
   };
-
-  // Apply new hero color
-  const heroAscii = document.querySelector('.hero-ascii pre');
-  if (heroAscii) {
-    const colors = ASCII.colors[animationState.hero.color];
-    if (colors) heroAscii.style.color = colors.primary;
-  }
 
   // Apply new contact color
   const contactAscii = document.querySelector('.contact-ascii pre');
@@ -537,10 +556,11 @@ function animate() {
     }
   });
 
-  // Animate hero
+  // Animate hero (larger bokeh with color cycling)
   const heroCanvas = document.getElementById('hero-animation');
   if (heroCanvas && animationState.hero.animation) {
-    ASCII.animate(heroCanvas, animationState.hero.animation, 70, 35);
+    ASCII.animate(heroCanvas, animationState.hero.animation, 100, 50);
+    updateHeroColor(performance.now());
   }
 
   // Animate contact
