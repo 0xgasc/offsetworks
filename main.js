@@ -1,0 +1,584 @@
+// Main Application - Card System with Animation & Color Randomizer
+
+// ====== INTERNATIONALIZATION (i18n) ======
+const translations = {
+  en: {
+    nav: {
+      work: 'Work',
+      services: 'Services',
+      contact: "Let's Talk"
+    },
+    hero: {
+      headline: 'What you imagine,<br>we <span class="highlight">ship</span>.',
+      subtext: 'Design & development studio for founders, startups, and creatives. Custom-coded, no templates. Fast turnaround, competitive rates.',
+      cta1: 'Start a Project →',
+      cta2: 'See Our Work'
+    },
+    services: {
+      shuffle: 'Shuffle Animations',
+      landing: {
+        title: 'Landing Pages',
+        desc: 'High-converting pages with custom animations. No templates, no bloat.'
+      },
+      webapps: {
+        title: 'Web Apps / Products',
+        desc: 'Custom web applications, dashboards, and digital products. Built to scale.'
+      },
+      immersive: {
+        title: 'Immersive Experiences',
+        desc: 'WebGL, 3D, ASCII art, particle systems. Websites that feel like products.'
+      }
+    },
+    process: {
+      step1: { title: 'Intro Call', desc: '15 min to understand your project. Free, no pressure.' },
+      step2: { title: 'Proposal', desc: 'Scope, timeline, and fixed price within 48 hours.' },
+      step3: { title: 'Build Sprint', desc: 'We work fast. Most projects ship in 1-4 weeks.' },
+      step4: { title: 'Launch + Support', desc: 'Go live, then optional retainer for ongoing needs.' }
+    },
+    work: {
+      tag: 'Selected Work',
+      badge: 'Coming Soon'
+    },
+    contact: {
+      headline: 'Ready to build something?',
+      subtext: 'Drop us a line. We respond fast (like everything else we do).'
+    }
+  },
+  es: {
+    nav: {
+      work: 'Trabajo',
+      services: 'Servicios',
+      contact: 'Hablemos'
+    },
+    hero: {
+      headline: 'Lo que imaginas,<br>lo <span class="highlight">hacemos realidad</span>.',
+      subtext: 'Estudio de diseño y desarrollo para fundadores, startups y creativos. Código personalizado, sin plantillas. Entrega rápida, precios competitivos.',
+      cta1: 'Iniciar Proyecto →',
+      cta2: 'Ver Nuestro Trabajo'
+    },
+    services: {
+      shuffle: 'Cambiar Animaciones',
+      landing: {
+        title: 'Landing Pages',
+        desc: 'Páginas de alta conversión con animaciones personalizadas. Sin plantillas, sin excesos.'
+      },
+      webapps: {
+        title: 'Apps Web / Productos',
+        desc: 'Aplicaciones web personalizadas, dashboards y productos digitales. Hechos para escalar.'
+      },
+      immersive: {
+        title: 'Experiencias Inmersivas',
+        desc: 'WebGL, 3D, ASCII art, sistemas de partículas. Sitios web que se sienten como productos.'
+      }
+    },
+    process: {
+      step1: { title: 'Llamada Intro', desc: '15 min para entender tu proyecto. Gratis, sin compromiso.' },
+      step2: { title: 'Propuesta', desc: 'Alcance, timeline y precio fijo en 48 horas.' },
+      step3: { title: 'Sprint de Desarrollo', desc: 'Trabajamos rápido. La mayoría de proyectos se entregan en 1-4 semanas.' },
+      step4: { title: 'Lanzamiento + Soporte', desc: 'Salimos en vivo, luego retainer opcional para necesidades continuas.' }
+    },
+    work: {
+      tag: 'Trabajo Seleccionado',
+      badge: 'Próximamente'
+    },
+    contact: {
+      headline: '¿Listo para crear algo?',
+      subtext: 'Escríbenos. Respondemos rápido (como todo lo que hacemos).'
+    }
+  }
+};
+
+let currentLang = 'en';
+
+function setLanguage(lang) {
+  currentLang = lang;
+  const t = translations[lang];
+
+  // Update all elements with data-i18n attribute
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const keys = key.split('.');
+    let value = t;
+    for (const k of keys) {
+      value = value?.[k];
+    }
+    if (value) {
+      el.innerHTML = value;
+    }
+  });
+
+  // Update service cards
+  updateServiceCardTranslations(t);
+
+  // Update work card badges
+  document.querySelectorAll('.work-badge').forEach(badge => {
+    badge.textContent = t.work.badge;
+  });
+
+  // Update toggle button
+  const toggleBtn = document.getElementById('lang-toggle');
+  if (toggleBtn) {
+    toggleBtn.textContent = lang === 'en' ? 'ES' : 'EN';
+  }
+
+  // Update html lang attribute
+  document.documentElement.lang = lang;
+}
+
+function updateServiceCardTranslations(t) {
+  const serviceKeys = ['landing', 'webapps', 'immersive'];
+  document.querySelectorAll('#services-grid .card').forEach((card, idx) => {
+    const key = serviceKeys[idx];
+    if (t.services[key]) {
+      const title = card.querySelector('.card-title');
+      const desc = card.querySelector('.card-desc');
+      if (title) title.textContent = t.services[key].title;
+      if (desc) desc.textContent = t.services[key].desc;
+    }
+  });
+}
+
+function initLanguageToggle() {
+  const toggleBtn = document.getElementById('lang-toggle');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      const newLang = currentLang === 'en' ? 'es' : 'en';
+      setLanguage(newLang);
+    });
+  }
+}
+
+const services = [
+  {
+    title: 'Landing Pages',
+    desc: 'High-converting pages with custom animations. No templates, no bloat.',
+    gif: 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMG8zeGQxbjhqajk0MDQ5N3dwZm1kY3JsMTU3N3ltbHlpb2czMDMweSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bz9PIxJMQtkO943XeS/giphy.gif'
+  },
+  {
+    title: 'Web Apps / Products',
+    desc: 'Custom web applications, dashboards, and digital products. Built to scale.',
+    gif: 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2VvYzA1bWN3MWhma3F2YTR3bGx4aW1wMjd5cWVuOWZhZG1nZTdzYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wgHY9nSrlTMt2/giphy.gif'
+  },
+  {
+    title: 'Immersive Experiences',
+    desc: 'WebGL, 3D, ASCII art, particle systems. Websites that feel like products.'
+  }
+];
+
+const workItems = [
+  {
+    title: 'FlyInGuate',
+    type: 'Web App',
+    badge: 'Coming Soon',
+    collage: true,
+    images: [
+      'images/heli-1.jpg',
+      'images/heli-2.jpg',
+      'images/heli-3.jpg',
+      'images/heli-4.jpg',
+      'images/heli-5.jpg',
+      'images/heli-6.jpg'
+    ]
+  },
+  {
+    title: 'Project Beta',
+    type: 'Brand + Site',
+    badge: 'Coming Soon',
+    image: 'images/project-beta.jpg'
+  }
+];
+
+// Color themes list
+const colorThemes = [
+  'cyber', 'neon', 'fire', 'ice', 'gold', 'vapor', 'matrix',
+  'sunset', 'ocean', 'toxic', 'blood', 'royal', 'mint', 'coral',
+  'arctic', 'lava'
+];
+
+// Gradient options
+const gradients = [
+  'gradient-vapor', 'gradient-sunset', 'gradient-ocean',
+  'gradient-royal', 'gradient-fire', 'gradient-cyber'
+];
+
+// Animation state tracking
+const animationState = {
+  services: [],
+  work: [],
+  hero: { animation: null, color: null },
+  contact: { animation: null, color: null },
+  running: true
+};
+
+// Get random color
+function randomColor() {
+  return colorThemes[Math.floor(Math.random() * colorThemes.length)];
+}
+
+// Get random gradient (with probability)
+function maybeGradient() {
+  if (Math.random() > 0.7) {
+    return gradients[Math.floor(Math.random() * gradients.length)];
+  }
+  return null;
+}
+
+// Create dithered GIF element for service cards
+function createDitheredGif(gifSrc) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'service-gif-wrapper';
+
+  const img = document.createElement('img');
+  img.src = gifSrc;
+  img.className = 'service-gif';
+  img.alt = '';
+
+  // Halftone overlay
+  const halftone = document.createElement('div');
+  halftone.className = 'service-gif-halftone';
+
+  // Scanline overlay
+  const scanlines = document.createElement('div');
+  scanlines.className = 'service-gif-scanlines';
+
+  wrapper.appendChild(img);
+  wrapper.appendChild(halftone);
+  wrapper.appendChild(scanlines);
+
+  return wrapper;
+}
+
+// Initialize service cards
+function initServiceCards() {
+  const grid = document.getElementById('services-grid');
+  grid.innerHTML = '';
+
+  // Custom animations for specific services
+  const customAnimations = {
+    'Landing Pages': 'landingPage',
+    'Web Apps / Products': 'codeMatrix',
+    'Immersive Experiences': 'bokeh'
+  };
+
+  services.forEach((service, idx) => {
+    const animation = service.gif ? null : (customAnimations[service.title] || ASCII.random());
+    const color = randomColor();
+    const gradient = maybeGradient();
+
+    animationState.services[idx] = { animation, color, hasGif: !!service.gif };
+
+    const card = document.createElement('div');
+    let classes = `card color-${color}`;
+    if (gradient) classes += ` ${gradient}`;
+    if (service.gif) classes += ' has-gif';
+    card.className = classes;
+
+    card.innerHTML = `
+      <div class="card-ascii" id="service-ascii-container-${idx}">
+        <pre id="service-ascii-${idx}"></pre>
+      </div>
+      <div class="card-content">
+        <div class="card-title">${service.title}</div>
+        <div class="card-desc">${service.desc}</div>
+      </div>
+    `;
+    grid.appendChild(card);
+
+    // If service has a GIF, replace the ASCII animation
+    if (service.gif) {
+      const container = document.getElementById(`service-ascii-container-${idx}`);
+      const pre = document.getElementById(`service-ascii-${idx}`);
+      if (container && pre) {
+        pre.style.display = 'none';
+        const gifEl = createDitheredGif(service.gif);
+        container.insertBefore(gifEl, container.firstChild);
+      }
+    }
+  });
+}
+
+// Work carousel state
+let currentWorkIndex = Math.floor(Math.random() * workItems.length);
+
+// Create image element for work cards
+function createWorkImage(imgSrc) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'pixel-art-wrapper';
+
+  const img = document.createElement('img');
+  img.src = imgSrc;
+  img.className = 'pixel-art-img';
+  img.alt = '';
+
+  wrapper.appendChild(img);
+  return wrapper;
+}
+
+// Create crossfade dither slideshow
+function createDitherCollage(images) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'dither-slideshow';
+
+  // Create image layers that crossfade
+  images.forEach((src, idx) => {
+    const layer = document.createElement('div');
+    layer.className = 'dither-layer';
+    layer.style.animationDelay = `${idx * 2}s`; // 2 seconds per image, 12s total cycle
+
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = '';
+
+    layer.appendChild(img);
+    wrapper.appendChild(layer);
+  });
+
+  // Add halftone overlay
+  const halftone = document.createElement('div');
+  halftone.className = 'dither-halftone';
+  wrapper.appendChild(halftone);
+
+  return wrapper;
+}
+
+// Initialize work cards (carousel - one at a time)
+function initWorkCards() {
+  const grid = document.getElementById('work-grid');
+  grid.innerHTML = '';
+
+  const customWorkColors = {
+    'FlyInGuate': 'cyber',
+    'Project Beta': 'vapor'
+  };
+
+  // Create all cards but only show current one
+  workItems.forEach((item, idx) => {
+    const color = customWorkColors[item.title] || randomColor();
+
+    animationState.work[idx] = { animation: null, color, useImage: !!item.image };
+
+    const card = document.createElement('a');
+    card.href = '#';
+    card.className = `work-card color-${color}`;
+    card.style.display = idx === currentWorkIndex ? 'block' : 'none';
+    card.dataset.index = idx;
+    card.innerHTML = `
+      <div class="work-ascii" id="work-ascii-container-${idx}">
+        <pre id="work-ascii-${idx}"></pre>
+        ${item.badge ? `<span class="work-badge">${item.badge}</span>` : ''}
+      </div>
+      <div class="work-content">
+        <div class="work-title">${item.title}</div>
+        <div class="work-type">${item.type}</div>
+      </div>
+    `;
+    card.addEventListener('click', (e) => e.preventDefault());
+    grid.appendChild(card);
+
+    // Show collage or single image
+    if (item.collage && item.images) {
+      const container = document.getElementById(`work-ascii-container-${idx}`);
+      const pre = document.getElementById(`work-ascii-${idx}`);
+      if (container && pre) {
+        pre.style.display = 'none';
+        const collageEl = createDitherCollage(item.images);
+        container.insertBefore(collageEl, container.firstChild);
+      }
+    } else if (item.image) {
+      const container = document.getElementById(`work-ascii-container-${idx}`);
+      const pre = document.getElementById(`work-ascii-${idx}`);
+      if (container && pre) {
+        pre.style.display = 'none';
+        const imageWrapper = createWorkImage(item.image);
+        container.insertBefore(imageWrapper, container.firstChild);
+      }
+    }
+  });
+
+  // Set up carousel controls
+  const prevBtn = document.getElementById('work-prev');
+  const nextBtn = document.getElementById('work-next');
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => showWorkCard(currentWorkIndex - 1));
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => showWorkCard(currentWorkIndex + 1));
+  }
+}
+
+// Show specific work card
+function showWorkCard(index) {
+  const cards = document.querySelectorAll('#work-grid .work-card');
+  if (cards.length === 0) return;
+
+  // Wrap around
+  if (index < 0) index = cards.length - 1;
+  if (index >= cards.length) index = 0;
+
+  currentWorkIndex = index;
+
+  cards.forEach((card, idx) => {
+    card.style.display = idx === index ? 'block' : 'none';
+  });
+}
+
+// Initialize hero and contact animations
+function initSpecialAnimations() {
+  animationState.hero = {
+    animation: ASCII.random(),
+    color: randomColor()
+  };
+  animationState.contact = {
+    animation: ASCII.random(),
+    color: randomColor()
+  };
+
+  // Apply hero color
+  const heroAscii = document.querySelector('.hero-ascii pre');
+  if (heroAscii) {
+    const colors = ASCII.colors[animationState.hero.color];
+    if (colors) heroAscii.style.color = colors.primary;
+  }
+
+  // Apply contact color
+  const contactAscii = document.getElementById('contact-ascii');
+  if (contactAscii) {
+    const colors = ASCII.colors[animationState.contact.color];
+    if (colors) contactAscii.style.color = colors.primary;
+  }
+}
+
+// Randomize all animations and colors
+function randomizeAnimations() {
+  // Clear animation states to reset stateful animations
+  ASCII.matrixState.clear();
+  ASCII.particlesState.clear();
+  ASCII.starsState.clear();
+  ASCII.fireState.clear();
+  ASCII.constellationState.clear();
+  ASCII.bokehState.clear();
+  ASCII.rainState.clear();
+  ASCII.bubblesState.clear();
+
+  // Randomize services (preserve custom animations and GIFs)
+  const customAnimations = {
+    'Landing Pages': 'landingPage',
+    'Web Apps / Products': 'codeMatrix',
+    'Immersive Experiences': 'bokeh'
+  };
+  const servicesGrid = document.getElementById('services-grid');
+  servicesGrid.querySelectorAll('.card').forEach((card, idx) => {
+    const service = services[idx];
+    const title = service?.title;
+    const hasGif = !!service?.gif;
+    const animation = hasGif ? null : (customAnimations[title] || ASCII.random());
+    const color = randomColor();
+    const gradient = maybeGradient();
+
+    animationState.services[idx] = { animation, color, hasGif };
+
+    // Update classes
+    card.className = `card color-${color}`;
+    if (gradient) card.classList.add(gradient);
+    if (hasGif) card.classList.add('has-gif');
+  });
+
+  // Work cards keep their fixed animations/colors, just update display
+  const workGrid = document.getElementById('work-grid');
+  workGrid.querySelectorAll('.work-card').forEach((card, idx) => {
+    // Preserve carousel display state
+    card.style.display = idx === currentWorkIndex ? 'block' : 'none';
+  });
+
+  // Randomize hero and contact
+  animationState.hero = {
+    animation: ASCII.random(),
+    color: randomColor()
+  };
+  animationState.contact = {
+    animation: ASCII.random(),
+    color: randomColor()
+  };
+
+  // Apply new hero color
+  const heroAscii = document.querySelector('.hero-ascii pre');
+  if (heroAscii) {
+    const colors = ASCII.colors[animationState.hero.color];
+    if (colors) heroAscii.style.color = colors.primary;
+  }
+
+  // Apply new contact color
+  const contactAscii = document.querySelector('.contact-ascii pre');
+  if (contactAscii) {
+    const colors = ASCII.colors[animationState.contact.color];
+    if (colors) contactAscii.style.color = colors.primary;
+  }
+}
+
+// Animation loop
+function animate() {
+  if (!animationState.running) return;
+
+  // Animate service cards (skip cards with GIFs)
+  animationState.services.forEach((state, idx) => {
+    if (state.hasGif) return; // Skip GIF cards
+    const canvas = document.getElementById(`service-ascii-${idx}`);
+    if (canvas && state.animation) {
+      ASCII.animate(canvas, state.animation, 45, 14);
+    }
+  });
+
+  // Animate work cards
+  animationState.work.forEach((state, idx) => {
+    const canvas = document.getElementById(`work-ascii-${idx}`);
+    if (canvas && state.animation) {
+      ASCII.animate(canvas, state.animation, 60, 22);
+    }
+  });
+
+  // Animate hero
+  const heroCanvas = document.getElementById('hero-animation');
+  if (heroCanvas && animationState.hero.animation) {
+    ASCII.animate(heroCanvas, animationState.hero.animation, 70, 35);
+  }
+
+  // Animate contact
+  const contactCanvas = document.getElementById('contact-ascii');
+  if (contactCanvas && animationState.contact.animation) {
+    ASCII.animate(contactCanvas, animationState.contact.animation, 120, 40);
+  }
+
+  requestAnimationFrame(animate);
+}
+
+// Initialize everything
+function init() {
+  initServiceCards();
+  initWorkCards();
+  initSpecialAnimations();
+  initLanguageToggle();
+
+  // Start animation loop
+  requestAnimationFrame(animate);
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+}
+
+// Run on DOM ready
+document.addEventListener('DOMContentLoaded', init);
+
+// Pause animations when tab is hidden (performance)
+document.addEventListener('visibilitychange', () => {
+  animationState.running = !document.hidden;
+  if (animationState.running) requestAnimationFrame(animate);
+});

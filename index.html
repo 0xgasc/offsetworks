@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offset — Digital Products That Work</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-logo">offset works</div>
+    <div class="nav-links">
+      <a href="#work" data-i18n="nav.work">Work</a>
+      <a href="#services" data-i18n="nav.services">Services</a>
+      <a href="#contact" class="btn-nav" data-i18n="nav.contact">Let's Talk</a>
+      <button class="lang-toggle" id="lang-toggle">ES</button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <pre class="section-bg" id="hero-bg"></pre>
+    <div class="hero-content">
+      <h1 data-i18n="hero.headline">What you imagine,<br>we <span class="highlight">ship</span>.</h1>
+      <p class="hero-sub" data-i18n="hero.subtext">Design & development studio for founders, startups, and creatives. Custom-coded, no templates. Fast turnaround, competitive rates.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary" data-i18n="hero.cta1">Start a Project →</a>
+        <a href="#work" class="btn-secondary" data-i18n="hero.cta2">See Our Work</a>
+      </div>
+    </div>
+    <div class="hero-ascii">
+      <pre id="hero-animation"></pre>
+    </div>
+  </header>
+
+  <section class="marquee-section">
+    <pre class="section-bg" id="marquee-bg"></pre>
+    <div class="marquee">
+      <div class="marquee-content">
+        <span>WEBSITES</span><span>•</span>
+        <span>APPS</span><span>•</span>
+        <span>BRANDING</span><span>•</span>
+        <span>UI/UX</span><span>•</span>
+        <span>PROTOTYPES</span><span>•</span>
+        <span>LANDING PAGES</span><span>•</span>
+        <span>DASHBOARDS</span><span>•</span>
+        <span>WEBSITES</span><span>•</span>
+        <span>APPS</span><span>•</span>
+        <span>BRANDING</span><span>•</span>
+        <span>UI/UX</span><span>•</span>
+        <span>PROTOTYPES</span><span>•</span>
+        <span>LANDING PAGES</span><span>•</span>
+        <span>DASHBOARDS</span><span>•</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="services">
+    <pre class="section-bg" id="services-bg"></pre>
+    <div class="cards-grid" id="services-grid">
+      <!-- Cards injected by JS with random animations -->
+    </div>
+  </section>
+
+  <section id="process" class="process">
+    <pre class="section-bg" id="process-bg"></pre>
+    <div class="timeline">
+      <div class="timeline-step">
+        <div class="step-icon">
+          <pre>┌──┐
+│01│
+└──┘</pre>
+        </div>
+        <div class="step-content">
+          <h3 data-i18n="process.step1.title">Intro Call</h3>
+          <p data-i18n="process.step1.desc">15 min to understand your project. Free, no pressure.</p>
+        </div>
+      </div>
+      <div class="timeline-connector"></div>
+      <div class="timeline-step">
+        <div class="step-icon">
+          <pre>┌──┐
+│02│
+└──┘</pre>
+        </div>
+        <div class="step-content">
+          <h3 data-i18n="process.step2.title">Proposal</h3>
+          <p data-i18n="process.step2.desc">Scope, timeline, and fixed price within 48 hours.</p>
+        </div>
+      </div>
+      <div class="timeline-connector"></div>
+      <div class="timeline-step">
+        <div class="step-icon">
+          <pre>┌──┐
+│03│
+└──┘</pre>
+        </div>
+        <div class="step-content">
+          <h3 data-i18n="process.step3.title">Build Sprint</h3>
+          <p data-i18n="process.step3.desc">We work fast. Most projects ship in 1-4 weeks.</p>
+        </div>
+      </div>
+      <div class="timeline-connector"></div>
+      <div class="timeline-step">
+        <div class="step-icon">
+          <pre>┌──┐
+│04│
+└──┘</pre>
+        </div>
+        <div class="step-content">
+          <h3 data-i18n="process.step4.title">Launch + Support</h3>
+          <p data-i18n="process.step4.desc">Go live, then optional retainer for ongoing needs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="work">
+    <pre class="section-bg" id="work-bg"></pre>
+    <div class="section-header">
+      <span class="section-tag" data-i18n="work.tag">Selected Work</span>
+    </div>
+    <div class="work-carousel">
+      <button class="carousel-arrow carousel-prev" id="work-prev">←</button>
+      <div class="work-grid" id="work-grid">
+        <!-- Work cards injected by JS -->
+      </div>
+      <button class="carousel-arrow carousel-next" id="work-next">→</button>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <pre class="section-bg" id="contact-bg"></pre>
+    <div class="contact-ascii">
+      <pre id="contact-ascii"></pre>
+    </div>
+    <div class="contact-content">
+      <h2 data-i18n="contact.headline">Ready to build something?</h2>
+      <p data-i18n="contact.subtext">Drop us a line. We respond fast (like everything else we do).</p>
+      <a href="mailto:hello@offset.works" class="btn-primary btn-large">hello@offset.works</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="https://instagram.com/offset.works">Instagram</a>
+      </div>
+      <div class="footer-copy">© 2026 Offset</div>
+    </div>
+  </footer>
+
+  <script src="animations.js"></script>
+  <script src="main.js"></script>
+  <script>
+    // Trippy Section Backgrounds
+    (function() {
+      const chars = ' ░▒▓█';
+      const sections = {
+        'hero-bg': { effect: 'plasma', cols: 0, rows: 0 },
+        'marquee-bg': { effect: 'wave', cols: 0, rows: 0 },
+        'services-bg': { effect: 'spiral', cols: 0, rows: 0 },
+        'process-bg': { effect: 'warp', cols: 0, rows: 0 },
+        'work-bg': { effect: 'noise', cols: 0, rows: 0 },
+        'contact-bg': { effect: 'pulse', cols: 0, rows: 0 }
+      };
+
+      function resize() {
+        const charWidth = 6;
+        const charHeight = 11;
+        Object.keys(sections).forEach(id => {
+          const el = document.getElementById(id);
+          if (el && el.parentElement) {
+            const parent = el.parentElement;
+            const width = parent.offsetWidth || parent.clientWidth || window.innerWidth;
+            const height = parent.offsetHeight || parent.clientHeight || 600;
+            sections[id].cols = Math.ceil(width / charWidth) + 10;
+            sections[id].rows = Math.ceil(height / charHeight) + 10;
+          }
+        });
+      }
+
+      // Initial resize after DOM ready
+      setTimeout(resize, 100);
+      window.addEventListener('resize', resize);
+      window.addEventListener('load', resize);
+
+      const effects = {
+        wave: (time, cols, rows) => {
+          let out = '';
+          const t = time * 0.002;
+          for (let y = 0; y < rows; y++) {
+            for (let x = 0; x < cols; x++) {
+              const wave1 = Math.sin(x * 0.08 + t);
+              const wave2 = Math.sin(y * 0.1 + t * 1.3);
+              const wave3 = Math.sin((x + y) * 0.05 + t * 0.7);
+              const v = (wave1 + wave2 + wave3) / 3;
+              const idx = Math.floor((v + 1) * 2.4);
+              out += chars[Math.max(0, Math.min(4, idx))];
+            }
+            out += '\n';
+          }
+          return out;
+        },
+
+        plasma: (time, cols, rows) => {
+          let out = '';
+          const t = time * 0.001;
+          for (let y = 0; y < rows; y++) {
+            for (let x = 0; x < cols; x++) {
+              const v1 = Math.sin(x * 0.05 + t);
+              const v2 = Math.sin((y * 0.05 + t) * 0.7);
+              const v3 = Math.sin((x * 0.03 + y * 0.04 + t) * 0.8);
+              const v4 = Math.sin(Math.sqrt((x - cols/2) ** 2 + (y - rows/2) ** 2) * 0.05 + t);
+              const v = (v1 + v2 + v3 + v4) / 4;
+              const idx = Math.floor((v + 1) * 2.4);
+              out += chars[Math.max(0, Math.min(4, idx))];
+            }
+            out += '\n';
+          }
+          return out;
+        },
+
+        spiral: (time, cols, rows) => {
+          let out = '';
+          const cx = cols / 2;
+          const cy = rows / 2;
+          const t = time * 0.002;
+          for (let y = 0; y < rows; y++) {
+            for (let x = 0; x < cols; x++) {
+              const dx = (x - cx) / 2;
+              const dy = y - cy;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+              const angle = Math.atan2(dy, dx);
+              const spiral = Math.sin(dist * 0.2 - angle * 3 + t * 2);
+              const idx = Math.floor((spiral + 1) * 2.4);
+              out += chars[Math.max(0, Math.min(4, idx))];
+            }
+            out += '\n';
+          }
+          return out;
+        },
+
+        pulse: (time, cols, rows) => {
+          let out = '';
+          const cx = cols / 2;
+          const cy = rows / 2;
+          const t = time * 0.004;
+          for (let y = 0; y < rows; y++) {
+            for (let x = 0; x < cols; x++) {
+              const dx = (x - cx) / 2.5;
+              const dy = y - cy;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+              const pulse = Math.sin(dist * 0.5 - t);
+              const idx = Math.floor((pulse + 1) * 2.4);
+              out += chars[Math.max(0, Math.min(4, idx))];
+            }
+            out += '\n';
+          }
+          return out;
+        },
+
+        tunnel: (time, cols, rows) => {
+          let out = '';
+          const cx = cols / 2;
+          const cy = rows / 2;
+          const t = time * 0.003;
+          for (let y = 0; y < rows; y++) {
+            for (let x = 0; x < cols; x++) {
+              const dx = (x - cx) / 2;
+              const dy = y - cy;
+              const dist = Math.sqrt(dx * dx + dy * dy) + 0.1;
+              const angle = Math.atan2(dy, dx);
+              const tunnel = Math.sin(10 / dist + angle * 2 + t * 3);
+              const idx = Math.floor((tunnel + 1) * 2.4);
+              out += chars[Math.max(0, Math.min(4, idx))];
+            }
+            out += '\n';
+          }
+          return out;
+        },
+
+        warp: (time, cols, rows) => {
+          let out = '';
+          const cx = cols / 2;
+          const cy = rows / 2;
+          const t = time * 0.001;
+          for (let y = 0; y < rows; y++) {
+            for (let x = 0; x < cols; x++) {
+              const dx = (x - cx) / cols;
+              const dy = (y - cy) / rows;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+              const warp = Math.sin(dist * 20 - t * 5) * Math.exp(-dist * 3);
+              const idx = Math.floor((warp + 1) * 2.4);
+              out += chars[Math.max(0, Math.min(4, idx))];
+            }
+            out += '\n';
+          }
+          return out;
+        },
+
+        noise: (time, cols, rows) => {
+          let out = '';
+          const t = time * 0.002;
+          const denseChars = ' .:-=+*#%@';
+          for (let y = 0; y < rows; y++) {
+            for (let x = 0; x < cols; x++) {
+              const n1 = Math.sin(x * 0.1 + t) * Math.cos(y * 0.12 + t * 0.8);
+              const n2 = Math.sin((x + y) * 0.07 + t * 0.6);
+              const n3 = Math.cos(x * 0.15 - y * 0.08 + t * 1.2);
+              const v = (n1 + n2 + n3) / 3;
+              const idx = Math.floor((v + 1) * 4.5);
+              out += denseChars[Math.max(0, Math.min(9, idx))];
+            }
+            out += '\n';
+          }
+          return out;
+        }
+      };
+
+      let running = true;
+      function animate(time) {
+        if (!running) return;
+        Object.keys(sections).forEach(id => {
+          const el = document.getElementById(id);
+          const cfg = sections[id];
+          if (el && effects[cfg.effect] && cfg.cols > 0 && cfg.rows > 0) {
+            el.textContent = effects[cfg.effect](time, cfg.cols, cfg.rows);
+          }
+        });
+        requestAnimationFrame(animate);
+      }
+      requestAnimationFrame(animate);
+
+      document.addEventListener('visibilitychange', () => {
+        running = !document.hidden;
+        if (running) requestAnimationFrame(animate);
+      });
+    })();
+  </script>
+</body>
+</html>
