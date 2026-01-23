@@ -204,8 +204,8 @@ const workItems = [
     type: 'Music Platform',
     badge: 'Live',
     desc: 'Live music setlist archive and discovery platform. Browse performances, track artists, and explore music history.',
-    link: 'http://umo-live.xyz',
-    embed: 'http://umo-live.xyz'
+    link: 'https://umo-live.xyz',
+    embed: 'https://umo-live.xyz'
   }
 ];
 
