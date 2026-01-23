@@ -1000,6 +1000,7 @@ body {
   height: 100%;
   background: #000;
   position: relative;
+  overflow: hidden;
 }
 
 .work-iframe {
@@ -1007,6 +1008,30 @@ body {
   height: 100%;
   border: none;
   display: block;
+  transform-origin: top left;
+}
+
+/* Specific zoom adjustment for better display */
+@media (min-width: 1024px) {
+  .work-iframe {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  .work-iframe {
+    transform: scale(0.9);
+    width: 111%;
+    height: 111%;
+  }
+}
+
+@media (max-width: 767px) {
+  .work-iframe {
+    transform: scale(0.8);
+    width: 125%;
+    height: 125%;
+  }
 }
 
 /* Work video player */

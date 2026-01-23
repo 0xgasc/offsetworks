@@ -161,7 +161,8 @@ const services = [
   },
   {
     title: 'Immersive Experiences',
-    desc: 'WebGL, 3D, ASCII art, particle systems. Websites that feel like products.'
+    desc: 'WebGL, 3D, ASCII art, particle systems. Websites that feel like products.',
+    gif: 'https://38.media.tumblr.com/807d0662a240d33e4a8dfce3c128f654/tumblr_nriviszxIb1s2t3cto1_500.gif'
   }
 ];
 
@@ -204,7 +205,7 @@ const workItems = [
     badge: 'Live',
     desc: 'Live music setlist archive and discovery platform. Browse performances, track artists, and explore music history.',
     link: 'http://umo-live.xyz',
-    video: 'https://momentrepository-production.up.railway.app/proxy/irys/Atp5xtQt9wPgg6XyarUWAgf34ULLTJ1tDKEJurD6TqqT'
+    embed: 'http://umo-live.xyz'
   }
 ];
 
