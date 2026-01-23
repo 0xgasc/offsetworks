@@ -462,7 +462,6 @@ function initWorkCards() {
     card.innerHTML = `
       <div class="work-ascii" id="work-ascii-container-${idx}">
         <pre id="work-ascii-${idx}"></pre>
-        ${item.badge ? `<span class="work-badge">${item.badge}</span>` : ''}
       </div>
       <div class="work-content" data-index="${idx}">
         <div class="work-header">
@@ -470,13 +469,13 @@ function initWorkCards() {
             <div class="work-title">${item.title}</div>
             <div class="work-type">${item.type}</div>
           </div>
-          <span class="work-expand-icon">▼</span>
+          ${item.desc ? `<span class="work-expand-icon">▼</span>` : ''}
         </div>
-      </div>
-      <div class="work-details" data-index="${idx}">
-        ${item.desc ? `<p class="work-desc">${item.desc}</p>` : ''}
         ${item.link && item.link !== '#' ? `<a href="${item.link}" class="work-link" target="_blank" rel="noopener">Visit Site →</a>` : ''}
       </div>
+      ${item.desc ? `<div class="work-details" data-index="${idx}">
+        <p class="work-desc">${item.desc}</p>
+      </div>` : ''}
     `;
 
     // Add click handler for expand/collapse
@@ -590,13 +589,6 @@ function initSpecialAnimations() {
     const colors = ASCII.colors[animationState.hero.color];
     if (colors) heroAscii.style.color = colors.primary;
   }
-
-  // Apply contact color
-  const contactAscii = document.getElementById('contact-ascii');
-  if (contactAscii) {
-    const colors = ASCII.colors[animationState.contact.color];
-    if (colors) contactAscii.style.color = colors.primary;
-  }
 }
 
 // Randomize all animations and colors
@@ -655,12 +647,6 @@ function randomizeAnimations() {
     color: randomColor()
   };
 
-  // Apply new contact color
-  const contactAscii = document.querySelector('.contact-ascii pre');
-  if (contactAscii) {
-    const colors = ASCII.colors[animationState.contact.color];
-    if (colors) contactAscii.style.color = colors.primary;
-  }
 }
 
 // Animation loop with frame skipping for performance
@@ -700,11 +686,6 @@ function animate() {
       }
     });
 
-    // Animate contact
-    const contactCanvas = document.getElementById('contact-ascii');
-    if (contactCanvas && animationState.contact.animation) {
-      ASCII.animate(contactCanvas, animationState.contact.animation, 160, 60);
-    }
   }
 
   // Animate hero (bokeh with color cycling) - smaller canvas + more skipping for performance

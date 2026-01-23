@@ -1170,6 +1170,11 @@ body {
   color: var(--text-dim);
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.work-content .work-link {
+  margin-top: 4px;
 }
 
 .work-details {
