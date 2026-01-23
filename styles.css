@@ -215,11 +215,9 @@ body {
   line-height: 1.1;
   color: var(--accent);
   opacity: 0.5;
-  transition: color 1.5s ease-in-out, filter 1.5s ease-in-out, text-shadow 1.5s ease-in-out;
+  transition: color 1.5s ease-in-out;
   transform: scale(1.8);
   transform-origin: center center;
-  filter: blur(0.3px);
-  text-shadow: 0 0 20px currentColor, 0 0 40px currentColor;
 }
 
 /* Marquee */
