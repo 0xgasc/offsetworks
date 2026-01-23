@@ -198,6 +198,13 @@ const workItems = [
     desc: 'Live music setlist archive and discovery platform. Browse performances, track artists, and explore music history.',
     link: 'https://umo-live.xyz',
     embed: 'https://umo-live.xyz'
+  },
+  {
+    title: 'Geese Live Archive',
+    type: 'Music Platform',
+    desc: 'Live performance archive for Geese. Explore setlists, recordings, and concert history.',
+    link: 'https://geeselive-production-4233.up.railway.app/',
+    embed: 'https://geeselive-production-4233.up.railway.app/'
   }
 ];
 

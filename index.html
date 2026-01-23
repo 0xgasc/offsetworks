@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=22">
+  <link rel="stylesheet" href="styles.css?v=23">
 </head>
 <body>
   <nav class="nav">
@@ -120,15 +120,13 @@
   <section id="work" class="work">
     <pre class="section-bg" id="work-bg"></pre>
     <div class="section-header">
+      <button class="carousel-arrow carousel-prev" id="work-prev">←</button>
       <span class="section-tag" data-i18n="work.tag">Works</span>
+      <button class="carousel-arrow carousel-next" id="work-next">→</button>
     </div>
     <div class="work-carousel">
       <div class="work-grid" id="work-grid">
         <!-- Work cards injected by JS -->
-      </div>
-      <div class="carousel-controls">
-        <button class="carousel-arrow carousel-prev" id="work-prev">←</button>
-        <button class="carousel-arrow carousel-next" id="work-next">→</button>
       </div>
     </div>
   </section>
@@ -151,8 +149,8 @@
     </div>
   </footer>
 
-  <script src="animations.js?v=22"></script>
-  <script src="main.js?v=22"></script>
+  <script src="animations.js?v=23"></script>
+  <script src="main.js?v=23"></script>
   <script>
     // Trippy Section Backgrounds
     (function() {

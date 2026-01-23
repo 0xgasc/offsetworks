@@ -774,22 +774,23 @@ body {
   z-index: 1;
 }
 
-/* Work carousel */
-.work-carousel {
+/* Work section header with arrows */
+.work .section-header {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 32px;
-  max-width: 800px;
-  margin: 0 auto;
+  gap: 40px;
+  margin-bottom: 60px;
 }
 
-.carousel-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
+.work .section-tag {
+  margin-bottom: 0;
+}
+
+/* Work carousel */
+.work-carousel {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .carousel-arrow {
@@ -818,12 +819,8 @@ body {
 }
 
 @media (max-width: 768px) {
-  .work-carousel {
-    gap: 24px;
-  }
-
-  .carousel-controls {
-    gap: 12px;
+  .work .section-header {
+    gap: 20px;
   }
 
   .carousel-arrow {
