@@ -575,7 +575,7 @@ function animate() {
     // Animate contact
     const contactCanvas = document.getElementById('contact-ascii');
     if (contactCanvas && animationState.contact.animation) {
-      ASCII.animate(contactCanvas, animationState.contact.animation, 120, 40);
+      ASCII.animate(contactCanvas, animationState.contact.animation, 160, 60);
     }
   }
 

@@ -589,7 +589,7 @@ body {
 }
 
 #hero-bg { color: #00ff88; }
-#marquee-bg { color: #00ddff; }
+#marquee-bg { color: #00ffff; }
 #services-bg { color: #ff71ce; }
 #process-bg { color: #ffcc00; }
 #pricing-bg { color: #ff71ce; }
@@ -1158,7 +1158,7 @@ body {
 
 .contact-ascii pre {
   font-family: var(--font-mono);
-  font-size: 6px;
+  font-size: 9px;
   line-height: 1.1;
   color: var(--accent);
 }
