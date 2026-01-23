@@ -166,16 +166,18 @@
       };
 
       function resize() {
-        const charWidth = 6;
-        const charHeight = 11;
+        // Increased char size to reduce density and improve performance
+        const charWidth = 10;
+        const charHeight = 15;
         Object.keys(sections).forEach(id => {
           const el = document.getElementById(id);
           if (el && el.parentElement) {
             const parent = el.parentElement;
             const width = parent.offsetWidth || parent.clientWidth || window.innerWidth;
             const height = parent.offsetHeight || parent.clientHeight || 600;
-            sections[id].cols = Math.ceil(width / charWidth) + 10;
-            sections[id].rows = Math.ceil(height / charHeight) + 10;
+            // Reduced buffer to +5 since we don't need as much coverage with larger chars
+            sections[id].cols = Math.ceil(width / charWidth) + 5;
+            sections[id].rows = Math.ceil(height / charHeight) + 5;
           }
         });
       }
@@ -320,7 +322,7 @@
 
       let running = true;
       let frameCount = 0;
-      const frameSkip = 3; // Only render every 3rd frame for performance
+      const frameSkip = 8; // Increased from 3 to 8 - backgrounds don't need high fps
 
       function animate(time) {
         if (!running) return;
