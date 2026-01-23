@@ -170,18 +170,9 @@ const workItems = [
   {
     title: 'FlyInGuate',
     type: 'Web App',
-    badge: 'Coming Soon',
     desc: 'Helicopter tour booking platform for Guatemala. Real-time availability, payment processing, and automated confirmations.',
-    link: '#',
-    collage: true,
-    images: [
-      'images/heli-1.jpg',
-      'images/heli-2.jpg',
-      'images/heli-3.jpg',
-      'images/heli-4.jpg',
-      'images/heli-5.jpg',
-      'images/heli-6.jpg'
-    ]
+    link: 'https://flyinguate.com/',
+    embed: 'https://flyinguate.com/'
   },
   {
     title: 'StablePay',
