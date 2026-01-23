@@ -982,6 +982,39 @@ body {
   display: none;
 }
 
+/* Work iframe embed */
+.work-iframe-wrapper {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  position: relative;
+}
+
+.work-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Work video player */
+.work-video-wrapper {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.work-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
 
 /* Default subtle tint colors for work cards */
 .work-card.color-ice .work-ascii pre { color: #3a7a8a; }

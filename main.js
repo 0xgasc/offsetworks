@@ -198,17 +198,19 @@ const workItems = [
   },
   {
     title: 'ArtTab',
-    type: 'NFT Marketplace',
+    type: 'Digital Art Gallery',
     badge: 'Live',
-    desc: 'Curated NFT marketplace for emerging digital artists. Features lazy minting, auctions, and social discovery.',
-    link: 'https://arttab.io'
+    desc: 'Curated digital art gallery showcasing emerging artists. Browse collections and discover new work.',
+    link: 'https://arttab.xyz',
+    embed: 'https://arttab.xyz'
   },
   {
     title: 'UMO Archive',
     type: 'Music Platform',
     badge: 'Live',
     desc: 'Live music setlist archive and discovery platform. Browse performances, track artists, and explore music history.',
-    link: 'https://umo-archive.com'
+    link: 'https://umo-archive.com',
+    video: 'https://momentrepository-production.up.railway.app/proxy/irys/Atp5xtQt9wPgg6XyarUWAgf34ULLTJ1tDKEJurD6TqqT'
   }
 ];
 
@@ -365,6 +367,37 @@ function createDitherCollage(images) {
   return wrapper;
 }
 
+// Create iframe embed for websites
+function createIframeEmbed(url) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'work-iframe-wrapper';
+
+  const iframe = document.createElement('iframe');
+  iframe.src = url;
+  iframe.className = 'work-iframe';
+  iframe.setAttribute('loading', 'lazy');
+  iframe.setAttribute('allowfullscreen', '');
+
+  wrapper.appendChild(iframe);
+  return wrapper;
+}
+
+// Create video player
+function createVideoPlayer(videoUrl) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'work-video-wrapper';
+
+  const video = document.createElement('video');
+  video.src = videoUrl;
+  video.className = 'work-video';
+  video.setAttribute('controls', '');
+  video.setAttribute('preload', 'metadata');
+  video.setAttribute('playsinline', '');
+
+  wrapper.appendChild(video);
+  return wrapper;
+}
+
 // Initialize work cards (carousel - one at a time)
 function initWorkCards() {
   const grid = document.getElementById('work-grid');
@@ -419,19 +452,28 @@ function initWorkCards() {
 
     grid.appendChild(card);
 
-    // Show collage or single image
-    if (item.collage && item.images) {
-      const container = document.getElementById(`work-ascii-container-${idx}`);
-      const pre = document.getElementById(`work-ascii-${idx}`);
-      if (container && pre) {
+    // Show media based on type: embed, video, collage, or single image
+    const container = document.getElementById(`work-ascii-container-${idx}`);
+    const pre = document.getElementById(`work-ascii-${idx}`);
+
+    if (container && pre) {
+      if (item.embed) {
+        // Embedded website
+        pre.style.display = 'none';
+        const embedEl = createIframeEmbed(item.embed);
+        container.insertBefore(embedEl, container.firstChild);
+      } else if (item.video) {
+        // Video player
+        pre.style.display = 'none';
+        const videoEl = createVideoPlayer(item.video);
+        container.insertBefore(videoEl, container.firstChild);
+      } else if (item.collage && item.images) {
+        // Image collage
         pre.style.display = 'none';
         const collageEl = createDitherCollage(item.images);
         container.insertBefore(collageEl, container.firstChild);
-      }
-    } else if (item.image) {
-      const container = document.getElementById(`work-ascii-container-${idx}`);
-      const pre = document.getElementById(`work-ascii-${idx}`);
-      if (container && pre) {
+      } else if (item.image) {
+        // Single image
         pre.style.display = 'none';
         const imageWrapper = createWorkImage(item.image);
         container.insertBefore(imageWrapper, container.firstChild);
