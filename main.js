@@ -535,9 +535,20 @@ function randomizeAnimations() {
   }
 }
 
-// Animation loop
+// Animation loop with frame skipping for performance
+let frameCount = 0;
+const frameSkip = 3; // Only render every 3rd frame (60fps -> 20fps)
+
 function animate() {
   if (!animationState.running) return;
+
+  frameCount++;
+
+  // Skip frames to reduce CPU load
+  if (frameCount % frameSkip !== 0) {
+    requestAnimationFrame(animate);
+    return;
+  }
 
   // Animate service cards (skip cards with GIFs)
   animationState.services.forEach((state, idx) => {

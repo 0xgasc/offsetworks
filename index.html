@@ -319,8 +319,18 @@
       };
 
       let running = true;
+      let frameCount = 0;
+      const frameSkip = 3; // Only render every 3rd frame for performance
+
       function animate(time) {
         if (!running) return;
+
+        frameCount++;
+        if (frameCount % frameSkip !== 0) {
+          requestAnimationFrame(animate);
+          return;
+        }
+
         Object.keys(sections).forEach(id => {
           const el = document.getElementById(id);
           const cfg = sections[id];
