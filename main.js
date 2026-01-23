@@ -451,11 +451,11 @@ function initWorkCards() {
       </div>
       <div class="work-content" data-index="${idx}">
         <div class="work-header">
-          <div>
-            <div class="work-title">${item.title}</div>
-            <div class="work-type">${item.type}</div>
+          <div class="work-title">
+            ${item.title}
+            ${item.desc ? `<span class="work-expand-icon">▼</span>` : ''}
           </div>
-          ${item.desc ? `<span class="work-expand-icon">▼</span>` : ''}
+          <div class="work-type">${item.type}</div>
         </div>
         ${item.link && item.link !== '#' ? `<a href="${item.link}" class="work-link" target="_blank" rel="noopener">Visit Site →</a>` : ''}
       </div>

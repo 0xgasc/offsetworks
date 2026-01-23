@@ -1170,14 +1170,17 @@ body {
 
 .work-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 4px;
   width: 100%;
 }
 
 .work-title {
   font-size: 0.95rem;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .work-type {
@@ -1186,7 +1189,6 @@ body {
   color: var(--text-dim);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  margin-bottom: 8px;
 }
 
 .work-content .work-link {
