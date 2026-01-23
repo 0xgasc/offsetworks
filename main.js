@@ -187,14 +187,8 @@ const workItems = [
     type: 'Web3 Platform',
     badge: 'Live',
     desc: 'Stablecoin payment infrastructure for cross-border transactions. Built on Ethereum and Polygon with USDC integration.',
-    link: 'https://stablepay.xyz',
-    collage: true,
-    images: [
-      'images/stablepay-1.png',
-      'images/stablepay-2.png',
-      'images/stablepay-3.png',
-      'images/stablepay-4.png'
-    ]
+    link: 'https://stablepay-nine.vercel.app',
+    embed: 'https://stablepay-nine.vercel.app'
   },
   {
     title: 'ArtTab',
@@ -209,7 +203,7 @@ const workItems = [
     type: 'Music Platform',
     badge: 'Live',
     desc: 'Live music setlist archive and discovery platform. Browse performances, track artists, and explore music history.',
-    link: 'https://umo-archive.com',
+    link: 'http://umo-live.xyz',
     video: 'https://momentrepository-production.up.railway.app/proxy/irys/Atp5xtQt9wPgg6XyarUWAgf34ULLTJ1tDKEJurD6TqqT'
   }
 ];
@@ -377,6 +371,7 @@ function createIframeEmbed(url) {
   iframe.className = 'work-iframe';
   iframe.setAttribute('loading', 'lazy');
   iframe.setAttribute('allowfullscreen', '');
+  iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
 
   wrapper.appendChild(iframe);
   return wrapper;
@@ -390,11 +385,29 @@ function createVideoPlayer(videoUrl) {
   const video = document.createElement('video');
   video.src = videoUrl;
   video.className = 'work-video';
-  video.setAttribute('controls', '');
-  video.setAttribute('preload', 'metadata');
+  video.setAttribute('autoplay', '');
+  video.setAttribute('loop', '');
+  video.setAttribute('muted', '');
   video.setAttribute('playsinline', '');
+  video.setAttribute('preload', 'auto');
+
+  // Prevent pausing
+  video.addEventListener('pause', (e) => {
+    video.play();
+  });
+
+  // Ensure autoplay starts
+  video.addEventListener('loadeddata', () => {
+    video.play().catch(err => console.log('Autoplay prevented:', err));
+  });
 
   wrapper.appendChild(video);
+
+  // Add dither overlay
+  const ditherOverlay = document.createElement('div');
+  ditherOverlay.className = 'video-dither-overlay';
+  wrapper.appendChild(ditherOverlay);
+
   return wrapper;
 }
 
