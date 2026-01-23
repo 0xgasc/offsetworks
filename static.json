@@ -1,0 +1,17 @@
+{
+  "root": ".",
+  "clean_urls": true,
+  "routes": {
+    "/raise": "/raise/index.html",
+    "/raise/": "/raise/index.html"
+  },
+  "headers": {
+    "/**": {
+      "Cache-Control": "no-cache, no-store, must-revalidate",
+      "Pragma": "no-cache"
+    },
+    "/static/**": {
+      "Cache-Control": "public, max-age=31536000, immutable"
+    }
+  }
+}
