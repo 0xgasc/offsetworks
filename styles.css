@@ -1096,10 +1096,10 @@ body {
 .iframe-dither-overlay {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(0,0,0,0.4) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(0,0,0,0.7) 1px, transparent 1px);
   background-size: 3px 3px;
   mix-blend-mode: multiply;
-  opacity: 0.5;
+  opacity: 0.8;
   z-index: 10;
   pointer-events: none;
 }
@@ -1111,8 +1111,8 @@ body {
   inset: 0;
   z-index: 5;
   pointer-events: none;
-  background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 3px);
-  opacity: 0.3;
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.2) 2px, rgba(0,0,0,0.2) 3px);
+  opacity: 0.5;
 }
 
 
