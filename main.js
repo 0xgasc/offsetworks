@@ -184,7 +184,7 @@ const workItems = [
   },
   {
     title: 'StablePay',
-    type: 'Web3 Platform',
+    type: 'Decentralized Payments Enabler',
     badge: 'Live',
     desc: 'Stablecoin enablement platform for small merchants. Gateway for decentralized payments with crypto-native backends.',
     link: 'https://stablepay-nine.vercel.app/crypto-pay.html?productId=Special&productName=Special+Edition&price=0.5',
@@ -192,7 +192,7 @@ const workItems = [
   },
   {
     title: 'UMO Archive',
-    type: 'Music Platform',
+    type: 'Live Music Archive',
     badge: 'Live',
     desc: 'Live music setlist archive and discovery platform. Browse performances, track artists, and explore music history.',
     link: 'https://umo-live.xyz',
@@ -201,7 +201,7 @@ const workItems = [
   },
   {
     title: 'Geese Live Archive',
-    type: 'Music Platform',
+    type: 'Live Music Archive',
     desc: 'Live performance archive for Geese. Explore setlists, recordings, and concert history.',
     link: 'https://geeselive-production-4233.up.railway.app/',
     embed: 'https://geeselive-production-4233.up.railway.app/',
@@ -209,7 +209,7 @@ const workItems = [
   },
   {
     title: 'EZTix (WIP)',
-    type: 'Web3 Platform',
+    type: 'P2P Ticketing Platform',
     desc: 'Decentralized ticketing platform to empower artists and users. Build events, sell tickets, and connect communities on-chain.',
     link: 'https://eztix-lyart.vercel.app',
     embed: 'https://eztix-lyart.vercel.app'
