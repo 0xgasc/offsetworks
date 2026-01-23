@@ -188,8 +188,8 @@ const workItems = [
     type: 'Web3 Platform',
     badge: 'Live',
     desc: 'Stablecoin payment infrastructure for cross-border transactions. Built on Ethereum and Polygon with USDC integration.',
-    link: 'https://stablepay-nine.vercel.app',
-    embed: 'https://stablepay-nine.vercel.app'
+    link: 'https://stablepay-nine.vercel.app/crypto-pay.html?productId=Special&productName=Special+Edition&price=0.5',
+    embed: 'https://stablepay-nine.vercel.app/crypto-pay.html?productId=Special&productName=Special+Edition&price=0.5'
   },
   {
     title: 'ArtTab',
@@ -379,7 +379,27 @@ function createIframeEmbed(url) {
   iframe.setAttribute('allowfullscreen', '');
   iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
 
+  // Force desktop viewport rendering
+  iframe.style.width = '1440px';
+  iframe.style.height = '900px';
+
   wrapper.appendChild(iframe);
+
+  // Calculate and apply scale to fit container
+  const updateScale = () => {
+    const containerWidth = wrapper.offsetWidth;
+    const containerHeight = wrapper.offsetHeight;
+    const scaleX = containerWidth / 1440;
+    const scaleY = containerHeight / 900;
+    const scale = Math.min(scaleX, scaleY);
+
+    iframe.style.transform = `scale(${scale})`;
+  };
+
+  // Update scale on load and resize
+  setTimeout(updateScale, 100);
+  window.addEventListener('resize', updateScale);
+
   return wrapper;
 }
 
