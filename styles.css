@@ -1035,23 +1035,20 @@ body {
   display: none;
 }
 
-/* Work iframe embed - force desktop viewport */
+/* Work iframe embed */
 .work-iframe-wrapper {
   width: 100%;
   height: 100%;
   background: #000;
   position: relative;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .work-iframe {
+  width: 100%;
+  height: 100%;
   border: none;
   display: block;
-  transform-origin: center center;
-  flex-shrink: 0;
 }
 
 /* Work video player */
