@@ -167,18 +167,18 @@
       };
 
       function resize() {
-        // Increased char size to reduce density and improve performance
-        const charWidth = 10;
-        const charHeight = 15;
+        // Smaller char size for better coverage, balanced with performance
+        const charWidth = 8;
+        const charHeight = 12;
         Object.keys(sections).forEach(id => {
           const el = document.getElementById(id);
           if (el && el.parentElement) {
             const parent = el.parentElement;
             const width = parent.offsetWidth || parent.clientWidth || window.innerWidth;
             const height = parent.offsetHeight || parent.clientHeight || 600;
-            // Increased buffer to ensure full coverage with larger char spacing
-            sections[id].cols = Math.ceil(width / charWidth) + 25;
-            sections[id].rows = Math.ceil(height / charHeight) + 20;
+            // Large buffer to guarantee edge-to-edge coverage on all screen sizes
+            sections[id].cols = Math.ceil(width / charWidth) + 35;
+            sections[id].rows = Math.ceil(height / charHeight) + 25;
           }
         });
       }
