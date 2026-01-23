@@ -205,7 +205,7 @@ const workItems = [
     badge: 'Live',
     desc: 'Live music setlist archive and discovery platform. Browse performances, track artists, and explore music history.',
     link: 'https://umo-live.xyz',
-    video: 'https://momentrepository-production.up.railway.app/proxy/irys/Atp5xtQt9wPgg6XyarUWAgf34ULLTJ1tDKEJurD6TqqT'
+    embed: 'https://umo-live.xyz'
   }
 ];
 
