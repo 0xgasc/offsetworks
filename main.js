@@ -372,6 +372,12 @@ function createIframeEmbed(url) {
   iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
 
   wrapper.appendChild(iframe);
+
+  // Add dither overlay
+  const ditherOverlay = document.createElement('div');
+  ditherOverlay.className = 'iframe-dither-overlay';
+  wrapper.appendChild(ditherOverlay);
+
   return wrapper;
 }
 

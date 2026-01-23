@@ -1092,6 +1092,29 @@ body {
   opacity: 0.3;
 }
 
+/* Dither overlay for iframes */
+.iframe-dither-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(0,0,0,0.4) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Scanline effect for iframes */
+.work-iframe-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 3px);
+  opacity: 0.3;
+}
+
 
 /* Default subtle tint colors for work cards */
 .work-card.color-ice .work-ascii pre { color: #3a7a8a; }
