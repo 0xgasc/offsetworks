@@ -777,11 +777,19 @@ body {
 /* Work carousel */
 .work-carousel {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: 32px;
   max-width: 800px;
   margin: 0 auto;
+}
+
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
 }
 
 .carousel-arrow {
@@ -805,8 +813,24 @@ body {
 .work-grid {
   display: flex;
   justify-content: center;
-  flex: 1;
-  max-width: 550px;
+  width: 100%;
+  max-width: 800px;
+}
+
+@media (max-width: 768px) {
+  .work-carousel {
+    gap: 24px;
+  }
+
+  .carousel-controls {
+    gap: 12px;
+  }
+
+  .carousel-arrow {
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+  }
 }
 
 .work-card {
