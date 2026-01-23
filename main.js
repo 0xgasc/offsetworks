@@ -281,9 +281,14 @@ function initServiceCards() {
     'Immersive Experiences': 'bokeh'
   };
 
+  // Custom colors for specific services
+  const customColors = {
+    'Immersive Experiences': 'fire'
+  };
+
   services.forEach((service, idx) => {
     const animation = service.gif ? null : (customAnimations[service.title] || ASCII.random());
-    const color = randomColor();
+    const color = customColors[service.title] || randomColor();
     const gradient = maybeGradient();
 
     animationState.services[idx] = { animation, color, hasGif: !!service.gif };
@@ -592,13 +597,16 @@ function randomizeAnimations() {
     'Web Apps / Products': 'codeMatrix',
     'Immersive Experiences': 'bokeh'
   };
+  const customColors = {
+    'Immersive Experiences': 'fire'
+  };
   const servicesGrid = document.getElementById('services-grid');
   servicesGrid.querySelectorAll('.card').forEach((card, idx) => {
     const service = services[idx];
     const title = service?.title;
     const hasGif = !!service?.gif;
     const animation = hasGif ? null : (customAnimations[title] || ASCII.random());
-    const color = randomColor();
+    const color = customColors[title] || randomColor();
     const gradient = maybeGradient();
 
     animationState.services[idx] = { animation, color, hasGif };

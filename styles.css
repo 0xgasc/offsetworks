@@ -413,7 +413,10 @@ body {
 
 .card.has-gif.color-cyber .service-gif-wrapper::after { background: #00ff88; }
 .card.has-gif.color-neon .service-gif-wrapper::after { background: #ff00ff; }
-.card.has-gif.color-fire .service-gif-wrapper::after { background: #ff4400; }
+.card.has-gif.color-fire .service-gif-wrapper::after {
+  background: #ff6600;
+  opacity: 0.35;
+}
 .card.has-gif.color-ice .service-gif-wrapper::after { background: #00ddff; }
 .card.has-gif.color-gold .service-gif-wrapper::after { background: #ffcc00; }
 .card.has-gif.color-vapor .service-gif-wrapper::after { background: #ff71ce; }
@@ -423,6 +426,15 @@ body {
 
 .card.has-gif:hover .service-gif-wrapper::after {
   opacity: 0;
+}
+
+/* Lighter effects for fire color */
+.card.has-gif.color-fire .service-gif-halftone {
+  opacity: 0.4;
+}
+
+.card.has-gif.color-fire .service-gif-scanlines {
+  opacity: 0.5;
 }
 
 /* Dynamic color classes for cards */
