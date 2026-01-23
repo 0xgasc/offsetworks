@@ -197,14 +197,16 @@ const workItems = [
     badge: 'Live',
     desc: 'Live music setlist archive and discovery platform. Browse performances, track artists, and explore music history.',
     link: 'https://umo-live.xyz',
-    embed: 'https://umo-live.xyz'
+    embed: 'https://umo-live.xyz',
+    hasAudio: true
   },
   {
     title: 'Geese Live Archive',
     type: 'Music Platform',
     desc: 'Live performance archive for Geese. Explore setlists, recordings, and concert history.',
     link: 'https://geeselive-production-4233.up.railway.app/',
-    embed: 'https://geeselive-production-4233.up.railway.app/'
+    embed: 'https://geeselive-production-4233.up.railway.app/',
+    hasAudio: true
   }
 ];
 
@@ -367,7 +369,7 @@ function createDitherCollage(images) {
 }
 
 // Create iframe embed for websites
-function createIframeEmbed(url) {
+function createIframeEmbed(url, hasAudio = false) {
   const wrapper = document.createElement('div');
   wrapper.className = 'work-iframe-wrapper';
 
@@ -384,6 +386,20 @@ function createIframeEmbed(url) {
   const ditherOverlay = document.createElement('div');
   ditherOverlay.className = 'iframe-dither-overlay';
   wrapper.appendChild(ditherOverlay);
+
+  // Add audio hint for archive sites
+  if (hasAudio) {
+    const audioHint = document.createElement('div');
+    audioHint.className = 'iframe-audio-hint';
+    audioHint.innerHTML = '🔊 Click inside to enable audio';
+    wrapper.appendChild(audioHint);
+
+    // Hide hint after first click
+    iframe.addEventListener('click', () => {
+      audioHint.style.opacity = '0';
+      setTimeout(() => audioHint.remove(), 300);
+    });
+  }
 
   return wrapper;
 }
@@ -483,7 +499,7 @@ function initWorkCards() {
       if (item.embed) {
         // Embedded website
         pre.style.display = 'none';
-        const embedEl = createIframeEmbed(item.embed);
+        const embedEl = createIframeEmbed(item.embed, item.hasAudio);
         container.insertBefore(embedEl, container.firstChild);
       } else if (item.video) {
         // Video player
