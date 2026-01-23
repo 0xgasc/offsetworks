@@ -538,6 +538,7 @@ function randomizeAnimations() {
 // Animation loop with frame skipping for performance
 let frameCount = 0;
 const frameSkip = 3; // Only render every 3rd frame (60fps -> 20fps)
+const heroFrameSkip = 6; // Hero needs even more skipping due to expensive bokeh
 
 function animate() {
   if (!animationState.running) return;
@@ -545,39 +546,46 @@ function animate() {
   frameCount++;
 
   // Skip frames to reduce CPU load
-  if (frameCount % frameSkip !== 0) {
+  const shouldRenderNormal = frameCount % frameSkip === 0;
+  const shouldRenderHero = frameCount % heroFrameSkip === 0;
+
+  if (!shouldRenderNormal && !shouldRenderHero) {
     requestAnimationFrame(animate);
     return;
   }
 
   // Animate service cards (skip cards with GIFs)
-  animationState.services.forEach((state, idx) => {
-    if (state.hasGif) return; // Skip GIF cards
-    const canvas = document.getElementById(`service-ascii-${idx}`);
-    if (canvas && state.animation) {
-      ASCII.animate(canvas, state.animation, 45, 14);
-    }
-  });
+  if (shouldRenderNormal) {
+    animationState.services.forEach((state, idx) => {
+      if (state.hasGif) return; // Skip GIF cards
+      const canvas = document.getElementById(`service-ascii-${idx}`);
+      if (canvas && state.animation) {
+        ASCII.animate(canvas, state.animation, 45, 14);
+      }
+    });
 
-  // Animate work cards
-  animationState.work.forEach((state, idx) => {
-    const canvas = document.getElementById(`work-ascii-${idx}`);
-    if (canvas && state.animation) {
-      ASCII.animate(canvas, state.animation, 60, 22);
-    }
-  });
+    // Animate work cards
+    animationState.work.forEach((state, idx) => {
+      const canvas = document.getElementById(`work-ascii-${idx}`);
+      if (canvas && state.animation) {
+        ASCII.animate(canvas, state.animation, 60, 22);
+      }
+    });
 
-  // Animate hero (larger bokeh with color cycling)
-  const heroCanvas = document.getElementById('hero-animation');
-  if (heroCanvas && animationState.hero.animation) {
-    ASCII.animate(heroCanvas, animationState.hero.animation, 100, 50);
-    updateHeroColor(performance.now());
+    // Animate contact
+    const contactCanvas = document.getElementById('contact-ascii');
+    if (contactCanvas && animationState.contact.animation) {
+      ASCII.animate(contactCanvas, animationState.contact.animation, 120, 40);
+    }
   }
 
-  // Animate contact
-  const contactCanvas = document.getElementById('contact-ascii');
-  if (contactCanvas && animationState.contact.animation) {
-    ASCII.animate(contactCanvas, animationState.contact.animation, 120, 40);
+  // Animate hero (bokeh with color cycling) - smaller canvas + more skipping for performance
+  if (shouldRenderHero) {
+    const heroCanvas = document.getElementById('hero-animation');
+    if (heroCanvas && animationState.hero.animation) {
+      ASCII.animate(heroCanvas, animationState.hero.animation, 50, 25);
+      updateHeroColor(performance.now());
+    }
   }
 
   requestAnimationFrame(animate);
