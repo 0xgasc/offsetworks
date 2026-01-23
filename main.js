@@ -207,6 +207,13 @@ const workItems = [
     link: 'https://geeselive-production-4233.up.railway.app/',
     embed: 'https://geeselive-production-4233.up.railway.app/',
     hasAudio: true
+  },
+  {
+    title: 'Cipher',
+    type: 'Web3 Consultancy',
+    desc: 'Investment and consultancy platform for decentralized assets. Strategic advisory for crypto portfolios and DeFi protocols.',
+    link: 'https://cipher-fp31ikpx4-gs-projects-1311714b.vercel.app',
+    embed: 'https://cipher-fp31ikpx4-gs-projects-1311714b.vercel.app'
   }
 ];
 
