@@ -1112,36 +1112,6 @@ body {
   opacity: 0.5;
 }
 
-/* Audio hint overlay for archive sites */
-.iframe-audio-hint {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 15;
-  background: rgba(0, 255, 136, 0.15);
-  border: 1px solid var(--accent);
-  color: var(--accent);
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
-  pointer-events: none;
-  box-shadow: 0 0 20px rgba(0, 255, 136, 0.3), inset 0 0 20px rgba(0, 255, 136, 0.05);
-  transition: opacity 0.3s ease;
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3), inset 0 0 20px rgba(0, 255, 136, 0.05);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(0, 255, 136, 0.5), inset 0 0 30px rgba(0, 255, 136, 0.1);
-  }
-}
-
-
 /* Default subtle tint colors for work cards */
 .work-card.color-ice .work-ascii pre { color: #3a7a8a; }
 .work-card.color-vapor .work-ascii pre { color: #7a4a6a; }

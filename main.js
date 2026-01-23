@@ -387,20 +387,6 @@ function createIframeEmbed(url, hasAudio = false) {
   ditherOverlay.className = 'iframe-dither-overlay';
   wrapper.appendChild(ditherOverlay);
 
-  // Add audio hint for archive sites
-  if (hasAudio) {
-    const audioHint = document.createElement('div');
-    audioHint.className = 'iframe-audio-hint';
-    audioHint.innerHTML = '🔊 Click inside to enable audio';
-    wrapper.appendChild(audioHint);
-
-    // Hide hint after first click
-    iframe.addEventListener('click', () => {
-      audioHint.style.opacity = '0';
-      setTimeout(() => audioHint.remove(), 300);
-    });
-  }
-
   return wrapper;
 }
 
@@ -540,6 +526,22 @@ function showWorkCard(index) {
   // Wrap around
   if (index < 0) index = cards.length - 1;
   if (index >= cards.length) index = 0;
+
+  // Stop audio/video in hidden cards by reloading iframes
+  cards.forEach((card, idx) => {
+    if (idx !== index) {
+      // Kill iframe/video when hiding
+      const iframe = card.querySelector('.work-iframe');
+      if (iframe) {
+        const currentSrc = iframe.src;
+        iframe.src = 'about:blank';
+        // Reload when needed
+        setTimeout(() => {
+          iframe.src = currentSrc;
+        }, 100);
+      }
+    }
+  });
 
   currentWorkIndex = index;
 
