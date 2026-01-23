@@ -206,6 +206,13 @@ const workItems = [
     link: 'https://geeselive-production-4233.up.railway.app/',
     embed: 'https://geeselive-production-4233.up.railway.app/',
     hasAudio: true
+  },
+  {
+    title: 'EZTix (WIP)',
+    type: 'Web3 Platform',
+    desc: 'Decentralized ticketing platform to empower artists and users. Build events, sell tickets, and connect communities on-chain.',
+    link: 'https://eztix-lyart.vercel.app',
+    embed: 'https://eztix-lyart.vercel.app'
   }
 ];
 
