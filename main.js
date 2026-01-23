@@ -170,6 +170,8 @@ const workItems = [
     title: 'FlyInGuate',
     type: 'Web App',
     badge: 'Coming Soon',
+    desc: 'Helicopter tour booking platform for Guatemala. Real-time availability, payment processing, and automated confirmations.',
+    link: '#',
     collage: true,
     images: [
       'images/heli-1.jpg',
@@ -181,10 +183,32 @@ const workItems = [
     ]
   },
   {
-    title: 'Project Beta',
-    type: 'Brand + Site',
-    badge: 'Coming Soon',
-    image: 'images/project-beta.jpg'
+    title: 'StablePay',
+    type: 'Web3 Platform',
+    badge: 'Live',
+    desc: 'Stablecoin payment infrastructure for cross-border transactions. Built on Ethereum and Polygon with USDC integration.',
+    link: 'https://stablepay.xyz',
+    collage: true,
+    images: [
+      'images/stablepay-1.png',
+      'images/stablepay-2.png',
+      'images/stablepay-3.png',
+      'images/stablepay-4.png'
+    ]
+  },
+  {
+    title: 'ArtTab',
+    type: 'NFT Marketplace',
+    badge: 'Live',
+    desc: 'Curated NFT marketplace for emerging digital artists. Features lazy minting, auctions, and social discovery.',
+    link: 'https://arttab.io'
+  },
+  {
+    title: 'UMO Archive',
+    type: 'Music Platform',
+    badge: 'Live',
+    desc: 'Live music setlist archive and discovery platform. Browse performances, track artists, and explore music history.',
+    link: 'https://umo-archive.com'
   }
 ];
 
@@ -348,7 +372,9 @@ function initWorkCards() {
 
   const customWorkColors = {
     'FlyInGuate': 'cyber',
-    'Project Beta': 'vapor'
+    'StablePay': 'ice',
+    'ArtTab': 'vapor',
+    'UMO Archive': 'gold'
   };
 
   // Create all cards but only show current one
@@ -357,8 +383,7 @@ function initWorkCards() {
 
     animationState.work[idx] = { animation: null, color, useImage: !!item.image };
 
-    const card = document.createElement('a');
-    card.href = '#';
+    const card = document.createElement('div');
     card.className = `work-card color-${color}`;
     card.style.display = idx === currentWorkIndex ? 'block' : 'none';
     card.dataset.index = idx;
@@ -367,12 +392,31 @@ function initWorkCards() {
         <pre id="work-ascii-${idx}"></pre>
         ${item.badge ? `<span class="work-badge">${item.badge}</span>` : ''}
       </div>
-      <div class="work-content">
-        <div class="work-title">${item.title}</div>
-        <div class="work-type">${item.type}</div>
+      <div class="work-content" data-index="${idx}">
+        <div class="work-header">
+          <div>
+            <div class="work-title">${item.title}</div>
+            <div class="work-type">${item.type}</div>
+          </div>
+          <span class="work-expand-icon">▼</span>
+        </div>
+      </div>
+      <div class="work-details" data-index="${idx}">
+        ${item.desc ? `<p class="work-desc">${item.desc}</p>` : ''}
+        ${item.link && item.link !== '#' ? `<a href="${item.link}" class="work-link" target="_blank" rel="noopener">Visit Site →</a>` : ''}
       </div>
     `;
-    card.addEventListener('click', (e) => e.preventDefault());
+
+    // Add click handler for expand/collapse
+    const contentEl = card.querySelector('.work-content');
+    const detailsEl = card.querySelector('.work-details');
+    if (contentEl && detailsEl) {
+      contentEl.addEventListener('click', () => {
+        contentEl.classList.toggle('expanded');
+        detailsEl.classList.toggle('expanded');
+      });
+    }
+
     grid.appendChild(card);
 
     // Show collage or single image
