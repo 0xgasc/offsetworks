@@ -38,6 +38,7 @@
   </header>
 
   <section class="marquee-section">
+    <pre class="section-bg" id="marquee-bg"></pre>
     <div class="marquee">
       <div class="marquee-content">
         <span>WEBSITES</span><span>•</span>
@@ -160,6 +161,7 @@
     (function() {
       const chars = ' ░▒▓█';
       const sections = {
+        'marquee-bg': { effect: 'wave', cols: 0, rows: 0 },
         'services-bg': { effect: 'spiral', cols: 0, rows: 0 },
         'process-bg': { effect: 'warp', cols: 0, rows: 0 },
         'work-bg': { effect: 'noise', cols: 0, rows: 0 },
@@ -176,9 +178,9 @@
             const parent = el.parentElement;
             const width = parent.offsetWidth || parent.clientWidth || window.innerWidth;
             const height = parent.offsetHeight || parent.clientHeight || 600;
-            // Large buffer to guarantee edge-to-edge coverage on all screen sizes
-            sections[id].cols = Math.ceil(width / charWidth) + 35;
-            sections[id].rows = Math.ceil(height / charHeight) + 25;
+            // Massive buffer to absolutely guarantee full coverage with no gaps
+            sections[id].cols = Math.ceil(width / charWidth) + 50;
+            sections[id].rows = Math.ceil(height / charHeight) + 35;
           }
         });
       }
