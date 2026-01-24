@@ -17,8 +17,8 @@ const translations = {
     services: {
       shuffle: 'Shuffle Animations',
       landing: {
-        title: 'Landing Pages',
-        desc: 'High-converting pages with custom animations. No templates, no bloat.'
+        title: 'Websites',
+        desc: 'Custom websites with modern design and animations. Built for performance and conversion.'
       },
       webapps: {
         title: 'Web Apps / Products',
@@ -59,8 +59,8 @@ const translations = {
     services: {
       shuffle: 'Cambiar Animaciones',
       landing: {
-        title: 'Landing Pages',
-        desc: 'Páginas de alta conversión con animaciones personalizadas. Sin plantillas, sin excesos.'
+        title: 'Sitios Web',
+        desc: 'Sitios web personalizados con diseño moderno y animaciones. Construidos para rendimiento y conversión.'
       },
       webapps: {
         title: 'Apps Web / Productos',
@@ -150,8 +150,8 @@ function initLanguageToggle() {
 
 const services = [
   {
-    title: 'Landing Pages',
-    desc: 'High-converting pages with custom animations. No templates, no bloat.',
+    title: 'Websites',
+    desc: 'Custom websites with modern design and animations. Built for performance and conversion.',
     gif: 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMG8zeGQxbjhqajk0MDQ5N3dwZm1kY3JsMTU3N3ltbHlpb2czMDMweSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bz9PIxJMQtkO943XeS/giphy.gif'
   },
   {
