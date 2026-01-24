@@ -17,7 +17,7 @@ const translations = {
     services: {
       shuffle: 'Shuffle Animations',
       landing: {
-        title: 'Websites',
+        title: 'Digital Solutions',
         desc: 'Custom websites with modern design and animations. Built for performance and conversion.'
       },
       webapps: {
@@ -41,7 +41,7 @@ const translations = {
     },
     contact: {
       headline: 'Ready to build something?',
-      subtext: 'Drop us a line. We respond fast (like everything else we do).'
+      subtext: 'Drop us a line. We respond fast.'
     }
   },
   es: {
@@ -59,7 +59,7 @@ const translations = {
     services: {
       shuffle: 'Cambiar Animaciones',
       landing: {
-        title: 'Sitios Web',
+        title: 'Soluciones Digitales',
         desc: 'Sitios web personalizados con diseño moderno y animaciones. Construidos para rendimiento y conversión.'
       },
       webapps: {
@@ -150,7 +150,7 @@ function initLanguageToggle() {
 
 const services = [
   {
-    title: 'Websites',
+    title: 'Digital Solutions',
     desc: 'Custom websites with modern design and animations. Built for performance and conversion.',
     gif: 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMG8zeGQxbjhqajk0MDQ5N3dwZm1kY3JsMTU3N3ltbHlpb2czMDMweSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bz9PIxJMQtkO943XeS/giphy.gif'
   },
