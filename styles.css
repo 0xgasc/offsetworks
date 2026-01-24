@@ -1539,6 +1539,11 @@ body {
     display: none;
   }
 
+  /* Brighten background animations on mobile */
+  .section-bg {
+    opacity: 0.25;
+  }
+
   .hero,
   .services,
   .work,
