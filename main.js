@@ -10,7 +10,7 @@ const translations = {
     },
     hero: {
       headline: 'building systems<br>that <span class="highlight">work</span>.',
-      subtext: 'Boutique design and development for founders, startups, and creatives who need real software. Everything built from scratch — rates depend on scope.',
+      subtext: 'Boutique design and development for founders, startups, and creatives who need real software. Built from scratch — competitive rates.',
       cta1: 'Start a Project →',
       cta2: 'See Our Work'
     },
@@ -22,11 +22,11 @@ const translations = {
       },
       webapps: {
         title: 'Web Apps / Products',
-        desc: 'Custom web applications, dashboards, and digital products. Built to scale.'
+        desc: 'Platforms that actually work. Applications, dashboards, and tools built for real use at scale.'
       },
       immersive: {
         title: 'Immersive Experiences',
-        desc: 'WebGL, 3D, ASCII art, particle systems. Websites that feel like products.'
+        desc: 'Building digital ecosystems for communities. Interactive experiences with WebGL, 3D, custom animations, and real-time features.'
       }
     },
     process: {
@@ -52,7 +52,7 @@ const translations = {
     },
     hero: {
       headline: 'construyendo sistemas<br>que <span class="highlight">funcionan</span>.',
-      subtext: 'Diseño y desarrollo boutique para fundadores, startups y creativos que necesitan software real. Todo construido desde cero — tarifas según alcance.',
+      subtext: 'Diseño y desarrollo boutique para fundadores, startups y creativos que necesitan software real. Construido desde cero — tarifas competitivas.',
       cta1: 'Iniciar Proyecto →',
       cta2: 'Ver Nuestro Trabajo'
     },
@@ -64,11 +64,11 @@ const translations = {
       },
       webapps: {
         title: 'Apps Web / Productos',
-        desc: 'Aplicaciones web personalizadas, dashboards y productos digitales. Hechos para escalar.'
+        desc: 'Plataformas que realmente funcionan. Aplicaciones, dashboards y herramientas construidas para uso real a escala.'
       },
       immersive: {
         title: 'Experiencias Inmersivas',
-        desc: 'WebGL, 3D, ASCII art, sistemas de partículas. Sitios web que se sienten como productos.'
+        desc: 'Construyendo ecosistemas digitales para comunidades. Experiencias interactivas con WebGL, 3D, animaciones personalizadas y funciones en tiempo real.'
       }
     },
     process: {
@@ -156,12 +156,12 @@ const services = [
   },
   {
     title: 'Web Apps / Products',
-    desc: 'Custom web applications, dashboards, and digital products. Built to scale.',
+    desc: 'Platforms that actually work. Applications, dashboards, and tools built for real use at scale.',
     gif: 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2VvYzA1bWN3MWhma3F2YTR3bGx4aW1wMjd5cWVuOWZhZG1nZTdzYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wgHY9nSrlTMt2/giphy.gif'
   },
   {
     title: 'Immersive Experiences',
-    desc: 'WebGL, 3D, ASCII art, particle systems. Websites that feel like products.',
+    desc: 'Building digital ecosystems for communities. Interactive experiences with WebGL, 3D, custom animations, and real-time features.',
     gif: 'https://38.media.tumblr.com/807d0662a240d33e4a8dfce3c128f654/tumblr_nriviszxIb1s2t3cto1_500.gif'
   }
 ];
