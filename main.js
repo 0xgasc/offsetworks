@@ -10,7 +10,7 @@ const translations = {
     },
     hero: {
       headline: 'building systems<br>that <span class="highlight">work</span>.',
-      subtext: 'Boutique design and development for founders, startups, and creatives who need real software. Built from scratch — competitive rates.',
+      subtext: 'Boutique design and development for founders, startups, and creatives who need real software. Built from scratch with competitive rates.',
       cta1: 'Start a Project →',
       cta2: 'See Our Work'
     },
@@ -52,7 +52,7 @@ const translations = {
     },
     hero: {
       headline: 'construyendo sistemas<br>que <span class="highlight">funcionan</span>.',
-      subtext: 'Diseño y desarrollo boutique para fundadores, startups y creativos que necesitan software real. Construido desde cero — tarifas competitivas.',
+      subtext: 'Diseño y desarrollo boutique para fundadores, startups y creativos que necesitan software real. Construido desde cero con tarifas competitivas.',
       cta1: 'Iniciar Proyecto →',
       cta2: 'Ver Nuestro Trabajo'
     },
