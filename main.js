@@ -22,7 +22,7 @@ const translations = {
       },
       webapps: {
         title: 'Web Apps / Products',
-        desc: 'Platforms that actually work. Applications, dashboards, and tools built for real use at scale.'
+        desc: 'Bespoke applications, tailored solutions and tools built for your specific needs.'
       },
       immersive: {
         title: 'Immersive Experiences',
@@ -64,7 +64,7 @@ const translations = {
       },
       webapps: {
         title: 'Apps Web / Productos',
-        desc: 'Plataformas que realmente funcionan. Aplicaciones, dashboards y herramientas construidas para uso real a escala.'
+        desc: 'Aplicaciones a medida, soluciones personalizadas y herramientas construidas para tus necesidades específicas.'
       },
       immersive: {
         title: 'Experiencias Inmersivas',
@@ -156,7 +156,7 @@ const services = [
   },
   {
     title: 'Web Apps / Products',
-    desc: 'Platforms that actually work. Applications, dashboards, and tools built for real use at scale.',
+    desc: 'Bespoke applications, tailored solutions and tools built for your specific needs.',
     gif: 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2VvYzA1bWN3MWhma3F2YTR3bGx4aW1wMjd5cWVuOWZhZG1nZTdzYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wgHY9nSrlTMt2/giphy.gif'
   },
   {
