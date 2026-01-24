@@ -9,7 +9,7 @@ const translations = {
       contact: "Let's Talk"
     },
     hero: {
-      headline: 'building systems<br>that <span class="highlight">work</span>.',
+      headline: 'Building systems<br>that <span class="highlight">work</span>.',
       subtext: 'Boutique design and development for founders, startups, and creatives who need real software. Built from scratch with competitive rates.',
       cta1: 'Start a Project →',
       cta2: 'See Our Work'
@@ -51,7 +51,7 @@ const translations = {
       contact: 'Hablemos'
     },
     hero: {
-      headline: 'construyendo sistemas<br>que <span class="highlight">funcionan</span>.',
+      headline: 'Construyendo sistemas<br>que <span class="highlight">funcionan</span>.',
       subtext: 'Diseño y desarrollo boutique para fundadores, startups y creativos que necesitan software real. Construido desde cero con tarifas competitivas.',
       cta1: 'Iniciar Proyecto →',
       cta2: 'Ver Nuestro Trabajo'
