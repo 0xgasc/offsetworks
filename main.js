@@ -213,6 +213,13 @@ const workItems = [
     desc: 'Decentralized ticketing platform to empower artists and users. Build events, sell tickets, and connect communities on-chain.',
     link: 'https://eztix-lyart.vercel.app',
     image: 'images/eztix-screenshot.png'
+  },
+  {
+    title: 'Stash',
+    type: 'Decentralized Storage Provider',
+    desc: 'Decentralized storage infrastructure. Upload, manage, and access data on distributed networks with permanent, censorship-resistant storage.',
+    link: '#',
+    image: 'images/stash-screenshot.png'
   }
 ];
 
