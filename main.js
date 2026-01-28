@@ -453,14 +453,16 @@ function initWorkCards() {
     card.dataset.index = idx;
     card.innerHTML = `
       <div class="work-content" data-index="${idx}">
-        <div class="work-header">
-          <div class="work-title">
-            ${item.title}
-            ${item.desc ? `<span class="work-expand-icon">▼</span>` : ''}
+        <div class="work-content-row">
+          <div class="work-header">
+            <div class="work-title">
+              ${item.title}
+              ${item.desc ? `<span class="work-expand-icon">▼</span>` : ''}
+            </div>
+            <div class="work-type">${item.type}</div>
           </div>
-          <div class="work-type">${item.type}</div>
+          ${item.link && item.link !== '#' ? `<a href="${item.link}" class="work-link" target="_blank" rel="noopener">Visit Site</a>` : ''}
         </div>
-        ${item.link && item.link !== '#' ? `<a href="${item.link}" class="work-link" target="_blank" rel="noopener">Visit Site</a>` : ''}
         ${item.desc ? `<div class="work-details" data-index="${idx}">
           <p class="work-desc">${item.desc}</p>
         </div>` : ''}

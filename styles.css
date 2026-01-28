@@ -1156,12 +1156,18 @@ body {
 .work-content {
   padding: 16px 24px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   cursor: pointer;
   transition: all 0.3s;
   background: var(--bg);
   border-top: 1px solid var(--border);
+}
+
+.work-content-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .work-content:hover {
