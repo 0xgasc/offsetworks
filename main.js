@@ -168,7 +168,7 @@ const services = [
 
 const workItems = [
   {
-    title: 'FlyInGuate',
+    title: 'Flyin',
     type: 'Web App',
     desc: 'Helicopter tour booking platform for Guatemala. Real-time availability, payment processing, and automated confirmations.',
     link: 'https://flyinguate.com/',
