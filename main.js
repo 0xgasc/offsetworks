@@ -188,7 +188,7 @@ const workItems = [
     badge: 'Live',
     desc: 'Stablecoin enablement platform for small merchants. Gateway for decentralized payments with crypto-native backends.',
     link: 'https://stablepay-nine.vercel.app/crypto-pay.html?productId=Special&productName=Special+Edition&price=0.5',
-    embed: 'https://stablepay-nine.vercel.app/crypto-pay.html?productId=Special&productName=Special+Edition&price=0.5'
+    image: 'images/stablepay-screenshot.png'
   },
   {
     title: 'UMO Archive',
