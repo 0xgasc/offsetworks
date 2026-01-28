@@ -913,6 +913,18 @@ body {
   transform: scale(1.03);
 }
 
+/* Mobile: contain images instead of cropping */
+@media (max-width: 768px) {
+  .pixel-art-img {
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .pixel-art-wrapper {
+    background: #0a0a0a;
+  }
+}
+
 /* Halftone dot pattern overlay */
 .pixel-art-wrapper::before {
   content: '';
