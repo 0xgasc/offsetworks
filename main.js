@@ -188,8 +188,7 @@ const workItems = [
     badge: 'Live',
     desc: 'Live music setlist archive and discovery platform. Browse performances, track artists, and explore music history.',
     link: 'https://umo-live.xyz',
-    embed: 'https://umo-live.xyz',
-    hasAudio: true
+    image: 'images/umo-screenshot.png'
   },
   {
     title: 'Geese Live Archive',
