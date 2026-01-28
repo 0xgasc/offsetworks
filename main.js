@@ -36,7 +36,7 @@ const translations = {
       step4: { title: 'Launch + Support', desc: 'Go live, then optional retainer for ongoing needs.' }
     },
     work: {
-      tag: 'Selected Work',
+      tag: 'Recent Work',
       badge: 'Coming Soon'
     },
     contact: {
@@ -78,7 +78,7 @@ const translations = {
       step4: { title: 'Lanzamiento + Soporte', desc: 'Salimos en vivo, luego retainer opcional para necesidades continuas.' }
     },
     work: {
-      tag: 'Trabajo Seleccionado',
+      tag: 'Trabajo Reciente',
       badge: 'Próximamente'
     },
     contact: {
@@ -461,13 +461,13 @@ function initWorkCards() {
           <div class="work-type">${item.type}</div>
         </div>
         ${item.link && item.link !== '#' ? `<a href="${item.link}" class="work-link" target="_blank" rel="noopener">Visit Site</a>` : ''}
+        ${item.desc ? `<div class="work-details" data-index="${idx}">
+          <p class="work-desc">${item.desc}</p>
+        </div>` : ''}
       </div>
       <div class="work-ascii" id="work-ascii-container-${idx}">
         <pre id="work-ascii-${idx}"></pre>
       </div>
-      ${item.desc ? `<div class="work-details" data-index="${idx}">
-        <p class="work-desc">${item.desc}</p>
-      </div>` : ''}
     `;
 
     // Add click handler for expand/collapse
