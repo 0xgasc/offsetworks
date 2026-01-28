@@ -452,9 +452,6 @@ function initWorkCards() {
     card.style.display = idx === currentWorkIndex ? 'block' : 'none';
     card.dataset.index = idx;
     card.innerHTML = `
-      <div class="work-ascii" id="work-ascii-container-${idx}">
-        <pre id="work-ascii-${idx}"></pre>
-      </div>
       <div class="work-content" data-index="${idx}">
         <div class="work-header">
           <div class="work-title">
@@ -463,7 +460,10 @@ function initWorkCards() {
           </div>
           <div class="work-type">${item.type}</div>
         </div>
-        ${item.link && item.link !== '#' ? `<a href="${item.link}" class="work-link" target="_blank" rel="noopener">Visit Site →</a>` : ''}
+        ${item.link && item.link !== '#' ? `<a href="${item.link}" class="work-link" target="_blank" rel="noopener">Visit Site</a>` : ''}
+      </div>
+      <div class="work-ascii" id="work-ascii-container-${idx}">
+        <pre id="work-ascii-${idx}"></pre>
       </div>
       ${item.desc ? `<div class="work-details" data-index="${idx}">
         <p class="work-desc">${item.desc}</p>
