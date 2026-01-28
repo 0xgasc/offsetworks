@@ -195,8 +195,7 @@ const workItems = [
     type: 'Live Music Archive',
     desc: 'Live performance archive for Geese. Explore setlists, recordings, and concert history.',
     link: 'https://geeselive-production-4233.up.railway.app/',
-    embed: 'https://geeselive-production-4233.up.railway.app/',
-    hasAudio: true
+    image: 'images/geese-screenshot.png'
   },
   {
     title: 'EZTix (WIP)',
