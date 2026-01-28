@@ -212,7 +212,7 @@ const workItems = [
     type: 'P2P Ticketing Platform',
     desc: 'Decentralized ticketing platform to empower artists and users. Build events, sell tickets, and connect communities on-chain.',
     link: 'https://eztix-lyart.vercel.app',
-    embed: 'https://eztix-lyart.vercel.app'
+    image: 'images/eztix-screenshot.png'
   }
 ];
 
