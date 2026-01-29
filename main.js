@@ -212,6 +212,13 @@ const workItems = [
     image: 'images/stash-screenshot.png'
   },
   {
+    title: 'Lynx',
+    type: 'Creator Profile Platform',
+    desc: 'Link-in-bio meets patronage for artists and small businesses. Unified profiles with Stripe and crypto payments, music-first design, and built-in support tools.',
+    link: '#',
+    image: 'images/lynx-screenshot.png'
+  },
+  {
     title: 'Stok',
     type: 'Inventory Management System',
     desc: 'Inventory and warehousing platform for small restaurants and manufacturers. Connected worker module for real-time stock tracking and operations management.',
