@@ -170,6 +170,7 @@ const workItems = [
   {
     title: 'Flyin',
     type: 'Web App',
+    badge: 'Live',
     desc: 'Helicopter tour booking platform for Guatemala. Real-time availability, payment processing, and automated confirmations.',
     link: 'https://flyinguate.com/',
     image: 'images/flyin-screenshot.png'
@@ -193,13 +194,15 @@ const workItems = [
   {
     title: 'Geese Live Archive',
     type: 'Live Music Archive',
+    badge: 'Live',
     desc: 'Live performance archive for Geese. Explore setlists, recordings, and concert history.',
     link: 'https://geeselive-production-4233.up.railway.app/',
     image: 'images/geese-screenshot.png'
   },
   {
-    title: 'EZTix (WIP)',
+    title: 'EZTix',
     type: 'P2P Ticketing Platform',
+    badge: 'Live',
     desc: 'Decentralized ticketing platform to empower artists and users. Build events, sell tickets, and connect communities on-chain.',
     link: 'https://eztix-lyart.vercel.app',
     image: 'images/eztix-screenshot.png'
@@ -207,6 +210,7 @@ const workItems = [
   {
     title: 'Stash',
     type: 'Decentralized Storage Provider',
+    badge: 'WIP',
     desc: 'Decentralized storage infrastructure. Upload, manage, and access data on distributed networks with permanent, censorship-resistant storage.',
     link: '#',
     image: 'images/stash-screenshot.png'
@@ -214,6 +218,7 @@ const workItems = [
   {
     title: 'Lynx',
     type: 'Creator Profile Platform',
+    badge: 'WIP',
     desc: 'Link-in-bio meets patronage for artists and small businesses. Unified profiles with Stripe and crypto payments, music-first design, and built-in support tools.',
     link: '#',
     image: 'images/lynx-screenshot.png'
@@ -221,6 +226,7 @@ const workItems = [
   {
     title: 'Stok',
     type: 'Inventory Management System',
+    badge: 'WIP',
     desc: 'Inventory and warehousing platform for small restaurants and manufacturers. Connected worker module for real-time stock tracking and operations management.',
     link: '#',
     image: 'images/stok-screenshot.png'
@@ -355,13 +361,12 @@ function initWorkList() {
     track.className = 'work-track';
     track.innerHTML = `
       <div class="work-track-header">
-        <span class="work-track-number">${String(idx + 1).padStart(2, '0')}</span>
         <span class="work-track-indicator">▶</span>
         <div class="work-track-info">
           <div class="work-track-title">${item.title}</div>
           <div class="work-track-type">${item.type}</div>
         </div>
-        ${item.badge ? `<span class="work-badge-inline">${item.badge}</span>` : ''}
+        ${item.badge ? `<span class="work-badge-inline" data-badge="${item.badge.toLowerCase()}">${item.badge}</span>` : ''}
       </div>
       <div class="work-track-body">
         <div class="work-track-body-inner">
