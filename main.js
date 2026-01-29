@@ -347,7 +347,10 @@ function initWorkList() {
   grid.innerHTML = '';
   grid.className = 'work-list';
 
-  workItems.forEach((item, idx) => {
+  // Shuffle order each time
+  const shuffled = [...workItems].sort(() => Math.random() - 0.5);
+
+  shuffled.forEach((item, idx) => {
     const track = document.createElement('div');
     track.className = 'work-track';
     track.innerHTML = `
