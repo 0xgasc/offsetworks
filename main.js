@@ -210,9 +210,9 @@ const workItems = [
   {
     title: 'Stash',
     type: 'Decentralized Storage Provider',
-    badge: 'WIP',
+    badge: 'Live',
     desc: 'Decentralized storage infrastructure. Upload, manage, and access data on distributed networks with permanent, censorship-resistant storage.',
-    link: '#',
+    link: 'https://aeter-eight.vercel.app/',
     image: 'images/stash-screenshot.png'
   },
   {
