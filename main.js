@@ -210,6 +210,13 @@ const workItems = [
     desc: 'Decentralized storage infrastructure. Upload, manage, and access data on distributed networks with permanent, censorship-resistant storage.',
     link: '#',
     image: 'images/stash-screenshot.png'
+  },
+  {
+    title: 'Stok',
+    type: 'Inventory Management System',
+    desc: 'Inventory and warehousing platform for small restaurants and manufacturers. Connected worker module for real-time stock tracking and operations management.',
+    link: '#',
+    image: 'images/stok-screenshot.png'
   }
 ];
 
