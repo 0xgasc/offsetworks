@@ -110,8 +110,8 @@ function setLanguage(lang) {
   // Update service cards
   updateServiceCardTranslations(t);
 
-  // Update work card badges
-  document.querySelectorAll('.work-badge').forEach(badge => {
+  // Update work track badges
+  document.querySelectorAll('.work-badge-inline').forEach(badge => {
     badge.textContent = t.work.badge;
   });
 
@@ -334,231 +334,44 @@ function initServiceCards() {
   });
 }
 
-// Work carousel state
-let currentWorkIndex = Math.floor(Math.random() * workItems.length);
-
-// Create image element for work cards
-function createWorkImage(imgSrc) {
-  const wrapper = document.createElement('div');
-  wrapper.className = 'pixel-art-wrapper';
-
-  const img = document.createElement('img');
-  img.src = imgSrc;
-  img.className = 'pixel-art-img';
-  img.alt = '';
-
-  wrapper.appendChild(img);
-  return wrapper;
-}
-
-// Create crossfade dither slideshow
-function createDitherCollage(images) {
-  const wrapper = document.createElement('div');
-  wrapper.className = 'dither-slideshow';
-
-  // Create image layers that crossfade
-  images.forEach((src, idx) => {
-    const layer = document.createElement('div');
-    layer.className = 'dither-layer';
-    layer.style.animationDelay = `${idx * 2}s`; // 2 seconds per image, 12s total cycle
-
-    const img = document.createElement('img');
-    img.src = src;
-    img.alt = '';
-
-    layer.appendChild(img);
-    wrapper.appendChild(layer);
-  });
-
-  // Add halftone overlay
-  const halftone = document.createElement('div');
-  halftone.className = 'dither-halftone';
-  wrapper.appendChild(halftone);
-
-  return wrapper;
-}
-
-// Create iframe embed for websites
-function createIframeEmbed(url, hasAudio = false) {
-  const wrapper = document.createElement('div');
-  wrapper.className = 'work-iframe-wrapper';
-
-  const iframe = document.createElement('iframe');
-  iframe.src = url;
-  iframe.className = 'work-iframe';
-  iframe.setAttribute('loading', 'lazy');
-  iframe.setAttribute('allowfullscreen', '');
-  iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-
-  wrapper.appendChild(iframe);
-
-  // Add dither overlay
-  const ditherOverlay = document.createElement('div');
-  ditherOverlay.className = 'iframe-dither-overlay';
-  wrapper.appendChild(ditherOverlay);
-
-  return wrapper;
-}
-
-// Create video player
-function createVideoPlayer(videoUrl) {
-  const wrapper = document.createElement('div');
-  wrapper.className = 'work-video-wrapper';
-
-  const video = document.createElement('video');
-  video.src = videoUrl;
-  video.className = 'work-video';
-  video.setAttribute('autoplay', '');
-  video.setAttribute('loop', '');
-  video.setAttribute('muted', '');
-  video.setAttribute('playsinline', '');
-  video.setAttribute('preload', 'auto');
-
-  // Prevent pausing
-  video.addEventListener('pause', (e) => {
-    video.play();
-  });
-
-  // Ensure autoplay starts
-  video.addEventListener('loadeddata', () => {
-    video.play().catch(err => console.log('Autoplay prevented:', err));
-  });
-
-  wrapper.appendChild(video);
-
-  // Add dither overlay
-  const ditherOverlay = document.createElement('div');
-  ditherOverlay.className = 'video-dither-overlay';
-  wrapper.appendChild(ditherOverlay);
-
-  return wrapper;
-}
-
-// Initialize work cards (carousel - one at a time)
-function initWorkCards() {
+// Initialize work list (rocola/jukebox tracklist - all visible, accordion expand)
+function initWorkList() {
   const grid = document.getElementById('work-grid');
   grid.innerHTML = '';
+  grid.className = 'work-list';
 
-  const customWorkColors = {
-    'FlyInGuate': 'cyber',
-    'StablePay': 'ice',
-    'ArtTab': 'vapor',
-    'UMO Archive': 'gold'
-  };
-
-  // Create all cards but only show current one
   workItems.forEach((item, idx) => {
-    const color = customWorkColors[item.title] || randomColor();
-
-    animationState.work[idx] = { animation: null, color, useImage: !!item.image };
-
-    const card = document.createElement('div');
-    card.className = `work-card color-${color}`;
-    card.style.display = idx === currentWorkIndex ? 'block' : 'none';
-    card.dataset.index = idx;
-    card.innerHTML = `
-      <div class="work-content" data-index="${idx}">
-        <div class="work-content-row">
-          <div class="work-header">
-            <div class="work-title">
-              ${item.title}
-              ${item.desc ? `<span class="work-expand-icon">▼</span>` : ''}
-            </div>
-            <div class="work-type">${item.type}</div>
-          </div>
+    const track = document.createElement('div');
+    track.className = 'work-track';
+    track.innerHTML = `
+      <div class="work-track-header">
+        <span class="work-track-number">${String(idx + 1).padStart(2, '0')}</span>
+        <span class="work-track-indicator">▶</span>
+        <div class="work-track-info">
+          <div class="work-track-title">${item.title}</div>
+          <div class="work-track-type">${item.type}</div>
+        </div>
+        ${item.badge ? `<span class="work-badge-inline">${item.badge}</span>` : ''}
+      </div>
+      <div class="work-track-body">
+        <div class="work-track-body-inner">
+          ${item.image ? `<img class="work-track-image" src="${item.image}" alt="${item.title}" loading="lazy">` : ''}
+          ${item.desc ? `<p class="work-track-desc">${item.desc}</p>` : ''}
           ${item.link && item.link !== '#' ? `<a href="${item.link}" class="work-link" target="_blank" rel="noopener">Visit Site</a>` : ''}
         </div>
-        ${item.desc ? `<div class="work-details" data-index="${idx}">
-          <p class="work-desc">${item.desc}</p>
-        </div>` : ''}
-      </div>
-      <div class="work-ascii" id="work-ascii-container-${idx}">
-        <pre id="work-ascii-${idx}"></pre>
       </div>
     `;
 
-    // Add click handler for expand/collapse
-    const contentEl = card.querySelector('.work-content');
-    const detailsEl = card.querySelector('.work-details');
-    if (contentEl && detailsEl) {
-      contentEl.addEventListener('click', () => {
-        contentEl.classList.toggle('expanded');
-        detailsEl.classList.toggle('expanded');
-      });
-    }
+    track.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A') return; // don't toggle on link click
+      const wasActive = track.classList.contains('active');
+      // Close all
+      grid.querySelectorAll('.work-track.active').forEach(t => t.classList.remove('active'));
+      // Toggle clicked
+      if (!wasActive) track.classList.add('active');
+    });
 
-    grid.appendChild(card);
-
-    // Show media based on type: embed, video, collage, or single image
-    const container = document.getElementById(`work-ascii-container-${idx}`);
-    const pre = document.getElementById(`work-ascii-${idx}`);
-
-    if (container && pre) {
-      if (item.embed) {
-        // Embedded website
-        pre.style.display = 'none';
-        const embedEl = createIframeEmbed(item.embed, item.hasAudio);
-        container.insertBefore(embedEl, container.firstChild);
-      } else if (item.video) {
-        // Video player
-        pre.style.display = 'none';
-        const videoEl = createVideoPlayer(item.video);
-        container.insertBefore(videoEl, container.firstChild);
-      } else if (item.collage && item.images) {
-        // Image collage
-        pre.style.display = 'none';
-        const collageEl = createDitherCollage(item.images);
-        container.insertBefore(collageEl, container.firstChild);
-      } else if (item.image) {
-        // Single image
-        pre.style.display = 'none';
-        const imageWrapper = createWorkImage(item.image);
-        container.insertBefore(imageWrapper, container.firstChild);
-      }
-    }
-  });
-
-  // Set up carousel controls
-  const prevBtn = document.getElementById('work-prev');
-  const nextBtn = document.getElementById('work-next');
-
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => showWorkCard(currentWorkIndex - 1));
-  }
-  if (nextBtn) {
-    nextBtn.addEventListener('click', () => showWorkCard(currentWorkIndex + 1));
-  }
-}
-
-// Show specific work card
-function showWorkCard(index) {
-  const cards = document.querySelectorAll('#work-grid .work-card');
-  if (cards.length === 0) return;
-
-  // Wrap around
-  if (index < 0) index = cards.length - 1;
-  if (index >= cards.length) index = 0;
-
-  // Stop audio/video in hidden cards by reloading iframes
-  cards.forEach((card, idx) => {
-    if (idx !== index) {
-      // Kill iframe/video when hiding
-      const iframe = card.querySelector('.work-iframe');
-      if (iframe) {
-        const currentSrc = iframe.src;
-        iframe.src = 'about:blank';
-        // Reload when needed
-        setTimeout(() => {
-          iframe.src = currentSrc;
-        }, 100);
-      }
-    }
-  });
-
-  currentWorkIndex = index;
-
-  cards.forEach((card, idx) => {
-    card.style.display = idx === index ? 'block' : 'none';
+    grid.appendChild(track);
   });
 }
 
@@ -644,12 +457,7 @@ function randomizeAnimations() {
     if (hasGif) card.classList.add('has-gif');
   });
 
-  // Work cards keep their fixed animations/colors, just update display
-  const workGrid = document.getElementById('work-grid');
-  workGrid.querySelectorAll('.work-card').forEach((card, idx) => {
-    // Preserve carousel display state
-    card.style.display = idx === currentWorkIndex ? 'block' : 'none';
-  });
+  // Work list doesn't need randomization (no ASCII animations)
 
   // Hero always stays bokeh (color cycles automatically)
   animationState.hero = {
@@ -693,14 +501,6 @@ function animate() {
       }
     });
 
-    // Animate work cards
-    animationState.work.forEach((state, idx) => {
-      const canvas = document.getElementById(`work-ascii-${idx}`);
-      if (canvas && state.animation) {
-        ASCII.animate(canvas, state.animation, 60, 22);
-      }
-    });
-
   }
 
   // Animate hero (bokeh with color cycling) - smaller canvas + more skipping for performance
@@ -718,7 +518,7 @@ function animate() {
 // Initialize everything
 function init() {
   initServiceCards();
-  initWorkCards();
+  initWorkList();
   initSpecialAnimations();
   initLanguageToggle();
 
