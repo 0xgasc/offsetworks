@@ -2,7 +2,7 @@
 
 **Live URL:** https://offsetworks.xyz
 
-Boutique design and development agency website with ASCII animation backgrounds, work portfolio carousel, and bilingual support (EN/ES).
+Boutique design and development studio website with ASCII animation backgrounds, rocola-style work tracklist, and bilingual support (EN/ES).
 
 ## Architecture
 
@@ -15,36 +15,58 @@ Boutique design and development agency website with ASCII animation backgrounds,
 | File | Purpose |
 |------|---------|
 | `index.html` | Main page structure |
-| `main.js` | Card system, animations, i18n, work carousel |
+| `main.js` | Card system, animations, i18n, work tracklist |
 | `styles.css` | All styling including color themes |
 | `animations.js` | 30+ ASCII animation effects library |
 
 ## Work Portfolio
 
-Work items displayed in carousel format with screenshot images:
+Jukebox/rocola-style tracklist — all projects visible, click to expand:
 
-| Project | Type | Image |
-|---------|------|-------|
-| Flyin | Web App | `images/flyin-screenshot.png` |
-| StablePay | Decentralized Payments | `images/stablepay-screenshot.png` |
-| UMO Archive | Live Music Archive | iframe embed |
-| Geese Live Archive | Live Music Archive | iframe embed |
-| EZTix (WIP) | P2P Ticketing Platform | `images/eztix-screenshot.png` |
-| Stash | Decentralized Storage | `images/stash-screenshot.png` |
+| Project | Type | Status | Link |
+|---------|------|--------|------|
+| Flyin | Web App | Live | flyinguate.com |
+| StablePay | Decentralized Payments | Live | stablepay-nine.vercel.app |
+| UMO Archive | Live Music Archive | Live | umo-live.xyz |
+| Geese Live Archive | Live Music Archive | Live | geeselive-production-4233.up.railway.app |
+| EZTix | P2P Ticketing Platform | Live | eztix-lyart.vercel.app |
+| Stash | Decentralized Storage | Live | aeter-eight.vercel.app |
+| Lynx | Creator Profile Platform | WIP | - |
+| Stok | Inventory Management | WIP | - |
 
-## Work Card Structure
+## Work Tracklist Structure
 
 ```
-┌─────────────────────────────────────┐
-│ Title ▼           [Visit Site]      │  ← work-content-row
-│ TYPE                                │
-├─────────────────────────────────────┤
-│ Expandable description...           │  ← work-details (hidden by default)
-├─────────────────────────────────────┤
-│                                     │
-│         [Screenshot Image]          │  ← work-ascii container
-│                                     │
-└─────────────────────────────────────┘
+┌──────────────────────────────────────┐
+│ ▶ flyin                        LIVE  │  ← track header (click to expand)
+│   WEB APP                            │
+├──────────────────────────────────────┤
+│   [Screenshot Image]                 │  ← expanded content
+│   Description text...                │
+│   Visit Site                         │
+├──────────────────────────────────────┤
+│   stablepay                    LIVE  │  ← collapsed track
+│   DECENTRALIZED PAYMENTS             │
+├──────────────────────────────────────┤
+│   lynx                         WIP   │  ← WIP badge (dimmed)
+│   CREATOR PROFILE PLATFORM           │
+└──────────────────────────────────────┘
+```
+
+Features:
+- **Shuffled order** on each page load
+- **Accordion expand** — only one track open at a time
+- **LIVE/WIP badges** — green accent for live, dimmed for WIP
+- **Lowercase titles** — clean aesthetic
+- **▶ indicator** on active track
+
+## Hero Section
+
+```
+systems that work.
+
+boutique design and development studio for startups, creatives and founders.
+competitive rates, built from scratch.
 ```
 
 ## Color Themes
@@ -55,15 +77,17 @@ Work items displayed in carousel format with screenshot images:
 
 Supports English and Spanish via `translations` object in `main.js`. Toggle button switches between languages.
 
-## Recent Changes (Jan 2026)
+## Recent Changes (Jan-Feb 2026)
 
-- Replaced iframe embeds with screenshot images for Flyin, StablePay, EZTix, Stash
-- Renamed section from "WORKS" to "Recent Work"
-- Moved info pane (title, type, Visit Site) to top of work cards
-- Moved expandable description inside info pane
-- Removed arrow from "Visit Site →" link
-- Made carousel arrows whiter for better visibility
-- Renamed "FlyInGuate" to "Flyin"
+- **Rocola redesign** — replaced carousel with jukebox-style tracklist
+- **All projects visible** — no more one-at-a-time navigation
+- **Shuffled order** — randomizes on each page load
+- **LIVE/WIP badges** — auto-assigned based on link availability
+- **Removed track numbers** — cleaner look
+- **Lowercase titles** — via CSS text-transform
+- **Added projects**: Lynx (creator profiles), Stok (inventory management)
+- **Updated hero copy** — shorter headline, lowercase subtext
+- **Stash now live** at aeter-eight.vercel.app
 
 ## Deployment
 
@@ -77,10 +101,12 @@ git push origin main
 
 ## Image Sources
 
-Work screenshots stored on Irys (decentralized storage):
-- EZTix: `https://gateway.irys.xyz/GaEnoYHnfajhnziUDRmozy8boaN2PmGia8QraMAhgKfD`
-- Stash: `https://devnet.irys.xyz/681qmpfNVwiqCpH31jDmzL1HbDVA858hx3TXaKSz475H`
-- StablePay: `https://devnet.irys.xyz/ECjHxh7EgabCRC6jEt69pZpQoHzpYs52fGkqP4WdeMfA`
-- Flyin: `https://devnet.irys.xyz/4qLbQvDy98NP8ZD5GHpgRsqLq2ZM4Ysqa6ao8QaQmQ9Y`
-
-Local copies in `images/` folder for faster loading.
+Work screenshots stored locally in `images/` folder. Original uploads on Irys:
+- EZTix: `gateway.irys.xyz/GaEnoYHnfajhnziUDRmozy8boaN2PmGia8QraMAhgKfD`
+- Stash: `devnet.irys.xyz/AF7J3gh4hCEqANytZYcjVZnbiMbJmi4SoDLiEuKBrrN5`
+- StablePay: `devnet.irys.xyz/ECjHxh7EgabCRC6jEt69pZpQoHzpYs52fGkqP4WdeMfA`
+- Flyin: `devnet.irys.xyz/4qLbQvDy98NP8ZD5GHpgRsqLq2ZM4Ysqa6ao8QaQmQ9Y`
+- UMO Archive: `devnet.irys.xyz/9E3uTk18THauLf1R1FtMuiFx6u17v3MHCQpTJPkL3ZAV`
+- Geese: `devnet.irys.xyz/DUZc8wEQDXx7qMGxaEXQUecW82FJ7mTfYMhSMjBHkWyw`
+- Lynx: `devnet.irys.xyz/64Sb1iU9DioJjKPby9hJLM7VUZU66VuPpJNskq4XP25T`
+- Stok: `devnet.irys.xyz/HBXfzcHgL4LNQj9nQMUec6SYfSuqyxH5eUsmggcug8hw`
