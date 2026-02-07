@@ -445,14 +445,14 @@ function initWorkList() {
     track.dataset.itemIndex = idx;
     const isLive = item.badge === 'live' && item.link && item.link !== '#';
     const isWip = item.badge === 'wip';
-    const isLynx = item.title === 'lynx';
+    const needsZoom = item.title === 'lynx' || item.title === 'stok';
 
     // For live sites: use iframe, for WIP: use clickable image
     let mediaContent = '';
     if (isLive) {
       mediaContent = `<div class="work-track-iframe-wrapper"><iframe class="work-track-iframe" src="${item.link}" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe></div>`;
     } else if (item.image) {
-      const zoomClass = isLynx ? ' work-track-image-zoomed' : '';
+      const zoomClass = needsZoom ? ' work-track-image-zoomed' : '';
       if (isWip && item.link && item.link !== '#') {
         mediaContent = `<a href="${item.link}" target="_blank" rel="noopener" class="work-track-image-link"><img class="work-track-image${zoomClass}" src="${item.image}" alt="${item.title}" loading="lazy"></a>`;
       } else {
