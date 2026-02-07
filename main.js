@@ -4,86 +4,86 @@
 const translations = {
   en: {
     nav: {
-      work: 'Work',
-      services: 'Services',
-      contact: "Let's Talk"
+      work: 'work',
+      services: 'services',
+      contact: "let's talk"
     },
     hero: {
       headline: 'systems that <span class="highlight">work</span>.',
       subtext: 'boutique design and development studio for startups, creatives and founders.<br>competitive rates, built from scratch.',
-      cta1: 'Start a Project →',
-      cta2: 'See Our Work'
+      cta1: 'start a project →',
+      cta2: 'see our work'
     },
     services: {
-      shuffle: 'Shuffle Animations',
+      shuffle: 'shuffle animations',
       landing: {
-        title: 'Digital Solutions',
-        desc: 'Custom websites with modern design and animations. Built for performance and conversion.'
+        title: 'digital solutions',
+        desc: 'custom websites with modern design and animations. built for performance and conversion.'
       },
       webapps: {
-        title: 'Web Apps / Products',
-        desc: 'Bespoke applications, tailored solutions and tools built for your specific needs.'
+        title: 'web apps / products',
+        desc: 'bespoke applications, tailored solutions and tools built for your specific needs.'
       },
       immersive: {
-        title: 'Immersive Experiences',
-        desc: 'Building digital ecosystems for communities. Interactive experiences with WebGL, 3D, custom animations, and real-time features.'
+        title: 'immersive experiences',
+        desc: 'building digital ecosystems for communities. interactive experiences with webgl, 3d, custom animations, and real-time features.'
       }
     },
     process: {
-      step1: { title: 'Intro Call', desc: '15 min to understand your project. Free, no pressure.' },
-      step2: { title: 'Proposal', desc: 'Scope, timeline, and fixed price within 48 hours.' },
-      step3: { title: 'Build Sprint', desc: 'We work fast. Most projects ship in 1-4 weeks.' },
-      step4: { title: 'Launch + Support', desc: 'Go live, then optional retainer for ongoing needs.' }
+      step1: { title: 'intro call', desc: '15 min to understand your project. free, no pressure.' },
+      step2: { title: 'proposal', desc: 'scope, timeline, and fixed price within 48 hours.' },
+      step3: { title: 'build sprint', desc: 'we work fast. most projects ship in 1-4 weeks.' },
+      step4: { title: 'launch + support', desc: 'go live, then optional retainer for ongoing needs.' }
     },
     work: {
-      tag: 'Recent Work',
-      badge: 'Coming Soon'
+      tag: 'recent work',
+      badge: 'coming soon'
     },
     contact: {
-      headline: 'Ready to build something?',
-      subtext: 'Drop us a line. We respond fast.'
+      headline: 'ready to build something?',
+      subtext: 'drop us a line. we respond fast.'
     }
   },
   es: {
     nav: {
-      work: 'Trabajo',
-      services: 'Servicios',
-      contact: 'Hablemos'
+      work: 'trabajo',
+      services: 'servicios',
+      contact: 'hablemos'
     },
     hero: {
       headline: 'sistemas que <span class="highlight">funcionan</span>.',
       subtext: 'estudio boutique de diseño y desarrollo para startups, creativos y fundadores.<br>tarifas competitivas, construido desde cero.',
-      cta1: 'Iniciar Proyecto →',
-      cta2: 'Ver Nuestro Trabajo'
+      cta1: 'iniciar proyecto →',
+      cta2: 'ver nuestro trabajo'
     },
     services: {
-      shuffle: 'Cambiar Animaciones',
+      shuffle: 'cambiar animaciones',
       landing: {
-        title: 'Soluciones Digitales',
-        desc: 'Sitios web personalizados con diseño moderno y animaciones. Construidos para rendimiento y conversión.'
+        title: 'soluciones digitales',
+        desc: 'sitios web personalizados con diseño moderno y animaciones. construidos para rendimiento y conversión.'
       },
       webapps: {
-        title: 'Apps Web / Productos',
-        desc: 'Aplicaciones a medida, soluciones personalizadas y herramientas construidas para tus necesidades específicas.'
+        title: 'apps web / productos',
+        desc: 'aplicaciones a medida, soluciones personalizadas y herramientas construidas para tus necesidades específicas.'
       },
       immersive: {
-        title: 'Experiencias Inmersivas',
-        desc: 'Construyendo ecosistemas digitales para comunidades. Experiencias interactivas con WebGL, 3D, animaciones personalizadas y funciones en tiempo real.'
+        title: 'experiencias inmersivas',
+        desc: 'construyendo ecosistemas digitales para comunidades. experiencias interactivas con webgl, 3d, animaciones personalizadas y funciones en tiempo real.'
       }
     },
     process: {
-      step1: { title: 'Llamada Intro', desc: '15 min para entender tu proyecto. Gratis, sin compromiso.' },
-      step2: { title: 'Propuesta', desc: 'Alcance, timeline y precio fijo en 48 horas.' },
-      step3: { title: 'Sprint de Desarrollo', desc: 'Trabajamos rápido. La mayoría de proyectos se entregan en 1-4 semanas.' },
-      step4: { title: 'Lanzamiento + Soporte', desc: 'Salimos en vivo, luego retainer opcional para necesidades continuas.' }
+      step1: { title: 'llamada intro', desc: '15 min para entender tu proyecto. gratis, sin compromiso.' },
+      step2: { title: 'propuesta', desc: 'alcance, timeline y precio fijo en 48 horas.' },
+      step3: { title: 'sprint de desarrollo', desc: 'trabajamos rápido. la mayoría de proyectos se entregan en 1-4 semanas.' },
+      step4: { title: 'lanzamiento + soporte', desc: 'salimos en vivo, luego retainer opcional para necesidades continuas.' }
     },
     work: {
-      tag: 'Trabajo Reciente',
-      badge: 'Próximamente'
+      tag: 'trabajo reciente',
+      badge: 'próximamente'
     },
     contact: {
-      headline: '¿Listo para crear algo?',
-      subtext: 'Escríbenos. Respondemos rápido (como todo lo que hacemos).'
+      headline: '¿listo para crear algo?',
+      subtext: 'escríbenos. respondemos rápido (como todo lo que hacemos).'
     }
   }
 };
@@ -118,7 +118,7 @@ function setLanguage(lang) {
   // Update toggle button
   const toggleBtn = document.getElementById('lang-toggle');
   if (toggleBtn) {
-    toggleBtn.textContent = lang === 'en' ? 'ES' : 'EN';
+    toggleBtn.textContent = lang === 'en' ? 'es' : 'en';
   }
 
   // Update html lang attribute
@@ -148,86 +148,115 @@ function initLanguageToggle() {
   }
 }
 
+// Mobile hamburger menu
+function initHamburgerMenu() {
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      }
+    });
+  }
+}
+
 const services = [
   {
-    title: 'Digital Solutions',
-    desc: 'Custom websites with modern design and animations. Built for performance and conversion.',
+    title: 'digital solutions',
+    desc: 'custom websites with modern design and animations. built for performance and conversion.',
     gif: 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMG8zeGQxbjhqajk0MDQ5N3dwZm1kY3JsMTU3N3ltbHlpb2czMDMweSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bz9PIxJMQtkO943XeS/giphy.gif'
   },
   {
-    title: 'Web Apps / Products',
-    desc: 'Bespoke applications, tailored solutions and tools built for your specific needs.',
+    title: 'web apps / products',
+    desc: 'bespoke applications, tailored solutions and tools built for your specific needs.',
     gif: 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2VvYzA1bWN3MWhma3F2YTR3bGx4aW1wMjd5cWVuOWZhZG1nZTdzYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wgHY9nSrlTMt2/giphy.gif'
   },
   {
-    title: 'Immersive Experiences',
-    desc: 'Building digital ecosystems for communities. Interactive experiences with WebGL, 3D, custom animations, and real-time features.',
+    title: 'immersive experiences',
+    desc: 'building digital ecosystems for communities. interactive experiences with webgl, 3d, custom animations, and real-time features.',
     gif: 'https://38.media.tumblr.com/807d0662a240d33e4a8dfce3c128f654/tumblr_nriviszxIb1s2t3cto1_500.gif'
   }
 ];
 
 const workItems = [
   {
-    title: 'Flyin',
-    type: 'Web App',
-    badge: 'Live',
-    desc: 'Helicopter tour booking platform for Guatemala. Real-time availability, payment processing, and automated confirmations.',
+    title: 'flyin',
+    type: 'web app',
+    badge: 'live',
+    desc: 'helicopter tour booking platform for guatemala. real-time availability, payment processing, and automated confirmations.',
     link: 'https://flyinguate.com/',
     image: 'images/flyin-screenshot.png'
   },
   {
-    title: 'StablePay',
-    type: 'Decentralized Payments Enabler',
-    badge: 'Live',
-    desc: 'Stablecoin enablement platform for small merchants. Gateway for decentralized payments with crypto-native backends.',
+    title: 'stablepay',
+    type: 'decentralized payments enabler',
+    badge: 'live',
+    desc: 'stablecoin enablement platform for small merchants. gateway for decentralized payments with crypto-native backends.',
     link: 'https://stablepay-nine.vercel.app/crypto-pay.html?productId=Special&productName=Special+Edition&price=0.5',
     image: 'images/stablepay-screenshot.png'
   },
   {
-    title: 'UMO Archive',
-    type: 'Live Music Archive',
-    badge: 'Live',
-    desc: 'Live music setlist archive and discovery platform. Browse performances, track artists, and explore music history.',
+    title: 'umo archive',
+    type: 'live music archive',
+    badge: 'live',
+    desc: 'live music setlist archive and discovery platform. browse performances, track artists, and explore music history.',
     link: 'https://umo-live.xyz',
     image: 'images/umo-screenshot.png'
   },
   {
-    title: 'Geese Live Archive',
-    type: 'Live Music Archive',
-    badge: 'Live',
-    desc: 'Live performance archive for Geese. Explore setlists, recordings, and concert history.',
+    title: 'geese live archive',
+    type: 'live music archive',
+    badge: 'live',
+    desc: 'live performance archive for geese. explore setlists, recordings, and concert history.',
     link: 'https://geeselive-production-4233.up.railway.app/',
     image: 'images/geese-screenshot.png'
   },
   {
-    title: 'EZTix',
-    type: 'P2P Ticketing Platform',
-    badge: 'Live',
-    desc: 'Decentralized ticketing platform to empower artists and users. Build events, sell tickets, and connect communities on-chain.',
+    title: 'eztix',
+    type: 'p2p ticketing platform',
+    badge: 'live',
+    desc: 'decentralized ticketing platform to empower artists and users. build events, sell tickets, and connect communities on-chain.',
     link: 'https://eztix-lyart.vercel.app',
     image: 'images/eztix-screenshot.png'
   },
   {
-    title: 'Stash',
-    type: 'Decentralized Storage Provider',
-    badge: 'Live',
-    desc: 'Decentralized storage infrastructure. Upload, manage, and access data on distributed networks with permanent, censorship-resistant storage.',
+    title: 'stash',
+    type: 'decentralized storage provider',
+    badge: 'live',
+    desc: 'decentralized storage infrastructure. upload, manage, and access data on distributed networks with permanent, censorship-resistant storage.',
     link: 'https://aeter-eight.vercel.app/',
     image: 'images/stash-screenshot.png'
   },
   {
-    title: 'Lynx',
-    type: 'Creator Profile Platform',
-    badge: 'WIP',
-    desc: 'Link-in-bio meets patronage for artists and small businesses. Unified profiles with Stripe and crypto payments, music-first design, and built-in support tools.',
+    title: 'lynx',
+    type: 'creator profile platform',
+    badge: 'wip',
+    desc: 'link-in-bio meets patronage for artists and small businesses. unified profiles with stripe and crypto payments, music-first design, and built-in support tools.',
     link: '#',
     image: 'images/lynx-screenshot.png'
   },
   {
-    title: 'Stok',
-    type: 'Inventory Management System',
-    badge: 'WIP',
-    desc: 'Inventory and warehousing platform for small restaurants and manufacturers. Connected worker module for real-time stock tracking and operations management.',
+    title: 'stok',
+    type: 'inventory management system',
+    badge: 'wip',
+    desc: 'inventory and warehousing platform for small restaurants and manufacturers. connected worker module for real-time stock tracking and operations management.',
     link: '#',
     image: 'images/stok-screenshot.png'
   }
@@ -300,14 +329,14 @@ function initServiceCards() {
 
   // Custom animations for specific services
   const customAnimations = {
-    'Landing Pages': 'landingPage',
-    'Web Apps / Products': 'codeMatrix',
-    'Immersive Experiences': 'bokeh'
+    'landing pages': 'landingPage',
+    'web apps / products': 'codeMatrix',
+    'immersive experiences': 'bokeh'
   };
 
   // Custom colors for specific services
   const customColors = {
-    'Immersive Experiences': 'fire'
+    'immersive experiences': 'fire'
   };
 
   services.forEach((service, idx) => {
@@ -372,7 +401,7 @@ function initWorkList() {
         <div class="work-track-body-inner">
           ${item.image ? `<img class="work-track-image" src="${item.image}" alt="${item.title}" loading="lazy">` : ''}
           ${item.desc ? `<p class="work-track-desc">${item.desc}</p>` : ''}
-          ${item.link && item.link !== '#' ? `<a href="${item.link}" class="work-link" target="_blank" rel="noopener">Visit Site</a>` : ''}
+          ${item.link && item.link !== '#' ? `<a href="${item.link}" class="work-link" target="_blank" rel="noopener">visit site</a>` : ''}
         </div>
       </div>
     `;
@@ -448,12 +477,12 @@ function randomizeAnimations() {
 
   // Randomize services (preserve custom animations and GIFs)
   const customAnimations = {
-    'Landing Pages': 'landingPage',
-    'Web Apps / Products': 'codeMatrix',
-    'Immersive Experiences': 'bokeh'
+    'landing pages': 'landingPage',
+    'web apps / products': 'codeMatrix',
+    'immersive experiences': 'bokeh'
   };
   const customColors = {
-    'Immersive Experiences': 'fire'
+    'immersive experiences': 'fire'
   };
   const servicesGrid = document.getElementById('services-grid');
   servicesGrid.querySelectorAll('.card').forEach((card, idx) => {
@@ -536,6 +565,7 @@ function init() {
   initWorkList();
   initSpecialAnimations();
   initLanguageToggle();
+  initHamburgerMenu();
 
   // Start animation loop
   requestAnimationFrame(animate);
