@@ -276,7 +276,7 @@ body {
 
 .section-tag {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 1.1rem;
   color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 0.15em;
