@@ -8,64 +8,10 @@
   <meta http-equiv="Expires" content="0">
   <title>Offset — Digital Products That Work</title>
   <link rel="icon" type="image/jpeg" href="favicon.jpg">
-  <!-- Geist Font (Vercel) via Fontsource CDN -->
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link href="https://cdn.jsdelivr.net/fontsource/fonts/geist:vf@latest/latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link href="https://cdn.jsdelivr.net/fontsource/fonts/geist-mono:vf@latest/latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <style>
-    /* Geist Sans & Mono (Variable) */
-    @font-face {
-      font-family: 'Geist';
-      font-style: normal;
-      font-display: swap;
-      font-weight: 100 900;
-      src: url('https://cdn.jsdelivr.net/fontsource/fonts/geist:vf@latest/latin-wght-normal.woff2') format('woff2-variations');
-    }
-    @font-face {
-      font-family: 'Geist Mono';
-      font-style: normal;
-      font-display: swap;
-      font-weight: 100 900;
-      src: url('https://cdn.jsdelivr.net/fontsource/fonts/geist-mono:vf@latest/latin-wght-normal.woff2') format('woff2-variations');
-    }
-    /* Geist Pixel Variants (self-hosted) */
-    @font-face {
-      font-family: 'Geist Pixel Square';
-      font-style: normal;
-      font-display: swap;
-      font-weight: 400;
-      src: url('fonts/GeistPixel-Square.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Geist Pixel Grid';
-      font-style: normal;
-      font-display: swap;
-      font-weight: 400;
-      src: url('fonts/GeistPixel-Grid.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Geist Pixel Circle';
-      font-style: normal;
-      font-display: swap;
-      font-weight: 400;
-      src: url('fonts/GeistPixel-Circle.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Geist Pixel Triangle';
-      font-style: normal;
-      font-display: swap;
-      font-weight: 400;
-      src: url('fonts/GeistPixel-Triangle.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Geist Pixel Line';
-      font-style: normal;
-      font-display: swap;
-      font-weight: 400;
-      src: url('fonts/GeistPixel-Line.woff2') format('woff2');
-    }
-  </style>
-  <link rel="stylesheet" href="styles.css?v=35">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=46">
 </head>
 <body>
   <nav class="nav">
@@ -81,8 +27,8 @@
   <header class="hero">
     <pre class="section-bg" id="hero-bg"></pre>
     <div class="hero-content">
-      <h1 data-i18n="hero.headline">Building systems<br>that <span class="highlight">work</span>.</h1>
-      <p class="hero-sub" data-i18n="hero.subtext">Boutique design and development for founders, startups, and creatives. Built from scratch with competitive rates.</p>
+      <h1 data-i18n="hero.headline">systems that <span class="highlight">work</span>.</h1>
+      <p class="hero-sub" data-i18n="hero.subtext">boutique design and development studio for startups, creatives and founders.<br>competitive rates, built from scratch.</p>
       <div class="hero-cta">
         <a href="#contact" class="btn-primary" data-i18n="hero.cta1">Start a Project →</a>
         <a href="#work" class="btn-secondary" data-i18n="hero.cta2">See Our Work</a>
@@ -185,14 +131,10 @@
   <section id="work" class="work">
     <pre class="section-bg" id="work-bg"></pre>
     <div class="section-header">
-      <button class="carousel-arrow carousel-prev" id="work-prev">←</button>
-      <span class="section-tag" data-i18n="work.tag">Works</span>
-      <button class="carousel-arrow carousel-next" id="work-next">→</button>
+      <span class="section-tag" data-i18n="work.tag">Recent Work</span>
     </div>
-    <div class="work-carousel">
-      <div class="work-grid" id="work-grid">
-        <!-- Work cards injected by JS -->
-      </div>
+    <div id="work-grid">
+      <!-- Work tracks injected by JS -->
     </div>
   </section>
 
@@ -214,8 +156,8 @@
     </div>
   </footer>
 
-  <script src="animations.js?v=35"></script>
-  <script src="main.js?v=35"></script>
+  <script src="animations.js?v=46"></script>
+  <script src="main.js?v=46"></script>
   <script>
     // Trippy Section Backgrounds
     (function() {
