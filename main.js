@@ -37,7 +37,8 @@ const translations = {
     },
     work: {
       tag: 'recent work',
-      badge: 'coming soon'
+      badge: 'coming soon',
+      visitSite: 'visit site'
     },
     contact: {
       headline: 'ready to build something?',
@@ -52,43 +53,54 @@ const translations = {
     },
     hero: {
       headline: 'sistemas que <span class="highlight">funcionan</span>.',
-      subtext: 'estudio boutique de diseño y desarrollo para startups, creativos y fundadores.<br>tarifas competitivas, construido desde cero.',
-      cta1: 'iniciar proyecto →',
-      cta2: 'ver nuestro trabajo'
+      subtext: 'estudio boutique de diseño y desarrollo para startups, creativos y fundadores.<br>tarifas competitivas, hecho desde cero.',
+      cta1: 'empezar proyecto →',
+      cta2: 'ver trabajo'
     },
     services: {
-      shuffle: 'cambiar animaciones',
+      shuffle: 'mezclar animaciones',
       landing: {
         title: 'soluciones digitales',
-        desc: 'sitios web personalizados con diseño moderno y animaciones. construidos para rendimiento y conversión.'
+        desc: 'sitios web personalizados con diseño moderno y animaciones. hechos para rendimiento y conversión.'
       },
       webapps: {
         title: 'apps web / productos',
-        desc: 'aplicaciones a medida, soluciones personalizadas y herramientas construidas para tus necesidades específicas.'
+        desc: 'aplicaciones a medida, soluciones y herramientas hechas para tus necesidades específicas.'
       },
       immersive: {
         title: 'experiencias inmersivas',
-        desc: 'construyendo ecosistemas digitales para comunidades. experiencias interactivas con webgl, 3d, animaciones personalizadas y funciones en tiempo real.'
+        desc: 'ecosistemas digitales para comunidades. experiencias interactivas con webgl, 3d, animaciones y funciones en tiempo real.'
       }
     },
     process: {
-      step1: { title: 'llamada intro', desc: '15 min para entender tu proyecto. gratis, sin compromiso.' },
+      step1: { title: 'llamada intro', desc: '15 min para entender tu proyecto. gratis, sin presión.' },
       step2: { title: 'propuesta', desc: 'alcance, timeline y precio fijo en 48 horas.' },
-      step3: { title: 'sprint de desarrollo', desc: 'trabajamos rápido. la mayoría de proyectos se entregan en 1-4 semanas.' },
-      step4: { title: 'lanzamiento + soporte', desc: 'salimos en vivo, luego retainer opcional para necesidades continuas.' }
+      step3: { title: 'sprint de desarrollo', desc: 'trabajamos rápido. la mayoría de proyectos salen en 1-4 semanas.' },
+      step4: { title: 'lanzamiento + soporte', desc: 'salimos en vivo, después retainer opcional para lo que necesites.' }
     },
     work: {
       tag: 'trabajo reciente',
-      badge: 'próximamente'
+      badge: 'próximamente',
+      visitSite: 'ver sitio'
     },
     contact: {
       headline: '¿listo para crear algo?',
-      subtext: 'escríbenos. respondemos rápido (como todo lo que hacemos).'
+      subtext: 'escríbenos. respondemos rápido.'
     }
   }
 };
 
 let currentLang = 'en';
+
+// Check URL for language parameter
+function getInitialLanguage() {
+  const params = new URLSearchParams(window.location.search);
+  const langParam = params.get('lang');
+  if (langParam && translations[langParam]) {
+    return langParam;
+  }
+  return 'en';
+}
 
 function setLanguage(lang) {
   currentLang = lang;
@@ -114,6 +126,14 @@ function setLanguage(lang) {
   document.querySelectorAll('.work-badge-inline').forEach(badge => {
     badge.textContent = t.work.badge;
   });
+
+  // Update visit site links
+  document.querySelectorAll('.work-link').forEach(link => {
+    link.textContent = t.work.visitSite;
+  });
+
+  // Update work items (type, desc)
+  updateWorkItemTranslations();
 
   // Update toggle button
   const toggleBtn = document.getElementById('lang-toggle');
@@ -198,65 +218,89 @@ const services = [
 const workItems = [
   {
     title: 'flyin',
-    type: 'web app',
+    type: { en: 'web app', es: 'app web' },
     badge: 'live',
-    desc: 'helicopter tour booking platform for guatemala. real-time availability, payment processing, and automated confirmations.',
+    desc: {
+      en: 'helicopter tour booking platform for guatemala. real-time availability, payment processing, and automated confirmations.',
+      es: 'plataforma de reservas para tours en helicóptero en guatemala. disponibilidad en tiempo real, procesamiento de pagos y confirmaciones automáticas.'
+    },
     link: 'https://flyinguate.com/',
     image: 'images/flyin-screenshot.png'
   },
   {
     title: 'stablepay',
-    type: 'decentralized payments enabler',
+    type: { en: 'decentralized payments enabler', es: 'pagos descentralizados' },
     badge: 'live',
-    desc: 'stablecoin enablement platform for small merchants. gateway for decentralized payments with crypto-native backends.',
+    desc: {
+      en: 'stablecoin enablement platform for small merchants. gateway for decentralized payments with crypto-native backends.',
+      es: 'plataforma de stablecoins para pequeños comerciantes. gateway para pagos descentralizados con backends crypto-nativos.'
+    },
     link: 'https://stablepay-nine.vercel.app/crypto-pay.html?productId=Special&productName=Special+Edition&price=0.5',
     image: 'images/stablepay-screenshot.png'
   },
   {
     title: 'umo archive',
-    type: 'live music archive',
+    type: { en: 'live music archive', es: 'archivo de música en vivo' },
     badge: 'live',
-    desc: 'live music setlist archive and discovery platform. browse performances, track artists, and explore music history.',
+    desc: {
+      en: 'live music setlist archive and discovery platform. browse performances, track artists, and explore music history.',
+      es: 'archivo de setlists y plataforma de descubrimiento. explora presentaciones, sigue artistas y descubre historia musical.'
+    },
     link: 'https://umo-live.xyz',
     image: 'images/umo-screenshot.png'
   },
   {
     title: 'geese live archive',
-    type: 'live music archive',
+    type: { en: 'live music archive', es: 'archivo de música en vivo' },
     badge: 'live',
-    desc: 'live performance archive for geese. explore setlists, recordings, and concert history.',
+    desc: {
+      en: 'live performance archive for geese. explore setlists, recordings, and concert history.',
+      es: 'archivo de presentaciones en vivo de geese. explora setlists, grabaciones e historial de conciertos.'
+    },
     link: 'https://geeselive-production-4233.up.railway.app/',
     image: 'images/geese-screenshot.png'
   },
   {
     title: 'eztix',
-    type: 'p2p ticketing platform',
+    type: { en: 'p2p ticketing platform', es: 'plataforma de tickets p2p' },
     badge: 'live',
-    desc: 'decentralized ticketing platform to empower artists and users. build events, sell tickets, and connect communities on-chain.',
+    desc: {
+      en: 'decentralized ticketing platform to empower artists and users. build events, sell tickets, and connect communities on-chain.',
+      es: 'plataforma de tickets descentralizada para artistas y usuarios. crea eventos, vende tickets y conecta comunidades on-chain.'
+    },
     link: 'https://eztix-lyart.vercel.app',
     image: 'images/eztix-screenshot.png'
   },
   {
     title: 'stash',
-    type: 'decentralized storage provider',
+    type: { en: 'decentralized storage provider', es: 'almacenamiento descentralizado' },
     badge: 'live',
-    desc: 'decentralized storage infrastructure. upload, manage, and access data on distributed networks with permanent, censorship-resistant storage.',
+    desc: {
+      en: 'decentralized storage infrastructure. upload, manage, and access data on distributed networks with permanent, censorship-resistant storage.',
+      es: 'infraestructura de almacenamiento descentralizado. sube, gestiona y accede a datos en redes distribuidas con almacenamiento permanente y resistente a censura.'
+    },
     link: 'https://aeter-eight.vercel.app/',
     image: 'images/stash-screenshot.png'
   },
   {
     title: 'lynx',
-    type: 'creator profile platform',
+    type: { en: 'creator profile platform', es: 'plataforma de perfiles para creadores' },
     badge: 'wip',
-    desc: 'link-in-bio meets patronage for artists and small businesses. unified profiles with stripe and crypto payments, music-first design, and built-in support tools.',
+    desc: {
+      en: 'link-in-bio meets patronage for artists and small businesses. unified profiles with stripe and crypto payments, music-first design, and built-in support tools.',
+      es: 'link-in-bio con patronazgo para artistas y pequeños negocios. perfiles unificados con pagos stripe y crypto, diseño music-first y herramientas de soporte integradas.'
+    },
     link: '#',
     image: 'images/lynx-screenshot.png'
   },
   {
     title: 'stok',
-    type: 'inventory management system',
+    type: { en: 'inventory management system', es: 'sistema de inventario' },
     badge: 'wip',
-    desc: 'inventory and warehousing platform for small restaurants and manufacturers. connected worker module for real-time stock tracking and operations management.',
+    desc: {
+      en: 'inventory and warehousing platform for small restaurants and manufacturers. connected worker module for real-time stock tracking and operations management.',
+      es: 'plataforma de inventario y almacén para restaurantes y fabricantes pequeños. módulo de trabajador conectado para seguimiento de stock en tiempo real.'
+    },
     link: '#',
     image: 'images/stok-screenshot.png'
   }
@@ -376,32 +420,60 @@ function initServiceCards() {
   });
 }
 
+// Store shuffled work items for consistent order
+let shuffledWorkItems = [];
+
 // Initialize work list (rocola/jukebox tracklist - all visible, accordion expand)
 function initWorkList() {
   const grid = document.getElementById('work-grid');
   grid.innerHTML = '';
   grid.className = 'work-list';
 
-  // Shuffle order each time
-  const shuffled = [...workItems].sort(() => Math.random() - 0.5);
+  // Shuffle order once
+  if (shuffledWorkItems.length === 0) {
+    shuffledWorkItems = [...workItems].sort(() => Math.random() - 0.5);
+  }
 
-  shuffled.forEach((item, idx) => {
+  const t = translations[currentLang];
+
+  shuffledWorkItems.forEach((item, idx) => {
+    const itemType = typeof item.type === 'object' ? item.type[currentLang] : item.type;
+    const itemDesc = typeof item.desc === 'object' ? item.desc[currentLang] : item.desc;
+
     const track = document.createElement('div');
     track.className = 'work-track';
+    track.dataset.itemIndex = idx;
+    const isLive = item.badge === 'live' && item.link && item.link !== '#';
+    const isWip = item.badge === 'wip';
+    const isLynx = item.title === 'lynx';
+
+    // For live sites: use iframe, for WIP: use clickable image
+    let mediaContent = '';
+    if (isLive) {
+      mediaContent = `<div class="work-track-iframe-wrapper"><iframe class="work-track-iframe" src="${item.link}" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe></div>`;
+    } else if (item.image) {
+      const zoomClass = isLynx ? ' work-track-image-zoomed' : '';
+      if (isWip && item.link && item.link !== '#') {
+        mediaContent = `<a href="${item.link}" target="_blank" rel="noopener" class="work-track-image-link"><img class="work-track-image${zoomClass}" src="${item.image}" alt="${item.title}" loading="lazy"></a>`;
+      } else {
+        mediaContent = `<img class="work-track-image${zoomClass}" src="${item.image}" alt="${item.title}" loading="lazy">`;
+      }
+    }
+
     track.innerHTML = `
       <div class="work-track-header">
         <span class="work-track-indicator">▶</span>
         <div class="work-track-info">
           <div class="work-track-title">${item.title}</div>
-          <div class="work-track-type">${item.type}</div>
+          <div class="work-track-type">${itemType}</div>
         </div>
         ${item.badge ? `<span class="work-badge-inline" data-badge="${item.badge.toLowerCase()}">${item.badge}</span>` : ''}
       </div>
       <div class="work-track-body">
         <div class="work-track-body-inner">
-          ${item.image ? `<img class="work-track-image" src="${item.image}" alt="${item.title}" loading="lazy">` : ''}
-          ${item.desc ? `<p class="work-track-desc">${item.desc}</p>` : ''}
-          ${item.link && item.link !== '#' ? `<a href="${item.link}" class="work-link" target="_blank" rel="noopener">visit site</a>` : ''}
+          ${mediaContent}
+          ${itemDesc ? `<p class="work-track-desc">${itemDesc}</p>` : ''}
+          ${isLive ? `<a href="${item.link}" class="work-link" target="_blank" rel="noopener">${t.work.visitSite}</a>` : ''}
         </div>
       </div>
     `;
@@ -416,6 +488,26 @@ function initWorkList() {
     });
 
     grid.appendChild(track);
+  });
+}
+
+// Update work items text when language changes
+function updateWorkItemTranslations() {
+  const t = translations[currentLang];
+
+  document.querySelectorAll('.work-track').forEach(track => {
+    const idx = parseInt(track.dataset.itemIndex);
+    const item = shuffledWorkItems[idx];
+    if (!item) return;
+
+    const itemType = typeof item.type === 'object' ? item.type[currentLang] : item.type;
+    const itemDesc = typeof item.desc === 'object' ? item.desc[currentLang] : item.desc;
+
+    const typeEl = track.querySelector('.work-track-type');
+    const descEl = track.querySelector('.work-track-desc');
+
+    if (typeEl) typeEl.textContent = itemType;
+    if (descEl) descEl.textContent = itemDesc;
   });
 }
 
@@ -561,11 +653,19 @@ function animate() {
 
 // Initialize everything
 function init() {
+  // Check URL for language param first
+  const initialLang = getInitialLanguage();
+
   initServiceCards();
   initWorkList();
   initSpecialAnimations();
   initLanguageToggle();
   initHamburgerMenu();
+
+  // Apply initial language (after DOM elements exist)
+  if (initialLang !== 'en') {
+    setLanguage(initialLang);
+  }
 
   // Start animation loop
   requestAnimationFrame(animate);

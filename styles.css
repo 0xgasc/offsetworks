@@ -49,10 +49,10 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  background: rgba(5, 5, 5, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(26, 26, 26, 0.5);
+  background: rgba(5, 5, 5, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(26, 26, 26, 0.3);
 }
 
 /* Animated logo slash */
@@ -974,6 +974,53 @@ body {
 .work-link:hover {
   color: #00ffaa;
   transform: translateX(4px);
+}
+
+/* Iframe for live sites */
+.work-track-iframe-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+
+.work-track.active .work-track-iframe-wrapper {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.work-track-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  pointer-events: none;
+}
+
+/* Clickable image link for WIP */
+.work-track-image-link {
+  display: block;
+  cursor: pointer;
+}
+
+.work-track-image-link:hover .work-track-image {
+  filter: brightness(1.1);
+}
+
+/* Zoomed image for Lynx */
+.work-track-image-zoomed {
+  object-fit: cover;
+  object-position: center top;
+  transform: scale(1.3) translateY(8px);
+}
+
+.work-track.active .work-track-image-zoomed {
+  transform: scale(1.3) translateY(0);
 }
 
 /* Mobile adjustments for tracklist */
