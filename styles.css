@@ -304,6 +304,12 @@ body {
   color: var(--text-dim);
   text-transform: lowercase;
   letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.marquee-content span {
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 @keyframes marquee {
