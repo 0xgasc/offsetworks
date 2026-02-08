@@ -1301,6 +1301,111 @@ body {
   opacity: 1;
 }
 
+/* WIP Modal */
+.wip-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.wip-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.wip-modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.wip-modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 500px;
+  aspect-ratio: 16 / 10;
+  background: rgba(5, 5, 5, 0.9);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.wip-modal.active .wip-modal-content {
+  transform: scale(1);
+}
+
+.wip-modal-ascii {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.3;
+  overflow: hidden;
+  white-space: pre;
+}
+
+.wip-modal-text {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.wip-modal-text span {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  color: var(--text);
+  text-transform: lowercase;
+  letter-spacing: 0.1em;
+}
+
+.wip-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 2;
+}
+
+.wip-modal-close:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .hero {

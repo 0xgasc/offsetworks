@@ -503,6 +503,12 @@ function initWorkList() {
         return;
       }
 
+      // Handle WIP image click - show modal
+      if (isWip && e.target.classList.contains('work-track-image')) {
+        if (window.showWipModal) window.showWipModal();
+        return;
+      }
+
       const wasActive = track.classList.contains('active');
       // Close all
       grid.querySelectorAll('.work-track.active').forEach(t => t.classList.remove('active'));
@@ -713,3 +719,92 @@ document.addEventListener('visibilitychange', () => {
   animationState.running = !document.hidden;
   if (animationState.running) requestAnimationFrame(animate);
 });
+
+// ====== WIP MODAL ======
+const wipModal = {
+  el: null,
+  ascii: null,
+  message: null,
+  animationId: null,
+  chars: ' .·:░▒▓█▓▒░:·. ',
+
+  init() {
+    this.el = document.getElementById('wip-modal');
+    this.ascii = document.getElementById('wip-modal-ascii');
+    this.message = document.getElementById('wip-modal-message');
+    const closeBtn = document.getElementById('wip-modal-close');
+    const backdrop = this.el?.querySelector('.wip-modal-backdrop');
+
+    if (closeBtn) closeBtn.addEventListener('click', () => this.hide());
+    if (backdrop) backdrop.addEventListener('click', () => this.hide());
+
+    // ESC key to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.el?.classList.contains('active')) {
+        this.hide();
+      }
+    });
+  },
+
+  show() {
+    if (!this.el) return;
+
+    // Update message based on language
+    if (this.message) {
+      this.message.textContent = currentLang === 'es' ? 'disponible pronto' : 'check back soon';
+    }
+
+    this.el.classList.add('active');
+    this.startAnimation();
+  },
+
+  hide() {
+    if (!this.el) return;
+    this.el.classList.remove('active');
+    this.stopAnimation();
+  },
+
+  startAnimation() {
+    if (!this.ascii) return;
+
+    const cols = Math.ceil(500 / 6);
+    const rows = Math.ceil(300 / 10);
+
+    const animate = (time) => {
+      let out = '';
+      const t = time * 0.002;
+
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const wave1 = Math.sin(x * 0.15 + t);
+          const wave2 = Math.sin(y * 0.2 + t * 1.5);
+          const wave3 = Math.sin((x + y) * 0.1 + t * 0.8);
+          const v = (wave1 + wave2 + wave3) / 3;
+          const idx = Math.floor((v + 1) * (this.chars.length - 1) / 2);
+          out += this.chars[Math.max(0, Math.min(this.chars.length - 1, idx))];
+        }
+        out += '\n';
+      }
+
+      this.ascii.textContent = out;
+      this.animationId = requestAnimationFrame(animate);
+    };
+
+    this.animationId = requestAnimationFrame(animate);
+  },
+
+  stopAnimation() {
+    if (this.animationId) {
+      cancelAnimationFrame(this.animationId);
+      this.animationId = null;
+    }
+  }
+};
+
+// Initialize modal after DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+  wipModal.init();
+});
+
+// Export for use in work track clicks
+window.showWipModal = () => wipModal.show();
