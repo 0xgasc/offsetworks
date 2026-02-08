@@ -1093,6 +1093,31 @@ body {
     font-size: 0.8rem;
     padding: 8px 0;
   }
+
+  /* Contain images on mobile */
+  .work-track-image {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 4px;
+    display: block;
+  }
+
+  /* Disable zoom on mobile to prevent overflow */
+  .work-track-image-zoomed {
+    transform: none !important;
+    max-height: 250px;
+  }
+
+  .work-track.active .work-track-image-zoomed {
+    transform: none !important;
+  }
+
+  .work-track-iframe-wrapper {
+    max-height: 220px;
+  }
 }
 
 /* Pricing */
