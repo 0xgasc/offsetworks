@@ -484,8 +484,8 @@ function initWorkList() {
       </div>
       <div class="work-track-body">
         <div class="work-track-body-inner">
-          ${mediaContent}
           ${itemDesc ? `<p class="work-track-desc">${itemDesc}</p>` : ''}
+          ${mediaContent}
           ${isLive ? `<a href="${item.link}" class="work-link" target="_blank" rel="noopener">${t.work.visitSite}</a>` : ''}
         </div>
       </div>
