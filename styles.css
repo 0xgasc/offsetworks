@@ -1064,6 +1064,32 @@ body {
   .work-track {
     border-left: 2px solid transparent;
   }
+
+  .work-track-title {
+    font-size: 1rem;
+  }
+
+  .work-track-type {
+    font-size: 0.7rem;
+    margin-top: 4px;
+  }
+
+  .work-track-desc {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .work-badge-inline {
+    font-size: 0.65rem;
+    padding: 4px 10px;
+  }
+
+  .work-link {
+    font-size: 0.8rem;
+    padding: 8px 0;
+  }
 }
 
 /* Pricing */
