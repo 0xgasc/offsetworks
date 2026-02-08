@@ -235,8 +235,19 @@ const workItems = [
       en: 'stablecoin enablement platform for small merchants. gateway for decentralized payments with crypto-native backends.',
       es: 'plataforma de stablecoins para pequeños comerciantes. gateway para pagos descentralizados con backends crypto-nativos.'
     },
-    link: 'https://stablepay-nine.vercel.app/crypto-pay.html?productId=Special&productName=Special+Edition&price=0.5',
+    link: 'https://stablepay-nine.vercel.app/',
     image: 'images/stablepay-screenshot.png'
+  },
+  {
+    title: 'manto',
+    type: { en: 'property management suite', es: 'sistema de gestión de propiedades' },
+    badge: 'live',
+    desc: {
+      en: 'property management platform for landlords and tenants. streamlined rent collection, maintenance requests, and lease management.',
+      es: 'plataforma de gestión de propiedades para propietarios e inquilinos. cobro de renta, solicitudes de mantenimiento y gestión de contratos.'
+    },
+    link: 'https://manto-propiedades.vercel.app/',
+    image: 'images/manto-screenshot.png'
   },
   {
     title: 'umo archive',
@@ -449,13 +460,14 @@ function initWorkList() {
     const needsZoom = item.title === 'lynx' || item.title === 'stok';
     const useIframe = isLive && !item.useImage;
 
-    // For live sites: use iframe (unless useImage flag), for WIP: use clickable image
+    // For live sites: use iframe (scrollable, click opens new tab), for WIP: non-clickable image
     let mediaContent = '';
     if (useIframe) {
-      mediaContent = `<div class="work-track-iframe-wrapper"><iframe class="work-track-iframe" src="${item.link}" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe></div>`;
+      mediaContent = `<div class="work-track-iframe-wrapper" data-link="${item.link}"><iframe class="work-track-iframe" src="${item.link}" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe><div class="iframe-click-overlay"></div></div>`;
     } else if (item.image) {
       const zoomClass = needsZoom ? ' work-track-image-zoomed' : '';
-      if (item.link && item.link !== '#') {
+      // Live sites with useImage flag get clickable images, WIP pics are not clickable
+      if (isLive && item.link && item.link !== '#') {
         mediaContent = `<a href="${item.link}" target="_blank" rel="noopener" class="work-track-image-link"><img class="work-track-image${zoomClass}" src="${item.image}" alt="${item.title}" loading="lazy"></a>`;
       } else {
         mediaContent = `<img class="work-track-image${zoomClass}" src="${item.image}" alt="${item.title}" loading="lazy">`;
@@ -482,6 +494,16 @@ function initWorkList() {
 
     track.addEventListener('click', (e) => {
       if (e.target.tagName === 'A') return; // don't toggle on link click
+
+      // Handle iframe overlay click - open link in new tab
+      if (e.target.classList.contains('iframe-click-overlay')) {
+        const wrapper = e.target.closest('.work-track-iframe-wrapper');
+        if (wrapper && wrapper.dataset.link) {
+          window.open(wrapper.dataset.link, '_blank');
+        }
+        return;
+      }
+
       const wasActive = track.classList.contains('active');
       // Close all
       grid.querySelectorAll('.work-track.active').forEach(t => t.classList.remove('active'));

@@ -983,6 +983,7 @@ body {
 
 /* Iframe for live sites */
 .work-track-iframe-wrapper {
+  position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
   border-radius: 4px;
@@ -1004,9 +1005,23 @@ body {
   width: 200%;
   height: 200%;
   border: none;
-  pointer-events: none;
   transform: scale(0.5);
   transform-origin: top left;
+}
+
+/* Invisible overlay for click-to-open on iframes */
+.iframe-click-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.iframe-click-overlay:hover {
+  background: rgba(0, 255, 136, 0.05);
 }
 
 /* Clickable image link for WIP */
