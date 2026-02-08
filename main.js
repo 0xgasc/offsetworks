@@ -246,8 +246,7 @@ const workItems = [
       en: 'property management platform for landlords and tenants. streamlined rent collection, maintenance requests, and lease management.',
       es: 'plataforma de gestión de propiedades para propietarios e inquilinos. cobro de renta, solicitudes de mantenimiento y gestión de contratos.'
     },
-    link: 'https://manto-propiedades.vercel.app/',
-    image: 'images/manto-screenshot.png'
+    link: 'https://manto-propiedades.vercel.app/'
   },
   {
     title: 'umo archive',
