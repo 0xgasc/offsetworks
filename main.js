@@ -299,7 +299,7 @@ const workItems = [
     badge: 'wip',
     desc: {
       en: 'link-in-bio meets patronage for artists and small businesses. unified profiles with stripe and crypto payments, music-first design, and built-in support tools.',
-      es: 'link-in-bio con patronazgo para artistas y pequeños negocios. perfiles unificados con pagos stripe y crypto, diseño music-first y herramientas de soporte integradas.'
+      es: 'link-in-bio con apoyo para artistas y pequeños negocios. perfiles unificados con pagos stripe y crypto, diseño music-first y herramientas de soporte integradas.'
     },
     link: '#',
     image: 'images/lynx-screenshot.png'
