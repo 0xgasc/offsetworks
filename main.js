@@ -224,7 +224,7 @@ const workItems = [
       en: 'helicopter tour booking platform for guatemala. real-time availability, payment processing, and automated confirmations.',
       es: 'plataforma de reservas para tours en helicóptero en guatemala. disponibilidad en tiempo real, procesamiento de pagos y confirmaciones automáticas.'
     },
-    link: 'https://flyinguate.com/',
+    link: 'https://flyinguate.vercel.app/',
     image: 'images/flyin-screenshot.png'
   },
   {
@@ -264,6 +264,7 @@ const workItems = [
     title: 'eztix',
     type: { en: 'p2p ticketing platform', es: 'plataforma de tickets p2p' },
     badge: 'live',
+    useImage: true,
     desc: {
       en: 'decentralized ticketing platform to empower artists and users. build events, sell tickets, and connect communities on-chain.',
       es: 'plataforma de tickets descentralizada para artistas y usuarios. crea eventos, vende tickets y conecta comunidades on-chain.'
@@ -446,14 +447,15 @@ function initWorkList() {
     const isLive = item.badge === 'live' && item.link && item.link !== '#';
     const isWip = item.badge === 'wip';
     const needsZoom = item.title === 'lynx' || item.title === 'stok';
+    const useIframe = isLive && !item.useImage;
 
-    // For live sites: use iframe, for WIP: use clickable image
+    // For live sites: use iframe (unless useImage flag), for WIP: use clickable image
     let mediaContent = '';
-    if (isLive) {
+    if (useIframe) {
       mediaContent = `<div class="work-track-iframe-wrapper"><iframe class="work-track-iframe" src="${item.link}" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe></div>`;
     } else if (item.image) {
       const zoomClass = needsZoom ? ' work-track-image-zoomed' : '';
-      if (isWip && item.link && item.link !== '#') {
+      if (item.link && item.link !== '#') {
         mediaContent = `<a href="${item.link}" target="_blank" rel="noopener" class="work-track-image-link"><img class="work-track-image${zoomClass}" src="${item.image}" alt="${item.title}" loading="lazy"></a>`;
       } else {
         mediaContent = `<img class="work-track-image${zoomClass}" src="${item.image}" alt="${item.title}" loading="lazy">`;
