@@ -37,7 +37,10 @@ const translations = {
     },
     work: {
       tag: 'recent work',
-      badge: 'coming soon',
+      badges: {
+        live: 'live',
+        wip: 'wip'
+      },
       visitSite: 'visit site'
     },
     contact: {
@@ -80,7 +83,10 @@ const translations = {
     },
     work: {
       tag: 'trabajo reciente',
-      badge: 'próximamente',
+      badges: {
+        live: 'en vivo',
+        wip: 'en desarrollo'
+      },
       visitSite: 'ver sitio'
     },
     contact: {
@@ -122,9 +128,12 @@ function setLanguage(lang) {
   // Update service cards
   updateServiceCardTranslations(t);
 
-  // Update work track badges
+  // Update work track badges based on their data-badge attribute
   document.querySelectorAll('.work-badge-inline').forEach(badge => {
-    badge.textContent = t.work.badge;
+    const badgeType = badge.dataset.badge;
+    if (badgeType && t.work.badges[badgeType]) {
+      badge.textContent = t.work.badges[badgeType];
+    }
   });
 
   // Update visit site links
