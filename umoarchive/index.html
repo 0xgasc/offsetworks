@@ -139,18 +139,22 @@
     }
 
     /* ─── DEMO EMBED ─── */
+    .demo-section .container-break {
+      margin-left: -32px;
+      margin-right: -32px;
+    }
     .demo-frame-wrapper {
       position: relative;
-      width: 100%;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid var(--border);
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
       background: #000;
     }
     .demo-frame-wrapper iframe {
       width: 100%;
-      height: 70vh;
-      min-height: 500px;
+      height: 85vh;
+      min-height: 700px;
       border: none;
       display: block;
     }
@@ -454,7 +458,7 @@
       <div class="section demo-section">
         <div class="section-label">Live Demo</div>
         <div class="demo-frame-wrapper">
-          <iframe src="https://umo-live.xyz" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" title="UMO Archive Live Demo"></iframe>
+          <iframe src="https://umo-live.xyz" loading="lazy" allow="autoplay; fullscreen" title="UMO Archive Live Demo"></iframe>
         </div>
         <div class="demo-hint">Interactive demo &mdash; browse performances, songs, and moments live</div>
       </div>
