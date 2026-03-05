@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UMO Archive — Project Quote | Offset Works</title>
+  <meta name="author" content="Offset Works">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #050505;
+      --bg-secondary: #0a0a0a;
+      --bg-card: #111111;
+      --text-primary: #fafafa;
+      --text-secondary: #999999;
+      --text-muted: #555555;
+      --accent: #00ff88;
+      --accent-dim: #00cc6a;
+      --border: #1a1a1a;
+      --border-accent: rgba(0, 255, 136, 0.2);
+      --struck: #ff4444;
+    }
+
+    @media print {
+      :root {
+        --bg-primary: #ffffff;
+        --bg-secondary: #fafafa;
+        --bg-card: #f7f7f7;
+        --text-primary: #111111;
+        --text-secondary: #555555;
+        --text-muted: #888888;
+        --accent: #00875a;
+        --accent-dim: #006644;
+        --border: #e0e0e0;
+        --border-accent: rgba(0, 135, 90, 0.2);
+        --struck: #cc0000;
+      }
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        padding: 20px 30px;
+        max-width: 100%;
+        font-size: 11.5px;
+      }
+      .no-print { display: none !important; }
+      .page-break { page-break-before: always; }
+      a { color: inherit; text-decoration: none; }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 60px 40px;
+      line-height: 1.65;
+      font-size: 14px;
+    }
+
+    .mono {
+      font-family: 'Space Mono', 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    }
+
+    .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .accent { color: var(--accent); }
+
+    /* ─── HEADER ─── */
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--accent);
+      margin-bottom: 40px;
+    }
+
+    .header-left h1 {
+      font-family: 'Space Mono', monospace;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .header-left .contact-info {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .header-right {
+      text-align: right;
+    }
+
+    .header-right .doc-type {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 4px 14px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .header-right .doc-meta {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    /* ─── CLIENT ─── */
+
+    .client-block {
+      margin-bottom: 48px;
+    }
+
+    .client-block .client-name {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .client-block .client-sub {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* ─── PROJECT SUMMARY ─── */
+
+    .project-summary {
+      margin-bottom: 48px;
+    }
+
+    .project-title {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .project-subtitle {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .project-description {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 680px;
+    }
+
+    /* ─── SECTION HEADINGS ─── */
+
+    .section {
+      margin-bottom: 48px;
+    }
+
+    .section-heading {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ─── SCOPE / FEATURES ─── */
+
+    .scope-category {
+      margin-bottom: 28px;
+    }
+
+    .scope-category h3 {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      padding-left: 12px;
+      border-left: 2px solid var(--accent);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 24px;
+    }
+
+    @media (max-width: 600px) {
+      .feature-grid { grid-template-columns: 1fr; }
+    }
+
+    .feature-item {
+      padding: 12px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .feature-item .feature-name {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .feature-item .feature-desc {
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* ─── TECH STACK ─── */
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .tech-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .tech-col h4 {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .tech-col ul {
+      list-style: none;
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .hosting-row {
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .hosting-row span {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* ─── CALLOUT BOX ─── */
+
+    .callout {
+      border: 1px solid var(--border-accent);
+      border-left: 3px solid var(--accent);
+      padding: 24px 28px;
+      margin: 32px 0 48px 0;
+      background: var(--bg-card);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .callout h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .callout p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+
+    .callout p:last-child { margin-bottom: 0; }
+
+    .callout .compare {
+      font-family: 'Space Mono', monospace;
+      font-size: 11.5px;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .callout .compare .line {
+      display: flex;
+      justify-content: space-between;
+      padding: 2px 0;
+    }
+
+    .callout .compare .line.highlight {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ─── PRICING TABLE ─── */
+
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .pricing-table td {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .pricing-table .item-name {
+      font-size: 13.5px;
+      font-weight: 500;
+    }
+
+    .pricing-table .item-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      padding-top: 3px;
+      line-height: 1.5;
+    }
+
+    .pricing-table .price {
+      text-align: right;
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      white-space: nowrap;
+      color: var(--text-secondary);
+    }
+
+    .pricing-table .subtotal-row td {
+      padding-top: 20px;
+      border-bottom: none;
+    }
+
+    .pricing-table .subtotal-row .item-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .pricing-table .subtotal-row .price {
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    .pricing-table .discount-row td {
+      border-bottom: none;
+      padding-top: 6px;
+    }
+
+    .pricing-table .discount-row .item-name {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .pricing-table .discount-row .price {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .pricing-table .total-row td {
+      border-top: 2px solid var(--accent);
+      border-bottom: none;
+      padding-top: 20px;
+      padding-bottom: 4px;
+    }
+
+    .pricing-table .total-row .item-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .pricing-table .total-row .price {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .pricing-note {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 16px;
+      line-height: 1.6;
+    }
+
+    /* ─── CHECKLIST ─── */
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+
+    .checklist li {
+      font-size: 13.5px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .checklist li:last-child { border-bottom: none; }
+
+    .checklist .check {
+      color: var(--accent);
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .checklist .note {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-left: 4px;
+    }
+
+    /* ─── TERMS ─── */
+
+    .terms-block {
+      margin-bottom: 32px;
+    }
+
+    .terms-block h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .terms-block p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .terms-block .rate {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* ─── PAYMENT ─── */
+
+    .payment-total {
+      font-family: 'Space Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .payment-methods {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .payment-methods ul {
+      list-style: none;
+      padding-left: 16px;
+      margin: 8px 0;
+    }
+
+    .payment-methods ul li::before {
+      content: "—";
+      margin-right: 8px;
+      color: var(--text-muted);
+    }
+
+    /* ─── EMAIL DRAFT ─── */
+
+    .email-draft {
+      margin-top: 56px;
+      padding: 28px;
+      border: 1px dashed var(--text-muted);
+      border-radius: 4px;
+      background: var(--bg-secondary);
+    }
+
+    .email-draft .draft-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .email-draft .subject-line {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .email-draft .email-body {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+
+    .email-draft .sig {
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ─── FOOTER ─── */
+
+    .footer {
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .footer .footer-brand {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .footer .footer-note {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* ─── DIVIDER ─── */
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 48px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── HEADER ─── -->
+  <header class="header">
+    <div class="header-left">
+      <h1>Offset Works</h1>
+      <div class="contact-info">
+        NYC<br>
+        offset.works.studio@gmail.com<br>
+        @offset.works &nbsp;|&nbsp; offsetworks.xyz
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="doc-type mono">Quote / Invoice</div>
+      <div class="doc-meta">
+        Document #: OW-2026-003<br>
+        Date: March 5, 2026<br>
+        Valid until: April 5, 2026
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── CLIENT ─── -->
+  <div class="client-block">
+    <div class="label">Prepared For</div>
+    <div class="client-name">Tom / Friendly Announcer</div>
+    <div class="client-sub">Management for Unknown Mortal Orchestra</div>
+  </div>
+
+  <!-- ─── PROJECT SUMMARY ─── -->
+  <div class="project-summary">
+    <h2 class="project-title">UMO Archive</h2>
+    <div class="project-subtitle">Full-Stack Web3 Concert Archive Platform</div>
+    <p class="project-description">
+      A custom-built platform where UMO fans upload, preserve, and celebrate concert moments from across
+      the band's entire touring history. The archive indexes 300+ performances, calculates rarity scores
+      for every uploaded moment, and stores all media permanently on Arweave's decentralized network &mdash;
+      time-resistant, censorship-resistant, and free from recurring storage costs. Includes community features,
+      video galleries, content moderation, and a complete admin system. The NFT collectible/monetization
+      layer is built and ready to activate when the time is right. Built from scratch. Designed to last.
+    </p>
+  </div>
+
+  <!-- ─── SCOPE OF WORK ─── -->
+  <div class="section">
+    <div class="section-heading">Scope of Work</div>
+
+    <div class="scope-category">
+      <h3>Core Platform</h3>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="feature-name">Performance Database</div>
+          <div class="feature-desc">300+ UMO concerts indexed from setlist.fm with city, venue, setlist, and date data. Full search by city, venue, song, or year.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Moment Upload System</div>
+          <div class="feature-desc">Fans upload audio, video, and photos (up to 6GB) linked to specific performances and songs. Resumable uploads for large files.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Permanent Storage</div>
+          <div class="feature-desc">All uploads stored on Arweave via Irys &mdash; decentralized, immutable, and permanent. No recurring storage costs. Data persists forever.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">7-Tier Rarity Engine</div>
+          <div class="feature-desc">Every upload receives an automatic rarity score (Basic through Legendary) based on file quality, song frequency, and metadata completeness.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scope-category">
+      <h3>Web3 / Decentralized Storage</h3>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="feature-name">Arweave Permanent Storage</div>
+          <div class="feature-desc">All uploaded media is stored on Arweave's decentralized network &mdash; paid once, stored forever. No monthly fees, no expiration, no single point of failure.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Resumable Large File Uploads</div>
+          <div class="feature-desc">TUS protocol for reliable uploads up to 6GB. Files are verified, hashed, and tagged before being committed to permanent storage.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name" style="display:flex; align-items:center; gap:8px;">NFT Collectibles <span style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); border:1px solid var(--border); padding:1px 6px; border-radius:2px;">Future Phase</span></div>
+          <div class="feature-desc">ERC-1155 minting system, revenue sharing via 0xSplits, wallet integration (MetaMask, WalletConnect, Coinbase). Built and tested &mdash; ready to activate when the time is right.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scope-category">
+      <h3>Community &amp; Content</h3>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="feature-name">UMOTube Video Gallery</div>
+          <div class="feature-desc">YouTube-style video player with queue system, performance picker, and support for YouTube, Vimeo, SoundCloud, and Archive.org sources.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Community Features</div>
+          <div class="feature-desc">Real-time live chat (Socket.io), event RSVPs, public guestbook, comments, meetups, and top contributors leaderboard.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Content Moderation</div>
+          <div class="feature-desc">3-tier role system (User, Moderator, Admin) with approval workflows, revision requests, and rejection handling.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">User Profiles &amp; Collections</div>
+          <div class="feature-desc">Personal profiles with upload history, status tracking, and shareable collection management.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scope-category">
+      <h3>Infrastructure &amp; Admin</h3>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="feature-name">Admin Dashboard</div>
+          <div class="feature-desc">Full admin panel for user management, role assignment, content moderation queues, and system monitoring.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Authentication System</div>
+          <div class="feature-desc">JWT session management with email/password login. Secure password hashing and session handling.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Notification System</div>
+          <div class="feature-desc">Templated email notifications for approvals, rejections, revisions, and role assignments. SendGrid integration ready.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Mobile-Responsive</div>
+          <div class="feature-desc">Optimized for all devices with mobile-specific navigation, mini player, touch interactions, and performance tuning.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── TECH STACK ─── -->
+  <div class="section">
+    <div class="section-heading">Tech Stack</div>
+    <div class="tech-grid">
+      <div class="tech-col">
+        <h4>Frontend</h4>
+        <ul>
+          <li>React 19</li>
+          <li>Wagmi v2</li>
+          <li>TanStack Query</li>
+          <li>Tailwind CSS</li>
+          <li>Socket.io Client</li>
+        </ul>
+      </div>
+      <div class="tech-col">
+        <h4>Backend</h4>
+        <ul>
+          <li>Node.js + Express</li>
+          <li>MongoDB + Mongoose</li>
+          <li>Socket.io</li>
+          <li>Multer (6GB uploads)</li>
+          <li>JWT Auth</li>
+        </ul>
+      </div>
+      <div class="tech-col">
+        <h4>Web3</h4>
+        <ul>
+          <li>Arweave / Irys SDK</li>
+          <li>Solidity (ERC-1155)*</li>
+          <li>OpenZeppelin*</li>
+          <li>0xSplits Protocol*</li>
+          <li style="color:var(--text-muted); font-size:10px; margin-top:4px;">*NFT layer &mdash; future phase</li>
+        </ul>
+      </div>
+      <div class="tech-col">
+        <h4>Hosting</h4>
+        <ul>
+          <li>Vercel (frontend)</li>
+          <li>Railway (backend)</li>
+          <li>MongoDB Atlas</li>
+          <li>Arweave (storage)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── ARWEAVE CALLOUT ─── -->
+  <div class="callout">
+    <h3>What does "permanent storage" mean?</h3>
+    <p>
+      All media uploaded to the UMO Archive is stored on <strong>Arweave</strong> &mdash; a decentralized network
+      where data is paid for once and persists indefinitely. No monthly fees, no single point of failure.
+      If the platform website goes offline, <strong>the uploaded concert recordings remain accessible forever</strong>
+      via their permanent Arweave URLs.
+    </p>
+    <div class="compare">
+      <div class="line">
+        <span>Traditional cloud storage</span>
+        <span>~$0.023/GB/month, billed forever</span>
+      </div>
+      <div class="line highlight">
+        <span>Arweave</span>
+        <span>One-time cost, stored permanently</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── PRICING ─── -->
+  <div class="section page-break">
+    <div class="section-heading">Pricing</div>
+
+    <table class="pricing-table">
+      <tr>
+        <td>
+          <div class="item-name">Full-Stack Web Application</div>
+          <div class="item-desc">React 19 frontend, Express API backend, MongoDB data layer, full authentication system</div>
+        </td>
+        <td class="price">$3,000.00</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="item-name">Decentralized Storage Integration</div>
+          <div class="item-desc">Permanent Arweave upload pipeline, 6GB file handling, Irys SDK, transaction management</div>
+        </td>
+        <td class="price">$1,500.00</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="item-name">NFT / Collectible System <span style="font-size:10px; color:var(--text-muted);">(built, future activation)</span></div>
+          <div class="item-desc">ERC-1155 smart contracts, minting interface, revenue sharing (0xSplits), wallet integration &mdash; ready to go live</div>
+        </td>
+        <td class="price">$2,000.00</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="item-name">Performance Database &amp; Rarity Engine</div>
+          <div class="item-desc">setlist.fm API integration, 300+ show cache, 7-tier scoring algorithm, song statistics</div>
+        </td>
+        <td class="price">$1,000.00</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="item-name">Community Features</div>
+          <div class="item-desc">Live chat (Socket.io), guestbook, RSVP system, UMOTube video gallery with queue</div>
+        </td>
+        <td class="price">$1,000.00</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="item-name">Admin &amp; Moderation System</div>
+          <div class="item-desc">3-tier role system, approval workflows, admin dashboard, email notification framework</div>
+        </td>
+        <td class="price">$1,000.00</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="item-name">Hosting Setup &amp; Configuration</div>
+          <div class="item-desc">Vercel + Railway + MongoDB Atlas deployment, environment configuration</div>
+        </td>
+        <td class="price">$500.00</td>
+      </tr>
+
+      <tr class="subtotal-row">
+        <td><div class="item-name">Estimated Market Value</div></td>
+        <td class="price">$10,000.00</td>
+      </tr>
+      <tr class="discount-row">
+        <td><div class="item-name">Friends &amp; Family Rate &nbsp;<span style="font-size:11px; opacity:0.7;">(70% off)</span></div></td>
+        <td class="price">&minus;$7,000.00</td>
+      </tr>
+      <tr class="total-row">
+        <td><div class="item-name">Your Price</div></td>
+        <td class="price">$3,000.00</td>
+      </tr>
+    </table>
+
+    <p class="pricing-note">
+      As discussed in our original proposal, this platform was scoped as two components: the archive/repository
+      layer (~$3,000) and the collective creation/monetization layer (~$5,000). Both have been fully built.
+      This quote covers everything &mdash; both layers &mdash; at a friends &amp; family rate. This pricing is
+      exclusive to Friendly Announcer and is not available publicly.
+    </p>
+  </div>
+
+  <!-- ─── WHAT'S INCLUDED ─── -->
+  <div class="section">
+    <div class="section-heading">What's Included</div>
+    <ul class="checklist">
+      <li><span class="check">&#10003;</span> Fully built and deployed platform (turnkey delivery)</li>
+      <li><span class="check">&#10003;</span> Frontend hosted on Vercel <span class="note">(included through June 2027)</span></li>
+      <li><span class="check">&#10003;</span> Backend hosted on Railway <span class="note">(included through June 2027)</span></li>
+      <li><span class="check">&#10003;</span> MongoDB Atlas database <span class="note">(included through June 2027)</span></li>
+      <li><span class="check">&#10003;</span> All source code delivered via private GitHub repository</li>
+      <li>
+        <span class="check">&#10003;</span>
+        Permanent media storage on Arweave
+        <span class="note">&mdash; uploads live forever, no recurring cost, no expiration</span>
+      </li>
+      <li><span class="check">&#10003;</span> 10-hour launch support retainer <span class="note">(through December 2026)</span></li>
+    </ul>
+  </div>
+
+  <!-- ─── TERMS ─── -->
+  <div class="section">
+    <div class="section-heading">Terms &amp; Support</div>
+
+    <div class="terms-block">
+      <h3>Launch Support Retainer <span class="accent" style="font-weight:400; font-size:12px;">(included)</span></h3>
+      <p>
+        Through <strong>December 2026</strong>: <strong>10 hours</strong> of post-launch support included &mdash;
+        bug fixes, adjustments, content changes, deployment help. Hours tracked transparently.
+      </p>
+    </div>
+
+    <div class="terms-block">
+      <h3>After Launch Period <span style="font-weight:400; font-size:12px; color:var(--text-muted);">(2027+)</span></h3>
+      <p>
+        Additional development: <span class="rate">$50/hr</span>. Estimates provided before work begins.<br>
+        Hosting included through June 2027, then transfers to client at actual cost (~$5&ndash;15/month).
+        <br>Arweave storage is unaffected &mdash; all uploaded media remains permanent regardless.
+      </p>
+    </div>
+  </div>
+
+  <!-- ─── PAYMENT ─── -->
+  <div class="section">
+    <div class="section-heading">Payment</div>
+    <div class="payment-total">Total Due: $3,000.00 USD</div>
+    <div class="payment-methods">
+      <p>Payment method: <strong>To be confirmed</strong></p>
+      <p>Please let us know your preferred payment method:</p>
+      <ul>
+        <li>Direct bank transfer (ACH)</li>
+        <li>Wire transfer</li>
+        <li>Check</li>
+        <li>Zelle, PayPal, or other</li>
+      </ul>
+      <p style="margin-top: 12px;">
+        We are happy to work with whatever payment protocol Friendly Announcer typically uses.
+      </p>
+    </div>
+  </div>
+
+  <!-- ─── EMAIL DRAFT (no-print) ─── -->
+  <div class="email-draft no-print">
+    <div class="draft-label">Email Draft &mdash; for your reference, not part of invoice</div>
+    <div class="subject-line">
+      <strong>Subject:</strong> UMO Archive Platform &mdash; Quote &amp; Payment Details
+    </div>
+    <div class="email-body">Hey Tom,
+
+Thanks again for the opportunity to work on the UMO Archive. The platform is built and ready for delivery, and I'm really excited for the community to start using it.
+
+I've attached the project quote for your records. You might remember the original proposal broke this into two pieces &mdash; the archive/repository layer ($3K) and the NFT collectible/monetization layer ($5K). Both components have been fully built. The NFT layer is currently off but ready to activate whenever you want to explore that side. The total for everything is $3,000 USD at a friends &amp; family rate.
+
+This also includes hosting through June 2027, permanent Arweave storage (all uploads live forever &mdash; no recurring costs, no expiration), and a 10-hour support retainer through December 2026 for any fixes, tweaks, or requests during the launch period.
+
+Could you let me know your preferred payment method? Happy to do direct bank deposit (ACH), wire, or whatever process Friendly Announcer typically uses &mdash; just want to make it easy on your end.
+
+Looking forward to getting this live.</div>
+    <div class="sig">
+      Best,<br>
+      Offset Works<br>
+      offset.works.studio@gmail.com
+    </div>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="footer">
+    <div class="footer-brand">Offset Works &nbsp;&bull;&nbsp; NYC</div>
+    <div class="footer-note">
+      offset.works.studio@gmail.com &nbsp;|&nbsp; @offset.works &nbsp;|&nbsp; offsetworks.xyz
+    </div>
+    <div class="footer-note" style="margin-top: 12px;">
+      This document serves as both a project quote and invoice.<br>
+      Quote valid for 30 days from date of issue.
+    </div>
+  </footer>
+
+</body>
+</html>

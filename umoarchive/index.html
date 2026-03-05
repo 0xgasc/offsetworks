@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offset Works — Project Proposal</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#050505">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050505;
+      --bg-card: #0a0a0a;
+      --border: #1a1a1a;
+      --text: #fafafa;
+      --text-dim: #888;
+      --text-muted: #555;
+      --accent: #00ff88;
+      --accent-dim: #00cc6a;
+      --font-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'Space Mono', 'SF Mono', Consolas, monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── ASCII BACKGROUND ─── */
+    .ascii-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      line-height: 1.1;
+      white-space: pre;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.08;
+      color: var(--accent);
+    }
+
+    /* ─── MAIN CONTENT ─── */
+    .proposal-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ─── HEADER ─── */
+    .prop-header {
+      padding: 40px 0 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 56px;
+    }
+    .prop-brand {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .prop-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 4px 12px;
+      border-radius: 3px;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 40px 0 64px;
+      text-align: center;
+    }
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+    .hero-sub {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .hero-desc {
+      font-size: 15px;
+      color: var(--text-dim);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* ─── SECTIONS ─── */
+    .section {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+    }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+
+    /* ─── DEMO EMBED ─── */
+    .demo-frame-wrapper {
+      position: relative;
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #000;
+    }
+    .demo-frame-wrapper iframe {
+      width: 100%;
+      height: 70vh;
+      min-height: 500px;
+      border: none;
+      display: block;
+    }
+    .demo-hint {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    /* ─── FEATURES ─── */
+    .feat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 600px) { .feat-grid { grid-template-columns: 1fr; } }
+
+    .feat-card {
+      padding: 16px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    .feat-card h3 {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .feat-card p {
+      font-size: 11.5px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .feat-badge {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 1px 5px;
+      border-radius: 2px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    /* ─── CATEGORY LABEL ─── */
+    .cat-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 12px;
+      padding-left: 12px;
+      border-left: 2px solid var(--accent);
+    }
+
+    .cat-group { margin-bottom: 28px; }
+
+    /* ─── CALLOUT ─── */
+    .callout {
+      border: 1px solid rgba(0,255,136,0.15);
+      border-left: 3px solid var(--accent);
+      padding: 20px 24px;
+      background: var(--bg-card);
+      border-radius: 0 6px 6px 0;
+      margin: 28px 0;
+    }
+    .callout h3 { font-size: 14px; margin-bottom: 8px; }
+    .callout p { font-size: 12.5px; color: var(--text-dim); line-height: 1.7; }
+
+    /* ─── PRICING TABLE ─── */
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-variant-numeric: tabular-nums;
+    }
+    .price-table td {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .price-table .name { font-size: 13px; font-weight: 500; }
+    .price-table .desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      padding-top: 2px;
+    }
+    .price-table .amt {
+      text-align: right;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+    .price-table .row-sub td {
+      padding-top: 18px;
+      border-bottom: none;
+    }
+    .price-table .row-sub .name {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .price-table .row-sub .amt { color: var(--text); font-weight: 700; }
+    .price-table .row-disc td { border-bottom: none; padding-top: 4px; }
+    .price-table .row-disc .name { color: var(--accent); }
+    .price-table .row-disc .amt { color: var(--accent); font-weight: 700; }
+    .price-table .row-total td {
+      border-top: 2px solid var(--accent);
+      border-bottom: none;
+      padding-top: 18px;
+    }
+    .price-table .row-total .name {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .price-table .row-total .amt {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .price-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 14px;
+      line-height: 1.6;
+    }
+
+    /* ─── CHECKLIST ─── */
+    .check-list { list-style: none; }
+    .check-list li {
+      font-size: 13px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .check-list li:last-child { border-bottom: none; }
+    .check-list .ck { color: var(--accent); flex-shrink: 0; }
+    .check-list .note { font-size: 11px; color: var(--text-muted); }
+
+    /* ─── TERMS ─── */
+    .terms-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 600px) { .terms-row { grid-template-columns: 1fr; } }
+    .terms-card {
+      padding: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    .terms-card h3 { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+    .terms-card p { font-size: 12px; color: var(--text-dim); line-height: 1.65; }
+    .terms-card .rate {
+      font-family: var(--font-mono);
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ─── PAYMENT ─── */
+    .payment-box {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .payment-total {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .payment-note {
+      font-size: 13px;
+      color: var(--text-dim);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ─── FOOTER ─── */
+    .prop-footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      margin-top: 20px;
+    }
+    .prop-footer .f-brand {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .prop-footer .f-links {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .prop-footer .f-valid {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 10px;
+      opacity: 0.6;
+    }
+
+    /* ─── EXPORT BUTTON ─── */
+    .export-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 100;
+      background: var(--accent);
+      color: #050505;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: opacity 0.2s;
+      box-shadow: 0 4px 16px rgba(0,255,136,0.2);
+    }
+    .export-btn:hover { opacity: 0.85; }
+
+    /* ─── PRINT / PDF ─── */
+    @media print {
+      :root {
+        --bg: #ffffff;
+        --bg-card: #f7f7f7;
+        --border: #e0e0e0;
+        --text: #111111;
+        --text-dim: #555555;
+        --text-muted: #888888;
+        --accent: #00875a;
+        --accent-dim: #006644;
+      }
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-size: 11.5px;
+      }
+      .ascii-bg, .export-btn, .demo-section { display: none !important; }
+      .container { max-width: 100%; padding: 0 20px; }
+      .hero { padding: 20px 0 40px; }
+      .section { padding: 32px 0; }
+      .feat-card { break-inside: avoid; }
+      .price-section { page-break-before: always; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ASCII Background -->
+  <pre class="ascii-bg" id="ascii-bg"></pre>
+
+  <!-- Export Button -->
+  <button class="export-btn" onclick="window.print()">Export PDF</button>
+
+  <!-- Main Proposal Content -->
+  <div class="proposal-content">
+    <div class="container">
+
+      <!-- Header -->
+      <header class="prop-header">
+        <div class="prop-brand">Offset Works</div>
+        <div class="prop-badge">Proposal &mdash; March 2026</div>
+      </header>
+
+      <!-- Hero -->
+      <div class="hero">
+        <div class="hero-label">Prepared for Tom / Friendly Announcer</div>
+        <h1>UMO Archive</h1>
+        <div class="hero-sub">a layered live moment repository</div>
+        <p class="hero-desc">
+          A custom platform where fans upload, preserve, and celebrate concert moments from across
+          UMO's touring history. 300+ performances indexed. All media stored permanently on Arweave.
+          NFT collectible layer built and ready for future activation. Built from scratch. Designed to last.
+        </p>
+      </div>
+
+      <!-- Live Demo -->
+      <div class="section demo-section">
+        <div class="section-label">Live Demo</div>
+        <div class="demo-frame-wrapper">
+          <iframe src="https://umo-live.xyz" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" title="UMO Archive Live Demo"></iframe>
+        </div>
+        <div class="demo-hint">Interactive demo &mdash; browse performances, songs, and moments live</div>
+      </div>
+
+      <!-- Scope of Work -->
+      <div class="section">
+        <div class="section-label">What's Built</div>
+
+        <div class="cat-group">
+          <div class="cat-label">Core Platform</div>
+          <div class="feat-grid">
+            <div class="feat-card">
+              <h3>Performance Database</h3>
+              <p>300+ concerts indexed from setlist.fm. Search by city, venue, song, or year.</p>
+            </div>
+            <div class="feat-card">
+              <h3>Moment Uploads</h3>
+              <p>Audio, video, photos up to 6GB. Resumable uploads linked to specific performances and songs.</p>
+            </div>
+            <div class="feat-card">
+              <h3>Permanent Storage</h3>
+              <p>All uploads stored on Arweave &mdash; decentralized, immutable, permanent. No recurring costs.</p>
+            </div>
+            <div class="feat-card">
+              <h3>Rarity Engine</h3>
+              <p>7-tier scoring (Basic &rarr; Legendary) based on file quality, song frequency, and metadata.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cat-group">
+          <div class="cat-label">Web3 / Decentralized</div>
+          <div class="feat-grid">
+            <div class="feat-card">
+              <h3>Arweave Storage</h3>
+              <p>Paid once, stored forever. No monthly fees, no expiration, no single point of failure.</p>
+            </div>
+            <div class="feat-card">
+              <h3>NFT Collectibles <span class="feat-badge">Future Phase</span></h3>
+              <p>ERC-1155 minting, 0xSplits revenue sharing, wallet integration. Built and tested &mdash; ready to activate.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cat-group">
+          <div class="cat-label">Community &amp; Content</div>
+          <div class="feat-grid">
+            <div class="feat-card">
+              <h3>UMOTube</h3>
+              <p>Video gallery with queue, performance picker. YouTube, Vimeo, SoundCloud, Archive.org support.</p>
+            </div>
+            <div class="feat-card">
+              <h3>Community</h3>
+              <p>Live chat, guestbook, RSVP, comments, leaderboard. All real-time via Socket.io.</p>
+            </div>
+            <div class="feat-card">
+              <h3>Moderation</h3>
+              <p>3-tier roles (User, Mod, Admin). Approval workflows, revision requests, admin panel.</p>
+            </div>
+            <div class="feat-card">
+              <h3>Profiles &amp; Collections</h3>
+              <p>Upload history, status tracking, shareable collections.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cat-group">
+          <div class="cat-label">Infrastructure</div>
+          <div class="feat-grid">
+            <div class="feat-card">
+              <h3>Admin Dashboard</h3>
+              <p>User management, role assignment, content queues, system monitoring.</p>
+            </div>
+            <div class="feat-card">
+              <h3>Auth &amp; Notifications</h3>
+              <p>JWT sessions, secure password hashing. Email notification templates ready.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Permanent Storage Callout -->
+      <div class="callout">
+        <h3>Uploads are forever</h3>
+        <p>
+          All media lives on Arweave &mdash; a decentralized network where data is paid for once and persists indefinitely.
+          If the platform goes offline, if Offset Works disappears, the uploaded concert recordings remain accessible
+          via their permanent URLs. The memories are truly preserved.
+        </p>
+      </div>
+
+      <!-- Pricing -->
+      <div class="section price-section">
+        <div class="section-label">Pricing</div>
+
+        <table class="price-table">
+          <tr>
+            <td>
+              <div class="name">Full-Stack Web Application</div>
+              <div class="desc">React 19 + Express + MongoDB + Auth</div>
+            </td>
+            <td class="amt">$3,000</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="name">Decentralized Storage</div>
+              <div class="desc">Arweave/Irys upload pipeline, 6GB file handling</div>
+            </td>
+            <td class="amt">$1,500</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="name">NFT / Collectible System <span style="font-size:10px; color:var(--text-muted);">(built, future activation)</span></div>
+              <div class="desc">ERC-1155 smart contracts, 0xSplits, wallet integration</div>
+            </td>
+            <td class="amt">$2,000</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="name">Performance Database &amp; Rarity Engine</div>
+              <div class="desc">setlist.fm integration, 300+ shows, 7-tier scoring</div>
+            </td>
+            <td class="amt">$1,000</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="name">Community &amp; UMOTube</div>
+              <div class="desc">Chat, guestbook, RSVP, video gallery</div>
+            </td>
+            <td class="amt">$1,000</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="name">Admin, Moderation &amp; Hosting Setup</div>
+              <div class="desc">3-tier roles, admin panel, Vercel + Railway + Atlas deployment</div>
+            </td>
+            <td class="amt">$1,500</td>
+          </tr>
+          <tr class="row-sub">
+            <td><div class="name">Estimated Market Value</div></td>
+            <td class="amt">$10,000</td>
+          </tr>
+          <tr class="row-disc">
+            <td><div class="name">Friends &amp; Family Rate <span style="font-size:10px; opacity:0.6;">(70% off)</span></div></td>
+            <td class="amt">&minus;$7,000</td>
+          </tr>
+          <tr class="row-total">
+            <td><div class="name">Your Price</div></td>
+            <td class="amt">$3,000</td>
+          </tr>
+        </table>
+        <p class="price-note">
+          As discussed in our original proposal, this was scoped as two components: the archive/repository layer (~$3K)
+          and the collective creation/monetization layer (~$5K). Both fully built. This quote covers everything at a
+          friends &amp; family rate exclusive to Friendly Announcer.
+        </p>
+      </div>
+
+      <!-- What's Included -->
+      <div class="section">
+        <div class="section-label">What's Included</div>
+        <ul class="check-list">
+          <li><span class="ck">&#10003;</span> Fully built and deployed platform (turnkey)</li>
+          <li><span class="ck">&#10003;</span> Hosting on Vercel + Railway + Atlas <span class="note">(through June 2027)</span></li>
+          <li><span class="ck">&#10003;</span> All source code via private GitHub repo</li>
+          <li><span class="ck">&#10003;</span> Permanent Arweave storage <span class="note">&mdash; uploads live forever, no recurring cost</span></li>
+          <li><span class="ck">&#10003;</span> 10-hour launch support retainer <span class="note">(through December 2026)</span></li>
+        </ul>
+      </div>
+
+      <!-- Terms -->
+      <div class="section">
+        <div class="section-label">Terms</div>
+        <div class="terms-row">
+          <div class="terms-card">
+            <h3>Launch Support <span style="color:var(--accent); font-weight:400; font-size:11px;">(included)</span></h3>
+            <p>Through <strong>December 2026</strong>: 10 hours of post-launch support &mdash; bug fixes, adjustments, content changes, deployment help. Hours tracked transparently.</p>
+          </div>
+          <div class="terms-card">
+            <h3>After Launch</h3>
+            <p>Additional development: <span class="rate">$50/hr</span>. Estimates before work begins. Hosting included through June 2027, then transfers at cost (~$5&ndash;15/mo). Arweave storage is permanent regardless.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment -->
+      <div class="section">
+        <div class="section-label">Payment</div>
+        <div class="payment-box">
+          <div class="payment-total">$3,000 USD</div>
+          <p class="payment-note">
+            Let us know your preferred payment method &mdash; direct bank transfer, wire, check, Zelle,
+            or whatever Friendly Announcer typically uses. Happy to make it easy.
+          </p>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="prop-footer">
+        <div class="f-brand">Offset Works &bull; NYC</div>
+        <div class="f-links">offset.works.studio@gmail.com &nbsp;|&nbsp; @offset.works &nbsp;|&nbsp; offsetworks.xyz</div>
+        <div class="f-valid">Quote valid for 30 days from March 5, 2026</div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script>
+    // ─── ASCII BACKGROUND ───
+    const chars = ' ░▒▓';
+    const el = document.getElementById('ascii-bg');
+    let cols, rows;
+
+    function resize() {
+      cols = Math.floor(window.innerWidth / 6.5);
+      rows = Math.floor(window.innerHeight / 11);
+    }
+
+    function render(t) {
+      let out = '';
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const v = Math.sin(x * 0.04 + t * 0.0008) * Math.cos(y * 0.06 + t * 0.0006) * 0.5 + 0.5;
+          out += chars[Math.floor(v * (chars.length - 1))];
+        }
+        out += '\n';
+      }
+      el.textContent = out;
+      requestAnimationFrame(render);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    requestAnimationFrame(render);
+  </script>
+
+</body>
+</html>
