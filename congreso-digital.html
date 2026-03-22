@@ -1534,12 +1534,18 @@
       el.classList.toggle('open');
     }
 
+    var demoLoaded = false;
     function loadDemo() {
+      if (demoLoaded) return;
+      demoLoaded = true;
       var iframe = document.getElementById('demo-iframe');
       var prompt = document.getElementById('demo-prompt');
+      var box = document.getElementById('demo-box');
       iframe.src = 'https://gtstream-8asq0iui5-gs-projects-1311714b.vercel.app/demo.html';
       iframe.style.display = 'block';
       prompt.style.display = 'none';
+      box.removeAttribute('onclick');
+      box.style.cursor = 'default';
     }
 
 
