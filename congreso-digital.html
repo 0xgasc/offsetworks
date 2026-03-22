@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cotizacion — Congreso Digital | Offset Works</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #121212;
+      --bg-card: #1c1c1c;
+      --border: #2a2a2a;
+      --text: #f0f0f0;
+      --text-dim: #999;
+      --text-muted: #666;
+      --accent: #00ff88;
+      --accent-dim: #00cc6a;
+      --accent-glow: rgba(0, 255, 136, 0.15);
+      --phase2: #818cf8;
+      --phase3: #ff6b8a;
+      --font-body: 'Space Grotesk', -apple-system, sans-serif;
+      --font-mono: 'Space Mono', 'SF Mono', monospace;
+      --max-w: 820px;
+      --radius: 6px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    /* ---- TOGGLES ---- */
+    .toggles {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-end;
+    }
+
+    .toggle-row {
+      display: flex;
+      gap: 4px;
+    }
+
+    .toggle-btn {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      background: var(--bg-card);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+
+    .toggle-btn:hover, .toggle-btn.active {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .toggle-label {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-right: 6px;
+      align-self: center;
+    }
+
+    /* ---- HEADER ---- */
+    .prop-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+
+    .brand {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .brand span { color: var(--accent); }
+
+    .doc-meta {
+      text-align: right;
+    }
+
+    .doc-type {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 4px 12px;
+      border-radius: 3px;
+    }
+
+    .doc-date {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      letter-spacing: 0.1em;
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      text-align: center;
+      padding: 48px 0 56px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(0, 255, 136, 0.08);
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 .accent { color: var(--accent); }
+
+    .hero .subtitle {
+      font-size: 17px;
+      color: var(--text-dim);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ---- PARTIES ---- */
+    .parties {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .party-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .party-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .party-name {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .party-detail {
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .party-detail a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ---- SECTIONS ---- */
+    .section { margin-bottom: 56px; }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+
+    .section-text {
+      color: var(--text-dim);
+      font-size: 15px;
+      line-height: 1.8;
+      max-width: 640px;
+    }
+
+    /* ---- FEATURES ---- */
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .feature {
+      display: flex;
+      gap: 16px;
+      padding: 16px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: border-color 0.2s;
+      cursor: pointer;
+    }
+
+    .feature:hover { border-color: rgba(0, 255, 136, 0.3); }
+
+    .feature-icon {
+      color: var(--accent);
+      font-size: 14px;
+      width: 20px;
+      flex-shrink: 0;
+      padding-top: 3px;
+    }
+
+    .feature-content { flex: 1; }
+
+    .feature-title {
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .feature-title .chevron {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      transition: transform 0.2s;
+    }
+
+    .feature.open .feature-title .chevron {
+      transform: rotate(90deg);
+      color: var(--accent);
+    }
+
+    .feature-detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, margin 0.3s ease;
+    }
+
+    .feature.open .feature-detail {
+      max-height: 200px;
+      margin-top: 8px;
+    }
+
+    .feature-desc {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .feature-badges {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 3px;
+      background: rgba(0, 255, 136, 0.08);
+      color: var(--accent);
+      border: 1px solid rgba(0, 255, 136, 0.15);
+    }
+
+    .badge.p2 {
+      background: rgba(99, 102, 241, 0.1);
+      color: #818cf8;
+      border-color: rgba(99, 102, 241, 0.2);
+    }
+
+    .badge.p3 {
+      background: rgba(255, 51, 102, 0.08);
+      color: #ff6b8a;
+      border-color: rgba(255, 51, 102, 0.15);
+    }
+
+    /* ---- STACK ---- */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .stack-item {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-dim);
+      padding: 8px 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .stack-item::before {
+      content: '> ';
+      color: var(--accent);
+    }
+
+    /* ---- PHASE BUILDER ---- */
+    .phase-builder {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .phase-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phase-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      opacity: 0.3;
+      transition: opacity 0.3s ease;
+    }
+
+    .phase-card.active::before {
+      opacity: 1;
+    }
+
+    .phase-card.p1::before { background: var(--accent); }
+    .phase-card.p2::before { background: var(--phase2); }
+    .phase-card.p3::before { background: var(--phase3); }
+
+    .phase-card.p1.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+    }
+
+    .phase-card.p2.active {
+      border-color: var(--phase2);
+      box-shadow: 0 0 20px rgba(129, 140, 248, 0.1);
+    }
+
+    .phase-card.p3.active {
+      border-color: var(--phase3);
+      box-shadow: 0 0 20px rgba(255, 107, 138, 0.1);
+    }
+
+    .phase-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .phase-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .phase-check {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      transition: color 0.3s ease;
+      width: 28px;
+      text-align: center;
+    }
+
+    .phase-card.p1 .phase-check.on { color: var(--accent); }
+    .phase-card.p2 .phase-check.on { color: var(--phase2); }
+    .phase-card.p3 .phase-check.on { color: var(--phase3); }
+
+    .phase-name {
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .phase-badge-required {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 3px;
+      background: rgba(0, 255, 136, 0.08);
+      color: var(--accent);
+      border: 1px solid rgba(0, 255, 136, 0.15);
+      margin-left: 8px;
+    }
+
+    .phase-header-right {
+      text-align: right;
+    }
+
+    .phase-price {
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .phase-card.p1 .phase-price { color: var(--accent); }
+    .phase-card.p2 .phase-price { color: var(--phase2); }
+    .phase-card.p3 .phase-price { color: var(--phase3); }
+
+    .phase-timeline {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .phase-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .phase-card.active .phase-body {
+      max-height: 400px;
+      opacity: 1;
+    }
+
+    .phase-features {
+      list-style: none;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .phase-features li {
+      padding: 5px 0;
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .phase-card.p1 .phase-features li::before {
+      content: '+ ';
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-weight: 700;
+    }
+
+    .phase-card.p2 .phase-features li::before {
+      content: '+ ';
+      color: var(--phase2);
+      font-family: var(--font-mono);
+      font-weight: 700;
+    }
+
+    .phase-card.p3 .phase-features li::before {
+      content: '+ ';
+      color: var(--phase3);
+      font-family: var(--font-mono);
+      font-weight: 700;
+    }
+
+    /* ---- TOTAL BAR ---- */
+    .total-bar {
+      position: sticky;
+      bottom: 0;
+      z-index: 50;
+      margin-top: 24px;
+      padding: 20px 28px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, #1a2a1f, #1c1c2e);
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .total-bar-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .total-bar-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .total-bar-phases {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .total-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .total-bar-market {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+
+    .total-bar-amount {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+      transition: transform 0.2s ease;
+    }
+
+    .total-bar-amount.pulse {
+      animation: totalPulse 0.3s ease;
+    }
+
+    .total-bar-savings {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      background: rgba(0, 255, 136, 0.08);
+      border: 1px solid rgba(0, 255, 136, 0.15);
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+
+    @keyframes totalPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    /* ---- PLAN CARDS ---- */
+    .plan-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .plan-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      text-align: center;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .plan-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .plan-card.recommended { border-color: var(--accent); }
+
+    .plan-card.recommended::before {
+      content: attr(data-rec);
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 3px 12px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .plan-name {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+
+    .plan-price {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .plan-price .currency {
+      font-size: 16px;
+      color: var(--text-dim);
+      font-weight: 400;
+    }
+
+    .plan-detail {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ---- INCLUDES ---- */
+    .includes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .include-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .include-icon {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .include-title {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .include-desc {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    /* ---- RETAINER TIERS ---- */
+    .retainer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .retainer-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      transition: all 0.2s;
+    }
+
+    .retainer-card:hover {
+      border-color: rgba(0, 255, 136, 0.3);
+    }
+
+    .retainer-tier {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .retainer-name {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .retainer-price {
+      font-family: var(--font-mono);
+      font-size: 22px;
+      font-weight: 700;
+      margin: 12px 0 4px;
+    }
+
+    .retainer-price .mo {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .retainer-rate {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .retainer-features {
+      list-style: none;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .retainer-features li {
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .retainer-features li::before {
+      content: '+ ';
+      color: var(--accent);
+      font-family: var(--font-mono);
+    }
+
+    .retainer-features li:last-child { border-bottom: none; }
+
+    /* ---- CHECKLIST ---- */
+    .checklist {
+      list-style: none;
+      margin-top: 16px;
+    }
+
+    .checklist li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .checklist li::before {
+      content: '>';
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 12px;
+      width: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ---- CUSTOM WORK ---- */
+    .custom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .custom-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 13px;
+    }
+
+    .custom-item .custom-price {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    /* ---- DEMO ---- */
+    .demo-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .demo-box:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 30px var(--accent-glow);
+    }
+
+    .demo-prompt {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px;
+      gap: 12px;
+    }
+
+    .demo-prompt .play {
+      width: 48px;
+      height: 48px;
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+
+    .demo-box:hover .play {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .demo-prompt .label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .demo-iframe {
+      display: none;
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+
+    /* ---- CTA ---- */
+    .cta-box {
+      background: linear-gradient(135deg, rgba(0,255,136,0.05), rgba(0,255,136,0.02));
+      border: 1px solid rgba(0,255,136,0.2);
+      border-radius: var(--radius);
+      padding: 40px;
+      text-align: center;
+      margin-top: 48px;
+    }
+
+    .cta-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .cta-desc {
+      color: var(--text-dim);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 12px 32px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .cta-btn:hover {
+      opacity: 0.85;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+
+    /* ---- FOOTER ---- */
+    .prop-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 32px;
+      margin-top: 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-left {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .footer-left a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .footer-right {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+    }
+
+    .validity {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 24px;
+      letter-spacing: 0.05em;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 48px 0;
+    }
+
+    /* ---- TERMS ---- */
+    .terms-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .term-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .term-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .term-text {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    .strike {
+      text-decoration: line-through;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    /* ---- PRINT ---- */
+    @media print {
+      :root {
+        --bg: #fff; --bg-card: #f8f8f8; --border: #e0e0e0;
+        --text: #111; --text-dim: #555; --text-muted: #888;
+        --accent: #00875a;
+      }
+      .toggles, .demo-box, .total-bar { display: none; }
+      .container { padding: 20px; }
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 600px) {
+      .container { padding: 40px 16px 60px; }
+      .parties, .includes-grid, .stack-grid, .terms-grid, .custom-grid { grid-template-columns: 1fr; }
+      .plan-grid, .retainer-grid { grid-template-columns: 1fr; }
+      .prop-header { flex-direction: column; gap: 12px; align-items: flex-start; }
+      .prop-footer { flex-direction: column; align-items: flex-start; }
+      .total-bar { flex-direction: column; text-align: center; }
+      .total-bar-right { flex-direction: column; }
+      .phase-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .phase-header-right { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Toggles -->
+  <div class="toggles">
+    <div class="toggle-row">
+      <button class="toggle-btn active" id="btn-es" onclick="setLang('es')">ES</button>
+      <button class="toggle-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <div class="toggle-row">
+      <button class="toggle-btn" id="btn-usd" onclick="setCurrency('usd')">USD</button>
+      <button class="toggle-btn active" id="btn-gtq" onclick="setCurrency('gtq')">GTQ</button>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header class="prop-header">
+      <div class="brand"><span>offset</span> works</div>
+      <div class="doc-meta">
+        <span class="doc-type" data-es="Cotizacion" data-en="Proposal">Cotizacion</span>
+        <div class="doc-date" data-es="21 de Marzo, 2026" data-en="March 21, 2026">21 de Marzo, 2026</div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-badge" data-es="Plataforma de Congreso Medico" data-en="Medical Congress Platform">Plataforma de Congreso Medico</div>
+      <h1>Congreso <span class="accent">Digital</span></h1>
+      <p class="subtitle" data-es="Plataforma digital integral para su congreso medico — landing page, programa interactivo y transmision en vivo para 15,000+ usuarios simultaneos." data-en="Full-stack digital platform for your medical congress — landing page, interactive program and live streaming for 15,000+ concurrent users.">Plataforma digital integral para su congreso medico — landing page, programa interactivo y transmision en vivo para 15,000+ usuarios simultaneos.</p>
+    </div>
+
+    <!-- Parties -->
+    <div class="parties">
+      <div class="party-card">
+        <div class="party-label" data-es="De" data-en="From">De</div>
+        <div class="party-name">Offset Works</div>
+        <div class="party-detail">Software Studio</div>
+        <div class="party-detail" style="margin-top: 4px;"><a href="mailto:offset.works.studio@gmail.com">offset.works.studio@gmail.com</a></div>
+        <div class="party-detail">offsetworks.xyz</div>
+      </div>
+      <div class="party-card">
+        <div class="party-label" data-es="Para" data-en="For">Para</div>
+        <div class="party-name">Pedro Carrillo</div>
+        <div class="party-detail" data-es="Congreso Medico" data-en="Medical Congress">Congreso Medico</div>
+        <div class="party-detail" data-es="Ciudad de Guatemala" data-en="Guatemala City">Ciudad de Guatemala</div>
+      </div>
+    </div>
+
+    <!-- The Problem -->
+    <div class="section">
+      <div class="section-label" data-es="El Problema" data-en="The Problem">El Problema</div>
+      <h2 class="section-title" data-es="15,000 usuarios. Un servidor. El portal se cae." data-en="15,000 users. One server. The portal crashes.">15,000 usuarios. Un servidor. El portal se cae.</h2>
+      <p class="section-text" data-es="En ediciones anteriores, el portal del congreso ha presentado caidas por saturacion durante picos de acceso masivo. Los asistentes no pueden consultar el programa ni acceder a las transmisiones en los momentos mas criticos del evento. El programa en PDF estatico es dificil de navegar y no se puede actualizar en tiempo real." data-en="In previous editions, the congress portal has experienced crashes due to saturation during peak access. Attendees cannot check the program or access streams during the most critical moments. The static PDF program is hard to navigate and cannot be updated in real time.">En ediciones anteriores, el portal del congreso ha presentado caidas por saturacion durante picos de acceso masivo. Los asistentes no pueden consultar el programa ni acceder a las transmisiones en los momentos mas criticos del evento. El programa en PDF estatico es dificil de navegar y no se puede actualizar en tiempo real.</p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- What's Built -->
+    <div class="section">
+      <div class="section-label" data-es="La Solucion" data-en="The Solution">La Solucion</div>
+      <h2 class="section-title" data-es="Lo Que Se Construye" data-en="What Gets Built">Lo Que Se Construye</h2>
+
+      <div class="features-grid">
+        <div class="feature">
+          <div class="feature-icon">--</div>
+          <div class="feature-content">
+            <div class="feature-title" data-es="Landing Page Institucional" data-en="Institutional Landing Page">Landing Page Institucional<span class="chevron">></span></div>
+            <div class="feature-detail">
+              <div class="feature-desc" data-es="Pagina principal del congreso con informacion del evento, countdown en tiempo real, accesos rapidos y diseno responsivo para movil y escritorio. Preparada para recibir el branding oficial." data-en="Main congress page with event info, real-time countdown, quick access links and responsive design for mobile and desktop. Ready to receive official branding.">Pagina principal del congreso con informacion del evento, countdown en tiempo real, accesos rapidos y diseno responsivo para movil y escritorio. Preparada para recibir el branding oficial.</div>
+              <div class="feature-badges"><span class="badge">Landing</span><span class="badge">Responsive</span><span class="badge">SEO</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">--</div>
+          <div class="feature-content">
+            <div class="feature-title" data-es="Programa Academico Interactivo" data-en="Interactive Academic Program">Programa Academico Interactivo<span class="chevron">></span></div>
+            <div class="feature-detail">
+              <div class="feature-desc" data-es="Navegacion dinamica del programa completo. Filtros por dia, especialidad y tipo de conferencia. Busqueda por palabras clave. Organizacion visual por horarios y salas. Reemplaza el PDF estatico tradicional." data-en="Dynamic navigation of the full program. Filters by day, specialty and conference type. Keyword search. Visual organization by schedule and rooms. Replaces the traditional static PDF.">Navegacion dinamica del programa completo. Filtros por dia, especialidad y tipo de conferencia. Busqueda por palabras clave. Organizacion visual por horarios y salas. Reemplaza el PDF estatico tradicional.</div>
+              <div class="feature-badges"><span class="badge">Filtros</span><span class="badge">Busqueda</span><span class="badge">PDF Export</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">--</div>
+          <div class="feature-content">
+            <div class="feature-title" data-es="Portal de Streaming Multi-Sala" data-en="Multi-Room Streaming Portal">Portal de Streaming Multi-Sala<span class="chevron">></span></div>
+            <div class="feature-detail">
+              <div class="feature-desc" data-es="Transmisiones en vivo con soporte para multiples salas simultaneas. Reproductor adaptable a cualquier proveedor (YouTube, Castr, HLS, embeds de terceros). Panel informativo con sesion actual y siguiente." data-en="Live streams with support for multiple simultaneous rooms. Player adaptable to any provider (YouTube, Castr, HLS, third-party embeds). Info panel with current and next session.">Transmisiones en vivo con soporte para multiples salas simultaneas. Reproductor adaptable a cualquier proveedor (YouTube, Castr, HLS, embeds de terceros). Panel informativo con sesion actual y siguiente.</div>
+              <div class="feature-badges"><span class="badge">Multi-sala</span><span class="badge">YouTube</span><span class="badge">HLS</span><span class="badge">Castr</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">--</div>
+          <div class="feature-content">
+            <div class="feature-title" data-es="CMS con Google Sheets" data-en="Google Sheets CMS">CMS con Google Sheets<span class="chevron">></span></div>
+            <div class="feature-detail">
+              <div class="feature-desc" data-es="Sistema autoadministrable. Actualice conferencias, horarios, salas y ponentes directamente desde Google Sheets. Los cambios se reflejan automaticamente en la pagina en segundos. Sin necesidad de soporte tecnico." data-en="Self-administrable system. Update conferences, schedules, rooms and speakers directly from Google Sheets. Changes reflect automatically on the page within seconds. No tech support needed.">Sistema autoadministrable. Actualice conferencias, horarios, salas y ponentes directamente desde Google Sheets. Los cambios se reflejan automaticamente en la pagina en segundos. Sin necesidad de soporte tecnico.</div>
+              <div class="feature-badges"><span class="badge">Auto-admin</span><span class="badge">Tiempo real</span><span class="badge">Google Sheets</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">--</div>
+          <div class="feature-content">
+            <div class="feature-title" data-es="Infraestructura Anti-Caidas" data-en="Crash-Proof Infrastructure">Infraestructura Anti-Caidas<span class="chevron">></span></div>
+            <div class="feature-detail">
+              <div class="feature-desc" data-es="Arquitectura edge-first desplegada en 300+ servidores globales. Paginas pre-generadas y cacheadas. Soporta 100,000+ usuarios simultaneos sin degradacion. El streaming no pasa por nuestro servidor — conecta directamente al CDN del proveedor." data-en="Edge-first architecture deployed on 300+ global servers. Pre-generated and cached pages. Supports 100,000+ concurrent users without degradation. Streaming doesn't pass through our server — connects directly to the provider's CDN.">Arquitectura edge-first desplegada en 300+ servidores globales. Paginas pre-generadas y cacheadas. Soporta 100,000+ usuarios simultaneos sin degradacion. El streaming no pasa por nuestro servidor — conecta directamente al CDN del proveedor.</div>
+              <div class="feature-badges"><span class="badge">Edge CDN</span><span class="badge">100K+ Users</span><span class="badge">Auto-scale</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">--</div>
+          <div class="feature-content">
+            <div class="feature-title" data-es="Bilingue (ES/EN) + Control de Acceso" data-en="Bilingual (ES/EN) + Access Control">Bilingue (ES/EN) + Control de Acceso<span class="chevron">></span></div>
+            <div class="feature-detail">
+              <div class="feature-desc" data-es="Plataforma completa en espanol e ingles con toggle de idioma. Sistema de contrasena para restringir acceso a participantes registrados. Exportar sesiones al calendario personal con un clic." data-en="Full platform in Spanish and English with language toggle. Password system to restrict access to registered participants. Export sessions to personal calendar with one click.">Plataforma completa en espanol e ingles con toggle de idioma. Sistema de contrasena para restringir acceso a participantes registrados. Exportar sesiones al calendario personal con un clic.</div>
+              <div class="feature-badges"><span class="badge">ES/EN</span><span class="badge">Password Gate</span><span class="badge">iCal Export</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Tech Stack -->
+    <div class="section">
+      <div class="section-label" data-es="Stack Tecnologico" data-en="Tech Stack">Stack Tecnologico</div>
+      <h2 class="section-title" data-es="Tecnologia de Primer Nivel" data-en="World-Class Technology">Tecnologia de Primer Nivel</h2>
+      <div class="stack-grid">
+        <div class="stack-item">Next.js 14 (React)</div>
+        <div class="stack-item">TypeScript</div>
+        <div class="stack-item">Tailwind CSS</div>
+        <div class="stack-item">Vercel Edge Network</div>
+        <div class="stack-item">Google Sheets API v4</div>
+        <div class="stack-item">ISR (Incremental Static Regen)</div>
+        <div class="stack-item" data-es="Streaming Adaptable" data-en="Adaptive Streaming">Streaming Adaptable</div>
+        <div class="stack-item" data-es="CDN Global (300+ PoPs)" data-en="Global CDN (300+ PoPs)">CDN Global (300+ PoPs)</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Phase Builder -->
+    <div class="section">
+      <div class="section-label" data-es="Inversion" data-en="Investment">Inversion</div>
+      <h2 class="section-title" data-es="Construye Tu Plataforma" data-en="Build Your Platform">Construye Tu Plataforma</h2>
+      <p class="section-text" style="margin-bottom: 24px;" data-es="Selecciona las fases que necesitas. Cada fase se construye sobre la anterior. Haz clic para activar o desactivar." data-en="Select the phases you need. Each phase builds on the previous one. Click to toggle on or off.">Selecciona las fases que necesitas. Cada fase se construye sobre la anterior. Haz clic para activar o desactivar.</p>
+
+      <div class="phase-builder">
+
+        <!-- Phase 1 -->
+        <div class="phase-card p1 active" id="phase-1" onclick="togglePhase(1)">
+          <div class="phase-header">
+            <div class="phase-header-left">
+              <span class="phase-check on" id="check-1">///</span>
+              <span class="phase-name" data-es="Fase 1 — Plataforma Core" data-en="Phase 1 — Core Platform">Fase 1 — Plataforma Core</span>
+              <span class="phase-badge-required" data-es="Requerido" data-en="Required">Requerido</span>
+            </div>
+            <div class="phase-header-right">
+              <div class="phase-price" id="price-1" data-usd="$1,500" data-gtq="Q12,500">Q12,500</div>
+              <div class="phase-timeline" data-es="1 semana o menos" data-en="1 week or less">1 semana o menos</div>
+            </div>
+          </div>
+          <div class="phase-body">
+            <ul class="phase-features">
+              <li data-es="Landing page institucional con countdown y hero" data-en="Institutional landing page with countdown and hero">Landing page institucional con countdown y hero</li>
+              <li data-es="Programa academico interactivo con filtros y busqueda" data-en="Interactive academic program with filters and search">Programa academico interactivo con filtros y busqueda</li>
+              <li data-es="Portal de streaming multi-sala (YouTube, Castr, HLS)" data-en="Multi-room streaming portal (YouTube, Castr, HLS)">Portal de streaming multi-sala (YouTube, Castr, HLS)</li>
+              <li data-es="CMS con Google Sheets — actualizacion en tiempo real" data-en="Google Sheets CMS — real-time updates">CMS con Google Sheets — actualizacion en tiempo real</li>
+              <li data-es="Infraestructura edge CDN para 100,000+ usuarios" data-en="Edge CDN infrastructure for 100,000+ users">Infraestructura edge CDN para 100,000+ usuarios</li>
+              <li data-es="Bilingue (ES/EN), control de acceso, exportar calendario" data-en="Bilingual (ES/EN), access control, calendar export">Bilingue (ES/EN), control de acceso, exportar calendario</li>
+              <li data-es="Soporte integral: pre-evento, durante y 30 dias post-evento" data-en="Full support: pre-event, during and 30 days post-event">Soporte integral: pre-evento, durante y 30 dias post-evento</li>
+              <li data-es="Hosting incluido por 12 meses (dominio, SSL, CDN)" data-en="Hosting included for 12 months (domain, SSL, CDN)">Hosting incluido por 12 meses (dominio, SSL, CDN)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="phase-card p2" id="phase-2" onclick="togglePhase(2)">
+          <div class="phase-header">
+            <div class="phase-header-left">
+              <span class="phase-check" id="check-2">---</span>
+              <span class="phase-name" data-es="Fase 2 — Perfiles & Directorio" data-en="Phase 2 — Profiles & Directory">Fase 2 — Perfiles & Directorio</span>
+            </div>
+            <div class="phase-header-right">
+              <div class="phase-price" id="price-2" data-usd="$1,000" data-gtq="Q8,500">Q8,500</div>
+              <div class="phase-timeline" data-es="+1 semana" data-en="+1 week">+1 semana</div>
+            </div>
+          </div>
+          <div class="phase-body">
+            <ul class="phase-features">
+              <li data-es="Autenticacion y registro de cuentas" data-en="Authentication and account registration">Autenticacion y registro de cuentas</li>
+              <li data-es="Perfiles de asistentes con especialidad y bio" data-en="Attendee profiles with specialty and bio">Perfiles de asistentes con especialidad y bio</li>
+              <li data-es="Directorio de participantes con busqueda y filtros" data-en="Participant directory with search and filters">Directorio de participantes con busqueda y filtros</li>
+              <li data-es="Favoritos y sesiones guardadas" data-en="Favorites and saved sessions">Favoritos y sesiones guardadas</li>
+              <li data-es="Backend con Supabase (PostgreSQL + Auth)" data-en="Supabase backend (PostgreSQL + Auth)">Backend con Supabase (PostgreSQL + Auth)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="phase-card p3" id="phase-3" onclick="togglePhase(3)">
+          <div class="phase-header">
+            <div class="phase-header-left">
+              <span class="phase-check" id="check-3">---</span>
+              <span class="phase-name" data-es="Fase 3 — Networking & Reuniones" data-en="Phase 3 — Networking & Meetings">Fase 3 — Networking & Reuniones</span>
+            </div>
+            <div class="phase-header-right">
+              <div class="phase-price" id="price-3" data-usd="$1,000" data-gtq="Q8,500">Q8,500</div>
+              <div class="phase-timeline" data-es="+1-2 semanas" data-en="+1-2 weeks">+1-2 semanas</div>
+            </div>
+          </div>
+          <div class="phase-body">
+            <ul class="phase-features">
+              <li data-es="Agendamiento de reuniones 1-a-1 entre asistentes" data-en="1-on-1 meeting scheduling between attendees">Agendamiento de reuniones 1-a-1 entre asistentes</li>
+              <li data-es="Matchmaking por especialidad e intereses" data-en="Specialty and interest-based matchmaking">Matchmaking por especialidad e intereses</li>
+              <li data-es="Mensajeria entre participantes" data-en="Participant messaging">Mensajeria entre participantes</li>
+              <li data-es="La experiencia de plataformas como Brella y Swapcard" data-en="The experience of platforms like Brella and Swapcard">La experiencia de plataformas como Brella y Swapcard</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Total Bar -->
+      <div class="total-bar" id="total-bar">
+        <div class="total-bar-left">
+          <div class="total-bar-label" data-es="Total Seleccionado" data-en="Selected Total">Total Seleccionado</div>
+          <div class="total-bar-phases" id="total-phases" data-es="Fase 1" data-en="Phase 1">Fase 1</div>
+        </div>
+        <div class="total-bar-right">
+          <span class="total-bar-market strike" id="total-market">Q33,000</span>
+          <span class="total-bar-amount" id="total-amount">Q12,500</span>
+          <span class="total-bar-savings" id="total-savings">-47%</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Payment Plans -->
+    <div class="section">
+      <div class="section-label" data-es="Planes de Pago" data-en="Payment Plans">Planes de Pago</div>
+      <h2 class="section-title" data-es="Opciones Flexibles" data-en="Flexible Options">Opciones Flexibles</h2>
+
+      <div class="plan-grid">
+        <div class="plan-card pay-1">
+          <div class="plan-name" data-es="1 Pago" data-en="1 Payment">1 Pago</div>
+          <div class="plan-price"><span class="currency price-symbol">Q</span><span class="plan-amount pay-1-amount">11,875</span></div>
+          <div class="plan-detail" data-es="5% descuento por pago unico" data-en="5% discount for single payment">5% descuento por pago unico</div>
+        </div>
+        <div class="plan-card recommended pay-2" data-rec-es="Recomendado" data-rec-en="Recommended" data-rec="Recomendado">
+          <div class="plan-name" data-es="2 Pagos" data-en="2 Payments">2 Pagos</div>
+          <div class="plan-price"><span class="currency price-symbol">Q</span><span class="plan-amount pay-2-amount">6,250</span></div>
+          <div class="plan-detail" data-es="50% inicio / 50% al entregar" data-en="50% upfront / 50% on delivery">50% inicio / 50% al entregar</div>
+        </div>
+        <div class="plan-card pay-3">
+          <div class="plan-name" data-es="3 Pagos" data-en="3 Payments">3 Pagos</div>
+          <div class="plan-price"><span class="currency price-symbol">Q</span><span class="plan-amount pay-3-amount">4,167</span></div>
+          <div class="plan-detail" data-es="Mensual por 3 meses" data-en="Monthly for 3 months">Mensual por 3 meses</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- What's Included -->
+    <div class="section">
+      <div class="section-label" data-es="Que Incluye" data-en="What's Included">Que Incluye</div>
+      <h2 class="section-title" data-es="Incluido en la Cotizacion" data-en="Included in This Quote">Incluido en la Cotizacion</h2>
+
+      <div class="includes-grid">
+        <div class="include-card">
+          <div class="include-icon">[/]</div>
+          <div class="include-title" data-es="Soporte Integral" data-en="Full Support">Soporte Integral</div>
+          <div class="include-desc" data-es="Soporte tecnico antes, durante y despues del congreso. Configuracion inicial, pruebas pre-evento, soporte en tiempo real durante los 5 dias, y handover post-evento con archival de la plataforma si se requiere." data-en="Technical support before, during and after the congress. Initial setup, pre-event testing, real-time support during the 5 event days, and post-event handover with platform archival if needed.">Soporte tecnico antes, durante y despues del congreso. Configuracion inicial, pruebas pre-evento, soporte en tiempo real durante los 5 dias, y handover post-evento con archival de la plataforma si se requiere.</div>
+        </div>
+        <div class="include-card">
+          <div class="include-icon">[+]</div>
+          <div class="include-title" data-es="Template Google Sheets" data-en="Google Sheets Template">Template Google Sheets</div>
+          <div class="include-desc" data-es="Hoja de calculo pre-configurada con la estructura de datos lista para usar. Documentacion de como actualizar el contenido." data-en="Pre-configured spreadsheet with ready-to-use data structure. Documentation on how to update content.">Hoja de calculo pre-configurada con la estructura de datos lista para usar. Documentacion de como actualizar el contenido.</div>
+        </div>
+        <div class="include-card">
+          <div class="include-icon">[*]</div>
+          <div class="include-title" data-es="Integracion de Branding" data-en="Branding Integration">Integracion de Branding</div>
+          <div class="include-desc" data-es="Aplicacion de la identidad visual oficial del congreso: colores, logotipo, tipografia y elementos graficos proporcionados por el cliente." data-en="Application of official congress visual identity: colors, logo, typography and graphic elements provided by the client.">Aplicacion de la identidad visual oficial del congreso: colores, logotipo, tipografia y elementos graficos proporcionados por el cliente.</div>
+        </div>
+        <div class="include-card">
+          <div class="include-icon">[~]</div>
+          <div class="include-title" data-es="Hosting 12 Meses" data-en="12 Months Hosting">Hosting 12 Meses</div>
+          <div class="include-desc" data-es="Infraestructura incluida por un ano completo. Dominio personalizado, SSL y CDN global sin costo adicional." data-en="Infrastructure included for a full year. Custom domain, SSL and global CDN at no extra cost.">Infraestructura incluida por un ano completo. Dominio personalizado, SSL y CDN global sin costo adicional.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Market Context -->
+    <div class="section">
+      <div class="section-label" data-es="Contexto de Mercado" data-en="Market Context">Contexto de Mercado</div>
+      <h2 class="section-title" data-es="Cuanto Cuesta Esto Normalmente" data-en="What Does This Normally Cost">Cuanto Cuesta Esto Normalmente</h2>
+
+      <ul class="checklist">
+        <li><span data-es="Vbrick (Gobierno Federal USA): $5,000 - $50,000+/ano" data-en="Vbrick (US Federal Gov): $5,000 - $50,000+/year">Vbrick (Gobierno Federal USA): $5,000 - $50,000+/ano</span></li>
+        <li><span data-es="Brightcove Enterprise: $500+/mes minimo" data-en="Brightcove Enterprise: $500+/month minimum">Brightcove Enterprise: $500+/mes minimo</span></li>
+        <li><span data-es="Swapcard/Brella (networking): $5,000 - $15,000 por evento" data-en="Swapcard/Brella (networking): $5,000 - $15,000 per event">Swapcard/Brella (networking): $5,000 - $15,000 por evento</span></li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Terms -->
+    <div class="section">
+      <div class="section-label" data-es="Terminos" data-en="Terms">Terminos</div>
+      <h2 class="section-title" data-es="Condiciones" data-en="Conditions">Condiciones</h2>
+
+      <div class="terms-grid">
+        <div class="term-card">
+          <div class="term-title" data-es="Entrega" data-en="Delivery">Entrega</div>
+          <div class="term-text" data-es="Fase 1 lista para produccion en 7-14 dias habiles a partir de la aprobacion y recepcion del anticipo." data-en="Phase 1 production-ready within 7-14 business days from approval and deposit receipt.">Fase 1 lista para produccion en 7-14 dias habiles a partir de la aprobacion y recepcion del anticipo.</div>
+        </div>
+        <div class="term-card">
+          <div class="term-title" data-es="Revisiones" data-en="Revisions">Revisiones</div>
+          <div class="term-text" data-es="Incluye 2 rondas de revision sobre el diseno y contenido. Revisiones adicionales se facturan a $40/hora." data-en="Includes 2 rounds of revisions on design and content. Additional revisions billed at $40/hour.">Incluye 2 rondas de revision sobre el diseno y contenido. Revisiones adicionales se facturan a $40/hora.</div>
+        </div>
+        <div class="term-card">
+          <div class="term-title" data-es="Requisitos del Cliente" data-en="Client Requirements">Requisitos del Cliente</div>
+          <div class="term-text" data-es="Branding (logo, colores, tipografia), programa academico base en formato estructurado, y acceso al dominio del evento." data-en="Branding (logo, colors, typography), base academic program in structured format, and event domain access.">Branding (logo, colores, tipografia), programa academico base en formato estructurado, y acceso al dominio del evento.</div>
+        </div>
+        <div class="term-card">
+          <div class="term-title" data-es="Cambios Estructurales" data-en="Structural Changes">Cambios Estructurales</div>
+          <div class="term-text" data-es="Cambios significativos a la estructura de datos del programa despues de la implementacion inicial se cotizan por separado." data-en="Significant changes to the program data structure after initial implementation are quoted separately.">Cambios significativos a la estructura de datos del programa despues de la implementacion inicial se cotizan por separado.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Demo -->
+    <div class="section">
+      <div class="section-label" data-es="Demostracion" data-en="Demo">Demostracion</div>
+      <h2 class="section-title" data-es="Ver en Accion" data-en="See It in Action">Ver en Accion</h2>
+
+      <a href="https://gtstream-o43z9e81z-gs-projects-1311714b.vercel.app/demo" target="_blank" rel="noopener" class="demo-box" style="display:block;text-decoration:none;color:inherit;">
+        <div class="demo-prompt">
+          <div class="play">></div>
+          <div class="label" data-es="Click para ver demo en vivo" data-en="Click to see live demo">Click para ver demo en vivo</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-box">
+      <div class="cta-title" data-es="Listo para empezar?" data-en="Ready to start?">Listo para empezar?</div>
+      <div class="cta-desc" data-es="Respondemos en menos de 24 horas. El proyecto puede estar en produccion en 7 dias." data-en="We respond within 24 hours. The project can be in production in 7 days.">Respondemos en menos de 24 horas. El proyecto puede estar en produccion en 7 dias.</div>
+      <a href="mailto:offset.works.studio@gmail.com?subject=Congreso%20Digital%20-%20Cotizacion%20Aprobada&body=Hola%20equipo%20Offset%20Works%2C%0A%0AMe%20gustaria%20aprobar%20la%20cotizacion%20de%20Congreso%20Digital.%0A%0AFases%20de%20interes%3A%20%5BFase%201%20%2F%20Fase%201%2B2%20%2F%20Todas%5D%0AMoneda%20preferida%3A%20%5BUSD%20%2F%20GTQ%5D%0APlan%20de%20pago%3A%20%5B1%20pago%20%2F%202%20pagos%20%2F%203%20pagos%5D%0A%0AQuedo%20atento.%0A%0ASaludos%2C%0A%5BSu%20nombre%5D" class="cta-btn" data-es="Aprobar Cotizacion -->" data-en="Approve Proposal -->">Aprobar Cotizacion --></a>
+    </div>
+
+    <!-- Footer -->
+    <div class="prop-footer">
+      <div class="footer-left">
+        <a href="https://offsetworks.xyz">offsetworks.xyz</a> / <a href="mailto:offset.works.studio@gmail.com">offset.works.studio@gmail.com</a>
+      </div>
+      <div class="footer-right" data-es="Marzo 2026" data-en="March 2026">Marzo 2026</div>
+    </div>
+
+    <div class="validity" data-es="Esta cotizacion es valida por 30 dias a partir de la fecha de emision." data-en="This proposal is valid for 30 days from the date of issue.">Esta cotizacion es valida por 30 dias a partir de la fecha de emision.</div>
+
+  </div>
+
+  <script>
+    let currentLang = 'es';
+    let currentCurrency = 'gtq';
+
+    // Feature card expand/collapse
+    document.querySelectorAll('.feature').forEach(function(el) {
+      el.addEventListener('click', function() {
+        el.classList.toggle('open');
+      });
+    });
+
+
+    // Phase data
+    var phases = {
+      1: { usd: 1500, gtq: 12500, marketUsd: 4000, marketGtq: 33000, active: true },
+      2: { usd: 1000, gtq: 8500, marketUsd: 3000, marketGtq: 25000, active: false },
+      3: { usd: 1000, gtq: 8500, marketUsd: 3500, marketGtq: 29000, active: false }
+    };
+
+    // Bundle discount: all 3 = $11,000 total (not $13,000), market = $23,500
+    var bundleUsd = 3000;
+    var bundleGtq = 25000;
+    var bundleMarketUsd = 10500;
+    var bundleMarketGtq = 87000;
+
+    function fmt(n) {
+      return n.toLocaleString('en-US');
+    }
+
+    function togglePhase(n) {
+      // Phase 1 cannot be deactivated
+      if (n === 1) return;
+
+      if (n === 3 && !phases[3].active) {
+        // Activating Phase 3 auto-enables Phase 2
+        phases[2].active = true;
+        phases[3].active = true;
+      } else if (n === 3 && phases[3].active) {
+        // Deactivating Phase 3
+        phases[3].active = false;
+      } else if (n === 2 && !phases[2].active) {
+        // Activating Phase 2
+        phases[2].active = true;
+      } else if (n === 2 && phases[2].active) {
+        // Deactivating Phase 2 also deactivates Phase 3
+        phases[2].active = false;
+        phases[3].active = false;
+      }
+
+      updateUI();
+    }
+
+    function updateUI() {
+      // Update phase card states
+      for (var i = 1; i <= 3; i++) {
+        var card = document.getElementById('phase-' + i);
+        var check = document.getElementById('check-' + i);
+        if (phases[i].active) {
+          card.classList.add('active');
+          check.textContent = '///';
+          check.classList.add('on');
+        } else {
+          card.classList.remove('active');
+          check.textContent = '---';
+          check.classList.remove('on');
+        }
+      }
+
+      // Calculate totals
+      var allThree = phases[1].active && phases[2].active && phases[3].active;
+      var totalUsd, totalGtq, marketUsd, marketGtq;
+
+      if (allThree) {
+        totalUsd = bundleUsd;
+        totalGtq = bundleGtq;
+        marketUsd = bundleMarketUsd;
+        marketGtq = bundleMarketGtq;
+      } else {
+        totalUsd = 0;
+        totalGtq = 0;
+        marketUsd = 0;
+        marketGtq = 0;
+        for (var i = 1; i <= 3; i++) {
+          if (phases[i].active) {
+            totalUsd += phases[i].usd;
+            totalGtq += phases[i].gtq;
+            marketUsd += phases[i].marketUsd;
+            marketGtq += phases[i].marketGtq;
+          }
+        }
+      }
+
+      var isUsd = currentCurrency === 'usd';
+      var symbol = isUsd ? '$' : 'Q';
+      var total = isUsd ? totalUsd : totalGtq;
+      var market = isUsd ? marketUsd : marketGtq;
+      var savingsPct = Math.round((1 - total / market) * 100);
+
+      // Update total bar
+      var amountEl = document.getElementById('total-amount');
+      amountEl.textContent = symbol + fmt(total);
+      amountEl.classList.remove('pulse');
+      void amountEl.offsetWidth; // trigger reflow
+      amountEl.classList.add('pulse');
+
+      document.getElementById('total-market').textContent = symbol + fmt(market);
+      document.getElementById('total-savings').textContent = '-' + savingsPct + '%';
+
+      // Update phases list text
+      var activeList = [];
+      var activeListEn = [];
+      for (var i = 1; i <= 3; i++) {
+        if (phases[i].active) {
+          activeList.push('Fase ' + i);
+          activeListEn.push('Phase ' + i);
+        }
+      }
+      var phasesEl = document.getElementById('total-phases');
+      var phaseTextEs = activeList.join(' + ');
+      var phaseTextEn = activeListEn.join(' + ');
+      phasesEl.setAttribute('data-es', phaseTextEs);
+      phasesEl.setAttribute('data-en', phaseTextEn);
+      phasesEl.textContent = currentLang === 'es' ? phaseTextEs : phaseTextEn;
+
+      // Update payment plans
+      var pay1 = Math.round(total * 0.95);
+      var pay2 = Math.round(total / 2);
+      var pay3 = Math.round(total / 3);
+
+      document.querySelector('.pay-1-amount').textContent = fmt(pay1);
+      document.querySelector('.pay-2-amount').textContent = fmt(pay2);
+      document.querySelector('.pay-3-amount').textContent = fmt(pay3);
+
+      // Update market context price
+      var ctxEl = document.getElementById('market-context-price');
+      if (ctxEl) {
+        ctxEl.textContent = symbol + fmt(total);
+      }
+
+      // Update phase card prices for currency
+      for (var i = 1; i <= 3; i++) {
+        var priceEl = document.getElementById('price-' + i);
+        var p = isUsd ? phases[i].usd : phases[i].gtq;
+        priceEl.textContent = symbol + fmt(p);
+      }
+
+      // Update price symbols in payment plans
+      document.querySelectorAll('.plan-grid .price-symbol').forEach(function(el) {
+        el.textContent = symbol;
+      });
+    }
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll('[data-es]').forEach(function(el) {
+        var val = el.getAttribute('data-' + lang);
+        if (val !== null) el.textContent = val;
+      });
+
+      document.querySelectorAll('[data-rec-es]').forEach(function(el) {
+        el.setAttribute('data-rec', el.getAttribute('data-rec-' + lang));
+      });
+
+      setCurrency(currentCurrency);
+    }
+
+    function setCurrency(currency) {
+      currentCurrency = currency;
+      document.getElementById('btn-usd').classList.toggle('active', currency === 'usd');
+      document.getElementById('btn-gtq').classList.toggle('active', currency === 'gtq');
+
+      // Update static price cells (customizations, etc.)
+      document.querySelectorAll('.price-cell').forEach(function(el) {
+        var val = el.getAttribute('data-' + currency);
+        if (val !== null) el.textContent = val;
+      });
+
+      // Update retainer amounts
+      document.querySelectorAll('.retainer-amount').forEach(function(el) {
+        var val = el.getAttribute('data-' + currency);
+        if (val !== null) el.textContent = val;
+      });
+
+      // Update retainer price symbols
+      document.querySelectorAll('.retainer-price .price-symbol').forEach(function(el) {
+        el.textContent = currency === 'usd' ? '$' : 'Q';
+      });
+
+      // Recalculate dynamic elements
+      updateUI();
+    }
+
+  </script>
+
+</body>
+</html>
