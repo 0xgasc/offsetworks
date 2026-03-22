@@ -914,6 +914,14 @@
       color: var(--bg);
     }
 
+    .demo-iframe {
+      display: none;
+      width: 100%;
+      height: 600px;
+      border: none;
+      border-radius: 0 0 8px 8px;
+    }
+
     .demo-prompt .label {
       font-family: var(--font-mono);
       font-size: 11px;
@@ -1431,12 +1439,13 @@
       <div class="section-label" data-es="Demostracion" data-en="Demo">Demostracion</div>
       <h2 class="section-title" data-es="Ver en Accion" data-en="See It in Action">Ver en Accion</h2>
 
-      <a href="https://gtstream-o43z9e81z-gs-projects-1311714b.vercel.app/demo" target="_blank" rel="noopener" class="demo-box" style="display:block;text-decoration:none;color:inherit;">
-        <div class="demo-prompt">
+      <div class="demo-box" id="demo-box" onclick="loadDemo()">
+        <div class="demo-prompt" id="demo-prompt">
           <div class="play">></div>
           <div class="label" data-es="Click para ver demo en vivo" data-en="Click to see live demo">Click para ver demo en vivo</div>
         </div>
-      </a>
+        <iframe class="demo-iframe" id="demo-iframe" loading="lazy"></iframe>
+      </div>
     </div>
 
     <!-- CTA -->
@@ -1461,6 +1470,22 @@
   <script>
     let currentLang = 'es';
     let currentCurrency = 'gtq';
+
+    function loadDemo() {
+      var iframe = document.getElementById('demo-iframe');
+      var prompt = document.getElementById('demo-prompt');
+      iframe.src = 'https://gtstream-o43z9e81z-gs-projects-1311714b.vercel.app/demo';
+      iframe.style.display = 'block';
+      prompt.style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.feature').forEach(function(el) {
+        el.addEventListener('click', function() {
+          el.classList.toggle('open');
+        });
+      });
+    });
 
     // Feature card expand/collapse
     document.querySelectorAll('.feature').forEach(function(el) {
