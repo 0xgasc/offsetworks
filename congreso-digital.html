@@ -468,6 +468,52 @@
     .phase-card.p2 .phase-price { color: var(--phase2); }
     .phase-card.p3 .phase-price { color: var(--phase3); }
 
+    .phase-add-hint {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-top: 8px;
+      display: inline-block;
+      animation: hint-pulse 2s ease-in-out infinite;
+    }
+
+    .phase-card.p2 .phase-add-hint {
+      color: var(--phase2);
+      background: rgba(129, 140, 248, 0.08);
+      border: 1px solid rgba(129, 140, 248, 0.2);
+    }
+
+    .phase-card.p3 .phase-add-hint {
+      color: var(--phase3);
+      background: rgba(255, 107, 138, 0.08);
+      border: 1px solid rgba(255, 107, 138, 0.2);
+    }
+
+    .phase-card.active .phase-add-hint {
+      display: none;
+    }
+
+    @keyframes hint-pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    .phase-card:not(.active):hover {
+      transform: translateY(-2px);
+    }
+
+    .phase-card:not(.active) .phase-header {
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .phase-card:not(.active):hover .phase-header {
+      opacity: 1;
+    }
+
     .phase-timeline {
       font-family: var(--font-mono);
       font-size: 11px;
@@ -1219,6 +1265,7 @@
 
         <!-- Phase 2 -->
         <div class="phase-card p2" id="phase-2" onclick="togglePhase(2)">
+          <div class="phase-add-hint" data-es="+ Click para agregar al total" data-en="+ Click to add to total">+ Click para agregar al total</div>
           <div class="phase-header">
             <div class="phase-header-left">
               <span class="phase-check" id="check-2">---</span>
@@ -1242,6 +1289,7 @@
 
         <!-- Phase 3 -->
         <div class="phase-card p3" id="phase-3" onclick="togglePhase(3)">
+          <div class="phase-add-hint" data-es="+ Click para agregar al total" data-en="+ Click to add to total">+ Click para agregar al total</div>
           <div class="phase-header">
             <div class="phase-header-left">
               <span class="phase-check" id="check-3">---</span>
