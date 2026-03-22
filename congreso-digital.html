@@ -1111,10 +1111,32 @@
       .plan-grid, .retainer-grid { grid-template-columns: 1fr; }
       .prop-header { flex-direction: column; gap: 12px; align-items: flex-start; }
       .prop-footer { flex-direction: column; align-items: flex-start; }
-      .total-bar { flex-direction: column; text-align: center; }
-      .total-bar-right { flex-direction: column; }
       .phase-header { flex-direction: column; align-items: flex-start; gap: 8px; }
       .phase-header-right { text-align: left; }
+
+      /* Toggles: small, subtle, bottom corner */
+      .toggles {
+        top: auto;
+        bottom: 12px;
+        right: 12px;
+        opacity: 0.5;
+        transition: opacity 0.2s;
+      }
+      .toggles:active, .toggles:focus-within {
+        opacity: 1;
+      }
+      .toggle-btn {
+        font-size: 8px;
+        padding: 3px 7px;
+      }
+
+      /* Total bar: not sticky on mobile */
+      .total-bar {
+        position: static;
+        flex-direction: column;
+        text-align: center;
+      }
+      .total-bar-right { flex-direction: column; }
     }
   </style>
 </head>
@@ -1722,7 +1744,7 @@
       var frame = 0;
 
       function resize() {
-        cols = Math.floor(window.innerWidth / 7);
+        cols = Math.ceil(window.innerWidth / 6) + 2;
         rows = Math.floor(window.innerHeight / 12);
       }
 
