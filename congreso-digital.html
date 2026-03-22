@@ -7,6 +7,36 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    /* ---- ASCII BG ---- */
+    #ascii-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      line-height: 1.2;
+      color: rgba(0, 255, 136, 0.07);
+      white-space: pre;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 600px) {
+      #ascii-bg { display: none; }
+    }
+
+    @media print {
+      #ascii-bg { display: none; }
+    }
+
     :root {
       --bg: #121212;
       --bg-card: #1c1c1c;
@@ -1086,6 +1116,9 @@
 </head>
 <body>
 
+  <!-- ASCII Background -->
+  <div id="ascii-bg"></div>
+
   <!-- Toggles -->
   <div class="toggles">
     <div class="toggle-row">
@@ -1111,7 +1144,6 @@
 
     <!-- Hero -->
     <div class="hero">
-      <div class="hero-badge" data-es="Plataforma de Congreso Medico" data-en="Medical Congress Platform">Plataforma de Congreso Medico</div>
       <h1>Congreso <span class="accent">Digital</span></h1>
       <p class="subtitle" data-es="Plataforma digital integral para su congreso medico — landing page, programa interactivo y transmision en vivo para 15,000+ usuarios simultaneos." data-en="Full-stack digital platform for your medical congress — landing page, interactive program and live streaming for 15,000+ concurrent users.">Plataforma digital integral para su congreso medico — landing page, programa interactivo y transmision en vivo para 15,000+ usuarios simultaneos.</p>
     </div>
@@ -1685,6 +1717,46 @@
       // Recalculate dynamic elements
       updateUI();
     }
+
+    // ---- ASCII Background Animation ----
+    (function() {
+      var el = document.getElementById('ascii-bg');
+      if (!el) return;
+
+      var chars = '.:+*#@%&=~^|/\\<>[]{}()!?;,.-_';
+      var cols, rows;
+      var frame = 0;
+
+      function resize() {
+        cols = Math.floor(window.innerWidth / 7);
+        rows = Math.floor(window.innerHeight / 12);
+      }
+
+      function render() {
+        frame++;
+        if (frame % 4 !== 0) { requestAnimationFrame(render); return; }
+
+        var t = frame * 0.02;
+        var out = '';
+
+        for (var y = 0; y < rows; y++) {
+          for (var x = 0; x < cols; x++) {
+            var v = Math.sin(x * 0.04 + t) * Math.cos(y * 0.06 + t * 0.7)
+                  + Math.sin((x + y) * 0.03 + t * 0.5) * 0.5;
+            var idx = Math.floor((v + 1.5) * 0.5 * (chars.length - 1)) % chars.length;
+            out += chars[Math.abs(idx)];
+          }
+          out += '\n';
+        }
+
+        el.textContent = out;
+        requestAnimationFrame(render);
+      }
+
+      resize();
+      window.addEventListener('resize', resize);
+      requestAnimationFrame(render);
+    })();
 
   </script>
 
