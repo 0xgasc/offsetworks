@@ -1313,7 +1313,7 @@
               <span class="phase-badge-required" data-es="Requerido" data-en="Required">Requerido</span>
             </div>
             <div class="phase-header-right">
-              <div class="phase-price" id="price-1" data-usd="$1,500" data-gtq="Q11,550">Q11,550</div>
+              <div class="phase-price" id="price-1" data-usd="$1,500" data-gtq="Q12,000">Q12,000</div>
               <div class="phase-timeline" data-es="1 semana o menos" data-en="1 week or less">1 semana o menos</div>
             </div>
           </div>
@@ -1340,7 +1340,7 @@
               <span class="phase-name" data-es="Fase 2 — Perfiles & Directorio" data-en="Phase 2 — Profiles & Directory">Fase 2 — Perfiles & Directorio</span>
             </div>
             <div class="phase-header-right">
-              <div class="phase-price" id="price-2" data-usd="$1,000" data-gtq="Q7,700">Q7,700</div>
+              <div class="phase-price" id="price-2" data-usd="$1,000" data-gtq="Q8,000">Q8,000</div>
               <div class="phase-timeline" data-es="+1 semana" data-en="+1 week">+1 semana</div>
             </div>
           </div>
@@ -1364,7 +1364,7 @@
               <span class="phase-name" data-es="Fase 3 — Networking & Reuniones" data-en="Phase 3 — Networking & Meetings">Fase 3 — Networking & Reuniones</span>
             </div>
             <div class="phase-header-right">
-              <div class="phase-price" id="price-3" data-usd="$1,000" data-gtq="Q7,700">Q7,700</div>
+              <div class="phase-price" id="price-3" data-usd="$1,000" data-gtq="Q8,000">Q8,000</div>
               <div class="phase-timeline" data-es="+1-2 semanas" data-en="+1-2 weeks">+1-2 semanas</div>
             </div>
           </div>
@@ -1387,8 +1387,8 @@
           <div class="total-bar-phases" id="total-phases" data-es="Fase 1" data-en="Phase 1">Fase 1</div>
         </div>
         <div class="total-bar-right">
-          <span class="total-bar-market strike" id="total-market">Q30,800</span>
-          <span class="total-bar-amount" id="total-amount">Q11,550</span>
+          <span class="total-bar-market strike" id="total-market">Q30,000</span>
+          <span class="total-bar-amount" id="total-amount">Q12,000</span>
           <span class="total-bar-savings" id="total-savings">-47%</span>
         </div>
       </div>
@@ -1404,17 +1404,17 @@
       <div class="plan-grid">
         <div class="plan-card pay-1">
           <div class="plan-name" data-es="1 Pago" data-en="1 Payment">1 Pago</div>
-          <div class="plan-price"><span class="currency price-symbol">Q</span><span class="plan-amount pay-1-amount">10,973</span></div>
+          <div class="plan-price"><span class="currency price-symbol">Q</span><span class="plan-amount pay-1-amount">11,400</span></div>
           <div class="plan-detail" data-es="5% descuento por pago unico" data-en="5% discount for single payment">5% descuento por pago unico</div>
         </div>
         <div class="plan-card pay-2">
           <div class="plan-name" data-es="2 Pagos" data-en="2 Payments">2 Pagos</div>
-          <div class="plan-price"><span class="currency price-symbol">Q</span><span class="plan-amount pay-2-amount">5,775</span></div>
+          <div class="plan-price"><span class="currency price-symbol">Q</span><span class="plan-amount pay-2-amount">6,000</span></div>
           <div class="plan-detail" data-es="50% inicio / 50% al entregar" data-en="50% upfront / 50% on delivery">50% inicio / 50% al entregar</div>
         </div>
         <div class="plan-card pay-3">
           <div class="plan-name" data-es="3 Pagos" data-en="3 Payments">3 Pagos</div>
-          <div class="plan-price"><span class="currency price-symbol">Q</span><span class="plan-amount pay-3-amount">3,850</span></div>
+          <div class="plan-price"><span class="currency price-symbol">Q</span><span class="plan-amount pay-3-amount">4,000</span></div>
           <div class="plan-detail" data-es="Mensual por 3 meses" data-en="Monthly for 3 months">Mensual por 3 meses</div>
         </div>
       </div>
@@ -1553,15 +1553,15 @@
 
     // Phase data
     var phases = {
-      1: { usd: 1500, gtq: 11550, marketUsd: 4000, marketGtq: 30800, active: true },
-      2: { usd: 1000, gtq: 7700, marketUsd: 3000, marketGtq: 23100, active: false },
-      3: { usd: 1000, gtq: 7700, marketUsd: 3500, marketGtq: 26950, active: false }
+      1: { usd: 1500, gtq: 12000, marketUsd: 4000, marketGtq: 30000, active: true },
+      2: { usd: 1000, gtq: 8000, marketUsd: 3000, marketGtq: 23000, active: false },
+      3: { usd: 1000, gtq: 8000, marketUsd: 3500, marketGtq: 27000, active: false }
     };
 
     var bundleUsd = 3000;
-    var bundleGtq = 23100;
+    var bundleGtq = 24000;
     var bundleMarketUsd = 10500;
-    var bundleMarketGtq = 80850;
+    var bundleMarketGtq = 80000;
 
     function fmt(n) {
       return n.toLocaleString('en-US');
@@ -1649,10 +1649,11 @@
       phasesEl.setAttribute('data-en', phaseTextEn);
       phasesEl.textContent = currentLang === 'es' ? phaseTextEs : phaseTextEn;
 
-      // Update payment plans
-      var pay1 = Math.round(total * 0.95);
-      var pay2 = Math.round(total / 2);
-      var pay3 = Math.round(total / 3);
+      // Update payment plans (round to nearest 50)
+      function r50(n) { return Math.round(n / 50) * 50; }
+      var pay1 = r50(total * 0.95);
+      var pay2 = r50(total / 2);
+      var pay3 = r50(total / 3);
 
       document.querySelector('.pay-1-amount').textContent = fmt(pay1);
       document.querySelector('.pay-2-amount').textContent = fmt(pay2);
