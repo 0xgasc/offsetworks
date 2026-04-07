@@ -3,814 +3,800 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>King of Hearts</title>
+  <title>King of Hearts — Project Quote | Offset Works</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0a0a0a;
-      --tv-bezel: #1a1a1a;
-      --tv-bezel-light: #2a2a2a;
-      --tv-body: #151515;
-      --screen-bg: #0d0d0d;
-      --accent: #ff4400;
-      --accent-2: #ff8800;
-      --accent-glow: rgba(255, 68, 0, 0.3);
-      --text: #fafafa;
-      --text-dim: #666;
-      --text-muted: #333;
+      --bg-primary: #050505;
+      --bg-secondary: #0a0a0a;
+      --bg-card: #111111;
+      --text-primary: #fafafa;
+      --text-secondary: #999999;
+      --text-muted: #555555;
+      --accent: #00ff88;
+      --accent-dim: #00cc6a;
+      --border: #1a1a1a;
+      --border-accent: rgba(0, 255, 136, 0.2);
+    }
+
+    @media print {
+      :root {
+        --bg-primary: #ffffff; --bg-secondary: #fafafa; --bg-card: #f7f7f7;
+        --text-primary: #111111; --text-secondary: #555555; --text-muted: #888888;
+        --accent: #00875a; --accent-dim: #006644; --border: #e0e0e0;
+        --border-accent: rgba(0, 135, 90, 0.2);
+      }
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 20px 30px; max-width: 100%; font-size: 11.5px; }
+      .no-print, .lang-toggle, #ascii-bg { display: none !important; }
+      .page-break { page-break-before: always; }
+      a { color: inherit; text-decoration: none; }
+      .section { opacity: 1 !important; transform: none !important; }
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Space Mono', monospace;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* ─── NAV ─── */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 32px;
-      background: rgba(10, 10, 10, 0.9);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--tv-bezel);
-    }
-
-    .nav-brand {
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 60px 40px;
+      line-height: 1.65;
       font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      transition: color 0.5s;
+      position: relative;
     }
 
-    .nav-controls {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .nav-btn {
+    /* ─── ASCII BACKGROUND ─── */
+    #ascii-bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
       font-family: 'Space Mono', monospace;
       font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 6px 14px;
-      background: transparent;
-      border: 1px solid var(--tv-bezel-light);
-      color: var(--text-dim);
-      cursor: pointer;
-      transition: all 0.3s;
-      border-radius: 2px;
-    }
-
-    .nav-btn:hover, .nav-btn.active {
-      border-color: var(--accent);
+      line-height: 1.15;
       color: var(--accent);
-      box-shadow: 0 0 12px var(--accent-glow);
+      opacity: 0.04;
+      white-space: pre;
+      overflow: hidden;
+      pointer-events: none;
     }
 
-    .volume-toggle {
+    .content-wrapper { position: relative; z-index: 1; }
+
+    .mono { font-family: 'Space Mono', 'SF Mono', monospace; }
+
+    .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .accent { color: var(--accent); }
+
+    /* ─── LANG TOGGLE ─── */
+    .lang-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 100;
       display: flex;
       gap: 0;
     }
 
-    .volume-toggle .nav-btn { border-radius: 0; }
-    .volume-toggle .nav-btn:first-child { border-radius: 2px 0 0 2px; }
-    .volume-toggle .nav-btn:last-child { border-radius: 0 2px 2px 0; border-left: none; }
-
-    /* ─── TV COMPONENT ─── */
-    .tv {
-      position: relative;
-      cursor: pointer;
-      transition: transform 0.3s ease, opacity 0.4s;
-    }
-
-    .tv:hover {
-      transform: scale(1.03);
-      z-index: 10;
-    }
-
-    .tv-frame {
-      position: relative;
-      background: var(--tv-body);
-      border-radius: 16px;
-      padding: 16px 16px 40px 16px;
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.05),
-        0 4px 20px rgba(0,0,0,0.6),
-        0 0 0 1px rgba(255,255,255,0.03);
-      background-image:
-        linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.2) 100%),
-        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.005) 2px, rgba(255,255,255,0.005) 4px);
-    }
-
-    .tv-frame.model-round { border-radius: 24px; }
-    .tv-frame.model-boxy { border-radius: 6px; }
-    .tv-frame.model-wide { border-radius: 12px; padding-bottom: 48px; }
-
-    .tv-screen-wrapper {
-      position: relative;
-      overflow: hidden;
-      border-radius: 8px;
-      background: var(--screen-bg);
-      aspect-ratio: 4/3;
-    }
-
-    .tv-frame.model-round .tv-screen-wrapper { border-radius: 50% / 40%; }
-    .tv-frame.model-boxy .tv-screen-wrapper { border-radius: 2px; }
-
-    .tv-screen {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    /* Scan lines overlay */
-    .tv-screen::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0, 0, 0, 0.15) 2px,
-        rgba(0, 0, 0, 0.15) 4px
-      );
-      z-index: 3;
-      pointer-events: none;
-    }
-
-    /* Vignette */
-    .tv-screen::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.5) 100%);
-      z-index: 4;
-      pointer-events: none;
-    }
-
-    /* Inner shadow for CRT curve */
-    .tv-screen-wrapper::after {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      border-radius: inherit;
-      box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
-      z-index: 5;
-      pointer-events: none;
-    }
-
-    .tv:hover .tv-screen-wrapper {
-      box-shadow: 0 0 20px var(--accent-glow), 0 0 40px var(--accent-glow);
-      transition: box-shadow 0.3s;
-    }
-
-    /* ─── SCREEN CONTENT ─── */
-    .tv-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 12px;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .tv-content .label {
-      font-size: 8px;
-      letter-spacing: 0.2em;
+    .lang-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--text-dim);
+      padding: 6px 12px;
+      background: rgba(10,10,10,0.9);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .lang-btn:first-child { border-radius: 3px 0 0 3px; }
+    .lang-btn:last-child { border-radius: 0 3px 3px 0; border-left: none; }
+    .lang-btn.active { border-color: var(--accent); color: var(--accent); }
+
+    /* ─── HEADER ─── */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--accent);
+      margin-bottom: 40px;
+    }
+
+    .header-left h1 {
+      font-family: 'Space Mono', monospace;
+      font-size: 22px; font-weight: 700;
+      letter-spacing: 0.25em; text-transform: uppercase;
       margin-bottom: 4px;
     }
 
-    .tv-content .title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--accent);
-      text-shadow: 0 0 20px var(--accent-glow);
-      letter-spacing: 0.05em;
-      white-space: pre-line;
-      line-height: 1.2;
-      transition: color 0.5s, text-shadow 0.5s;
-    }
+    .header-left .contact-info { font-size: 12px; color: var(--text-secondary); line-height: 1.8; }
 
-    .tv-content .subtitle {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 10px;
-      color: var(--text-dim);
-      margin-top: 6px;
-    }
+    .header-right { text-align: right; }
 
-    /* ASCII animation background */
-    .tv-canvas {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
+    .header-right .doc-type {
       font-family: 'Space Mono', monospace;
-      font-size: 8px;
-      line-height: 1.1;
-      color: var(--accent);
-      opacity: 0.2;
-      white-space: pre;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-      transition: color 0.5s;
+      font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); border: 1px solid var(--accent);
+      padding: 4px 14px; display: inline-block; margin-bottom: 12px;
     }
 
-    /* ─── TV BOTTOM PANEL ─── */
-    .tv-panel {
-      position: absolute;
-      bottom: 8px;
-      left: 20px;
-      right: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .header-right .doc-meta { font-size: 12px; color: var(--text-secondary); line-height: 1.8; }
+
+    /* ─── CLIENT ─── */
+    .client-block { margin-bottom: 48px; }
+    .client-block .client-name { font-size: 16px; font-weight: 500; margin-bottom: 2px; }
+    .client-block .client-sub { font-size: 13px; color: var(--text-secondary); }
+
+    /* ─── PROJECT SUMMARY ─── */
+    .project-summary { margin-bottom: 48px; }
+    .project-title { font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px; }
+    .project-subtitle { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--accent); margin-bottom: 20px; }
+    .project-description { font-size: 14px; color: var(--text-secondary); line-height: 1.75; max-width: 680px; }
+
+    /* ─── SECTIONS ─── */
+    .section { margin-bottom: 48px; }
+
+    .section-heading {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 24px; padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
     }
 
-    .tv-knob {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #444, #1a1a1a);
-      border: 1px solid #333;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-    }
-
-    .tv-knob.power {
-      background: radial-gradient(circle at 35% 35%, var(--accent), #600);
-      box-shadow: 0 0 6px var(--accent-glow);
-      transition: background 0.5s, box-shadow 0.5s;
-    }
-
-    .tv-speaker {
-      display: flex;
-      gap: 2px;
-    }
-
-    .tv-speaker span {
-      width: 2px;
-      height: 12px;
-      background: #222;
-      border-radius: 1px;
-    }
-
-    .tv-brand-label {
-      font-size: 7px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #333;
-    }
-
-    /* ─── STATIC OVERLAY ─── */
-    @keyframes staticNoise {
-      0% { background-position: 0 0; }
-      10% { background-position: -5% -10%; }
-      20% { background-position: -15% 5%; }
-      30% { background-position: 7% -25%; }
-      40% { background-position: -5% 25%; }
-      50% { background-position: -15% 10%; }
-      60% { background-position: 15% 0%; }
-      70% { background-position: 0 15%; }
-      80% { background-position: 3% 25%; }
-      90% { background-position: -10% 10%; }
-      100% { background-position: 0 0; }
-    }
-
-    .tv-static-overlay {
-      position: absolute;
-      inset: 0;
-      z-index: 6;
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
       opacity: 0;
-      pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-      background-size: 150%;
-      animation: staticNoise 0.3s steps(5) infinite;
-      mix-blend-mode: overlay;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
-    .tv.switching .tv-static-overlay {
+    .reveal.visible {
       opacity: 1;
-      transition: opacity 0.05s;
+      transform: translateY(0);
     }
 
-    /* ─── POWER ON ANIMATION ─── */
-    @keyframes powerOn {
-      0% { transform: scaleY(0.005) scaleX(0.3); filter: brightness(10); }
-      30% { transform: scaleY(0.005) scaleX(1); filter: brightness(5); }
-      50% { transform: scaleY(0.5) scaleX(1); filter: brightness(2); }
-      100% { transform: scaleY(1) scaleX(1); filter: brightness(1); }
+    /* ─── DROPDOWNS ─── */
+    .dropdown {
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: border-color 0.3s;
     }
 
-    .tv.powering-on .tv-screen {
-      animation: powerOn 0.5s ease-out forwards;
-    }
+    .dropdown:hover { border-color: var(--border-accent); }
 
-    /* ─── FLICKER ─── */
-    @keyframes flicker {
-      0%, 100% { opacity: 1; }
-      92% { opacity: 1; }
-      93% { opacity: 0.85; }
-      94% { opacity: 1; }
-      96% { opacity: 0.92; }
-      97% { opacity: 1; }
-    }
-
-    .tv.powered .tv-screen {
-      animation: flicker 5s infinite;
-    }
-
-    /* ─── STAGGER ─── */
-    .tv { opacity: 0; }
-    .tv.powered { opacity: 1; }
-
-    /* ─── GRID VIEW ─── */
-    .grid-view {
-      padding: 80px 24px 40px;
-      min-height: 100vh;
+    .dropdown-header {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-    }
-
-    .tv-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      max-width: 900px;
-      width: 100%;
-    }
-
-    .tv-grid .tv.center-tv .tv-content .title {
-      font-size: 22px;
-      letter-spacing: 0.15em;
-    }
-
-    /* ─── SINGLE TV VIEW ─── */
-    .single-view {
-      padding: 80px 24px 40px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-    }
-
-    .single-tv-container {
-      max-width: 600px;
-      width: 100%;
-    }
-
-    .single-tv-container .tv-content .title { font-size: 28px; }
-    .single-tv-container .tv-content .subtitle { font-size: 13px; }
-    .single-tv-container .tv-canvas { font-size: 10px; }
-
-    .channel-controls {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .channel-btn {
-      font-family: 'Space Mono', monospace;
-      font-size: 24px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: var(--tv-body);
-      border: 2px solid var(--tv-bezel-light);
-      color: var(--text-dim);
+      padding: 16px 20px;
       cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      background: var(--bg-card);
+      transition: background 0.3s;
+      user-select: none;
     }
 
-    .channel-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      box-shadow: 0 0 16px var(--accent-glow);
-    }
+    .dropdown-header:hover { background: #161616; }
 
-    .channel-btn:active { transform: scale(0.92); }
-
-    .channel-info {
-      text-align: center;
-      min-width: 140px;
-    }
-
-    .channel-info .ch-number {
-      font-size: 12px;
-      letter-spacing: 0.2em;
-      color: var(--accent);
-      transition: color 0.5s;
-    }
-
-    .channel-info .ch-label {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 11px;
-      color: var(--text-dim);
-      margin-top: 4px;
-    }
-
-    .buy-btn {
+    .dropdown-title {
       font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 12px 32px;
-      background: var(--accent);
-      color: var(--bg);
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s;
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
       font-weight: 700;
     }
 
-    .buy-btn:hover {
-      box-shadow: 0 0 24px var(--accent-glow);
-      transform: translateY(-2px);
+    .dropdown-count {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; color: var(--text-muted);
     }
 
-    .buy-btn.hidden { display: none; }
+    .dropdown-arrow {
+      font-size: 12px; color: var(--accent);
+      transition: transform 0.3s;
+    }
 
-    /* ─── VIEWS ─── */
-    .view { display: none; }
-    .view.active { display: flex; }
+    .dropdown.open .dropdown-arrow { transform: rotate(180deg); }
+
+    .dropdown-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .dropdown.open .dropdown-body { max-height: 600px; }
+
+    .dropdown-body-inner { padding: 0 20px 20px; }
+
+    /* ─── FEATURE GRID ─── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 600px) { .feature-grid { grid-template-columns: 1fr; } }
+
+    .feature-item {
+      padding: 12px 14px;
+      background: var(--bg-secondary);
+      border-radius: 3px;
+    }
+
+    .feature-item .feature-name { font-size: 12px; font-weight: 600; margin-bottom: 3px; }
+    .feature-item .feature-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.5; }
+
+    /* ─── TECH STACK ─── */
+    .tech-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    @media (max-width: 600px) { .tech-grid { grid-template-columns: 1fr 1fr; } }
+    .tech-col h4 { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .tech-col ul { list-style: none; font-size: 12px; color: var(--text-secondary); line-height: 1.8; }
+
+    /* ─── CALLOUT ─── */
+    .callout {
+      border: 1px solid var(--border-accent); border-left: 3px solid var(--accent);
+      padding: 24px 28px; margin: 32px 0 48px 0;
+      background: var(--bg-card); border-radius: 0 4px 4px 0;
+    }
+    .callout h3 { font-size: 15px; font-weight: 600; margin-bottom: 12px; }
+    .callout p { font-size: 13px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 12px; }
+    .callout p:last-child { margin-bottom: 0; }
+    .callout .compare { font-family: 'Space Mono', monospace; font-size: 11.5px; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); }
+    .callout .compare .line { display: flex; justify-content: space-between; padding: 2px 0; }
+    .callout .compare .line.highlight { color: var(--accent); font-weight: 700; }
+
+    /* ─── PRICING TABLE ─── */
+    .pricing-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    .pricing-table td { padding: 14px 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .pricing-table .item-name { font-size: 13.5px; font-weight: 500; }
+    .pricing-table .item-desc { font-size: 11.5px; color: var(--text-muted); padding-top: 3px; line-height: 1.5; }
+    .pricing-table .price { text-align: right; font-family: 'Space Mono', monospace; font-size: 13px; white-space: nowrap; color: var(--text-secondary); }
+    .pricing-table .subtotal-row td { padding-top: 20px; border-bottom: none; }
+    .pricing-table .subtotal-row .item-name { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); }
+    .pricing-table .subtotal-row .price { color: var(--text-primary); font-weight: 700; }
+    .pricing-table .discount-row td { border-bottom: none; padding-top: 6px; }
+    .pricing-table .discount-row .item-name { color: var(--accent); font-weight: 500; }
+    .pricing-table .discount-row .price { color: var(--accent); font-weight: 700; }
+    .pricing-table .total-row td { border-top: 2px solid var(--accent); border-bottom: none; padding-top: 20px; padding-bottom: 4px; }
+    .pricing-table .total-row .item-name { font-family: 'Space Mono', monospace; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
+    .pricing-table .total-row .price { font-size: 22px; font-weight: 700; color: var(--accent); }
+    .pricing-note { font-size: 11.5px; color: var(--text-muted); font-style: italic; margin-top: 16px; line-height: 1.6; }
+
+    /* ─── CHECKLIST ─── */
+    .checklist { list-style: none; padding: 0; }
+    .checklist li { font-size: 13.5px; padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; align-items: baseline; gap: 10px; }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist .check { color: var(--accent); font-size: 14px; flex-shrink: 0; }
+    .checklist .note { font-size: 11.5px; color: var(--text-muted); margin-left: 4px; }
+
+    /* ─── RETAINER CARDS ─── */
+    .retainer-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    @media (max-width: 600px) { .retainer-grid { grid-template-columns: 1fr; } }
+
+    .retainer-card {
+      padding: 20px; background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: 4px;
+      position: relative;
+    }
+
+    .retainer-card.recommended { border-color: var(--accent); }
+
+    .retainer-card .badge {
+      position: absolute; top: -8px; right: 12px;
+      font-family: 'Space Mono', monospace; font-size: 9px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      background: var(--accent); color: var(--bg-primary);
+      padding: 2px 8px; border-radius: 2px;
+    }
+
+    .retainer-card .card-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .retainer-card .card-price { font-family: 'Space Mono', monospace; font-size: 18px; font-weight: 700; color: var(--accent); margin-bottom: 12px; }
+    .retainer-card .card-price span { font-size: 11px; color: var(--text-muted); font-weight: 400; }
+    .retainer-card ul { list-style: none; font-size: 11.5px; color: var(--text-secondary); line-height: 1.8; }
+
+    /* ─── TERMS ─── */
+    .terms-block { margin-bottom: 32px; }
+    .terms-block h3 { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+    .terms-block p { font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+    .terms-block .rate { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--text-primary); font-weight: 600; }
+
+    /* ─── PAYMENT ─── */
+    .payment-total { font-family: 'Space Mono', monospace; font-size: 18px; font-weight: 700; color: var(--accent); margin-bottom: 16px; }
+    .payment-methods { font-size: 13px; color: var(--text-secondary); line-height: 1.8; }
+    .payment-methods ul { list-style: none; padding-left: 16px; margin: 8px 0; }
+    .payment-methods ul li::before { content: "\2014"; margin-right: 8px; color: var(--text-muted); }
 
     /* ─── FOOTER ─── */
-    .footer {
-      text-align: center;
-      padding: 24px;
-      font-size: 9px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-muted);
+    .footer { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--border); text-align: center; }
+    .footer .footer-brand { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+    .footer .footer-note { font-size: 11px; color: var(--text-muted); }
+
+    .divider { height: 1px; background: var(--border); margin: 48px 0; }
+
+    /* ─── DEMO LINK ─── */
+    .demo-banner {
+      display: block; text-align: center; padding: 14px 24px;
+      background: var(--bg-card); border: 1px solid var(--border-accent);
+      border-radius: 4px; margin-bottom: 48px;
+      text-decoration: none; transition: all 0.3s;
     }
+    .demo-banner:hover { border-color: var(--accent); box-shadow: 0 0 20px var(--border-accent); }
+    .demo-banner .demo-label { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); }
+    .demo-banner .demo-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
 
-    .footer a { color: var(--text-dim); text-decoration: none; }
-    .footer a:hover { color: var(--accent); }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 768px) {
-      .tv-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
-      }
-      .tv-grid .tv:nth-child(5) {
-        grid-column: 1 / -1;
-        max-width: 60%;
-        justify-self: center;
-      }
-      .tv-content .title { font-size: 13px; }
-      .nav { padding: 12px 16px; }
-      .nav-brand { font-size: 11px; letter-spacing: 0.12em; }
-      .nav-btn { font-size: 8px; padding: 5px 10px; }
-    }
-
-    @media (max-width: 480px) {
-      .tv-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-      }
-      .grid-view { padding: 70px 12px 24px; }
-      .tv-frame { padding: 10px 10px 30px; border-radius: 10px; }
-      .tv-content .title { font-size: 11px; }
-      .tv-content .label { font-size: 6px; }
-      .tv-content .subtitle { font-size: 8px; }
-      .tv-canvas { font-size: 5px; }
-      .single-tv-container .tv-content .title { font-size: 20px; }
-      .channel-btn { width: 40px; height: 40px; font-size: 18px; }
+    @media (max-width: 600px) {
+      body { padding: 40px 20px; }
+      .header { flex-direction: column; gap: 16px; }
+      .header-right { text-align: left; }
+      .project-title { font-size: 28px; }
+      .retainer-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ─── NAV ─── -->
-  <nav class="nav">
-    <div class="nav-brand">King of Hearts</div>
-    <div class="nav-controls">
-      <div class="volume-toggle">
-        <button class="nav-btn active" onclick="setVolume(1)">Vol 1</button>
-        <button class="nav-btn" onclick="setVolume(2)">Vol 2</button>
-      </div>
-      <button class="nav-btn active" onclick="setView('grid')" id="btn-grid">Grid</button>
-      <button class="nav-btn" onclick="setView('single')" id="btn-single">Channel</button>
-    </div>
-  </nav>
+  <!-- ASCII Background -->
+  <pre id="ascii-bg"></pre>
 
-  <!-- ─── GRID VIEW ─── -->
-  <div class="grid-view view active" id="grid-view">
-    <div class="tv-grid" id="tv-grid"></div>
+  <!-- Language Toggle -->
+  <div class="lang-toggle no-print">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('es')">ES</button>
   </div>
 
-  <!-- ─── SINGLE TV VIEW ─── -->
-  <div class="single-view view" id="single-view">
-    <div class="single-tv-container" id="single-tv"></div>
-    <div class="channel-controls">
-      <button class="channel-btn" onclick="prevChannel()">&#9664;</button>
-      <div class="channel-info">
-        <div class="ch-number" id="ch-number">CH 01 / 09</div>
-        <div class="ch-label" id="ch-label">Episode 1</div>
-      </div>
-      <button class="channel-btn" onclick="nextChannel()">&#9654;</button>
+  <div class="content-wrapper">
+
+  <!-- HEADER -->
+  <header class="header reveal">
+    <div class="header-left">
+      <h1>Offset Works</h1>
+      <div class="contact-info">NYC &amp; THE WORLD<br>offset.works.studio@gmail.com<br>@offset.works &nbsp;|&nbsp; offsetworks.xyz</div>
     </div>
-    <button class="buy-btn hidden" id="buy-btn">Buy Now &rarr;</button>
+    <div class="header-right">
+      <div class="doc-type mono" data-en="Quote" data-es="Cotizaci&oacute;n">Quote</div>
+      <div class="doc-meta">
+        Document #: OW-2026-004<br>
+        <span data-en="Date" data-es="Fecha">Date</span>: April 7, 2026<br>
+        <span data-en="Valid until" data-es="V&aacute;lido hasta">Valid until</span>: May 7, 2026
+      </div>
+    </div>
+  </header>
+
+  <!-- CLIENT -->
+  <div class="client-block reveal">
+    <div class="label" data-en="Prepared For" data-es="Preparado Para">Prepared For</div>
+    <div class="client-name">Mateo</div>
+    <div class="client-sub">King of Hearts</div>
   </div>
 
-  <footer class="footer">
-    <a href="https://offsetworks.xyz" target="_blank">Built by Offset Works</a>
-    &nbsp;&bull;&nbsp; Prototype v1
-  </footer>
+  <!-- PROJECT SUMMARY -->
+  <div class="project-summary reveal">
+    <h2 class="project-title">King of Hearts</h2>
+    <div class="project-subtitle" data-en="Interactive Streetwear Platform &amp; Episode System" data-es="Plataforma Interactiva de Streetwear &amp; Sistema de Episodios">Interactive Streetwear Platform &amp; Episode System</div>
+    <p class="project-description" data-en="A world-building fashion platform where every drop is a broadcast. The Operator&mdash;the brand's mysterious host&mdash;plays a tape for each new collection, pulling visitors into a late-night analog TV experience. Users browse through an interactive vintage interface: watching episodes, exploring lookbooks, discovering characters, and purchasing pieces. Each drop lives as its own world with unique aesthetics, powered by a reusable engine underneath. Your Shopify store stays connected. A custom admin lets you launch new drops without writing a single line of code. Custom built, top to bottom." data-es="Una plataforma de moda donde cada drop es una transmisi&oacute;n. El Operador&mdash;el misterioso anfitri&oacute;n de la marca&mdash;reproduce un cassette para cada nueva colecci&oacute;n, atrayendo a los visitantes a una experiencia de TV an&aacute;loga de madrugada. Los usuarios navegan a trav&eacute;s de una interfaz vintage interactiva: viendo episodios, explorando lookbooks, descubriendo personajes y comprando piezas. Cada drop vive como su propio mundo con est&eacute;tica &uacute;nica, impulsado por un motor reutilizable. Tu tienda Shopify se mantiene conectada. Un panel de admin personalizado te permite lanzar nuevos drops sin escribir una sola l&iacute;nea de c&oacute;digo. Hecho a la medida, de arriba a abajo.">A world-building fashion platform where every drop is a broadcast. The Operator&mdash;the brand's mysterious host&mdash;plays a tape for each new collection, pulling visitors into a late-night analog TV experience. Users browse through an interactive vintage interface: watching episodes, exploring lookbooks, discovering characters, and purchasing pieces. Each drop lives as its own world with unique aesthetics, powered by a reusable engine underneath. Your Shopify store stays connected. A custom admin lets you launch new drops without writing a single line of code. Custom built, top to bottom.</p>
+  </div>
 
-  <script>
-    // ─── VOLUME THEMES ───
-    const volumes = {
-      1: { name: 'Volume 1', accent: '#ff4400', accent2: '#ff8800', glow: 'rgba(255,68,0,0.3)' },
-      2: { name: 'Volume 2', accent: '#01cdfe', accent2: '#ff71ce', glow: 'rgba(1,205,254,0.3)' },
-    };
+  <!-- DEMO LINK -->
+  <a href="./demo" class="demo-banner reveal no-print">
+    <div class="demo-label" data-en="&#9654; View Interactive Prototype" data-es="&#9654; Ver Prototipo Interactivo">&#9654; View Interactive Prototype</div>
+    <div class="demo-sub" data-en="See the TV grid and channel switching in action" data-es="Mira el grid de TVs y el cambio de canales en acci&oacute;n">See the TV grid and channel switching in action</div>
+  </a>
 
-    // ─── CHANNELS (each TV in the grid + channels in single mode) ───
-    const channels = [
-      { label: 'EPISODE',  title: 'EP. 01',        subtitle: 'The Introduction',      type: 'episode',  anim: 'noise' },
-      { label: 'EPISODE',  title: 'EP. 02',        subtitle: 'The Descent',            type: 'episode',  anim: 'wave' },
-      { label: 'EPISODE',  title: 'EP. 03',        subtitle: 'The Return',             type: 'episode',  anim: 'plasma' },
-      { label: 'SHOP',     title: 'SHOP',           subtitle: '12 pieces available',    type: 'shop',     anim: 'scanlines' },
-      { label: 'DROP',     title: 'VOL 1',          subtitle: 'King of Hearts',         type: 'center',   anim: 'glitch' },
-      { label: 'LOOKBOOK', title: 'LOOK\nBOOK',     subtitle: 'Fall 2026',              type: 'lookbook', anim: 'flow' },
-      { label: 'THE HOST', title: 'THE\nOPERATOR',  subtitle: 'Who is he?',             type: 'about',    anim: 'binary' },
-      { label: 'PRODUCT',  title: 'HOODIE',         subtitle: '$120 — S / M / L / XL',  type: 'product',  anim: 'noise' },
-      { label: 'ARCHIVE',  title: 'ALL\nDROPS',     subtitle: '2 volumes',              type: 'archive',  anim: 'scanlines' },
-    ];
+  <!-- SCOPE OF WORK -->
+  <div class="section reveal">
+    <div class="section-heading" data-en="What We're Building" data-es="Lo Que Vamos a Construir">What We're Building</div>
 
-    const tvModels = ['', 'model-round', 'model-boxy', '', 'model-wide', '', 'model-boxy', '', 'model-round'];
-    const brandLabels = ['KOH', 'HEARTS', 'K\u2665H', 'HRT', 'KOH', 'HEARTS', 'K\u2665H', 'HRT', 'KOH'];
-
-    let currentVolume = 1;
-    let currentChannel = 0;
-    let currentView = 'grid';
-    let animId = null;
-
-    // ─── ANIMATION ENGINE ───
-    const Anim = {
-      noise(cols, rows, t) {
-        let o = '';
-        const s = t * 0.001;
-        for (let y = 0; y < rows; y++) {
-          for (let x = 0; x < cols; x++) {
-            const n = Math.sin(x*0.1+s)*Math.cos(y*0.15+s*0.7)*Math.sin((x+y)*0.05+s*0.5);
-            o += ' .:;+=xX$#'[Math.max(0,Math.min(9,Math.floor((n+1)*4)))];
-          }
-          o += '\n';
-        }
-        return o;
-      },
-      wave(cols, rows, t) {
-        let o = '';
-        const c = '\u2591\u2592\u2593\u2588\u2593\u2592\u2591';
-        for (let y = 0; y < rows; y++) {
-          for (let x = 0; x < cols; x++) {
-            const w = (Math.sin(x*0.12+t*0.003)+Math.sin(x*0.08+y*0.15+t*0.002))/2;
-            o += c[Math.max(0,Math.min(6,Math.floor((w+1)*3.5)))];
-          }
-          o += '\n';
-        }
-        return o;
-      },
-      glitch(cols, rows, t) {
-        let o = '';
-        const g = '!@#$%^&*<>{}[]|\\/';
-        const i = Math.sin(t*0.01)*0.5+0.5;
-        for (let y = 0; y < rows; y++) {
-          const r = Math.random() < i*0.3;
-          for (let x = 0; x < cols; x++) {
-            o += r && Math.random()<0.7 ? g[Math.floor(Math.random()*g.length)] : Math.random()<0.1 ? '\u2588' : ' ';
-          }
-          o += '\n';
-        }
-        return o;
-      },
-      plasma(cols, rows, t) {
-        let o = '';
-        const c = ' .:;+=xX$#';
-        const s = t*0.003;
-        for (let y = 0; y < rows; y++) {
-          for (let x = 0; x < cols; x++) {
-            const v = (Math.sin(x*0.05+s)+Math.sin(y*0.07+s*1.3)+Math.sin((x+y)*0.04+s*0.7)+Math.sin(Math.sqrt((x-cols/2)**2+(y-rows/2)**2)*0.1-s))/4;
-            o += c[Math.max(0,Math.min(9,Math.floor((v+1)*4.5)))];
-          }
-          o += '\n';
-        }
-        return o;
-      },
-      scanlines(cols, rows, t) {
-        let o = '';
-        const p = (t*0.01)%rows;
-        for (let y = 0; y < rows; y++) {
-          const d = Math.abs(y-p);
-          for (let x = 0; x < cols; x++) o += d<1?'\u2588':d<2?'\u2593':d<3?'\u2591':y%2===0?'\u2500':' ';
-          o += '\n';
-        }
-        return o;
-      },
-      binary(cols, rows, t) {
-        let o = '';
-        const s = Math.floor(t*0.01);
-        for (let y = 0; y < rows; y++) {
-          for (let x = 0; x < cols; x++) o += Math.sin(x*0.3+y*0.2+s*0.1)>0?'1':'0';
-          o += '\n';
-        }
-        return o;
-      },
-      flow(cols, rows, t) {
-        let o = '';
-        for (let y = 0; y < rows; y++) {
-          const off = Math.floor(t*0.02+y*0.5)%8;
-          for (let x = 0; x < cols; x++) { const p=(x+off)%8; o += p<3?'\u2192':p<4?'\u2500':' '; }
-          o += '\n';
-        }
-        return o;
-      },
-    };
-
-    // ─── TV BUILDER ───
-    function createTV(channel, model, brandLabel, size) {
-      const cols = size === 'large' ? 50 : 28;
-      const rows = size === 'large' ? 18 : 10;
-
-      const div = document.createElement('div');
-      div.className = `tv${channel.type === 'center' ? ' center-tv' : ''}`;
-      div.dataset.type = channel.type;
-      div.innerHTML = `
-        <div class="tv-frame ${model}">
-          <div class="tv-screen-wrapper">
-            <div class="tv-screen">
-              <pre class="tv-canvas" data-anim="${channel.anim}" data-cols="${cols}" data-rows="${rows}"></pre>
-              <div class="tv-content">
-                <div class="label">${channel.label}</div>
-                <div class="title">${channel.title}</div>
-                <div class="subtitle">${channel.subtitle}</div>
-              </div>
-              <div class="tv-static-overlay"></div>
+    <div class="dropdown open">
+      <div class="dropdown-header" onclick="toggleDropdown(this)">
+        <div>
+          <div class="dropdown-title" data-en="The TV Experience" data-es="La Experiencia de TV">The TV Experience</div>
+          <div class="dropdown-count" data-en="5 features" data-es="5 caracter&iacute;sticas">5 features</div>
+        </div>
+        <div class="dropdown-arrow">&#9660;</div>
+      </div>
+      <div class="dropdown-body">
+        <div class="dropdown-body-inner">
+          <div class="feature-grid">
+            <div class="feature-item">
+              <div class="feature-name" data-en="Analog TV Interface" data-es="Interfaz de TV An&aacute;loga">Analog TV Interface</div>
+              <div class="feature-desc" data-en="CRT scan lines, static, channel switching, VHS effects. The whole site feels like flipping through a vintage TV." data-es="L&iacute;neas de escaneo CRT, est&aacute;tica, cambio de canales, efectos VHS. Todo el sitio se siente como cambiar canales en una TV vintage.">CRT scan lines, static, channel switching, VHS effects. The whole site feels like flipping through a vintage TV.</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-name" data-en="The Operator" data-es="El Operador">The Operator</div>
+              <div class="feature-desc" data-en="Your host character introduces each drop. Tape-play animations, mystery vibes throughout." data-es="Tu personaje anfitri&oacute;n presenta cada drop. Animaciones de cassette, vibras de misterio.">Your host character introduces each drop. Tape-play animations, mystery vibes throughout.</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-name" data-en="Episode Viewer" data-es="Visor de Episodios">Episode Viewer</div>
+              <div class="feature-desc" data-en="Each episode gets its own page with embedded video, themed layout, and story elements." data-es="Cada episodio tiene su propia p&aacute;gina con video embebido, dise&ntilde;o tem&aacute;tico y elementos narrativos.">Each episode gets its own page with embedded video, themed layout, and story elements.</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-name" data-en="Lookbook Browser" data-es="Navegador de Lookbook">Lookbook Browser</div>
+              <div class="feature-desc" data-en="Visual gallery for each drop. Grid with zoom, unique colors and typography per collection." data-es="Galer&iacute;a visual para cada drop. Grid con zoom, colores y tipograf&iacute;a &uacute;nicos por colecci&oacute;n.">Visual gallery for each drop. Grid with zoom, unique colors and typography per collection.</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-name" data-en="Fully Responsive" data-es="Completamente Responsivo">Fully Responsive</div>
+              <div class="feature-desc" data-en="Works perfectly on phone, tablet, and desktop. Touch-friendly interactions everywhere." data-es="Funciona perfectamente en tel&eacute;fono, tablet y desktop. Interacciones t&aacute;ctiles en todas partes.">Works perfectly on phone, tablet, and desktop. Touch-friendly interactions everywhere.</div>
             </div>
           </div>
-          <div class="tv-panel">
-            <div class="tv-knob power"></div>
-            <div class="tv-brand-label">${brandLabel}</div>
-            <div class="tv-speaker"><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="tv-knob"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <div class="dropdown-header" onclick="toggleDropdown(this)">
+        <div>
+          <div class="dropdown-title" data-en="Drop &amp; Episode Engine" data-es="Motor de Drops &amp; Episodios">Drop &amp; Episode Engine</div>
+          <div class="dropdown-count" data-en="4 features" data-es="4 caracter&iacute;sticas">4 features</div>
+        </div>
+        <div class="dropdown-arrow">&#9660;</div>
+      </div>
+      <div class="dropdown-body">
+        <div class="dropdown-body-inner">
+          <div class="feature-grid">
+            <div class="feature-item">
+              <div class="feature-name" data-en="Drop System" data-es="Sistema de Drops">Drop System</div>
+              <div class="feature-desc" data-en="Each drop = its own world. Colors, fonts, characters, lookbook, products, episode. One engine powers them all." data-es="Cada drop = su propio mundo. Colores, fuentes, personajes, lookbook, productos, episodio. Un motor los impulsa a todos.">Each drop = its own world. Colors, fonts, characters, lookbook, products, episode. One engine powers them all.</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-name" data-en="Volume Archive" data-es="Archivo de Vol&uacute;menes">Volume Archive</div>
+              <div class="feature-desc" data-en="Browse past drops exactly as they looked when they launched. The archive preserves each world." data-es="Navega drops anteriores exactamente como se ve&iacute;an al lanzarse. El archivo preserva cada mundo.">Browse past drops exactly as they looked when they launched. The archive preserves each world.</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-name" data-en="Characters" data-es="Personajes">Characters</div>
+              <div class="feature-desc" data-en="Each drop has its own characters tied to the narrative. Their pages live in the drop's visual identity." data-es="Cada drop tiene sus propios personajes vinculados a la narrativa. Sus p&aacute;ginas viven en la identidad visual del drop.">Each drop has its own characters tied to the narrative. Their pages live in the drop's visual identity.</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-name" data-en="Video Integration" data-es="Integraci&oacute;n de Video">Video Integration</div>
+              <div class="feature-desc" data-en="YouTube/Vimeo embeds with a custom player that matches the TV aesthetic." data-es="Embeds de YouTube/Vimeo con un reproductor personalizado que combina con la est&eacute;tica de TV.">YouTube/Vimeo embeds with a custom player that matches the TV aesthetic.</div>
+            </div>
           </div>
-        </div>`;
+        </div>
+      </div>
+    </div>
 
-      div.addEventListener('click', () => {
-        div.classList.add('switching');
-        setTimeout(() => div.classList.remove('switching'), 300);
-      });
+    <div class="dropdown">
+      <div class="dropdown-header" onclick="toggleDropdown(this)">
+        <div>
+          <div class="dropdown-title" data-en="Shopify Store Connection" data-es="Conexi&oacute;n con Tienda Shopify">Shopify Store Connection</div>
+          <div class="dropdown-count" data-en="4 features" data-es="4 caracter&iacute;sticas">4 features</div>
+        </div>
+        <div class="dropdown-arrow">&#9660;</div>
+      </div>
+      <div class="dropdown-body">
+        <div class="dropdown-body-inner">
+          <div class="feature-grid">
+            <div class="feature-item">
+              <div class="feature-name" data-en="Live Product Data" data-es="Datos de Productos en Vivo">Live Product Data</div>
+              <div class="feature-desc" data-en="Products, prices, and inventory pull directly from your Shopify store in real time." data-es="Productos, precios e inventario se jalan directamente de tu tienda Shopify en tiempo real.">Products, prices, and inventory pull directly from your Shopify store in real time.</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-name" data-en="Product Pages" data-es="P&aacute;ginas de Producto">Product Pages</div>
+              <div class="feature-desc" data-en="Custom product pages inside the TV interface. Sizes, variants, image galleries&mdash;all styled per drop." data-es="P&aacute;ginas de producto personalizadas dentro de la interfaz de TV. Tallas, variantes, galer&iacute;as&mdash;todo estilizado por drop.">Custom product pages inside the TV interface. Sizes, variants, image galleries&mdash;all styled per drop.</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-name" data-en="Cart &amp; Checkout" data-es="Carrito &amp; Checkout">Cart &amp; Checkout</div>
+              <div class="feature-desc" data-en="Add to cart right in the experience. Checkout happens through Shopify&mdash;payments, shipping, everything handled." data-es="Agrega al carrito directo en la experiencia. El checkout pasa por Shopify&mdash;pagos, env&iacute;os, todo resuelto.">Add to cart right in the experience. Checkout happens through Shopify&mdash;payments, shipping, everything handled.</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-name" data-en="Auto-Sync" data-es="Sincronizaci&oacute;n Autom&aacute;tica">Auto-Sync</div>
+              <div class="feature-desc" data-en="Each drop links to a Shopify collection. Tag products in Shopify, they show up on the site. No double work." data-es="Cada drop se vincula a una colecci&oacute;n de Shopify. Etiqueta productos en Shopify, aparecen en el sitio. Sin doble trabajo.">Each drop links to a Shopify collection. Tag products in Shopify, they show up on the site. No double work.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      return div;
-    }
+    <div class="dropdown">
+      <div class="dropdown-header" onclick="toggleDropdown(this)">
+        <div>
+          <div class="dropdown-title" data-en="Admin Panel (Your Control Room)" data-es="Panel de Admin (Tu Sala de Control)">Admin Panel (Your Control Room)</div>
+          <div class="dropdown-count" data-en="4 features" data-es="4 caracter&iacute;sticas">4 features</div>
+        </div>
+        <div class="dropdown-arrow">&#9660;</div>
+      </div>
+      <div class="dropdown-body">
+        <div class="dropdown-body-inner">
+          <div class="feature-grid">
+            <div class="feature-item">
+              <div class="feature-name" data-en="Drop Builder" data-es="Constructor de Drops">Drop Builder</div>
+              <div class="feature-desc" data-en="Create new drops from a simple interface: upload images, pick colors, add characters, link your Shopify collection." data-es="Crea nuevos drops desde una interfaz simple: sube im&aacute;genes, elige colores, agrega personajes, vincula tu colecci&oacute;n de Shopify.">Create new drops from a simple interface: upload images, pick colors, add characters, link your Shopify collection.</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-name" data-en="Preview Before Launch" data-es="Vista Previa Antes de Lanzar">Preview Before Launch</div>
+              <div class="feature-desc" data-en="See exactly how a drop will look before it goes live. Draft and published states." data-es="Mira exactamente c&oacute;mo se ver&aacute; un drop antes de que salga en vivo. Estados de borrador y publicado.">See exactly how a drop will look before it goes live. Draft and published states.</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-name" data-en="Easy Editing" data-es="Edici&oacute;n F&aacute;cil">Easy Editing</div>
+              <div class="feature-desc" data-en="Change anything&mdash;reorder lookbook images, update bios, swap videos. No code needed." data-es="Cambia lo que quieras&mdash;reordena im&aacute;genes del lookbook, actualiza bios, cambia videos. Sin c&oacute;digo.">Change anything&mdash;reorder lookbook images, update bios, swap videos. No code needed.</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-name" data-en="Image Management" data-es="Gesti&oacute;n de Im&aacute;genes">Image Management</div>
+              <div class="feature-desc" data-en="Upload images, they get automatically optimized and organized by drop." data-es="Sube im&aacute;genes, se optimizan y organizan autom&aacute;ticamente por drop.">Upload images, they get automatically optimized and organized by drop.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    // ─── RENDER GRID ───
-    function renderGrid() {
-      const grid = document.getElementById('tv-grid');
-      grid.innerHTML = '';
-      // Order: 0,1,2,3, center(4), 5,6,7,8
-      channels.forEach((ch, i) => {
-        const tv = createTV(ch, tvModels[i], brandLabels[i], 'small');
-        grid.appendChild(tv);
-        setTimeout(() => {
-          tv.classList.add('powered', 'powering-on');
-          setTimeout(() => tv.classList.remove('powering-on'), 500);
-        }, 80 + i * 120);
-      });
-    }
+    <div class="dropdown">
+      <div class="dropdown-header" onclick="toggleDropdown(this)">
+        <div>
+          <div class="dropdown-title" data-en="Launch &amp; Hosting" data-es="Lanzamiento &amp; Hosting">Launch &amp; Hosting</div>
+          <div class="dropdown-count" data-en="4 features" data-es="4 caracter&iacute;sticas">4 features</div>
+        </div>
+        <div class="dropdown-arrow">&#9660;</div>
+      </div>
+      <div class="dropdown-body">
+        <div class="dropdown-body-inner">
+          <div class="feature-grid">
+            <div class="feature-item">
+              <div class="feature-name" data-en="Hosting" data-es="Hosting">Hosting</div>
+              <div class="feature-desc" data-en="Fast, reliable hosting. Push a change, it's live in seconds." data-es="Hosting r&aacute;pido y confiable. Haces un cambio, est&aacute; en vivo en segundos.">Fast, reliable hosting. Push a change, it's live in seconds.</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-name" data-en="Performance" data-es="Rendimiento">Performance</div>
+              <div class="feature-desc" data-en="Optimized images, fast loading. Smooth animations even on phones." data-es="Im&aacute;genes optimizadas, carga r&aacute;pida. Animaciones fluidas incluso en tel&eacute;fonos.">Optimized images, fast loading. Smooth animations even on phones.</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-name" data-en="Analytics" data-es="Anal&iacute;ticas">Analytics</div>
+              <div class="feature-desc" data-en="See which drops get the most traffic, what people click, how they shop." data-es="Ve qu&eacute; drops tienen m&aacute;s tr&aacute;fico, qu&eacute; clickean, c&oacute;mo compran.">See which drops get the most traffic, what people click, how they shop.</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-name" data-en="Domain &amp; SSL" data-es="Dominio &amp; SSL">Domain &amp; SSL</div>
+              <div class="feature-desc" data-en="Your custom domain, configured and secured. Ready for launch day." data-es="Tu dominio personalizado, configurado y seguro. Listo para el d&iacute;a del lanzamiento.">Your custom domain, configured and secured. Ready for launch day.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    // ─── RENDER SINGLE TV ───
-    function renderSingleTV() {
-      const container = document.getElementById('single-tv');
-      container.innerHTML = '';
-      const ch = channels[currentChannel];
-      const tv = createTV(ch, 'model-wide', 'KOH', 'large');
-      tv.classList.add('powered');
-      container.appendChild(tv);
+  <!-- CALLOUT -->
+  <div class="callout reveal">
+    <h3 data-en="Every drop is a new world" data-es="Cada drop es un nuevo mundo">Every drop is a new world</h3>
+    <p data-en="The platform is a reusable engine. Each new drop gets its own colors, fonts, characters, and lookbook&mdash;but the system underneath stays the same. You can launch a new collection without touching code. The TV stays on. The channel just changes." data-es="La plataforma es un motor reutilizable. Cada nuevo drop obtiene sus propios colores, fuentes, personajes y lookbook&mdash;pero el sistema de abajo sigue igual. Puedes lanzar una nueva colecci&oacute;n sin tocar c&oacute;digo. La TV sigue encendida. Solo cambia el canal.">The platform is a reusable engine. Each new drop gets its own colors, fonts, characters, and lookbook&mdash;but the system underneath stays the same. You can launch a new collection without touching code. The TV stays on. The channel just changes.</p>
+    <div class="compare">
+      <div class="line">
+        <span data-en="Traditional fashion site" data-es="Sitio de moda tradicional">Traditional fashion site</span>
+        <span data-en="Rebuild for every collection" data-es="Reconstruir para cada colecci&oacute;n">Rebuild for every collection</span>
+      </div>
+      <div class="line highlight">
+        <span>King of Hearts</span>
+        <span data-en="New drop = new entry, same engine" data-es="Nuevo drop = nueva entrada, mismo motor">New drop = new entry, same engine</span>
+      </div>
+    </div>
+  </div>
 
-      document.getElementById('ch-number').textContent =
-        `CH ${String(currentChannel+1).padStart(2,'0')} / ${String(channels.length).padStart(2,'0')}`;
-      document.getElementById('ch-label').textContent = `${ch.label} \u2014 ${ch.subtitle}`;
+  <!-- PRICING -->
+  <div class="section page-break reveal">
+    <div class="section-heading" data-en="Investment" data-es="Inversi&oacute;n">Investment</div>
 
-      const buyBtn = document.getElementById('buy-btn');
-      buyBtn.classList.toggle('hidden', ch.type !== 'product' && ch.type !== 'shop');
-    }
+    <div style="margin-bottom:32px; padding:20px 24px; background:var(--bg-card); border:1px solid var(--border); border-radius:4px;">
+      <div class="label" data-en="Launch Partner Rate" data-es="Tarifa de Socio de Lanzamiento">Launch Partner Rate</div>
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.7; margin-top:8px;" data-en="This type of build runs $10,000&ndash;$25,000+ at agencies. We're offering a launch partner rate&mdash;a reduced price in exchange for a long-term creative relationship, portfolio rights, and technical director credit." data-es="Este tipo de proyecto cuesta $10,000&ndash;$25,000+ en agencias. Ofrecemos una tarifa de socio de lanzamiento&mdash;un precio reducido a cambio de una relaci&oacute;n creativa a largo plazo, derechos de portafolio y cr&eacute;dito como director t&eacute;cnico.">This type of build runs $10,000&ndash;$25,000+ at agencies. We're offering a launch partner rate&mdash;a reduced price in exchange for a long-term creative relationship, portfolio rights, and technical director credit.</p>
+    </div>
 
-    // ─── CHANNEL SWITCHING ───
-    function switchChannel(dir) {
-      const tv = document.querySelector('#single-tv .tv');
-      if (!tv) return;
-      tv.classList.add('switching');
-      setTimeout(() => {
-        currentChannel = (currentChannel + dir + channels.length) % channels.length;
-        renderSingleTV();
-        startAnimations();
-      }, 200);
-    }
-    function nextChannel() { switchChannel(1); }
-    function prevChannel() { switchChannel(-1); }
+    <table class="pricing-table">
+      <tr>
+        <td>
+          <div class="item-name" data-en="The TV Experience" data-es="La Experiencia de TV">The TV Experience</div>
+          <div class="item-desc" data-en="Analog TV interface, CRT effects, The Operator, episode viewer, lookbook, responsive" data-es="Interfaz de TV an&aacute;loga, efectos CRT, El Operador, visor de episodios, lookbook, responsivo">Analog TV interface, CRT effects, The Operator, episode viewer, lookbook, responsive</div>
+        </td>
+        <td class="price">$3,500</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="item-name" data-en="Drop &amp; Episode Engine" data-es="Motor de Drops &amp; Episodios">Drop &amp; Episode Engine</div>
+          <div class="item-desc" data-en="Reusable drop system, volume archive, characters, video integration" data-es="Sistema de drops reutilizable, archivo de vol&uacute;menes, personajes, integraci&oacute;n de video">Reusable drop system, volume archive, characters, video integration</div>
+        </td>
+        <td class="price">$2,500</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="item-name" data-en="Shopify Integration" data-es="Integraci&oacute;n Shopify">Shopify Integration</div>
+          <div class="item-desc" data-en="Live product data, custom product pages, cart &amp; checkout, auto-sync" data-es="Datos de productos en vivo, p&aacute;ginas personalizadas, carrito &amp; checkout, sincronizaci&oacute;n autom&aacute;tica">Live product data, custom product pages, cart &amp; checkout, auto-sync</div>
+        </td>
+        <td class="price">$1,500</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="item-name" data-en="Admin Panel" data-es="Panel de Admin">Admin Panel</div>
+          <div class="item-desc" data-en="Drop builder, preview mode, easy editing, image management" data-es="Constructor de drops, modo de vista previa, edici&oacute;n f&aacute;cil, gesti&oacute;n de im&aacute;genes">Drop builder, preview mode, easy editing, image management</div>
+        </td>
+        <td class="price">$1,500</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="item-name" data-en="Launch &amp; Hosting" data-es="Lanzamiento &amp; Hosting">Launch &amp; Hosting</div>
+          <div class="item-desc" data-en="Hosting, performance, analytics, domain &amp; SSL" data-es="Hosting, rendimiento, anal&iacute;ticas, dominio &amp; SSL">Hosting, performance, analytics, domain &amp; SSL</div>
+        </td>
+        <td class="price">$1,000</td>
+      </tr>
+      <tr class="subtotal-row">
+        <td>
+          <div class="item-name" data-en="Market Value" data-es="Valor de Mercado">Market Value</div>
+          <div class="item-desc" data-en="~100 hours of development" data-es="~100 horas de desarrollo">~100 hours of development</div>
+        </td>
+        <td class="price">$10,000</td>
+      </tr>
+      <tr class="discount-row">
+        <td><div class="item-name" data-en="Launch Partner Rate" data-es="Tarifa Socio de Lanzamiento">Launch Partner Rate</div></td>
+        <td class="price">&minus;70%</td>
+      </tr>
+      <tr class="total-row">
+        <td><div class="item-name" data-en="Your Price" data-es="Tu Precio">Your Price</div></td>
+        <td class="price">$3,000</td>
+      </tr>
+    </table>
+    <p class="pricing-note" data-en="Launch partner rate = our investment in King of Hearts. In exchange: technical director credit, portfolio rights, and priority on future work." data-es="Tarifa de socio de lanzamiento = nuestra inversi&oacute;n en King of Hearts. A cambio: cr&eacute;dito como director t&eacute;cnico, derechos de portafolio y prioridad en trabajo futuro.">Launch partner rate = our investment in King of Hearts. In exchange: technical director credit, portfolio rights, and priority on future work.</p>
+  </div>
 
-    // ─── VIEW TOGGLE ───
-    function setView(view) {
-      currentView = view;
-      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-      document.getElementById(view + '-view').classList.add('active');
-      document.getElementById('btn-grid').classList.toggle('active', view === 'grid');
-      document.getElementById('btn-single').classList.toggle('active', view === 'single');
-      if (view === 'grid') renderGrid(); else renderSingleTV();
-      startAnimations();
-    }
+  <!-- WHAT'S INCLUDED -->
+  <div class="section reveal">
+    <div class="section-heading" data-en="What's Included" data-es="Qu&eacute; Incluye">What's Included</div>
+    <ul class="checklist">
+      <li><span class="check">&#10003;</span> <span data-en="Fully built and deployed platform (turnkey)" data-es="Plataforma completamente construida y desplegada (llave en mano)">Fully built and deployed platform (turnkey)</span></li>
+      <li><span class="check">&#10003;</span> <span data-en="Hosting included" data-es="Hosting incluido">Hosting included</span> <span class="note" data-en="(through June 2027)" data-es="(hasta junio 2027)">(through June 2027)</span></li>
+      <li><span class="check">&#10003;</span> <span data-en="All source code via private GitHub repo" data-es="Todo el c&oacute;digo fuente en repo privado de GitHub">All source code via private GitHub repo</span></li>
+      <li><span class="check">&#10003;</span> <span data-en="Admin panel for launching new drops" data-es="Panel de admin para lanzar nuevos drops">Admin panel for launching new drops</span> <span class="note" data-en="(no code needed)" data-es="(sin c&oacute;digo)">(no code needed)</span></li>
+      <li><span class="check">&#10003;</span> <span data-en="Support, fixes &amp; drop onboarding" data-es="Soporte, arreglos &amp; onboarding de drops">Support, fixes &amp; drop onboarding</span> <span class="note" data-en="(through 2026)" data-es="(hasta 2026)">(through 2026)</span></li>
+      <li><span class="check">&#10003;</span> <span data-en="Technical director credit" data-es="Cr&eacute;dito como director t&eacute;cnico">Technical director credit</span></li>
+    </ul>
+  </div>
 
-    // ─── VOLUME TOGGLE ───
-    function setVolume(vol) {
-      currentVolume = vol;
-      const v = volumes[vol];
-      const r = document.documentElement.style;
-      r.setProperty('--accent', v.accent);
-      r.setProperty('--accent-2', v.accent2);
-      r.setProperty('--accent-glow', v.glow);
+  <!-- RETAINER -->
+  <div class="section reveal">
+    <div class="section-heading" data-en="After Launch" data-es="Despu&eacute;s del Lanzamiento">After Launch</div>
+    <p style="font-size:13px; color:var(--text-secondary); line-height:1.7; margin-bottom:28px;" data-en="The launch is just the first broadcast. Three options for how we keep building together:" data-es="El lanzamiento es solo la primera transmisi&oacute;n. Tres opciones para seguir construyendo juntos:">The launch is just the first broadcast. Three options for how we keep building together:</p>
 
-      channels[4].title = v.name.toUpperCase().replace('VOLUME ', 'VOL ');
+    <div class="retainer-grid">
+      <div class="retainer-card">
+        <div class="label" data-en="Option A" data-es="Opci&oacute;n A">Option A</div>
+        <div class="card-title" data-en="On-Call" data-es="Bajo Demanda">On-Call</div>
+        <div class="card-price">$50<span>/hr</span></div>
+        <ul>
+          <li data-en="&bull; Pay as you go" data-es="&bull; Paga conforme uses">&bull; Pay as you go</li>
+          <li data-en="&bull; Bug fixes &amp; tweaks" data-es="&bull; Arreglos &amp; ajustes">&bull; Bug fixes &amp; tweaks</li>
+          <li data-en="&bull; New features on request" data-es="&bull; Nuevas funciones bajo pedido">&bull; New features on request</li>
+          <li data-en="&bull; No commitment" data-es="&bull; Sin compromiso">&bull; No commitment</li>
+        </ul>
+      </div>
+      <div class="retainer-card recommended">
+        <div class="badge" data-en="Recommended" data-es="Recomendado">Recommended</div>
+        <div class="label" data-en="Option B" data-es="Opci&oacute;n B">Option B</div>
+        <div class="card-title" data-en="Drop Retainer" data-es="Retainer de Drops">Drop Retainer</div>
+        <div class="card-price">$500<span>/mo</span></div>
+        <ul>
+          <li data-en="&bull; ~10 hrs/month" data-es="&bull; ~10 hrs/mes">&bull; ~10 hrs/month</li>
+          <li data-en="&bull; New drop setup" data-es="&bull; Setup de nuevos drops">&bull; New drop setup</li>
+          <li data-en="&bull; Episode pages" data-es="&bull; P&aacute;ginas de episodios">&bull; Episode pages</li>
+          <li data-en="&bull; Priority response" data-es="&bull; Respuesta prioritaria">&bull; Priority response</li>
+          <li data-en="&bull; Hosting included" data-es="&bull; Hosting incluido">&bull; Hosting included</li>
+        </ul>
+      </div>
+      <div class="retainer-card">
+        <div class="label" data-en="Option C" data-es="Opci&oacute;n C">Option C</div>
+        <div class="card-title" data-en="Technical Director" data-es="Director T&eacute;cnico">Technical Director</div>
+        <div class="card-price">$1,000<span>/mo</span></div>
+        <ul>
+          <li data-en="&bull; ~20 hrs/month" data-es="&bull; ~20 hrs/mes">&bull; ~20 hrs/month</li>
+          <li data-en="&bull; Everything in B" data-es="&bull; Todo lo de B">&bull; Everything in B</li>
+          <li data-en="&bull; New features" data-es="&bull; Nuevas funciones">&bull; New features</li>
+          <li data-en="&bull; Creative tech consulting" data-es="&bull; Consultor&iacute;a tech creativa">&bull; Creative tech consulting</li>
+          <li data-en="&bull; Hosting included" data-es="&bull; Hosting incluido">&bull; Hosting included</li>
+        </ul>
+      </div>
+    </div>
+    <p class="pricing-note" data-en="Retainer starts July 2026. Support through 2026 is already included in the build." data-es="Retainer comienza julio 2026. El soporte hasta 2026 ya est&aacute; incluido en la construcci&oacute;n.">Retainer starts July 2026. Support through 2026 is already included in the build.</p>
+  </div>
 
-      document.querySelectorAll('.volume-toggle .nav-btn').forEach((btn, i) => {
-        btn.classList.toggle('active', i + 1 === vol);
-      });
+  <!-- TIMELINE -->
+  <div class="section reveal">
+    <div class="section-heading" data-en="Timeline" data-es="Cronograma">Timeline</div>
+    <div class="terms-block">
+      <h3 data-en="Build" data-es="Construcci&oacute;n">Build</h3>
+      <p><span class="accent">April &ndash; May 2026</span></p>
+      <p data-en="Full build. Regular check-ins and previews throughout." data-es="Construcci&oacute;n completa. Check-ins regulares y previews durante todo el proceso.">Full build. Regular check-ins and previews throughout.</p>
+    </div>
+    <div class="terms-block">
+      <h3 data-en="Launch" data-es="Lanzamiento">Launch</h3>
+      <p><span class="accent">June 2026</span></p>
+      <p data-en="Go live with your first drop ready to broadcast." data-es="En vivo con tu primer drop listo para transmitir.">Go live with your first drop ready to broadcast.</p>
+    </div>
+  </div>
 
-      if (currentView === 'grid') renderGrid(); else renderSingleTV();
-      startAnimations();
-    }
+  <!-- PAYMENT -->
+  <div class="section reveal">
+    <div class="section-heading" data-en="Payment" data-es="Pago">Payment</div>
+    <div class="payment-total">$3,000 USD</div>
+    <div class="payment-methods">
+      <p data-en="Two payments:" data-es="Dos pagos:">Two payments:</p>
+      <ul>
+        <li><strong>$1,500</strong> <span data-en="upfront" data-es="por adelantado">upfront</span></li>
+        <li><strong>$1,500</strong> <span data-en="on launch" data-es="al lanzar">on launch</span></li>
+      </ul>
+      <p style="margin-top:12px;" data-en="Payment method to be confirmed. We're flexible." data-es="M&eacute;todo de pago por confirmar. Somos flexibles.">Payment method to be confirmed. We're flexible.</p>
+    </div>
+  </div>
 
-    // ─── ANIMATION LOOP ───
-    function startAnimations() {
-      if (animId) cancelAnimationFrame(animId);
-      const canvases = document.querySelectorAll('.tv-canvas');
-      let frame = 0;
-      function loop(time) {
-        frame++;
-        if (frame % 3 === 0) { // every 3rd frame for performance
-          canvases.forEach(c => {
-            const fn = Anim[c.dataset.anim];
-            if (fn) c.textContent = fn(+c.dataset.cols, +c.dataset.rows, time);
-          });
+  <!-- FOOTER -->
+  <footer class="footer reveal">
+    <div class="footer-brand">Offset Works &nbsp;&bull;&nbsp; NYC &amp; THE WORLD</div>
+    <div class="footer-note">
+      <a href="mailto:offset.works.studio@gmail.com">offset.works.studio@gmail.com</a> &nbsp;|&nbsp;
+      <a href="https://instagram.com/offset.works" target="_blank" rel="noopener">@offset.works</a> &nbsp;|&nbsp;
+      <a href="https://offsetworks.xyz" target="_blank" rel="noopener">offsetworks.xyz</a>
+    </div>
+    <div class="footer-note" style="margin-top:12px;" data-en="Quote valid for 30 days from date of issue." data-es="Cotizaci&oacute;n v&aacute;lida por 30 d&iacute;as desde la fecha de emisi&oacute;n.">Quote valid for 30 days from date of issue.</div>
+  </footer>
+
+  </div><!-- /content-wrapper -->
+
+  <script>
+    // ─── ASCII BACKGROUND ───
+    const bg = document.getElementById('ascii-bg');
+    function animBg(time) {
+      const cols = Math.floor(window.innerWidth / 7);
+      const rows = Math.floor(window.innerHeight / 12);
+      let out = '';
+      const t = time * 0.0008;
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const v = Math.sin(x * 0.03 + t) * Math.cos(y * 0.05 + t * 0.6) * Math.sin((x + y) * 0.02 + t * 0.4);
+          out += ' .·:+*#'[Math.max(0, Math.min(6, Math.floor((v + 1) * 3)))];
         }
-        animId = requestAnimationFrame(loop);
+        out += '\n';
       }
-      animId = requestAnimationFrame(loop);
+      bg.textContent = out;
+      requestAnimationFrame(animBg);
+    }
+    requestAnimationFrame(animBg);
+
+    // ─── SCROLL REVEAL ───
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ─── DROPDOWNS ───
+    function toggleDropdown(header) {
+      const dropdown = header.parentElement;
+      dropdown.classList.toggle('open');
     }
 
-    // ─── KEYBOARD SHORTCUTS ───
-    document.addEventListener('keydown', e => {
-      if (currentView === 'single') {
-        if (e.key === 'ArrowRight') nextChannel();
-        if (e.key === 'ArrowLeft') prevChannel();
-      }
-      if (e.key === 'g') setView('grid');
-      if (e.key === 's') setView('single');
-      if (e.key === '1') setVolume(1);
-      if (e.key === '2') setVolume(2);
-    });
+    // ─── LANGUAGE ───
+    let currentLang = 'en';
 
-    // ─── INIT ───
-    renderGrid();
-    startAnimations();
+    function setLang(lang) {
+      currentLang = lang;
+      document.querySelectorAll('.lang-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', (i === 0 && lang === 'en') || (i === 1 && lang === 'es'));
+      });
+
+      document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+        const text = el.getAttribute('data-' + lang);
+        if (text) el.innerHTML = text;
+      });
+    }
   </script>
 </body>
 </html>
