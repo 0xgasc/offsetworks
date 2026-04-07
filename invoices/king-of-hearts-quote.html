@@ -766,12 +766,13 @@
     <div class="section-heading">Pricing</div>
 
     <div style="margin-bottom:32px; padding:20px 24px; background:var(--bg-card); border:1px solid var(--border); border-radius:4px;">
-      <div class="label" style="margin-bottom:12px;">Rate Basis</div>
-      <p style="font-size:13px; color:var(--text-secondary); line-height:1.7; margin-bottom:8px;">
-        Industry standard for custom headless Shopify builds with creative frontend work:
-        <span class="mono" style="color:var(--text-primary); font-weight:600;">$100&ndash;$150/hr</span>.
-        This quote uses <span class="mono" style="color:var(--text-primary); font-weight:600;">$100/hr</span> as the base market rate.
-        Total estimated effort: <span class="mono" style="color:var(--text-primary); font-weight:600;">~155 hours</span>.
+      <div class="label" style="margin-bottom:12px;">Launch Partner Rate</div>
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.7;">
+        Custom headless Shopify builds with bespoke creative frontends run
+        <span class="mono" style="color:var(--text-primary); font-weight:600;">$10,000&ndash;$25,000+</span>
+        at agencies (100+ hours at $100&ndash;$200/hr).
+        We're quoting this as a <strong style="color:var(--text-primary);">launch partner</strong>&mdash;reduced
+        rate in exchange for a long-term creative relationship, portfolio rights, and technical director credit.
       </p>
     </div>
 
@@ -779,89 +780,59 @@
       <tr>
         <td>
           <div class="item-name">Custom Frontend Experience</div>
-          <div class="item-desc" style="line-height:1.7;">
-            <span class="mono" style="color:var(--text-secondary);">~50 hrs</span> &nbsp;&bull;&nbsp;
-            TV shell &amp; CRT effects (15h) &bull; The Operator animations &amp; narrative (10h) &bull;
-            Episode viewer with themed layouts (8h) &bull; Lookbook browser with zoom &amp; carousel (8h) &bull;
-            Responsive &amp; touch optimization (9h)<br>
-            <span style="color:var(--text-muted); font-style:italic;">Why: This is the most labor-intensive component. Every screen requires custom shader-style CSS effects (scan lines, static, flicker), GSAP timeline animations, and per-drop theming. Nothing off-the-shelf&mdash;every interaction is hand-built.</span>
-          </div>
-        </td>
-        <td class="price">$5,000.00</td>
-      </tr>
-      <tr>
-        <td>
-          <div class="item-name">Drop &amp; Episode System</div>
-          <div class="item-desc" style="line-height:1.7;">
-            <span class="mono" style="color:var(--text-secondary);">~30 hrs</span> &nbsp;&bull;&nbsp;
-            Drop template engine &amp; schema (12h) &bull; Volume archive with preserved aesthetics (8h) &bull;
-            Character profile pages (5h) &bull; Video integration &amp; custom player UI (5h)<br>
-            <span style="color:var(--text-muted); font-style:italic;">Why: The drop engine is the core architecture. Each drop needs its own color palette, typography, and layout that loads dynamically. This system is what makes future drops possible without rebuilding.</span>
-          </div>
-        </td>
-        <td class="price">$3,000.00</td>
-      </tr>
-      <tr>
-        <td>
-          <div class="item-name">Shopify E-Commerce Integration</div>
-          <div class="item-desc" style="line-height:1.7;">
-            <span class="mono" style="color:var(--text-secondary);">~25 hrs</span> &nbsp;&bull;&nbsp;
-            Storefront API connection &amp; GraphQL queries (8h) &bull; Product detail pages within TV UI (6h) &bull;
-            Cart &amp; checkout flow (6h) &bull; Collection-to-drop mapping (5h)<br>
-            <span style="color:var(--text-muted); font-style:italic;">Why: Headless Shopify means building the entire shopping experience from scratch&mdash;product display, variant selection, cart state, checkout redirect&mdash;while making it feel native to the TV interface, not a bolted-on store.</span>
-          </div>
-        </td>
-        <td class="price">$2,500.00</td>
-      </tr>
-      <tr>
-        <td>
-          <div class="item-name">Custom Admin Panel</div>
-          <div class="item-desc" style="line-height:1.7;">
-            <span class="mono" style="color:var(--text-secondary);">~35 hrs</span> &nbsp;&bull;&nbsp;
-            Drop builder UI &amp; forms (12h) &bull; Preview mode &amp; draft/publish states (8h) &bull;
-            Content management CRUD (8h) &bull; Asset upload &amp; optimization pipeline (7h)<br>
-            <span style="color:var(--text-muted); font-style:italic;">Why: A custom admin (vs. off-the-shelf CMS) means building the entire interface, auth, API, and database layer. The tradeoff: it's tailored exactly to King of Hearts&mdash;no bloat, no learning curve, no monthly CMS fee.</span>
-          </div>
+          <div class="item-desc">Analog TV interface, CRT effects, scan lines, static transitions, The Operator host sequences, responsive across all devices</div>
         </td>
         <td class="price">$3,500.00</td>
       </tr>
       <tr>
         <td>
-          <div class="item-name">Infrastructure &amp; Launch</div>
-          <div class="item-desc" style="line-height:1.7;">
-            <span class="mono" style="color:var(--text-secondary);">~15 hrs</span> &nbsp;&bull;&nbsp;
-            Hosting &amp; CI/CD setup (5h) &bull; Performance optimization &amp; image pipeline (5h) &bull;
-            Analytics integration (2h) &bull; Domain, DNS &amp; SSL (3h)<br>
-            <span style="color:var(--text-muted); font-style:italic;">Why: Heavy animation sites need careful performance tuning&mdash;code splitting, lazy loading, frame rate management on mobile. This ensures the TV experience loads fast and runs smooth on all devices.</span>
-          </div>
+          <div class="item-name">Drop &amp; Episode System</div>
+          <div class="item-desc">Reusable drop engine with per-drop theming, volume archive, character profiles, video integration with custom player UI</div>
+        </td>
+        <td class="price">$2,500.00</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="item-name">Shopify E-Commerce Integration</div>
+          <div class="item-desc">Headless Storefront API, product pages within TV interface, cart &amp; checkout, collection-to-drop mapping</div>
         </td>
         <td class="price">$1,500.00</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="item-name">Custom Admin Panel</div>
+          <div class="item-desc">Drop builder, preview mode, content management, asset upload &amp; optimization pipeline</div>
+        </td>
+        <td class="price">$1,500.00</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="item-name">Infrastructure &amp; Launch</div>
+          <div class="item-desc">Vercel + Railway hosting, CI/CD, performance optimization, analytics, domain &amp; SSL</div>
+        </td>
+        <td class="price">$1,000.00</td>
       </tr>
 
       <tr class="subtotal-row">
         <td>
           <div class="item-name">Estimated Market Value</div>
-          <div class="item-desc">~155 hours &times; $100/hr base rate</div>
+          <div class="item-desc">~100 hours of full-stack development</div>
         </td>
-        <td class="price">$15,500.00</td>
+        <td class="price">$10,000.00</td>
       </tr>
       <tr class="discount-row">
-        <td><div class="item-name">Friends &amp; Family Rate &nbsp;<span style="font-size:11px; opacity:0.7;">(70% off)</span></div></td>
-        <td class="price">&minus;$10,850.00</td>
+        <td><div class="item-name">Launch Partner Rate &nbsp;<span style="font-size:11px; opacity:0.7;">(70% off)</span></div></td>
+        <td class="price">&minus;$7,000.00</td>
       </tr>
       <tr class="total-row">
-        <td>
-          <div class="item-name">Your Price</div>
-          <div class="item-desc" style="font-size:11px; color:var(--text-muted);">Effective rate: ~$30/hr</div>
-        </td>
-        <td class="price">$4,650.00</td>
+        <td><div class="item-name">Your Price</div></td>
+        <td class="price">$3,000.00</td>
       </tr>
     </table>
 
     <p class="pricing-note">
-      Market value of $15,500 is based on 155 hours at $100/hr&mdash;conservative for custom headless Shopify builds
-      with bespoke creative frontends (agencies typically bill $150&ndash;$200/hr for this type of work).
-      At the friends &amp; family rate, your effective cost is ~$30/hr for senior full-stack development.
+      Launch partner rate reflects our investment in King of Hearts as a long-term creative partnership.
+      In exchange: technical director credit, portfolio &amp; case study rights, and priority on future work.
     </p>
   </div>
 
@@ -873,8 +844,71 @@
       <li><span class="check">&#10003;</span> Hosting on Vercel + Railway <span class="note">(through June 2027)</span></li>
       <li><span class="check">&#10003;</span> All source code via private GitHub repo</li>
       <li><span class="check">&#10003;</span> Custom admin panel for launching new drops <span class="note">(no code required)</span></li>
-      <li><span class="check">&#10003;</span> Support &amp; feature enablement included <span class="note">(through 2026)</span></li>
+      <li><span class="check">&#10003;</span> Support, bug fixes &amp; drop onboarding <span class="note">(through 2026)</span></li>
+      <li><span class="check">&#10003;</span> Technical director credit on the project</li>
     </ul>
+  </div>
+
+  <!-- ─── RETAINER OPTIONS ─── -->
+  <div class="section">
+    <div class="section-heading">Ongoing Partnership</div>
+
+    <p style="font-size:13px; color:var(--text-secondary); line-height:1.7; margin-bottom:28px;">
+      The platform launch is just the first broadcast. As King of Hearts grows, each new drop, each new volume,
+      each new idea needs someone who knows the system inside out. Three options for how we keep building together:
+    </p>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:24px;">
+
+      <div style="padding:20px; background:var(--bg-card); border:1px solid var(--border); border-radius:4px;">
+        <div class="label" style="margin-bottom:6px;">Option A</div>
+        <div style="font-size:15px; font-weight:600; margin-bottom:4px;">On-Call</div>
+        <div class="mono accent" style="font-size:18px; font-weight:700; margin-bottom:12px;">$50<span style="font-size:11px; color:var(--text-muted); font-weight:400;">/hr</span></div>
+        <ul style="list-style:none; font-size:11.5px; color:var(--text-secondary); line-height:1.8;">
+          <li>&bull; Pay as you go</li>
+          <li>&bull; Bug fixes &amp; tweaks</li>
+          <li>&bull; New features on request</li>
+          <li>&bull; Estimates before any work</li>
+          <li>&bull; No commitment</li>
+        </ul>
+      </div>
+
+      <div style="padding:20px; background:var(--bg-card); border:1px solid var(--accent); border-radius:4px; position:relative;">
+        <div style="position:absolute; top:-8px; right:12px; font-family:'Space Mono',monospace; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; background:var(--accent); color:var(--bg-primary); padding:2px 8px; border-radius:2px;">Recommended</div>
+        <div class="label" style="margin-bottom:6px;">Option B</div>
+        <div style="font-size:15px; font-weight:600; margin-bottom:4px;">Drop Retainer</div>
+        <div class="mono accent" style="font-size:18px; font-weight:700; margin-bottom:12px;">$500<span style="font-size:11px; color:var(--text-muted); font-weight:400;">/mo</span></div>
+        <ul style="list-style:none; font-size:11.5px; color:var(--text-secondary); line-height:1.8;">
+          <li>&bull; ~10 hrs/month included</li>
+          <li>&bull; New drop setup &amp; theming</li>
+          <li>&bull; Episode page builds</li>
+          <li>&bull; Shopify collection sync</li>
+          <li>&bull; Priority response</li>
+          <li>&bull; Hosting included</li>
+        </ul>
+      </div>
+
+      <div style="padding:20px; background:var(--bg-card); border:1px solid var(--border); border-radius:4px;">
+        <div class="label" style="margin-bottom:6px;">Option C</div>
+        <div style="font-size:15px; font-weight:600; margin-bottom:4px;">Technical Director</div>
+        <div class="mono accent" style="font-size:18px; font-weight:700; margin-bottom:12px;">$1,000<span style="font-size:11px; color:var(--text-muted); font-weight:400;">/mo</span></div>
+        <ul style="list-style:none; font-size:11.5px; color:var(--text-secondary); line-height:1.8;">
+          <li>&bull; ~20 hrs/month included</li>
+          <li>&bull; Everything in Drop Retainer</li>
+          <li>&bull; Brand site evolution</li>
+          <li>&bull; New features &amp; pages</li>
+          <li>&bull; Analytics &amp; conversion work</li>
+          <li>&bull; Creative tech consulting</li>
+          <li>&bull; Hosting included</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <p class="pricing-note">
+      Retainer starts after launch (July 2026). Support through end of 2026 is already included in the build price.
+      Unused retainer hours don't roll over. Overages billed at $50/hr with approval.
+    </p>
   </div>
 
   <!-- ─── TIMELINE ─── -->
@@ -896,25 +930,33 @@
         Platform goes live with your first drop ready to broadcast.
       </p>
     </div>
+
+    <div class="terms-block">
+      <h3>Ongoing <span style="font-weight:400; font-size:12px; color:var(--text-muted);">July 2026+</span></h3>
+      <p>
+        Retainer kicks in (if selected). New drops, new volumes, platform evolution.
+        The TV stays on.
+      </p>
+    </div>
   </div>
 
   <!-- ─── TERMS ─── -->
   <div class="section">
-    <div class="section-heading">Terms &amp; Support</div>
+    <div class="section-heading">Terms</div>
 
     <div class="terms-block">
-      <h3>Support Through 2026 <span class="accent" style="font-weight:400; font-size:12px;">(included)</span></h3>
+      <h3>Support Through 2026 <span class="accent" style="font-weight:400; font-size:12px;">(included in build)</span></h3>
       <p>
         Through <strong>end of 2026</strong>: bug fixes, adjustments, content changes, new drop onboarding,
-        and feature enablement at no extra cost.
+        and feature enablement at no extra cost. This is part of the launch partner deal.
       </p>
     </div>
 
     <div class="terms-block">
-      <h3>After 2026 <span style="font-weight:400; font-size:12px; color:var(--text-muted);">(2027+)</span></h3>
+      <h3>Hosting</h3>
       <p>
-        Additional work: <span class="rate">$50/hr</span> (friends &amp; family rate). We'll give estimates before starting anything.<br>
-        Hosting is covered through June 2027, then transfers at cost (~$5&ndash;20/mo).
+        Covered through June 2027 (included in retainer if active, or covered by us as part of the launch deal).
+        After that, transfers at cost (~$5&ndash;20/mo) or stays included with any active retainer.
       </p>
     </div>
   </div>
@@ -922,18 +964,21 @@
   <!-- ─── PAYMENT ─── -->
   <div class="section">
     <div class="section-heading">Payment</div>
-    <div class="payment-total">Total Due: $4,650.00 USD</div>
+    <div class="payment-total">Platform Build: $3,000.00 USD</div>
     <div class="payment-methods">
-      <p>Payment method: <strong>To be confirmed</strong></p>
-      <p>Please let us know your preferred payment method:</p>
+      <p style="margin-bottom:12px;">Two-payment schedule:</p>
+      <ul>
+        <li><strong>$1,500</strong> upfront (to start development)</li>
+        <li><strong>$1,500</strong> on launch</li>
+      </ul>
+      <p style="margin-top:16px;">Payment method: <strong>To be confirmed</strong></p>
       <ul>
         <li>Direct bank transfer (ACH)</li>
         <li>Wire transfer</li>
-        <li>Check</li>
         <li>Zelle, PayPal, or other</li>
       </ul>
       <p style="margin-top: 12px;">
-        We are happy to work with whatever payment method is most convenient for you.
+        Retainer billing (if selected) starts July 2026, billed monthly.
       </p>
     </div>
   </div>
