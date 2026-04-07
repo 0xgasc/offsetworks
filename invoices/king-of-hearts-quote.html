@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>King of Hearts — Project Quote | Offset Works</title>
+  <meta name="author" content="Offset Works">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #050505;
+      --bg-secondary: #0a0a0a;
+      --bg-card: #111111;
+      --text-primary: #fafafa;
+      --text-secondary: #999999;
+      --text-muted: #555555;
+      --accent: #00ff88;
+      --accent-dim: #00cc6a;
+      --border: #1a1a1a;
+      --border-accent: rgba(0, 255, 136, 0.2);
+      --struck: #ff4444;
+    }
+
+    @media print {
+      :root {
+        --bg-primary: #ffffff;
+        --bg-secondary: #fafafa;
+        --bg-card: #f7f7f7;
+        --text-primary: #111111;
+        --text-secondary: #555555;
+        --text-muted: #888888;
+        --accent: #00875a;
+        --accent-dim: #006644;
+        --border: #e0e0e0;
+        --border-accent: rgba(0, 135, 90, 0.2);
+        --struck: #cc0000;
+      }
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        padding: 20px 30px;
+        max-width: 100%;
+        font-size: 11.5px;
+      }
+      .no-print { display: none !important; }
+      .page-break { page-break-before: always; }
+      a { color: inherit; text-decoration: none; }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 60px 40px;
+      line-height: 1.65;
+      font-size: 14px;
+    }
+
+    .mono {
+      font-family: 'Space Mono', 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    }
+
+    .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .accent { color: var(--accent); }
+
+    /* ─── HEADER ─── */
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--accent);
+      margin-bottom: 40px;
+    }
+
+    .header-left h1 {
+      font-family: 'Space Mono', monospace;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .header-left .contact-info {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .header-right {
+      text-align: right;
+    }
+
+    .header-right .doc-type {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 4px 14px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .header-right .doc-meta {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    /* ─── CLIENT ─── */
+
+    .client-block {
+      margin-bottom: 48px;
+    }
+
+    .client-block .client-name {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .client-block .client-sub {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* ─── PROJECT SUMMARY ─── */
+
+    .project-summary {
+      margin-bottom: 48px;
+    }
+
+    .project-title {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .project-subtitle {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .project-description {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 680px;
+    }
+
+    /* ─── SECTION HEADINGS ─── */
+
+    .section {
+      margin-bottom: 48px;
+    }
+
+    .section-heading {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ─── SCOPE / FEATURES ─── */
+
+    .scope-category {
+      margin-bottom: 28px;
+    }
+
+    .scope-category h3 {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      padding-left: 12px;
+      border-left: 2px solid var(--accent);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 24px;
+    }
+
+    @media (max-width: 600px) {
+      .feature-grid { grid-template-columns: 1fr; }
+    }
+
+    .feature-item {
+      padding: 12px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .feature-item .feature-name {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .feature-item .feature-desc {
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* ─── TECH STACK ─── */
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .tech-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .tech-col h4 {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .tech-col ul {
+      list-style: none;
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .hosting-row {
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .hosting-row span {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* ─── CALLOUT BOX ─── */
+
+    .callout {
+      border: 1px solid var(--border-accent);
+      border-left: 3px solid var(--accent);
+      padding: 24px 28px;
+      margin: 32px 0 48px 0;
+      background: var(--bg-card);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .callout h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .callout p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+
+    .callout p:last-child { margin-bottom: 0; }
+
+    .callout .compare {
+      font-family: 'Space Mono', monospace;
+      font-size: 11.5px;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .callout .compare .line {
+      display: flex;
+      justify-content: space-between;
+      padding: 2px 0;
+    }
+
+    .callout .compare .line.highlight {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ─── PRICING TABLE ─── */
+
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .pricing-table td {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .pricing-table .item-name {
+      font-size: 13.5px;
+      font-weight: 500;
+    }
+
+    .pricing-table .item-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      padding-top: 3px;
+      line-height: 1.5;
+    }
+
+    .pricing-table .price {
+      text-align: right;
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      white-space: nowrap;
+      color: var(--text-secondary);
+    }
+
+    .pricing-table .subtotal-row td {
+      padding-top: 20px;
+      border-bottom: none;
+    }
+
+    .pricing-table .subtotal-row .item-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .pricing-table .subtotal-row .price {
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    .pricing-table .discount-row td {
+      border-bottom: none;
+      padding-top: 6px;
+    }
+
+    .pricing-table .discount-row .item-name {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .pricing-table .discount-row .price {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .pricing-table .total-row td {
+      border-top: 2px solid var(--accent);
+      border-bottom: none;
+      padding-top: 20px;
+      padding-bottom: 4px;
+    }
+
+    .pricing-table .total-row .item-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .pricing-table .total-row .price {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .pricing-note {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 16px;
+      line-height: 1.6;
+    }
+
+    /* ─── CHECKLIST ─── */
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+
+    .checklist li {
+      font-size: 13.5px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .checklist li:last-child { border-bottom: none; }
+
+    .checklist .check {
+      color: var(--accent);
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .checklist .note {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-left: 4px;
+    }
+
+    /* ─── TERMS ─── */
+
+    .terms-block {
+      margin-bottom: 32px;
+    }
+
+    .terms-block h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .terms-block p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .terms-block .rate {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* ─── PAYMENT ─── */
+
+    .payment-total {
+      font-family: 'Space Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .payment-methods {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .payment-methods ul {
+      list-style: none;
+      padding-left: 16px;
+      margin: 8px 0;
+    }
+
+    .payment-methods ul li::before {
+      content: "—";
+      margin-right: 8px;
+      color: var(--text-muted);
+    }
+
+    /* ─── FOOTER ─── */
+
+    .footer {
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .footer .footer-brand {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .footer .footer-note {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* ─── DIVIDER ─── */
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 48px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── HEADER ─── -->
+  <header class="header">
+    <div class="header-left">
+      <h1>Offset Works</h1>
+      <div class="contact-info">
+        NYC &amp; THE WORLD<br>
+        offset.works.studio@gmail.com<br>
+        @offset.works &nbsp;|&nbsp; offsetworks.xyz
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="doc-type mono">Quote / Invoice</div>
+      <div class="doc-meta">
+        Document #: OW-2026-004<br>
+        Date: April 7, 2026<br>
+        Valid until: May 7, 2026
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── CLIENT ─── -->
+  <div class="client-block">
+    <div class="label">Prepared For</div>
+    <div class="client-name">Mateo</div>
+    <div class="client-sub">King of Hearts</div>
+  </div>
+
+  <!-- ─── PROJECT SUMMARY ─── -->
+  <div class="project-summary">
+    <h2 class="project-title">King of Hearts</h2>
+    <div class="project-subtitle">Interactive Streetwear Platform &amp; Episode System</div>
+    <p class="project-description">
+      A world-building fashion platform where every drop is a broadcast. The Operator&mdash;the brand's
+      mysterious host&mdash;plays a tape for each new collection, pulling visitors into a late-night analog
+      TV experience. Users browse through an interactive vintage interface: watching episodes, exploring
+      lookbooks, discovering characters, and purchasing pieces. Each drop lives as its own world with unique
+      aesthetics, powered by a reusable engine underneath. Shopify-backed e-commerce, custom admin panel for
+      launching new drops without code, and a full archive of every volume. Custom built, top to bottom.
+    </p>
+  </div>
+
+  <!-- ─── SCOPE OF WORK ─── -->
+  <div class="section">
+    <div class="section-heading">Scope of Work</div>
+
+    <div class="scope-category">
+      <h3>Frontend Experience (TV Interface)</h3>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="feature-name">Analog TV Interface</div>
+          <div class="feature-desc">CRT scan lines, static transitions, channel switching, VHS tracking effects. The core browsing metaphor for the entire platform.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">The Operator</div>
+          <div class="feature-desc">Host character who introduces each drop. Tape-play animation sequences, mystery narrative elements woven into the browsing experience.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Episode Viewer</div>
+          <div class="feature-desc">Full multimedia episode pages with embedded video, themed layouts, and story elements unique to each drop.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Lookbook Browser</div>
+          <div class="feature-desc">Visual gallery for each drop's lookbook. Grid and carousel with zoom, per-drop color palettes and typography.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Responsive Design</div>
+          <div class="feature-desc">Full mobile, tablet, and desktop support. Touch-friendly TV interactions, adaptive layouts, and performance-tuned animations across all devices.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scope-category">
+      <h3>Drop &amp; Episode System</h3>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="feature-name">Drop Architecture</div>
+          <div class="feature-desc">Each drop is a self-contained world: color palette, typography, characters, lookbook, products, and episode. Reusable template engine that preserves each drop's unique aesthetic.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Volume Archive</div>
+          <div class="feature-desc">Chronological archive of all drops and volumes. Browse past collections with their original aesthetics preserved exactly as they launched.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Character Profiles</div>
+          <div class="feature-desc">Per-drop character pages tied to the world-building narrative. Each character lives within their drop's visual identity.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Video Integration</div>
+          <div class="feature-desc">YouTube and Vimeo embeds within episode pages. Custom player UI matching the analog TV aesthetic with channel-style navigation.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scope-category">
+      <h3>E-Commerce / Shopify Integration</h3>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="feature-name">Shopify Storefront API</div>
+          <div class="feature-desc">Headless connection to your existing Shopify store. Pull products, variants, and pricing in real-time while keeping the custom frontend experience.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Product Pages</div>
+          <div class="feature-desc">Custom product detail pages within the TV interface. Size and variant selection, image galleries, all styled per-drop.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Cart &amp; Checkout</div>
+          <div class="feature-desc">Add-to-cart within the experience, seamless redirect to Shopify checkout for payment processing, shipping, and order management.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Collection Mapping</div>
+          <div class="feature-desc">Each drop maps to a Shopify collection. Products auto-populate on the platform when tagged in Shopify. No double entry.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scope-category">
+      <h3>Custom Admin Panel</h3>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="feature-name">Drop Builder</div>
+          <div class="feature-desc">Admin interface to create new drops: upload lookbook images, set color palette, add characters, link Shopify collection, and embed episode video.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Preview Mode</div>
+          <div class="feature-desc">Preview a drop's full experience before publishing. Draft and published states so nothing goes live until it's ready.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Content Management</div>
+          <div class="feature-desc">Edit drop metadata, reorder lookbook images, update character bios, and manage episode content. All without touching code.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Asset Management</div>
+          <div class="feature-desc">Image upload and optimization pipeline. Assets organized by drop and volume with automatic compression and format conversion.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scope-category">
+      <h3>Infrastructure &amp; Launch</h3>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="feature-name">Hosting &amp; Deployment</div>
+          <div class="feature-desc">Vercel for the frontend, Railway for the admin API. CI/CD pipeline from GitHub. Push to deploy.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Performance</div>
+          <div class="feature-desc">Image optimization, lazy loading, code splitting. Fast load times despite heavy visual effects and animations.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Analytics</div>
+          <div class="feature-desc">Vercel Analytics integration to track drop engagement, page views, and conversion paths through the TV experience.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-name">Domain &amp; DNS</div>
+          <div class="feature-desc">Custom domain setup, SSL certificates, and production configuration. Ready for launch day.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── TECH STACK ─── -->
+  <div class="section">
+    <div class="section-heading">Tech Stack</div>
+    <div class="tech-grid">
+      <div class="tech-col">
+        <h4>Frontend</h4>
+        <ul>
+          <li>Next.js 14 (App Router)</li>
+          <li>React 19</li>
+          <li>Framer Motion</li>
+          <li>GSAP (TV effects)</li>
+          <li>Tailwind CSS</li>
+        </ul>
+      </div>
+      <div class="tech-col">
+        <h4>Backend</h4>
+        <ul>
+          <li>Node.js API Routes</li>
+          <li>Custom Admin API</li>
+          <li>NextAuth.js</li>
+          <li>Image Pipeline</li>
+        </ul>
+      </div>
+      <div class="tech-col">
+        <h4>Commerce</h4>
+        <ul>
+          <li>Shopify Storefront API</li>
+          <li>Shopify Buy SDK</li>
+          <li>Existing Shopify Store</li>
+          <li>Shopify Checkout</li>
+        </ul>
+      </div>
+      <div class="tech-col">
+        <h4>Hosting</h4>
+        <ul>
+          <li>Vercel (frontend)</li>
+          <li>Railway (admin API)</li>
+          <li>Vercel Blob (assets)</li>
+          <li>GitHub (source)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── CALLOUT ─── -->
+  <div class="callout">
+    <h3>Every drop is a new world</h3>
+    <p>
+      The platform is built as a reusable engine. Each new drop gets its own color palette, typography,
+      characters, and lookbook&mdash;but the underlying system stays the same. Your creative director can
+      launch a new collection without touching code. The TV stays on. The channel just changes.
+    </p>
+    <div class="compare">
+      <div class="line">
+        <span>Traditional fashion site</span>
+        <span>Rebuild for every collection</span>
+      </div>
+      <div class="line highlight">
+        <span>King of Hearts platform</span>
+        <span>New drop = new entry, same engine</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── PRICING ─── -->
+  <div class="section page-break">
+    <div class="section-heading">Pricing</div>
+
+    <div style="margin-bottom:32px; padding:20px 24px; background:var(--bg-card); border:1px solid var(--border); border-radius:4px;">
+      <div class="label" style="margin-bottom:12px;">Rate Basis</div>
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.7; margin-bottom:8px;">
+        Industry standard for custom headless Shopify builds with creative frontend work:
+        <span class="mono" style="color:var(--text-primary); font-weight:600;">$100&ndash;$150/hr</span>.
+        This quote uses <span class="mono" style="color:var(--text-primary); font-weight:600;">$100/hr</span> as the base market rate.
+        Total estimated effort: <span class="mono" style="color:var(--text-primary); font-weight:600;">~155 hours</span>.
+      </p>
+    </div>
+
+    <table class="pricing-table">
+      <tr>
+        <td>
+          <div class="item-name">Custom Frontend Experience</div>
+          <div class="item-desc" style="line-height:1.7;">
+            <span class="mono" style="color:var(--text-secondary);">~50 hrs</span> &nbsp;&bull;&nbsp;
+            TV shell &amp; CRT effects (15h) &bull; The Operator animations &amp; narrative (10h) &bull;
+            Episode viewer with themed layouts (8h) &bull; Lookbook browser with zoom &amp; carousel (8h) &bull;
+            Responsive &amp; touch optimization (9h)<br>
+            <span style="color:var(--text-muted); font-style:italic;">Why: This is the most labor-intensive component. Every screen requires custom shader-style CSS effects (scan lines, static, flicker), GSAP timeline animations, and per-drop theming. Nothing off-the-shelf&mdash;every interaction is hand-built.</span>
+          </div>
+        </td>
+        <td class="price">$5,000.00</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="item-name">Drop &amp; Episode System</div>
+          <div class="item-desc" style="line-height:1.7;">
+            <span class="mono" style="color:var(--text-secondary);">~30 hrs</span> &nbsp;&bull;&nbsp;
+            Drop template engine &amp; schema (12h) &bull; Volume archive with preserved aesthetics (8h) &bull;
+            Character profile pages (5h) &bull; Video integration &amp; custom player UI (5h)<br>
+            <span style="color:var(--text-muted); font-style:italic;">Why: The drop engine is the core architecture. Each drop needs its own color palette, typography, and layout that loads dynamically. This system is what makes future drops possible without rebuilding.</span>
+          </div>
+        </td>
+        <td class="price">$3,000.00</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="item-name">Shopify E-Commerce Integration</div>
+          <div class="item-desc" style="line-height:1.7;">
+            <span class="mono" style="color:var(--text-secondary);">~25 hrs</span> &nbsp;&bull;&nbsp;
+            Storefront API connection &amp; GraphQL queries (8h) &bull; Product detail pages within TV UI (6h) &bull;
+            Cart &amp; checkout flow (6h) &bull; Collection-to-drop mapping (5h)<br>
+            <span style="color:var(--text-muted); font-style:italic;">Why: Headless Shopify means building the entire shopping experience from scratch&mdash;product display, variant selection, cart state, checkout redirect&mdash;while making it feel native to the TV interface, not a bolted-on store.</span>
+          </div>
+        </td>
+        <td class="price">$2,500.00</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="item-name">Custom Admin Panel</div>
+          <div class="item-desc" style="line-height:1.7;">
+            <span class="mono" style="color:var(--text-secondary);">~35 hrs</span> &nbsp;&bull;&nbsp;
+            Drop builder UI &amp; forms (12h) &bull; Preview mode &amp; draft/publish states (8h) &bull;
+            Content management CRUD (8h) &bull; Asset upload &amp; optimization pipeline (7h)<br>
+            <span style="color:var(--text-muted); font-style:italic;">Why: A custom admin (vs. off-the-shelf CMS) means building the entire interface, auth, API, and database layer. The tradeoff: it's tailored exactly to King of Hearts&mdash;no bloat, no learning curve, no monthly CMS fee.</span>
+          </div>
+        </td>
+        <td class="price">$3,500.00</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="item-name">Infrastructure &amp; Launch</div>
+          <div class="item-desc" style="line-height:1.7;">
+            <span class="mono" style="color:var(--text-secondary);">~15 hrs</span> &nbsp;&bull;&nbsp;
+            Hosting &amp; CI/CD setup (5h) &bull; Performance optimization &amp; image pipeline (5h) &bull;
+            Analytics integration (2h) &bull; Domain, DNS &amp; SSL (3h)<br>
+            <span style="color:var(--text-muted); font-style:italic;">Why: Heavy animation sites need careful performance tuning&mdash;code splitting, lazy loading, frame rate management on mobile. This ensures the TV experience loads fast and runs smooth on all devices.</span>
+          </div>
+        </td>
+        <td class="price">$1,500.00</td>
+      </tr>
+
+      <tr class="subtotal-row">
+        <td>
+          <div class="item-name">Estimated Market Value</div>
+          <div class="item-desc">~155 hours &times; $100/hr base rate</div>
+        </td>
+        <td class="price">$15,500.00</td>
+      </tr>
+      <tr class="discount-row">
+        <td><div class="item-name">Friends &amp; Family Rate &nbsp;<span style="font-size:11px; opacity:0.7;">(70% off)</span></div></td>
+        <td class="price">&minus;$10,850.00</td>
+      </tr>
+      <tr class="total-row">
+        <td>
+          <div class="item-name">Your Price</div>
+          <div class="item-desc" style="font-size:11px; color:var(--text-muted);">Effective rate: ~$30/hr</div>
+        </td>
+        <td class="price">$4,650.00</td>
+      </tr>
+    </table>
+
+    <p class="pricing-note">
+      Market value of $15,500 is based on 155 hours at $100/hr&mdash;conservative for custom headless Shopify builds
+      with bespoke creative frontends (agencies typically bill $150&ndash;$200/hr for this type of work).
+      At the friends &amp; family rate, your effective cost is ~$30/hr for senior full-stack development.
+    </p>
+  </div>
+
+  <!-- ─── WHAT'S INCLUDED ─── -->
+  <div class="section">
+    <div class="section-heading">What's Included</div>
+    <ul class="checklist">
+      <li><span class="check">&#10003;</span> Fully built and deployed platform (turnkey)</li>
+      <li><span class="check">&#10003;</span> Hosting on Vercel + Railway <span class="note">(through June 2027)</span></li>
+      <li><span class="check">&#10003;</span> All source code via private GitHub repo</li>
+      <li><span class="check">&#10003;</span> Custom admin panel for launching new drops <span class="note">(no code required)</span></li>
+      <li><span class="check">&#10003;</span> Support &amp; feature enablement included <span class="note">(through 2026)</span></li>
+    </ul>
+  </div>
+
+  <!-- ─── TIMELINE ─── -->
+  <div class="section">
+    <div class="section-heading">Timeline</div>
+
+    <div class="terms-block">
+      <h3>Development <span class="accent" style="font-weight:400; font-size:12px;">April &ndash; May 2026</span></h3>
+      <p>
+        Full build across two months. TV interface, drop system, Shopify integration, admin panel,
+        and infrastructure. Regular check-ins and previews throughout development.
+      </p>
+    </div>
+
+    <div class="terms-block">
+      <h3>Launch <span class="accent" style="font-weight:400; font-size:12px;">June 2026</span></h3>
+      <p>
+        Production deployment, domain setup, final QA, and launch support.
+        Platform goes live with your first drop ready to broadcast.
+      </p>
+    </div>
+  </div>
+
+  <!-- ─── TERMS ─── -->
+  <div class="section">
+    <div class="section-heading">Terms &amp; Support</div>
+
+    <div class="terms-block">
+      <h3>Support Through 2026 <span class="accent" style="font-weight:400; font-size:12px;">(included)</span></h3>
+      <p>
+        Through <strong>end of 2026</strong>: bug fixes, adjustments, content changes, new drop onboarding,
+        and feature enablement at no extra cost.
+      </p>
+    </div>
+
+    <div class="terms-block">
+      <h3>After 2026 <span style="font-weight:400; font-size:12px; color:var(--text-muted);">(2027+)</span></h3>
+      <p>
+        Additional work: <span class="rate">$50/hr</span> (friends &amp; family rate). We'll give estimates before starting anything.<br>
+        Hosting is covered through June 2027, then transfers at cost (~$5&ndash;20/mo).
+      </p>
+    </div>
+  </div>
+
+  <!-- ─── PAYMENT ─── -->
+  <div class="section">
+    <div class="section-heading">Payment</div>
+    <div class="payment-total">Total Due: $4,650.00 USD</div>
+    <div class="payment-methods">
+      <p>Payment method: <strong>To be confirmed</strong></p>
+      <p>Please let us know your preferred payment method:</p>
+      <ul>
+        <li>Direct bank transfer (ACH)</li>
+        <li>Wire transfer</li>
+        <li>Check</li>
+        <li>Zelle, PayPal, or other</li>
+      </ul>
+      <p style="margin-top: 12px;">
+        We are happy to work with whatever payment method is most convenient for you.
+      </p>
+    </div>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="footer">
+    <div class="footer-brand">Offset Works &nbsp;&bull;&nbsp; NYC &amp; THE WORLD</div>
+    <div class="footer-note">
+      <a href="mailto:offset.works.studio@gmail.com" style="color:inherit; text-decoration:none;">offset.works.studio@gmail.com</a> &nbsp;|&nbsp; <a href="https://instagram.com/offset.works" target="_blank" rel="noopener" style="color:inherit; text-decoration:none;">@offset.works</a> &nbsp;|&nbsp; <a href="https://offsetworks.xyz" target="_blank" rel="noopener" style="color:inherit; text-decoration:none;">offsetworks.xyz</a>
+    </div>
+    <div class="footer-note" style="margin-top: 12px;">
+      This document serves as both a project quote and invoice.<br>
+      Quote valid for 30 days from date of issue.
+    </div>
+  </footer>
+
+</body>
+</html>
