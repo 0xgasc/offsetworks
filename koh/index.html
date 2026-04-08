@@ -163,13 +163,91 @@
     /* ─── SCROLL REVEAL ─── */
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    /* Staggered children */
+    .reveal.visible .feature-item,
+    .reveal.visible .checklist li,
+    .reveal.visible .pricing-table tr,
+    .reveal.visible .dropdown {
+      opacity: 0;
+      animation: staggerIn 0.5s ease forwards;
+    }
+
+    .reveal.visible .feature-item:nth-child(1),
+    .reveal.visible .checklist li:nth-child(1),
+    .reveal.visible .pricing-table tr:nth-child(1),
+    .reveal.visible .dropdown:nth-child(1) { animation-delay: 0.05s; }
+    .reveal.visible .feature-item:nth-child(2),
+    .reveal.visible .checklist li:nth-child(2),
+    .reveal.visible .pricing-table tr:nth-child(2),
+    .reveal.visible .dropdown:nth-child(2) { animation-delay: 0.12s; }
+    .reveal.visible .feature-item:nth-child(3),
+    .reveal.visible .checklist li:nth-child(3),
+    .reveal.visible .pricing-table tr:nth-child(3),
+    .reveal.visible .dropdown:nth-child(3) { animation-delay: 0.19s; }
+    .reveal.visible .feature-item:nth-child(4),
+    .reveal.visible .checklist li:nth-child(4),
+    .reveal.visible .pricing-table tr:nth-child(4),
+    .reveal.visible .dropdown:nth-child(4) { animation-delay: 0.26s; }
+    .reveal.visible .feature-item:nth-child(5),
+    .reveal.visible .checklist li:nth-child(5),
+    .reveal.visible .pricing-table tr:nth-child(5),
+    .reveal.visible .dropdown:nth-child(5) { animation-delay: 0.33s; }
+    .reveal.visible .checklist li:nth-child(6),
+    .reveal.visible .pricing-table tr:nth-child(6) { animation-delay: 0.40s; }
+    .reveal.visible .pricing-table tr:nth-child(7) { animation-delay: 0.47s; }
+    .reveal.visible .pricing-table tr:nth-child(8) { animation-delay: 0.54s; }
+
+    @keyframes staggerIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── SCROLL PROGRESS BAR ─── */
+    #scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      background: var(--accent);
+      z-index: 200;
+      width: 0%;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent);
+    }
+
+    /* ─── INTERACTIVE TEXT ─── */
+    .text-alive span {
+      display: inline-block;
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  opacity 0.3s ease,
+                  color 0.3s ease;
+      cursor: default;
+    }
+
+    .text-alive:hover span {
+      animation: textBreathe 1.5s ease infinite;
+      animation-delay: calc(var(--i) * 0.03s);
+    }
+
+    .text-alive span.popped {
+      transform: translate(
+        calc((var(--rx) - 0.5) * 18px),
+        calc((var(--ry) - 0.5) * 12px)
+      ) rotate(calc((var(--rx) - 0.5) * 8deg));
+      color: var(--accent);
+    }
+
+    @keyframes textBreathe {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(calc((var(--rx) - 0.5) * -6px)); }
     }
 
     /* ─── DROPDOWNS ─── */
@@ -364,6 +442,9 @@
   </style>
 </head>
 <body>
+
+  <!-- Scroll Progress -->
+  <div id="scroll-progress"></div>
 
   <!-- ASCII Background -->
   <pre id="ascii-bg"></pre>
@@ -734,24 +815,30 @@
   </div><!-- /content-wrapper -->
 
   <script>
-    // ─── ASCII BACKGROUND ───
+    // ─── ASCII BACKGROUND WITH PARALLAX ───
     const bg = document.getElementById('ascii-bg');
     const chars = ' .-·:;=+x%#@░▒▓█';
     const bgColors = ['#00ff88', '#1a3a5c', '#00ff88', '#2a2a3a', '#00ff88', '#0a2a4a'];
     let bgColorIdx = 0;
     let bgFrame = 0;
+    let scrollY = 0;
 
-    // Cycle colors every 8 seconds
     setInterval(() => {
       bgColorIdx = (bgColorIdx + 1) % bgColors.length;
       bg.style.color = bgColors[bgColorIdx];
     }, 8000);
 
+    // Parallax — bg moves at 0.3x scroll speed
+    window.addEventListener('scroll', () => {
+      scrollY = window.scrollY;
+      bg.style.transform = 'translateY(' + (-scrollY * 0.3) + 'px)';
+    }, { passive: true });
+
     function animBg(time) {
       bgFrame++;
       if (bgFrame % 2 !== 0) { requestAnimationFrame(animBg); return; }
       const cols = Math.ceil(window.innerWidth / 6) + 4;
-      const rows = Math.ceil(window.innerHeight / 11) + 4;
+      const rows = Math.ceil(window.innerHeight / 11) + 8;
       let out = '';
       const t = time * 0.001;
       for (let y = 0; y < rows; y++) {
@@ -774,6 +861,14 @@
     }
     requestAnimationFrame(animBg);
 
+    // ─── SCROLL PROGRESS BAR ───
+    const progressBar = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+      progressBar.style.width = pct + '%';
+    }, { passive: true });
+
     // ─── SCROLL REVEAL ───
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -784,6 +879,44 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ─── INTERACTIVE TEXT ───
+    // Wrap key text elements in spans for character-level interaction
+    function makeTextAlive(selector) {
+      document.querySelectorAll(selector).forEach(el => {
+        if (el.classList.contains('text-alive')) return;
+        const text = el.textContent;
+        el.innerHTML = '';
+        el.classList.add('text-alive');
+        for (let i = 0; i < text.length; i++) {
+          const span = document.createElement('span');
+          span.textContent = text[i] === ' ' ? '\u00a0' : text[i];
+          span.style.setProperty('--i', i);
+          span.style.setProperty('--rx', Math.random().toFixed(3));
+          span.style.setProperty('--ry', Math.random().toFixed(3));
+          el.appendChild(span);
+        }
+
+        // Click to pop characters outward, then settle back
+        el.addEventListener('click', () => {
+          const spans = el.querySelectorAll('span');
+          spans.forEach(s => {
+            s.style.setProperty('--rx', Math.random().toFixed(3));
+            s.style.setProperty('--ry', Math.random().toFixed(3));
+            s.classList.add('popped');
+          });
+          setTimeout(() => {
+            spans.forEach(s => s.classList.remove('popped'));
+          }, 600);
+        });
+      });
+    }
+
+    // Apply to titles and headings
+    makeTextAlive('.project-title');
+    makeTextAlive('.section-heading');
+    makeTextAlive('.callout h3');
+    makeTextAlive('.payment-total');
 
     // ─── DROPDOWNS ───
     function toggleDropdown(header) {
@@ -800,10 +933,24 @@
         btn.classList.toggle('active', (i === 0 && lang === 'en') || (i === 1 && lang === 'es'));
       });
 
+      // Re-apply text, then re-wrap alive elements
       document.querySelectorAll('[data-' + lang + ']').forEach(el => {
-        const text = el.getAttribute('data-' + lang);
-        if (text) el.innerHTML = text;
+        if (el.classList.contains('text-alive')) {
+          el.classList.remove('text-alive');
+          el.textContent = el.getAttribute('data-' + lang);
+        } else {
+          const text = el.getAttribute('data-' + lang);
+          if (text) el.innerHTML = text;
+        }
       });
+
+      // Re-wrap after language swap
+      setTimeout(() => {
+        makeTextAlive('.project-title');
+        makeTextAlive('.section-heading');
+        makeTextAlive('.callout h3');
+        makeTextAlive('.payment-total');
+      }, 50);
     }
   </script>
 </body>
