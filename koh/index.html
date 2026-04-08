@@ -836,7 +836,7 @@
     // ─── ASCII BACKGROUND WITH PARALLAX ───
     const bg = document.getElementById('ascii-bg');
     const chars = ' .-·:;=+x%#@░▒▓█';
-    const bgColors = ['#00ff88', '#1a3a5c', '#00ff88', '#2a2a3a', '#00ff88', '#0a2a4a'];
+    const bgColors = ['#00ff88', '#4488ff', '#00ff88', '#8866cc', '#00ff88', '#2299cc'];
     let bgColorIdx = 0;
     let bgFrame = 0;
     let scrollY = 0;
@@ -844,7 +844,7 @@
     setInterval(() => {
       bgColorIdx = (bgColorIdx + 1) % bgColors.length;
       bg.style.color = bgColors[bgColorIdx];
-    }, 8000);
+    }, 5000);
 
     // Parallax — bg moves at 0.3x scroll speed
     window.addEventListener('scroll', () => {
