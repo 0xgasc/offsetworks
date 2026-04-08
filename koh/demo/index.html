@@ -9,13 +9,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #080808;
+      --bg: #0c0b0a;
       --accent: #ff4400;
       --accent-2: #ff8800;
       --accent-glow: rgba(255, 68, 0, 0.35);
-      --text: #fafafa;
-      --text-dim: #888;
-      --text-muted: #444;
+      --text: #f0ece8;
+      --text-dim: #8a8480;
+      --text-muted: #4a4540;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,6 +23,7 @@
     body {
       font-family: 'Space Mono', monospace;
       background: var(--bg);
+      background-image: radial-gradient(ellipse at 50% 30%, rgba(40,30,20,0.4), transparent 70%);
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
@@ -534,24 +535,60 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
-      .tv-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-      .tv-grid .tv:nth-child(5) { grid-column: 1 / -1; max-width: 55%; justify-self: center; }
+      .nav { padding: 10px 14px; flex-wrap: wrap; gap: 8px; }
+      .nav-brand { font-size: 11px; width: 100%; text-align: center; }
+      .nav-controls { width: 100%; justify-content: center; flex-wrap: wrap; gap: 6px; }
+      .nav-btn { font-size: 8px; padding: 5px 10px; }
+
+      .tv-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .tv-grid .tv:nth-child(5) { grid-column: 1 / -1; max-width: 60%; justify-self: center; }
       .tv-screen .title { font-size: 12px; }
+
+      .single-view { padding: 100px 16px 40px; gap: 20px; }
+      .single-tv-wrap { max-width: 100%; }
+      .single-tv-wrap .tv-screen .title { font-size: 22px; }
+      .single-tv-wrap .tv-screen .subtitle { font-size: 11px; }
+
+      .ch-controls { gap: 16px; }
+      .ch-btn { width: 44px; height: 44px; font-size: 18px; }
+      .ch-info .ch-num { font-size: 10px; }
+
       .tape-grid { grid-template-columns: 1fr; }
-      .nav { padding: 10px 14px; }
-      .nav-brand { font-size: 10px; }
-      .nav-btn { font-size: 7px; padding: 4px 8px; }
+
+      .archive-view { padding: 100px 16px 40px; }
+      .grid-view { padding: 100px 14px 40px; }
     }
 
     @media (max-width: 480px) {
-      .tv-grid { gap: 10px; }
-      .grid-view { padding: 70px 10px 24px; }
-      .tv-shell { padding: 10px 10px 0; border-radius: 12px; }
+      .nav-brand { font-size: 10px; }
+      .nav-btn { font-size: 7px; padding: 4px 8px; }
+
+      .tv-grid { gap: 8px; }
+      .tv-shell { padding: 10px 10px 0; border-radius: 8px; }
       .tv-screen .title { font-size: 10px; }
       .tv-screen .label { font-size: 5px; }
       .tv-canvas { font-size: 5px; }
+      .tv-controls { padding: 8px 6px 10px; }
+      .knob { width: 14px; height: 14px; }
+      .tv-speaker-grille span { height: 12px; }
+      .tv-badge { font-size: 5px; }
+      .tv-feet { padding: 0 14px; }
+      .tv-foot { width: 12px; height: 4px; }
+      .tv-antenna .ear { height: 22px; }
+
+      .single-view { padding: 90px 12px 30px; }
       .single-tv-wrap .tv-screen .title { font-size: 18px; }
-      .ch-btn { width: 38px; height: 38px; font-size: 16px; }
+      .ch-btn { width: 40px; height: 40px; font-size: 16px; }
+      .ch-info { min-width: 100px; }
+
+      .buy-btn { padding: 10px 24px; font-size: 9px; }
+    }
+
+    /* Touch-friendly — larger tap targets on mobile */
+    @media (pointer: coarse) {
+      .tv { min-height: 44px; }
+      .ch-btn { width: 52px; height: 52px; }
+      .nav-btn { padding: 8px 14px; font-size: 9px; }
     }
   </style>
 </head>
@@ -564,19 +601,19 @@
         <button class="nav-btn active" onclick="setVolume(1)">Vol 1</button>
         <button class="nav-btn" onclick="setVolume(2)">Vol 2</button>
       </div>
-      <button class="nav-btn active" onclick="setView('grid')" id="btn-grid">TVs</button>
-      <button class="nav-btn" onclick="setView('single')" id="btn-single">Channel</button>
+      <button class="nav-btn" onclick="setView('grid')" id="btn-grid">TVs</button>
+      <button class="nav-btn active" onclick="setView('single')" id="btn-single">Channel</button>
       <button class="nav-btn" onclick="setView('archive')" id="btn-archive">Archive</button>
     </div>
   </nav>
 
   <!-- GRID VIEW -->
-  <div class="grid-view view active" id="grid-view">
+  <div class="grid-view view" id="grid-view">
     <div class="tv-grid" id="tv-grid"></div>
   </div>
 
   <!-- SINGLE TV VIEW -->
-  <div class="single-view view" id="single-view">
+  <div class="single-view view active" id="single-view">
     <div class="single-tv-wrap" id="single-tv"></div>
     <div class="ch-controls">
       <button class="ch-btn" onclick="prevCh()">&#9664;</button>
@@ -632,7 +669,7 @@
     const badges = ['ZENITH', 'KOH', 'HEARTS', 'SANYO', 'K\u2665H', 'RCA', 'MAGNAVOX', 'KOH', 'PHILCO'];
     const hasAntenna = [true, false, false, false, true, false, false, true, false];
 
-    let curVol = 1, curCh = 0, curView = 'grid', animId = null;
+    let curVol = 1, curCh = 0, curView = 'single', animId = null;
 
     // ─── ANIMATIONS ───
     const A = {
@@ -796,8 +833,19 @@
       if (e.key === '2') setVolume(2);
     });
 
+    // ─── TOUCH SWIPE (mobile channel switching) ───
+    let touchStartX = 0;
+    document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    document.addEventListener('touchend', e => {
+      if (curView !== 'single') return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 60) {
+        if (dx > 0) prevCh(); else nextCh();
+      }
+    }, { passive: true });
+
     // ─── INIT ───
-    renderGrid();
+    renderSingle();
     startAnims();
   </script>
 </body>
