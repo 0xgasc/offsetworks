@@ -69,6 +69,21 @@
 
     .content-wrapper { position: relative; z-index: 1; }
 
+    /* Smooth accent transitions across all elements */
+    .accent, .section-heading, .project-subtitle, .doc-type,
+    .lang-btn.active, .nav-btn.active, .demo-label,
+    .pricing-table .discount-row .item-name,
+    .pricing-table .discount-row .price,
+    .pricing-table .total-row .price,
+    .payment-total, .check,
+    .card-price, .callout .compare .line.highlight {
+      transition: color 3s ease, border-color 3s ease, box-shadow 3s ease, text-shadow 3s ease;
+    }
+    .header, .callout, .demo-banner, .dropdown.open,
+    .pricing-table .total-row td, .lang-btn.active, .nav-btn.active {
+      transition: border-color 3s ease, box-shadow 3s ease;
+    }
+
     .mono { font-family: 'Space Mono', 'SF Mono', monospace; }
 
     .label {
@@ -841,9 +856,25 @@
     let bgFrame = 0;
     let scrollY = 0;
 
+    // Full accent theme palette per color
+    const bgThemes = [
+      { color: '#00ff88', accent: '#00ff88', dim: '#00cc6a', glow: 'rgba(0,255,136,0.2)' },
+      { color: '#4488ff', accent: '#4488ff', dim: '#3366cc', glow: 'rgba(68,136,255,0.2)' },
+      { color: '#00ff88', accent: '#00ff88', dim: '#00cc6a', glow: 'rgba(0,255,136,0.2)' },
+      { color: '#8866cc', accent: '#8866cc', dim: '#6644aa', glow: 'rgba(136,102,204,0.2)' },
+      { color: '#00ff88', accent: '#00ff88', dim: '#00cc6a', glow: 'rgba(0,255,136,0.2)' },
+      { color: '#2299cc', accent: '#2299cc', dim: '#1177aa', glow: 'rgba(34,153,204,0.2)' },
+    ];
+
     setInterval(() => {
-      bgColorIdx = (bgColorIdx + 1) % bgColors.length;
-      bg.style.color = bgColors[bgColorIdx];
+      bgColorIdx = (bgColorIdx + 1) % bgThemes.length;
+      const theme = bgThemes[bgColorIdx];
+      bg.style.color = theme.color;
+      // Sync accent across the entire page
+      const root = document.documentElement.style;
+      root.setProperty('--accent', theme.accent);
+      root.setProperty('--accent-dim', theme.dim);
+      root.setProperty('--border-accent', theme.glow);
     }, 5000);
 
     // Parallax — bg moves at 0.3x scroll speed

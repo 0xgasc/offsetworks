@@ -23,12 +23,30 @@
     body {
       font-family: 'Space Mono', monospace;
       background: var(--bg);
-      background-image:
-        radial-gradient(ellipse at 50% 30%, rgba(50,35,20,0.5), transparent 60%),
-        radial-gradient(ellipse at 80% 80%, rgba(30,20,15,0.3), transparent 50%);
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
+    }
+
+    /* Full-screen ASCII background */
+    #ascii-bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      line-height: 1.12;
+      color: var(--accent);
+      opacity: 0.08;
+      white-space: pre;
+      overflow: hidden;
+      pointer-events: none;
+      transition: color 4s ease;
+    }
+
+    .nav, .grid-view, .single-view, .archive-view, .footer {
+      position: relative;
+      z-index: 1;
     }
 
     /* ─── NAV ─── */
@@ -656,6 +674,8 @@
 </head>
 <body>
 
+  <pre id="ascii-bg"></pre>
+
   <nav class="nav">
     <div class="nav-brand">King of Hearts</div>
     <div class="nav-controls">
@@ -944,6 +964,45 @@
         if (dx > 0) prevCh(); else nextCh();
       }
     }, { passive: true });
+
+    // ─── FULL-SCREEN ASCII BACKGROUND ───
+    const asciiBg = document.getElementById('ascii-bg');
+    const bgChars = ' .-·:;=+x%#@░▒▓█';
+    const bgColors = ['#ff4400', '#4488ff', '#ff4400', '#8866cc', '#ff4400', '#2299cc'];
+    let bgColorIdx = 0;
+    let bgFrame = 0;
+
+    setInterval(() => {
+      bgColorIdx = (bgColorIdx + 1) % bgColors.length;
+      asciiBg.style.color = bgColors[bgColorIdx];
+    }, 6000);
+
+    function animAsciiBg(time) {
+      bgFrame++;
+      if (bgFrame % 3 !== 0) { requestAnimationFrame(animAsciiBg); return; }
+      const cols = Math.ceil(window.innerWidth / 6) + 4;
+      const rows = Math.ceil(window.innerHeight / 10) + 4;
+      let out = '';
+      const t = time * 0.0008;
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const cx = x - cols/2, cy = y - rows/2;
+          const dist = Math.sqrt(cx*cx + cy*cy);
+          const v = (
+            Math.sin(x*0.04 + t*0.9) +
+            Math.cos(y*0.05 + t*0.7) +
+            Math.sin((x+y)*0.03 + t*0.5) +
+            Math.sin(dist*0.06 - t*1.1) +
+            Math.cos(x*0.02 - y*0.04 + t*0.3)
+          ) / 5;
+          out += bgChars[Math.max(0, Math.min(bgChars.length-1, Math.floor((v+1)*8)))];
+        }
+        out += '\n';
+      }
+      asciiBg.textContent = out;
+      requestAnimationFrame(animAsciiBg);
+    }
+    requestAnimationFrame(animAsciiBg);
 
     // ─── INIT ───
     renderSingle();
