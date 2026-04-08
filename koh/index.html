@@ -51,8 +51,8 @@
 
     /* ─── ASCII BACKGROUND ─── */
     #ascii-bg {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
+      position: absolute;
+      top: 0; left: 0; right: 0;
       z-index: 0;
       font-family: 'Space Mono', monospace;
       font-size: 10px;
@@ -697,8 +697,8 @@
     <div class="payment-methods">
       <p data-en="Two payments:" data-es="Dos pagos:">Two payments:</p>
       <ul>
-        <li><strong>$1,000</strong> <span data-en="upfront (to start)" data-es="por adelantado (para comenzar)">upfront (to start)</span></li>
-        <li><strong>$1,500</strong> <span data-en="on launch" data-es="al lanzar">on launch</span></li>
+        <li><strong>$1,000</strong> <span data-en="upon agreement (by May 8, 2026)" data-es="al acordar (antes del 8 de mayo, 2026)">upon agreement (by May 8, 2026)</span></li>
+        <li><strong>$1,500</strong> <span data-en="on launch (June 2026)" data-es="al lanzar (junio 2026)">on launch (June 2026)</span></li>
       </ul>
       <p style="margin-top:12px;" data-en="Payment method to be confirmed. We're flexible." data-es="M&eacute;todo de pago por confirmar. Somos flexibles.">Payment method to be confirmed. We're flexible.</p>
     </div>
@@ -725,8 +725,8 @@
     function animBg(time) {
       bgFrame++;
       if (bgFrame % 2 !== 0) { requestAnimationFrame(animBg); return; } // every other frame
-      const cols = Math.floor(window.innerWidth / 7);
-      const rows = Math.floor(window.innerHeight / 12);
+      const cols = Math.ceil(window.innerWidth / 7) + 2;
+      const rows = Math.ceil(document.documentElement.scrollHeight / 12) + 2;
       let out = '';
       const t = time * 0.001;
       for (let y = 0; y < rows; y++) {
