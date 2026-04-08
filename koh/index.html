@@ -175,6 +175,7 @@
       font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
       color: var(--accent); margin-bottom: 24px; padding-bottom: 8px;
       border-bottom: 1px solid var(--border);
+      transition: color 3s ease;
     }
 
     /* ─── SCROLL REVEAL ─── */
@@ -228,6 +229,14 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Global smooth transitions for accent-dependent properties */
+    .header { transition: border-color 3s ease; }
+    .callout { transition: border-color 3s ease; }
+    .dropdown { transition: border-color 3s ease; }
+    .demo-banner { transition: border-color 3s ease, box-shadow 0.3s ease; }
+    .pricing-table .total-row td { transition: border-color 3s ease; }
+    .knob.power { transition: background 3s ease, box-shadow 3s ease; }
+
     /* ─── SCROLL PROGRESS BAR ─── */
     #scroll-progress {
       position: fixed;
@@ -236,8 +245,8 @@
       background: var(--accent);
       z-index: 200;
       width: 0%;
-      transition: width 0.1s linear;
-      box-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent);
+      transition: width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1), background 3s ease, box-shadow 3s ease;
+      box-shadow: 0 0 6px var(--accent);
     }
 
     /* ─── INTERACTIVE TEXT ─── */
