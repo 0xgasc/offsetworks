@@ -51,8 +51,8 @@
 
     /* ─── ASCII BACKGROUND ─── */
     #ascii-bg {
-      position: absolute;
-      top: 0; left: 0; right: 0;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
       z-index: 0;
       font-family: 'Space Mono', monospace;
       font-size: 10px;
@@ -62,6 +62,7 @@
       white-space: pre;
       overflow: hidden;
       pointer-events: none;
+      transition: color 3s ease;
     }
 
     .content-wrapper { position: relative; z-index: 1; }
@@ -721,12 +722,21 @@
     // ─── ASCII BACKGROUND ───
     const bg = document.getElementById('ascii-bg');
     const chars = ' .-·:;=+x%#@░▒▓█';
+    const bgColors = ['#00ff88', '#1a3a5c', '#00ff88', '#2a2a3a', '#00ff88', '#0a2a4a'];
+    let bgColorIdx = 0;
     let bgFrame = 0;
+
+    // Cycle colors every 8 seconds
+    setInterval(() => {
+      bgColorIdx = (bgColorIdx + 1) % bgColors.length;
+      bg.style.color = bgColors[bgColorIdx];
+    }, 8000);
+
     function animBg(time) {
       bgFrame++;
-      if (bgFrame % 2 !== 0) { requestAnimationFrame(animBg); return; } // every other frame
-      const cols = Math.ceil(window.innerWidth / 7) + 2;
-      const rows = Math.ceil(document.documentElement.scrollHeight / 12) + 2;
+      if (bgFrame % 2 !== 0) { requestAnimationFrame(animBg); return; }
+      const cols = Math.ceil(window.innerWidth / 6) + 4;
+      const rows = Math.ceil(window.innerHeight / 11) + 4;
       let out = '';
       const t = time * 0.001;
       for (let y = 0; y < rows; y++) {
