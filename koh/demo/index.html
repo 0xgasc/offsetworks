@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0c0b0a;
+      --bg: #100e0c;
       --accent: #ff4400;
       --accent-2: #ff8800;
       --accent-glow: rgba(255, 68, 0, 0.35);
@@ -23,7 +23,9 @@
     body {
       font-family: 'Space Mono', monospace;
       background: var(--bg);
-      background-image: radial-gradient(ellipse at 50% 30%, rgba(40,30,20,0.4), transparent 70%);
+      background-image:
+        radial-gradient(ellipse at 50% 30%, rgba(50,35,20,0.5), transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(30,20,15,0.3), transparent 50%);
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
@@ -225,7 +227,14 @@
       border: 1px solid rgba(255,255,255,0.06);
       box-shadow: 0 2px 5px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08);
       position: relative;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.2s;
     }
+    .knob:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 8px var(--accent-glow), 0 2px 5px rgba(0,0,0,0.6);
+    }
+    .knob:active { transform: scale(0.95) rotate(15deg); }
     .knob::after {
       content: ''; position: absolute; top: 4px; left: 50%; transform: translateX(-50%);
       width: 1.5px; height: 6px; background: rgba(255,255,255,0.25); border-radius: 1px;
@@ -235,10 +244,20 @@
       box-shadow: 0 0 4px rgba(80,180,100,0.3), 0 2px 5px rgba(0,0,0,0.6);
     }
 
+    /* Knob labels */
+    .knob-wrap {
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+    }
+    .knob-label {
+      font-size: 5px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.18);
+    }
+
     .tv-badge {
       font-size: 7px; letter-spacing: 0.2em; text-transform: uppercase;
       color: rgba(255,255,255,0.15);
       font-style: italic;
+      white-space: nowrap;
     }
 
     .tv-speaker-grille { display: flex; gap: 2.5px; }
@@ -487,13 +506,41 @@
     .ch-info .ch-num { font-size: 11px; letter-spacing: 0.2em; color: var(--accent); transition: color 0.5s; }
     .ch-info .ch-lbl { font-family: 'Space Grotesk', sans-serif; font-size: 10px; color: var(--text-dim); margin-top: 3px; }
 
+    /* Product panel */
+    .product-panel {
+      display: flex; align-items: center; gap: 24px;
+      padding: 16px 24px;
+      background: rgba(20,18,15,0.6);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 6px;
+      max-width: 580px; width: 100%;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .product-panel.hidden { display: none; }
+    .product-info { flex: 1; }
+    .product-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 16px; font-weight: 700; color: var(--text);
+      letter-spacing: 0.05em;
+    }
+    .product-price {
+      font-family: 'Space Mono', monospace;
+      font-size: 14px; color: var(--accent); font-weight: 700;
+      margin-top: 2px;
+    }
+    .product-sizes {
+      font-size: 10px; color: var(--text-dim); margin-top: 4px;
+      letter-spacing: 0.08em;
+    }
+
     .buy-btn {
       font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
-      padding: 11px 28px; background: var(--accent); color: var(--bg); border: none;
+      padding: 12px 24px; background: var(--accent); color: var(--bg); border: none;
       cursor: pointer; transition: all 0.3s; font-weight: 700;
+      border-radius: 3px; white-space: nowrap;
     }
     .buy-btn:hover { box-shadow: 0 0 24px var(--accent-glow); transform: translateY(-2px); }
-    .buy-btn.hidden { display: none; }
 
     /* ════════════════════════════════════════
        ARCHIVE VIEW (CASSETTES)
@@ -581,7 +628,9 @@
       .ch-btn { width: 40px; height: 40px; font-size: 16px; }
       .ch-info { min-width: 100px; }
 
-      .buy-btn { padding: 10px 24px; font-size: 9px; }
+      .buy-btn { padding: 10px 20px; font-size: 9px; }
+      .product-panel { flex-direction: column; gap: 12px; text-align: center; padding: 14px 16px; }
+      .product-name { font-size: 14px; }
     }
 
     /* Touch-friendly — larger tap targets on mobile */
@@ -623,7 +672,14 @@
       </div>
       <button class="ch-btn" onclick="nextCh()">&#9654;</button>
     </div>
-    <button class="buy-btn hidden" id="buy-btn">Buy Now &rarr;</button>
+    <div class="product-panel hidden" id="product-panel">
+      <div class="product-info">
+        <div class="product-name" id="product-name">HOODIE</div>
+        <div class="product-price" id="product-price">$120</div>
+        <div class="product-sizes" id="product-sizes">S / M / L / XL</div>
+      </div>
+      <button class="buy-btn" id="buy-btn">Add to Cart &rarr;</button>
+    </div>
   </div>
 
   <!-- ARCHIVE VIEW -->
@@ -647,14 +703,16 @@
     };
 
     const channels = [
-      { label: 'EPISODE',  title: 'EP. 01',       subtitle: 'The Introduction',     type: 'episode',  anim: 'noise' },
-      { label: 'EPISODE',  title: 'EP. 02',       subtitle: 'The Descent',           type: 'episode',  anim: 'wave' },
-      { label: 'EPISODE',  title: 'EP. 03',       subtitle: 'The Return',            type: 'episode',  anim: 'plasma' },
-      { label: 'SHOP',     title: 'SHOP',          subtitle: '12 pieces',             type: 'shop',     anim: 'scanlines' },
       { label: 'DROP',     title: 'VOL 1',         subtitle: 'King of Hearts',        type: 'center',   anim: 'glitch' },
+      { label: 'EPISODE',  title: 'EP. 01',        subtitle: 'The Introduction',      type: 'episode',  anim: 'noise' },
+      { label: 'EPISODE',  title: 'EP. 02',        subtitle: 'The Descent',           type: 'episode',  anim: 'wave' },
+      { label: 'EPISODE',  title: 'EP. 03',        subtitle: 'The Return',            type: 'episode',  anim: 'plasma' },
+      { label: 'PRODUCT',  title: 'HOODIE',        subtitle: '$120 — S/M/L/XL',       type: 'product',  anim: 'noise' },
+      { label: 'PRODUCT',  title: 'TEE',           subtitle: '$65 — S/M/L/XL',        type: 'product',  anim: 'wave' },
+      { label: 'PRODUCT',  title: 'CAP',           subtitle: '$45 — One Size',        type: 'product',  anim: 'flow' },
+      { label: 'PRODUCT',  title: 'PANTS',         subtitle: '$140 — 28/30/32/34',    type: 'product',  anim: 'scanlines' },
       { label: 'LOOKBOOK', title: 'LOOK\nBOOK',    subtitle: 'Fall 2026',             type: 'lookbook', anim: 'flow' },
       { label: 'THE HOST', title: 'THE\nOPERATOR', subtitle: 'Who is he?',            type: 'about',    anim: 'binary' },
-      { label: 'PRODUCT',  title: 'HOODIE',        subtitle: '$120 — S/M/L/XL',       type: 'product',  anim: 'noise' },
       { label: 'ARCHIVE',  title: 'ALL\nDROPS',    subtitle: '2 volumes',             type: 'archive',  anim: 'scanlines' },
     ];
 
@@ -665,9 +723,9 @@
       { ep: 'FULL LENGTH', title: 'Volume 1 — Complete', duration: '37:04', style: '', full: true },
     ];
 
-    const shellTypes = ['', 'plastic', 'silver', '', '', 'plastic', 'silver', '', 'plastic'];
-    const badges = ['ZENITH', 'KOH', 'HEARTS', 'SANYO', 'K\u2665H', 'RCA', 'MAGNAVOX', 'KOH', 'PHILCO'];
-    const hasAntenna = [true, false, false, false, true, false, false, true, false];
+    const shellTypes = ['', 'plastic', 'silver', '', 'plastic', 'silver', '', 'plastic', '', 'silver', 'plastic'];
+    const badges = ['K\u2665H', 'ZENITH', 'KOH', 'HEARTS', 'SANYO', 'RCA', 'MAGNAVOX', 'KOH', 'PHILCO', 'KOH', 'ZENITH'];
+    const hasAntenna = [true, false, false, true, false, false, true, false, false, false, false];
 
     let curVol = 1, curCh = 0, curView = 'single', animId = null;
 
@@ -703,14 +761,31 @@
             <div class="tv-static"></div>
           </div>
           <div class="tv-controls">
-            <div class="tv-knobs"><div class="knob power"></div><div class="knob"></div></div>
+            <div class="tv-knobs">
+              <div class="knob-wrap"><div class="knob power" data-action="power"></div><div class="knob-label">power</div></div>
+              <div class="knob-wrap"><div class="knob" data-action="prev"></div><div class="knob-label">ch &larr;</div></div>
+            </div>
             <div class="tv-badge">${badge}</div>
             <div class="tv-speaker-grille"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="tv-knobs"><div class="knob"></div></div>
+            <div class="tv-knobs">
+              <div class="knob-wrap"><div class="knob" data-action="next"></div><div class="knob-label">ch &rarr;</div></div>
+            </div>
           </div>
         </div>
         <div class="tv-feet"><div class="tv-foot"></div><div class="tv-foot"></div></div>`;
-      d.addEventListener('click', () => { d.classList.add('switching'); setTimeout(() => d.classList.remove('switching'), 300); });
+      // Knob clicks → channel switching
+      d.addEventListener('click', (e) => {
+        const knob = e.target.closest('[data-action]');
+        if (knob && curView === 'single') {
+          e.stopPropagation();
+          const action = knob.dataset.action;
+          if (action === 'prev') prevCh();
+          else if (action === 'next') nextCh();
+          return;
+        }
+        d.classList.add('switching');
+        setTimeout(() => d.classList.remove('switching'), 300);
+      });
       return d;
     }
 
@@ -744,7 +819,9 @@
     // ─── RENDER VIEWS ───
     function renderGrid() {
       const g = document.getElementById('tv-grid'); g.innerHTML = '';
-      channels.forEach((ch, i) => {
+      // Show 9 TVs in 3x3 grid (subset of all channels)
+      const gridChannels = channels.slice(0, 9);
+      gridChannels.forEach((ch, i) => {
         const tv = buildTV(ch, shellTypes[i], badges[i], hasAntenna[i], 'small');
         g.appendChild(tv);
         setTimeout(() => { tv.classList.add('powered', 'powering-on'); setTimeout(() => tv.classList.remove('powering-on'), 600); }, 60 + i * 100);
@@ -754,12 +831,23 @@
     function renderSingle() {
       const c = document.getElementById('single-tv'); c.innerHTML = '';
       const ch = channels[curCh];
-      const tv = buildTV(ch, 'plastic', 'KOH', true, 'large');
+      const tv = buildTV(ch, shellTypes[curCh % shellTypes.length], badges[curCh % badges.length], hasAntenna[curCh % hasAntenna.length], 'large');
       tv.classList.add('powered');
       c.appendChild(tv);
       document.getElementById('ch-num').textContent = `CH ${String(curCh+1).padStart(2,'0')} / ${String(channels.length).padStart(2,'0')}`;
       document.getElementById('ch-lbl').textContent = `${ch.label} \u2014 ${ch.subtitle}`;
-      document.getElementById('buy-btn').classList.toggle('hidden', ch.type !== 'product' && ch.type !== 'shop');
+
+      // Product panel
+      const panel = document.getElementById('product-panel');
+      if (ch.type === 'product') {
+        panel.classList.remove('hidden');
+        document.getElementById('product-name').textContent = ch.title;
+        const parts = ch.subtitle.split(' \u2014 ');
+        document.getElementById('product-price').textContent = parts[0] || '';
+        document.getElementById('product-sizes').textContent = parts[1] || '';
+      } else {
+        panel.classList.add('hidden');
+      }
     }
 
     function renderArchive() {
