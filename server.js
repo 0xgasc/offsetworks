@@ -17,17 +17,20 @@ const LYNX_TARGET =
   process.env.LYNX_TARGET ||
   "https://lynx-production-9436.up.railway.app";
 
-// Use a path filter (not app.use("/lynx", ...)) so the original
-// req.url including the /lynx prefix is forwarded as-is.
-app.use(
-  createProxyMiddleware({
-    pathFilter: ["/lynx", "/lynx/**"],
-    target: LYNX_TARGET,
-    changeOrigin: true,
-    ws: true,
-    xfwd: true,
-  }),
-);
+// Match any /lynx or /lynx/... path; forward URL untouched.
+app.use((req, res, next) => {
+  if (req.path === "/lynx" || req.path.startsWith("/lynx/")) {
+    return lynxProxy(req, res, next);
+  }
+  next();
+});
+
+const lynxProxy = createProxyMiddleware({
+  target: LYNX_TARGET,
+  changeOrigin: true,
+  ws: true,
+  xfwd: true,
+});
 
 app.use(express.static(path.resolve(__dirname), { extensions: ["html"] }));
 
