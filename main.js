@@ -488,7 +488,7 @@ function initWorkList() {
     const isLive = item.badge === 'live' && item.link && item.link !== '#';
     const isWip = item.badge === 'wip';
     const needsZoom = item.title === 'lynx' || item.title === 'stok';
-    const useIframe = isLive && !item.useImage;
+    const useIframe = isLive && item.useIframe === true;
 
     // For live sites: use iframe (scrollable, click opens new tab), for WIP: non-clickable image
     let mediaContent = '';
