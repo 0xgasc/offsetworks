@@ -340,12 +340,12 @@ const workItems = [
   {
     title: 'convoca',
     type: { en: 'hackathon demo', es: 'demo de hackathon' },
-    badge: 'wip',
+    badge: 'live',
     desc: {
       en: 'agent-powered civic and community event discovery for nyc and guate. cross-platform ingestion, vision ocr on flyers, semantic dedup, ranked recs with reasoning traces.',
       es: 'descubrimiento de eventos cívicos y comunitarios con agentes para nyc y guate. ingesta multiplataforma, ocr de flyers, dedup semántico y recomendaciones con trazas de razonamiento.'
     },
-    link: '#'
+    link: 'https://convoca-web-production.up.railway.app/'
   }
 ];
 
