@@ -269,17 +269,6 @@ const workItems = [
     image: 'images/umo-screenshot.png'
   },
   {
-    title: 'geese live archive',
-    type: { en: 'live music archive', es: 'archivo de música en vivo' },
-    badge: 'live',
-    desc: {
-      en: 'live performance archive for geese. explore setlists, recordings, and concert history.',
-      es: 'archivo de presentaciones en vivo de geese. explora setlists, grabaciones e historial de conciertos.'
-    },
-    link: 'https://geeselive-production-4233.up.railway.app/',
-    image: 'images/geese-screenshot.png'
-  },
-  {
     title: 'eztix',
     type: { en: 'p2p ticketing platform', es: 'plataforma de tickets p2p' },
     badge: 'live',
@@ -323,6 +312,36 @@ const workItems = [
     },
     link: '#',
     image: 'images/stok-screenshot.png'
+  },
+  {
+    title: 'obro',
+    type: { en: 'construction expense saas', es: 'saas de gastos de construcción' },
+    badge: 'live',
+    desc: {
+      en: 'expense and document management for guatemalan construction teams. cobros, gastos, and documentos in one place, built for site managers and contractors.',
+      es: 'gestión de gastos y documentos para equipos de construcción en guatemala. cobros, gastos y documentos en un solo lugar, hecho para residentes y contratistas.'
+    },
+    link: 'https://obro-gt.vercel.app'
+  },
+  {
+    title: 'koh',
+    type: { en: 'media archive + drops', es: 'archivo de medios + drops' },
+    badge: 'live',
+    desc: {
+      en: 'webgl crt drop platform for media releases. shader-driven channels, persistent volume on railway, built for moments and limited drops.',
+      es: 'plataforma de drops con crt en webgl para lanzamientos. canales con shaders, volumen persistente en railway, hecho para momentos y drops limitados.'
+    },
+    link: '/koh'
+  },
+  {
+    title: 'convoca',
+    type: { en: 'hackathon demo', es: 'demo de hackathon' },
+    badge: 'wip',
+    desc: {
+      en: 'agent-powered civic and community event discovery for nyc and guate. cross-platform ingestion, vision ocr on flyers, semantic dedup, ranked recs with reasoning traces.',
+      es: 'descubrimiento de eventos cívicos y comunitarios con agentes para nyc y guate. ingesta multiplataforma, ocr de flyers, dedup semántico y recomendaciones con trazas de razonamiento.'
+    },
+    link: '#'
   }
 ];
 
