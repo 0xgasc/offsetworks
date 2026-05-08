@@ -262,6 +262,7 @@ const workItems = [
     title: 'umo archive',
     type: { en: 'live music archive', es: 'archivo de música en vivo' },
     badge: 'live',
+    useImage: true,
     desc: {
       en: 'live music setlist archive and discovery platform. browse performances, track artists, and explore music history.',
       es: 'archivo de setlists y plataforma de descubrimiento. explora presentaciones, sigue artistas y descubre historia musical.'
@@ -488,7 +489,7 @@ function initWorkList() {
     const isLive = item.badge === 'live' && item.link && item.link !== '#';
     const isWip = item.badge === 'wip';
     const needsZoom = item.title === 'lynx' || item.title === 'stok';
-    const useIframe = isLive && item.useIframe === true;
+    const useIframe = isLive && !item.useImage;
 
     // For live sites: use iframe (scrollable, click opens new tab), for WIP: non-clickable image
     let mediaContent = '';
