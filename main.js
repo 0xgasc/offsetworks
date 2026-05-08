@@ -255,7 +255,8 @@ const workItems = [
       en: 'property management platform for landlords and tenants. streamlined rent collection, maintenance requests, and lease management.',
       es: 'plataforma de gestión de propiedades para propietarios e inquilinos. cobro de renta, solicitudes de mantenimiento y gestión de contratos.'
     },
-    link: 'https://manto-propiedades.vercel.app/'
+    link: 'https://manto-propiedades.vercel.app/',
+    image: 'images/manto-screenshot.png'
   },
   {
     title: 'umo archive',
@@ -321,7 +322,8 @@ const workItems = [
       en: 'expense and document management for guatemalan construction teams. cobros, gastos, and documentos in one place, built for site managers and contractors.',
       es: 'gestión de gastos y documentos para equipos de construcción en guatemala. cobros, gastos y documentos en un solo lugar, hecho para residentes y contratistas.'
     },
-    link: 'https://obro-gt.vercel.app'
+    link: 'https://obro-gt.vercel.app',
+    image: 'images/obro-screenshot.png'
   },
   {
     title: 'koh',
@@ -331,7 +333,8 @@ const workItems = [
       en: 'webgl crt drop platform for media releases. shader-driven channels, persistent volume on railway, built for moments and limited drops.',
       es: 'plataforma de drops con crt en webgl para lanzamientos. canales con shaders, volumen persistente en railway, hecho para momentos y drops limitados.'
     },
-    link: '/koh'
+    link: '/koh',
+    image: 'images/koh-screenshot.png'
   },
   {
     title: 'convoca',
