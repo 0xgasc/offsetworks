@@ -588,7 +588,7 @@ function initWorkList() {
       }
 
       // Handle WIP image click - show modal
-      if (isWip && e.target.classList.contains('work-track-image')) {
+      if (item.badge === 'wip' && e.target.classList.contains('work-track-image')) {
         if (window.showWipModal) window.showWipModal();
         return;
       }
