@@ -268,12 +268,12 @@ const workItems = [
     title: 'umo archive',
     type: { en: 'live music archive', es: 'archivo de música en vivo' },
     badge: 'live',
-    useImage: true,
     desc: {
       en: 'live music setlist archive and discovery platform. browse performances, track artists, and explore music history.',
       es: 'archivo de setlists y plataforma de descubrimiento. explora presentaciones, sigue artistas y descubre historia musical.'
     },
-    link: 'https://umo-live.xyz',
+    link: 'https://umo.livemoments.online/songs',
+    iframeSrc: '/umo-frame/songs',
     image: 'images/umo-screenshot.png'
   },
   {
@@ -340,7 +340,7 @@ const workItems = [
       en: 'webgl crt drop platform for media releases. shader-driven channels, persistent volume on railway, built for moments and limited drops.',
       es: 'plataforma de drops con crt en webgl para lanzamientos. canales con shaders, volumen persistente en railway, hecho para momentos y drops limitados.'
     },
-    link: 'https://tv-landing-app-production.up.railway.app/',
+    link: 'https://tv-landing-app-production.up.railway.app/vol2',
     image: 'images/koh-screenshot.png'
   },
   {
@@ -502,7 +502,8 @@ function initWorkList() {
     // For live sites: use iframe (scrollable, click opens new tab), for WIP: non-clickable image
     let mediaContent = '';
     if (useIframe) {
-      mediaContent = `<div class="work-track-iframe-wrapper" data-link="${item.link}"><iframe class="work-track-iframe" src="${item.link}" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe><div class="iframe-click-overlay"></div></div>`;
+      const iframeSrc = item.iframeSrc || item.link;
+      mediaContent = `<div class="work-track-iframe-wrapper" data-link="${item.link}"><iframe class="work-track-iframe" src="${iframeSrc}" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe><div class="iframe-click-overlay"></div></div>`;
     } else if (item.image) {
       const zoomClass = needsZoom ? ' work-track-image-zoomed' : '';
       // Live sites with useImage flag get clickable images, WIP pics are not clickable
