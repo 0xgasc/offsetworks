@@ -96,6 +96,8 @@ const ES_META = {
   ogUrl: "https://offsetworks.xyz/es",
   ogLocale: "es_GT",
   ogLocaleAlt: "en_US",
+  ogImage: "https://offsetworks.xyz/images/og-es.png",
+  ogImageAlt: "offset works — sistemas que funcionan.",
   htmlLang: "es",
 };
 
@@ -143,6 +145,18 @@ function renderLocale(req, res, locale) {
       .replace(
         /<meta name="twitter:description" content="[^"]*">/,
         `<meta name="twitter:description" content="${ES_META.description}">`
+      )
+      .replace(
+        /<meta property="og:image" content="[^"]*">/,
+        `<meta property="og:image" content="${ES_META.ogImage}">`
+      )
+      .replace(
+        /<meta property="og:image:alt" content="[^"]*">/,
+        `<meta property="og:image:alt" content="${ES_META.ogImageAlt}">`
+      )
+      .replace(
+        /<meta name="twitter:image" content="[^"]*">/,
+        `<meta name="twitter:image" content="${ES_META.ogImage}">`
       );
   }
   res.type("html").send(html);

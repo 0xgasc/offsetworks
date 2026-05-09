@@ -9,6 +9,8 @@ const seoMeta = {
     canonical: 'https://offsetworks.xyz/',
     ogLocale: 'en_US',
     ogLocaleAlt: 'es_GT',
+    ogImage: 'https://offsetworks.xyz/images/og-en.png',
+    ogImageAlt: 'offset works — systems that work.',
   },
   es: {
     title: 'offset works — productos digitales que funcionan',
@@ -16,6 +18,8 @@ const seoMeta = {
     canonical: 'https://offsetworks.xyz/es',
     ogLocale: 'es_GT',
     ogLocaleAlt: 'en_US',
+    ogImage: 'https://offsetworks.xyz/images/og-es.png',
+    ogImageAlt: 'offset works — sistemas que funcionan.',
   },
 };
 
@@ -192,6 +196,9 @@ function setLanguage(lang) {
     set('meta[property="og:locale:alternate"]', 'content', meta.ogLocaleAlt);
     set('meta[name="twitter:title"]', 'content', meta.title);
     set('meta[name="twitter:description"]', 'content', meta.description);
+    set('meta[property="og:image"]', 'content', meta.ogImage);
+    set('meta[property="og:image:alt"]', 'content', meta.ogImageAlt);
+    set('meta[name="twitter:image"]', 'content', meta.ogImage);
   }
 }
 
