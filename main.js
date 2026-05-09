@@ -538,20 +538,19 @@ function initWorkList() {
     const track = document.createElement('div');
     track.className = 'work-track';
     track.dataset.itemIndex = idx;
-    const isLive = item.badge === 'live' && item.link && item.link !== '#';
-    const isWip = item.badge === 'wip';
+    const hasLink = item.link && item.link !== '#';
+    const useIframe = hasLink && !item.useImage;
     const needsZoom = false;
-    const useIframe = isLive && !item.useImage;
 
-    // For live sites: use iframe (scrollable, click opens new tab), for WIP: non-clickable image
+    // Media: iframe if we have a real link and aren't opted into image-only,
+    // otherwise clickable image (if we have a link), otherwise plain image.
     let mediaContent = '';
     if (useIframe) {
       const iframeSrc = item.iframeSrc || item.link;
       mediaContent = `<div class="work-track-iframe-wrapper" data-link="${item.link}"><iframe class="work-track-iframe" src="${iframeSrc}" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe><div class="iframe-click-overlay"></div></div>`;
     } else if (item.image) {
       const zoomClass = needsZoom ? ' work-track-image-zoomed' : '';
-      // Live sites with useImage flag get clickable images, WIP pics are not clickable
-      if (isLive && item.link && item.link !== '#') {
+      if (hasLink) {
         mediaContent = `<a href="${item.link}" target="_blank" rel="noopener" class="work-track-image-link"><img class="work-track-image${zoomClass}" src="${item.image}" alt="${item.title}" loading="lazy"></a>`;
       } else {
         mediaContent = `<img class="work-track-image${zoomClass}" src="${item.image}" alt="${item.title}" loading="lazy">`;
@@ -571,7 +570,7 @@ function initWorkList() {
         <div class="work-track-body-inner">
           ${itemDesc ? `<p class="work-track-desc">${itemDesc}</p>` : ''}
           ${mediaContent}
-          ${isLive ? `<a href="${item.link}" class="work-link" target="_blank" rel="noopener">${t.work.visitSite}</a>` : ''}
+          ${hasLink ? `<a href="${item.link}" class="work-link" target="_blank" rel="noopener">${t.work.visitSite}</a>` : ''}
         </div>
       </div>
     `;
