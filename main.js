@@ -257,7 +257,6 @@ const workItems = [
     title: 'manto',
     type: { en: 'property management for landlords', es: 'gestión para arrendadores' },
     badge: 'live',
-    useImage: true,
     desc: {
       en: 'collect rent, handle maintenance requests, and track every lease in one place. built for landlords in guatemala managing more than one property.',
       es: 'cobrá renta, atendé mantenimiento y llevá cada contrato desde un solo lugar. hecho para arrendadores en guatemala con más de una propiedad.'
@@ -281,7 +280,6 @@ const workItems = [
     title: 'tiqueteo',
     type: { en: 'tickets + resale, for guatemala', es: 'tickets + reventa, para guatemala' },
     badge: 'live',
-    useImage: true,
     desc: {
       en: 'buy tickets direct from the organizer, or pass them on safely when plans change. one app for going out in guatemala.',
       es: 'comprá tickets directo del organizador, o pasalos de forma segura cuando cambien los planes. una sola app para salir en guatemala.'
@@ -504,7 +502,7 @@ function initWorkList() {
     let mediaContent = '';
     if (useIframe) {
       const iframeSrc = item.iframeSrc || item.link;
-      mediaContent = `<div class="work-track-iframe-wrapper" data-link="${item.link}"><iframe class="work-track-iframe" src="${iframeSrc}" loading="lazy" referrerpolicy="no-referrer"></iframe><div class="iframe-click-overlay"></div></div>`;
+      mediaContent = `<div class="work-track-iframe-wrapper" data-link="${item.link}"><iframe class="work-track-iframe" src="${iframeSrc}" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe><div class="iframe-click-overlay"></div></div>`;
     } else if (item.image) {
       const zoomClass = needsZoom ? ' work-track-image-zoomed' : '';
       // Live sites with useImage flag get clickable images, WIP pics are not clickable
