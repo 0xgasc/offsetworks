@@ -547,7 +547,10 @@ function initWorkList() {
     let mediaContent = '';
     if (useIframe) {
       const iframeSrc = item.iframeSrc || item.link;
-      mediaContent = `<div class="work-track-iframe-wrapper" data-link="${item.link}"><iframe class="work-track-iframe" src="${iframeSrc}" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe><div class="iframe-click-overlay"></div></div>`;
+      // Lazy-mount: src empty until track is expanded. loading="lazy" alone
+      // doesn't reliably fire inside a collapsed (max-height:0) accordion,
+      // so we set src on first expand instead.
+      mediaContent = `<div class="work-track-iframe-wrapper" data-link="${item.link}"><iframe class="work-track-iframe" src="about:blank" data-src="${iframeSrc}" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe><div class="iframe-click-overlay"></div></div>`;
     } else if (item.image) {
       const zoomClass = needsZoom ? ' work-track-image-zoomed' : '';
       if (hasLink) {
@@ -597,7 +600,15 @@ function initWorkList() {
       // Close all
       grid.querySelectorAll('.work-track.active').forEach(t => t.classList.remove('active'));
       // Toggle clicked
-      if (!wasActive) track.classList.add('active');
+      if (!wasActive) {
+        track.classList.add('active');
+        // Lazy-mount the iframe src on first expand
+        const iframe = track.querySelector('iframe.work-track-iframe[data-src]');
+        if (iframe) {
+          iframe.src = iframe.dataset.src;
+          iframe.removeAttribute('data-src');
+        }
+      }
     });
 
     grid.appendChild(track);
