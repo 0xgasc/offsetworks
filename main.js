@@ -334,7 +334,7 @@ const workItems = [
       en: 'webgl crt drop platform for media releases. shader-driven channels, persistent volume on railway, built for moments and limited drops.',
       es: 'plataforma de drops con crt en webgl para lanzamientos. canales con shaders, volumen persistente en railway, hecho para momentos y drops limitados.'
     },
-    link: '/koh',
+    link: 'https://tv-landing-app-production.up.railway.app/',
     image: 'images/koh-screenshot.png'
   },
   {
