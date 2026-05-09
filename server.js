@@ -45,15 +45,39 @@ const lynxProxy = createProxyMiddleware({
   xfwd: true,
 });
 
+// Strip frame-blocking headers AND inject <base href> into HTML responses so
+// the proxied page's relative asset paths (/static/css/..., /static/js/...)
+// resolve to umo's origin instead of offsetworks.xyz.
 const umoProxy = createProxyMiddleware({
   target: UMO_TARGET,
   changeOrigin: true,
   pathRewrite: { "^/umo-frame": "" },
+  selfHandleResponse: true,
   on: {
-    proxyRes: (proxyRes) => {
-      delete proxyRes.headers["x-frame-options"];
-      delete proxyRes.headers["content-security-policy"];
-      delete proxyRes.headers["content-security-policy-report-only"];
+    proxyRes: (proxyRes, req, res) => {
+      const headers = { ...proxyRes.headers };
+      delete headers["x-frame-options"];
+      delete headers["content-security-policy"];
+      delete headers["content-security-policy-report-only"];
+
+      const contentType = proxyRes.headers["content-type"] || "";
+      if (contentType.includes("text/html")) {
+        const chunks = [];
+        proxyRes.on("data", (c) => chunks.push(c));
+        proxyRes.on("end", () => {
+          let html = Buffer.concat(chunks).toString("utf8");
+          html = html.replace(
+            /<head([^>]*)>/i,
+            `<head$1><base href="${UMO_TARGET}/">`
+          );
+          delete headers["content-length"];
+          res.writeHead(proxyRes.statusCode || 200, headers);
+          res.end(html);
+        });
+      } else {
+        res.writeHead(proxyRes.statusCode || 200, headers);
+        proxyRes.pipe(res);
+      }
     },
   },
 });

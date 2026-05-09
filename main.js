@@ -233,33 +233,33 @@ const services = [
 const workItems = [
   {
     title: 'flyin',
-    type: { en: 'web app', es: 'app web' },
+    type: { en: 'helicopter tours, online', es: 'tours en helicóptero, en línea' },
     badge: 'live',
     desc: {
-      en: 'helicopter tour booking platform for guatemala. real-time availability, payment processing, and automated confirmations.',
-      es: 'plataforma de reservas para tours en helicóptero en guatemala. disponibilidad en tiempo real, procesamiento de pagos y confirmaciones automáticas.'
+      en: 'helicopter tours over guatemala, booked in seconds. pick a route, pay, and the confirmation hits your inbox before you close the tab.',
+      es: 'tours en helicóptero sobre guatemala, reservados en segundos. elegí ruta, pagá, y la confirmación te llega al correo antes de cerrar la pestaña.'
     },
     link: 'https://flyinguate.vercel.app/',
     image: 'images/flyin-screenshot.png'
   },
   {
     title: 'stablepay',
-    type: { en: 'decentralized payments enabler', es: 'pagos descentralizados' },
+    type: { en: 'payments for small merchants', es: 'pagos para pequeños comercios' },
     badge: 'live',
     desc: {
-      en: 'stablecoin enablement platform for small merchants. gateway for decentralized payments with crypto-native backends.',
-      es: 'plataforma de stablecoins para pequeños comerciantes. gateway para pagos descentralizados con backends crypto-nativos.'
+      en: 'accept dollar-stable payments from any customer, anywhere. no bank, no chargebacks — money lands in your wallet instantly.',
+      es: 'recibí pagos estables en dólares desde cualquier cliente. sin banco, sin chargebacks — el dinero entra a tu billetera al instante.'
     },
     link: 'https://stablepay-nine.vercel.app/',
     image: 'images/stablepay-screenshot.png'
   },
   {
     title: 'manto',
-    type: { en: 'property management suite', es: 'sistema de gestión de propiedades' },
+    type: { en: 'property management for landlords', es: 'gestión para arrendadores' },
     badge: 'live',
     desc: {
-      en: 'property management platform for landlords and tenants. streamlined rent collection, maintenance requests, and lease management.',
-      es: 'plataforma de gestión de propiedades para propietarios e inquilinos. cobro de renta, solicitudes de mantenimiento y gestión de contratos.'
+      en: 'collect rent, handle maintenance requests, and track every lease in one place. built for landlords in guatemala managing more than one property.',
+      es: 'cobrá renta, atendé mantenimiento y llevá cada contrato desde un solo lugar. hecho para arrendadores en guatemala con más de una propiedad.'
     },
     link: 'https://manto-propiedades.vercel.app/',
     image: 'images/manto-screenshot.png'
@@ -269,88 +269,86 @@ const workItems = [
     type: { en: 'live music archive', es: 'archivo de música en vivo' },
     badge: 'live',
     desc: {
-      en: 'live music setlist archive and discovery platform. browse performances, track artists, and explore music history.',
-      es: 'archivo de setlists y plataforma de descubrimiento. explora presentaciones, sigue artistas y descubre historia musical.'
+      en: 'every unknown mortal orchestra show, in one place. setlists, recordings, and a community-built history of every performance.',
+      es: 'cada concierto de unknown mortal orchestra, en un solo lugar. setlists, grabaciones y un historial de cada presentación construido por la comunidad.'
     },
     link: 'https://umo.livemoments.online/songs',
     iframeSrc: '/umo-frame/songs',
     image: 'images/umo-screenshot.png'
   },
   {
-    title: 'eztix',
-    type: { en: 'p2p ticketing platform', es: 'plataforma de tickets p2p' },
+    title: 'tiqueteo',
+    type: { en: 'tickets + resale, for guatemala', es: 'tickets + reventa, para guatemala' },
     badge: 'live',
-    useImage: true,
     desc: {
-      en: 'decentralized ticketing platform to empower artists and users. build events, sell tickets, and connect communities on-chain.',
-      es: 'plataforma de tickets descentralizada para artistas y usuarios. crea eventos, vende tickets y conecta comunidades on-chain.'
+      en: 'buy tickets direct from the organizer, or pass them on safely when plans change. one app for going out in guatemala.',
+      es: 'comprá tickets directo del organizador, o pasalos de forma segura cuando cambien los planes. una sola app para salir en guatemala.'
     },
-    link: 'https://eztix-lyart.vercel.app',
-    image: 'images/eztix-screenshot.png'
+    link: 'https://tiqueteo.vercel.app'
   },
   {
     title: 'stash',
-    type: { en: 'decentralized storage provider', es: 'almacenamiento descentralizado' },
+    type: { en: 'permanent file storage', es: 'almacenamiento permanente de archivos' },
     badge: 'live',
     desc: {
-      en: 'decentralized storage infrastructure. upload, manage, and access data on distributed networks with permanent, censorship-resistant storage.',
-      es: 'infraestructura de almacenamiento descentralizado. sube, gestiona y accede a datos en redes distribuidas con almacenamiento permanente y resistente a censura.'
+      en: 'upload once, keep forever. files live on a network that does not go down — even if the company behind it does.',
+      es: 'subí una vez, guardalo para siempre. los archivos viven en una red que no se cae, ni aunque la empresa detrás desaparezca.'
     },
     link: 'https://aeter-eight.vercel.app/',
     image: 'images/stash-screenshot.png'
   },
   {
     title: 'lynx',
-    type: { en: 'creator profile platform', es: 'plataforma de perfiles para creadores' },
+    type: { en: 'one page for artists', es: 'una página para artistas' },
     badge: 'wip',
     desc: {
-      en: 'link-in-bio meets patronage for artists and small businesses. unified profiles with stripe and crypto payments, music-first design, and built-in support tools.',
-      es: 'link-in-bio con apoyo para artistas y pequeños negocios. perfiles unificados con pagos stripe y crypto, diseño music-first y herramientas de soporte integradas.'
+      en: 'your music, links, store, and tips on a single page. built for independent artists, made to actually get you paid.',
+      es: 'tu música, links, tienda y propinas en una sola página. hecha para artistas independientes, pensada para que cobres de verdad.'
     },
     link: '#',
     image: 'images/lynx-screenshot.png'
   },
   {
     title: 'stok',
-    type: { en: 'inventory management system', es: 'sistema de inventario' },
+    type: { en: 'inventory for small businesses', es: 'inventario para pequeños negocios' },
     badge: 'wip',
     desc: {
-      en: 'inventory and warehousing platform for small restaurants and manufacturers. connected worker module for real-time stock tracking and operations management.',
-      es: 'plataforma de inventario y almacén para restaurantes y fabricantes pequeños. módulo de trabajador conectado para seguimiento de stock en tiempo real.'
+      en: 'know what is in stock at every location, in real time. for restaurants, bars, and small manufacturers ready to grow.',
+      es: 'sabé qué hay en stock en cada lugar, en tiempo real. para restaurantes, bares y pequeños fabricantes listos para crecer.'
     },
     link: '#',
     image: 'images/stok-screenshot.png'
   },
   {
     title: 'obro',
-    type: { en: 'construction expense saas', es: 'saas de gastos de construcción' },
+    type: { en: 'construction expenses, simplified', es: 'gastos de obra, simplificados' },
     badge: 'live',
     desc: {
-      en: 'expense and document management for guatemalan construction teams. cobros, gastos, and documentos in one place, built for site managers and contractors.',
-      es: 'gestión de gastos y documentos para equipos de construcción en guatemala. cobros, gastos y documentos en un solo lugar, hecho para residentes y contratistas.'
+      en: 'every cobro, gasto, and documento for your construction site in one app. for the residentes and contratistas who actually run the work.',
+      es: 'cada cobro, gasto y documento de tu obra en una sola app. para los residentes y contratistas que de verdad llevan la obra.'
     },
     link: 'https://obro-gt.vercel.app',
     image: 'images/obro-screenshot.png'
   },
   {
-    title: 'koh',
-    type: { en: 'media archive + drops', es: 'archivo de medios + drops' },
+    title: 'king of hearts',
+    type: { en: 'fashion brand site', es: 'sitio de marca de ropa' },
     badge: 'live',
     desc: {
-      en: 'webgl crt drop platform for media releases. shader-driven channels, persistent volume on railway, built for moments and limited drops.',
-      es: 'plataforma de drops con crt en webgl para lanzamientos. canales con shaders, volumen persistente en railway, hecho para momentos y drops limitados.'
+      en: 'website for the king of hearts clothing brand. interactive vintage tv channels turn each drop into a moment, with curated archives and a built-in shop.',
+      es: 'sitio web para la marca de ropa king of hearts. canales de tv vintage interactivos convierten cada drop en un momento, con archivos curados y tienda integrada.'
     },
     link: 'https://tv-landing-app-production.up.railway.app/vol2',
     image: 'images/koh-screenshot.png'
   },
   {
     title: 'convoca',
-    type: { en: 'hackathon demo', es: 'demo de hackathon' },
+    type: { en: 'civic event discovery', es: 'descubrimiento de eventos cívicos' },
     badge: 'live',
     useImage: true,
     desc: {
-      en: 'agent-powered civic and community event discovery for nyc and guate. cross-platform ingestion, vision ocr on flyers, semantic dedup, ranked recs with reasoning traces.',
-      es: 'descubrimiento de eventos cívicos y comunitarios con agentes para nyc y guate. ingesta multiplataforma, ocr de flyers, dedup semántico y recomendaciones con trazas de razonamiento.'
+      en: 'find the protests, town halls, and community events near you that you would have missed. ai agents do the digging across instagram, telegram, and city calendars.',
+      es: 'encontrá las protestas, asambleas y eventos comunitarios cerca tuyo que de otra forma se te pasaban. agentes de ia hacen el trabajo entre instagram, telegram y calendarios de la ciudad.'
     },
     link: 'https://convoca-web-production.up.railway.app/',
     image: 'images/convoca-screenshot.png'
