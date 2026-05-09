@@ -1,6 +1,24 @@
 // Main Application - Card System with Animation & Color Randomizer
 
 // ====== INTERNATIONALIZATION (i18n) ======
+// Localized SEO metadata — kept in sync with server.js ES_META.
+const seoMeta = {
+  en: {
+    title: 'offset works — digital products that work',
+    description: 'Boutique design and development studio for startups, creatives and founders. Built from scratch, shipped in weeks.',
+    canonical: 'https://offsetworks.xyz/',
+    ogLocale: 'en_US',
+    ogLocaleAlt: 'es_GT',
+  },
+  es: {
+    title: 'offset works — productos digitales que funcionan',
+    description: 'Estudio boutique de diseño y desarrollo para startups, creativos y fundadores. Hechos desde cero, lanzados en semanas.',
+    canonical: 'https://offsetworks.xyz/es',
+    ogLocale: 'es_GT',
+    ogLocaleAlt: 'en_US',
+  },
+};
+
 const translations = {
   en: {
     nav: {
@@ -156,6 +174,25 @@ function setLanguage(lang) {
 
   // Update html lang attribute
   document.documentElement.lang = lang;
+
+  // Update SEO/meta tags so they match the active language
+  const meta = seoMeta[lang];
+  if (meta) {
+    document.title = meta.title;
+    const set = (selector, attr, value) => {
+      const el = document.querySelector(selector);
+      if (el) el.setAttribute(attr, value);
+    };
+    set('meta[name="description"]', 'content', meta.description);
+    set('link[rel="canonical"]', 'href', meta.canonical);
+    set('meta[property="og:title"]', 'content', meta.title);
+    set('meta[property="og:description"]', 'content', meta.description);
+    set('meta[property="og:url"]', 'content', meta.canonical);
+    set('meta[property="og:locale"]', 'content', meta.ogLocale);
+    set('meta[property="og:locale:alternate"]', 'content', meta.ogLocaleAlt);
+    set('meta[name="twitter:title"]', 'content', meta.title);
+    set('meta[name="twitter:description"]', 'content', meta.description);
+  }
 }
 
 function updateServiceCardTranslations(t) {

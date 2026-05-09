@@ -82,11 +82,74 @@ const umoProxy = createProxyMiddleware({
   },
 });
 
-// Language URL aliases — /es and /en serve the main index.html.
-// main.js reads window.location.pathname to set the initial language.
-app.get(["/es", "/es/", "/en", "/en/"], (req, res) => {
-  res.sendFile(path.resolve(__dirname, "index.html"));
-});
+// Language URL aliases — /es and /en serve index.html with locale-aware
+// SEO tags swapped server-side, so crawlers and social cards get the right
+// title/description/og:locale even before JS runs.
+const fs = require("fs");
+const indexPath = path.resolve(__dirname, "index.html");
+
+const ES_META = {
+  title: "offset works — productos digitales que funcionan",
+  description:
+    "Estudio boutique de diseño y desarrollo para startups, creativos y fundadores. Sitios web, apps web y experiencias inmersivas — hechas desde cero, lanzadas en semanas.",
+  canonical: "https://offsetworks.xyz/es",
+  ogUrl: "https://offsetworks.xyz/es",
+  ogLocale: "es_GT",
+  ogLocaleAlt: "en_US",
+  htmlLang: "es",
+};
+
+function renderLocale(req, res, locale) {
+  let html = fs.readFileSync(indexPath, "utf8");
+  if (locale === "es") {
+    html = html
+      .replace('<html lang="en">', `<html lang="${ES_META.htmlLang}">`)
+      .replace(
+        /<title>[^<]*<\/title>/,
+        `<title>${ES_META.title}</title>`
+      )
+      .replace(
+        /<meta name="description" content="[^"]*">/,
+        `<meta name="description" content="${ES_META.description}">`
+      )
+      .replace(
+        /<link rel="canonical" href="[^"]*">/,
+        `<link rel="canonical" href="${ES_META.canonical}">`
+      )
+      .replace(
+        /<meta property="og:title" content="[^"]*">/,
+        `<meta property="og:title" content="${ES_META.title}">`
+      )
+      .replace(
+        /<meta property="og:description" content="[^"]*">/,
+        `<meta property="og:description" content="${ES_META.description}">`
+      )
+      .replace(
+        /<meta property="og:url" content="[^"]*">/,
+        `<meta property="og:url" content="${ES_META.ogUrl}">`
+      )
+      .replace(
+        /<meta property="og:locale" content="[^"]*">/,
+        `<meta property="og:locale" content="${ES_META.ogLocale}">`
+      )
+      .replace(
+        /<meta property="og:locale:alternate" content="[^"]*">/,
+        `<meta property="og:locale:alternate" content="${ES_META.ogLocaleAlt}">`
+      )
+      .replace(
+        /<meta name="twitter:title" content="[^"]*">/,
+        `<meta name="twitter:title" content="${ES_META.title}">`
+      )
+      .replace(
+        /<meta name="twitter:description" content="[^"]*">/,
+        `<meta name="twitter:description" content="${ES_META.description}">`
+      );
+  }
+  res.type("html").send(html);
+}
+
+app.get(["/es", "/es/"], (req, res) => renderLocale(req, res, "es"));
+app.get(["/en", "/en/"], (req, res) => renderLocale(req, res, "en"));
 
 app.use(express.static(path.resolve(__dirname), { extensions: ["html"] }));
 
