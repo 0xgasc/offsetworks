@@ -329,6 +329,7 @@ const workItems = [
       es: 'cada cobro, gasto y documento de tu obra en una sola app. para los residentes y contratistas que de verdad llevan la obra.'
     },
     link: 'https://obro-gt.vercel.app',
+    iframeSrc: 'https://obro-gt.vercel.app/login?demo=1',
     image: 'images/obro-screenshot.png'
   },
   {
