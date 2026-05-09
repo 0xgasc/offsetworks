@@ -347,11 +347,13 @@ const workItems = [
     title: 'convoca',
     type: { en: 'hackathon demo', es: 'demo de hackathon' },
     badge: 'live',
+    useImage: true,
     desc: {
       en: 'agent-powered civic and community event discovery for nyc and guate. cross-platform ingestion, vision ocr on flyers, semantic dedup, ranked recs with reasoning traces.',
       es: 'descubrimiento de eventos cívicos y comunitarios con agentes para nyc y guate. ingesta multiplataforma, ocr de flyers, dedup semántico y recomendaciones con trazas de razonamiento.'
     },
-    link: 'https://convoca-web-production.up.railway.app/'
+    link: 'https://convoca-web-production.up.railway.app/',
+    image: 'images/convoca-screenshot.png'
   }
 ];
 
@@ -494,7 +496,7 @@ function initWorkList() {
     track.dataset.itemIndex = idx;
     const isLive = item.badge === 'live' && item.link && item.link !== '#';
     const isWip = item.badge === 'wip';
-    const needsZoom = item.title === 'lynx' || item.title === 'stok';
+    const needsZoom = false;
     const useIframe = isLive && !item.useImage;
 
     // For live sites: use iframe (scrollable, click opens new tab), for WIP: non-clickable image
