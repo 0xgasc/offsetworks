@@ -284,7 +284,7 @@ const workItems = [
       en: 'buy tickets direct from the organizer, or pass them on safely when plans change. one app for going out in guatemala.',
       es: 'comprá tickets directo del organizador, o pasalos de forma segura cuando cambien los planes. una sola app para salir en guatemala.'
     },
-    link: 'https://tiqueteo.vercel.app'
+    link: 'https://tiqueteo-v2.vercel.app'
   },
   {
     title: 'stash',
