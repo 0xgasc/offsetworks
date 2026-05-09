@@ -268,12 +268,12 @@ const workItems = [
     title: 'umo archive',
     type: { en: 'live music archive', es: 'archivo de música en vivo' },
     badge: 'live',
+    useImage: true,
     desc: {
       en: 'every unknown mortal orchestra show, in one place. setlists, recordings, and a community-built history of every performance.',
       es: 'cada concierto de unknown mortal orchestra, en un solo lugar. setlists, grabaciones y un historial de cada presentación construido por la comunidad.'
     },
     link: 'https://umo.livemoments.online/songs',
-    iframeSrc: '/umo-frame/songs',
     image: 'images/umo-screenshot.png'
   },
   {
@@ -501,7 +501,7 @@ function initWorkList() {
     let mediaContent = '';
     if (useIframe) {
       const iframeSrc = item.iframeSrc || item.link;
-      mediaContent = `<div class="work-track-iframe-wrapper" data-link="${item.link}"><iframe class="work-track-iframe" src="${iframeSrc}" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe><div class="iframe-click-overlay"></div></div>`;
+      mediaContent = `<div class="work-track-iframe-wrapper" data-link="${item.link}"><iframe class="work-track-iframe" src="${iframeSrc}" loading="lazy" referrerpolicy="no-referrer"></iframe><div class="iframe-click-overlay"></div></div>`;
     } else if (item.image) {
       const zoomClass = needsZoom ? ' work-track-image-zoomed' : '';
       // Live sites with useImage flag get clickable images, WIP pics are not clickable
