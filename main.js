@@ -61,7 +61,7 @@ const translations = {
       tag: 'recent work',
       badges: {
         live: 'live',
-        wip: 'wip'
+        wip: 'launching soon'
       },
       visitSite: 'visit site'
     },
@@ -107,7 +107,7 @@ const translations = {
       tag: 'trabajo reciente',
       badges: {
         live: 'en vivo',
-        wip: 'en desarrollo'
+        wip: 'próximamente'
       },
       visitSite: 'ver sitio'
     },
@@ -278,7 +278,7 @@ const workItems = [
   {
     title: 'flyin',
     type: { en: 'helicopter tours, online', es: 'tours en helicóptero, en línea' },
-    badge: 'live',
+    badge: 'wip',
     desc: {
       en: 'helicopter tours over guatemala, booked in seconds. pick a route, pay, and the confirmation hits your inbox before you close the tab.',
       es: 'tours en helicóptero sobre guatemala, reservados en segundos. elegí ruta, pagá, y la confirmación te llega al correo antes de cerrar la pestaña.'
