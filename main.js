@@ -98,8 +98,12 @@ const translations = {
 
 let currentLang = 'en';
 
-// Check URL for language parameter
+// Check URL for language: pathname (/es, /en) first, then ?lang= query
 function getInitialLanguage() {
+  const path = window.location.pathname;
+  if (path === '/es' || path.startsWith('/es/')) return 'es';
+  if (path === '/en' || path.startsWith('/en/')) return 'en';
+
   const params = new URLSearchParams(window.location.search);
   const langParam = params.get('lang');
   if (langParam && translations[langParam]) {
@@ -173,6 +177,8 @@ function initLanguageToggle() {
     toggleBtn.addEventListener('click', () => {
       const newLang = currentLang === 'en' ? 'es' : 'en';
       setLanguage(newLang);
+      const newPath = newLang === 'es' ? '/es' : '/';
+      history.replaceState({}, '', newPath + window.location.hash);
     });
   }
 }

@@ -32,6 +32,12 @@ const lynxProxy = createProxyMiddleware({
   xfwd: true,
 });
 
+// Language URL aliases — /es and /en serve the main index.html.
+// main.js reads window.location.pathname to set the initial language.
+app.get(["/es", "/es/", "/en", "/en/"], (req, res) => {
+  res.sendFile(path.resolve(__dirname, "index.html"));
+});
+
 app.use(express.static(path.resolve(__dirname), { extensions: ["html"] }));
 
 app.listen(port, () => {
