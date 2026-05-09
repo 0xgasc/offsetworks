@@ -257,6 +257,7 @@ const workItems = [
     title: 'manto',
     type: { en: 'property management for landlords', es: 'gestión para arrendadores' },
     badge: 'live',
+    useImage: true,
     desc: {
       en: 'collect rent, handle maintenance requests, and track every lease in one place. built for landlords in guatemala managing more than one property.',
       es: 'cobrá renta, atendé mantenimiento y llevá cada contrato desde un solo lugar. hecho para arrendadores en guatemala con más de una propiedad.'
