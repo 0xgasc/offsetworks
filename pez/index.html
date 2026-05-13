@@ -481,9 +481,111 @@
       .project-title { font-size: 28px; }
       .retainer-grid { grid-template-columns: 1fr; }
     }
+
+    /* ─── PASSWORD GATE ─── */
+    .gate {
+      position: fixed; inset: 0;
+      background: #030303;
+      z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px 20px;
+    }
+    .gate-card {
+      max-width: 420px; width: 100%;
+      padding: 36px 32px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-accent);
+      border-radius: 6px;
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      text-align: center;
+    }
+    .gate-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px;
+    }
+    .gate-title {
+      font-size: 22px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.01em;
+    }
+    .gate-sub {
+      font-size: 12.5px; color: var(--text-secondary); line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .gate-input {
+      width: 100%;
+      padding: 12px 14px;
+      background: rgba(8,8,8,0.6);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text-primary);
+      font-family: 'Space Mono', monospace;
+      font-size: 13px; letter-spacing: 0.05em;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .gate-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--border-accent);
+    }
+    .gate-btn {
+      margin-top: 12px;
+      width: 100%;
+      padding: 12px;
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: 'Space Mono', monospace;
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .gate-btn:hover { background: var(--accent); color: var(--bg-primary); }
+    .gate-error {
+      margin-top: 12px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px; color: #ff4466;
+      min-height: 14px;
+      letter-spacing: 0.05em;
+    }
+    .gate-foot {
+      margin-top: 22px;
+      font-size: 10.5px; color: var(--text-muted); line-height: 1.6;
+      letter-spacing: 0.02em;
+    }
+    body.locked .content-wrapper,
+    body.locked #ascii-bg,
+    body.locked #scroll-progress { display: none !important; }
+
+    /* NDA badge in header */
+    .nda-badge {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 3px 10px;
+      border: 1px solid var(--text-muted);
+      color: var(--text-muted);
+      border-radius: 2px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    @media print { .gate, .gate-card { display: none !important; } body.locked .content-wrapper { display: block !important; } }
   </style>
 </head>
-<body>
+<body class="locked">
+
+  <!-- PASSWORD GATE -->
+  <div class="gate no-print" id="gate">
+    <form class="gate-card" id="gate-form" autocomplete="off">
+      <div class="gate-eyebrow" data-en="Confidential &middot; NDA" data-es="Confidencial &middot; NDA">Confidential &middot; NDA</div>
+      <div class="gate-title" data-en="PEZ &times; Offset Works" data-es="PEZ &times; Offset Works">PEZ &times; Offset Works</div>
+      <div class="gate-sub" data-en="This quote is shared under a mutual NDA. Enter the passphrase Mateo or g@offsetworks.xyz sent you." data-es="Esta cotizaci&oacute;n se comparte bajo un NDA mutuo. Ingres&aacute; la frase que te mand&oacute; Mateo o g@offsetworks.xyz.">This quote is shared under a mutual NDA. Enter the passphrase Mateo or g@offsetworks.xyz sent you.</div>
+      <input class="gate-input" id="gate-input" type="password" placeholder="passphrase" autofocus>
+      <button class="gate-btn" type="submit" data-en="Unlock" data-es="Desbloquear">Unlock</button>
+      <div class="gate-error" id="gate-error"></div>
+      <div class="gate-foot" data-en="By entering, you agree to keep the contents of this quote (scope, pricing, materials) confidential between you and Offset Works." data-es="Al ingresar, aceptas mantener el contenido de esta cotizaci&oacute;n (alcance, precios, materiales) confidencial entre vos y Offset Works.">By entering, you agree to keep the contents of this quote (scope, pricing, materials) confidential between you and Offset Works.</div>
+    </form>
+  </div>
 
   <!-- Scroll Progress -->
   <div id="scroll-progress"></div>
@@ -507,6 +609,7 @@
     </div>
     <div class="header-right">
       <div class="doc-type mono" data-en="Quote" data-es="Cotizaci&oacute;n">Quote</div>
+      <span class="nda-badge" data-en="Under NDA" data-es="Bajo NDA">Under NDA</span>
       <div class="doc-meta">
         <span data-en="Date" data-es="Fecha">Date</span>: May 12, 2026<br>
         <span data-en="Valid until" data-es="V&aacute;lido hasta">Valid until</span>: June 12, 2026
@@ -792,11 +895,44 @@
       <a href="https://offsetworks.xyz" target="_blank" rel="noopener">offsetworks.xyz</a>
     </div>
     <div class="footer-note" style="margin-top:12px;" data-en="Quote valid for 30 days from date of issue." data-es="Cotizaci&oacute;n v&aacute;lida por 30 d&iacute;as desde la fecha de emisi&oacute;n.">Quote valid for 30 days from date of issue.</div>
+    <div class="footer-note" style="margin-top:6px;" data-en="Confidential &mdash; subject to a mutual NDA between Offset Works and PEZ / Carolina Fern&aacute;ndez." data-es="Confidencial &mdash; sujeto a un NDA mutuo entre Offset Works y PEZ / Carolina Fern&aacute;ndez.">Confidential &mdash; subject to a mutual NDA between Offset Works and PEZ / Carolina Fern&aacute;ndez.</div>
   </footer>
 
   </div><!-- /content-wrapper -->
 
   <script>
+    // ─── PASSWORD GATE ───
+    // Friction-only — content is in the HTML so this is not a security boundary.
+    // Real protection would need server-side gating; this is just an NDA acknowledgment step.
+    (function gate() {
+      const PASS = 'pezluchador26';
+      const KEY = 'pez-gate-ok';
+      const gateEl = document.getElementById('gate');
+      const form = document.getElementById('gate-form');
+      const input = document.getElementById('gate-input');
+      const err = document.getElementById('gate-error');
+
+      function unlock() {
+        document.body.classList.remove('locked');
+        gateEl.style.display = 'none';
+      }
+
+      if (sessionStorage.getItem(KEY) === '1') { unlock(); return; }
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const v = input.value.trim().toLowerCase();
+        if (v === PASS) {
+          sessionStorage.setItem(KEY, '1');
+          unlock();
+        } else {
+          err.textContent = 'wrong passphrase. try again or ping g@offsetworks.xyz';
+          input.value = '';
+          input.focus();
+        }
+      });
+    })();
+
     // ─── ASCII BACKGROUND WITH PARALLAX ───
     const bg = document.getElementById('ascii-bg');
     const chars = ' .-·:;=+x%#@░▒▓█';
