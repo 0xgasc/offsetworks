@@ -1088,31 +1088,32 @@
       root.setProperty('--border-accent', theme.glow);
     }, 5000);
 
-    // Parallax — bg moves at 0.3x scroll speed
+    // Drift the bg slowly with scroll position — feeds into the noise so the
+    // pattern visibly evolves as you scroll, but the bg itself stays fixed
+    // in viewport (so it never "ends" no matter how far down you go).
     window.addEventListener('scroll', () => {
       scrollY = window.scrollY;
-      bg.style.transform = 'translateY(' + (-scrollY * 0.3) + 'px)';
     }, { passive: true });
 
     function animBg(time) {
       bgFrame++;
       if (bgFrame % 2 !== 0) { requestAnimationFrame(animBg); return; }
       const cols = Math.ceil(window.innerWidth / 6) + 4;
-      // Render enough rows to cover viewport + max parallax offset, so the bg
-      // doesn't end mid-page once scrolling pulls it up.
-      const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-      const rows = Math.ceil((window.innerHeight + maxScroll * 0.3) / 11) + 12;
+      const rows = Math.ceil(window.innerHeight / 11) + 8;
       let out = '';
       const t = time * 0.001;
+      // scrollY shifts the noise field so the pattern visibly evolves as you
+      // scroll, even though the bg container itself stays fixed in viewport.
+      const sy = scrollY * 0.04;
       for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {
-          const cx = x - cols / 2, cy = y - rows / 2;
+          const cx = x - cols / 2, cy = y - rows / 2 + sy;
           const dist = Math.sqrt(cx * cx + cy * cy);
           const v1 = Math.sin(x * 0.04 + t * 0.8);
-          const v2 = Math.cos(y * 0.06 + t * 0.6);
-          const v3 = Math.sin((x + y) * 0.03 + t * 0.5);
+          const v2 = Math.cos((y + sy) * 0.06 + t * 0.6);
+          const v3 = Math.sin((x + y + sy) * 0.03 + t * 0.5);
           const v4 = Math.sin(dist * 0.08 - t * 1.2);
-          const v5 = Math.cos(x * 0.02 - y * 0.03 + t * 0.4);
+          const v5 = Math.cos(x * 0.02 - (y + sy) * 0.03 + t * 0.4);
           const v = (v1 + v2 + v3 + v4 + v5) / 5;
           const idx = Math.floor((v + 1) * 8);
           out += chars[Math.max(0, Math.min(chars.length - 1, idx))];
