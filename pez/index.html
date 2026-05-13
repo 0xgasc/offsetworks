@@ -287,6 +287,22 @@
       animation: none !important;
     }
 
+    /* Assemble on scroll: chars start scattered + faded, land into place */
+    .text-alive[data-assemble="pending"] span {
+      opacity: 0;
+      transform: translate(
+        calc((var(--rx) - 0.5) * 56px),
+        calc((var(--ry) - 0.5) * 36px)
+      ) rotate(calc((var(--rx) - 0.5) * 28deg)) scale(0.7);
+    }
+    .text-alive[data-assemble="done"] span {
+      opacity: 1;
+      transform: translate(0, 0) rotate(0) scale(1);
+      transition:
+        opacity 0.45s ease calc(var(--i) * 0.022s),
+        transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) calc(var(--i) * 0.022s);
+    }
+
     @keyframes textBreathe {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(calc((var(--rx) - 0.5) * -5px)); }
@@ -1082,7 +1098,10 @@
       bgFrame++;
       if (bgFrame % 2 !== 0) { requestAnimationFrame(animBg); return; }
       const cols = Math.ceil(window.innerWidth / 6) + 4;
-      const rows = Math.ceil(window.innerHeight / 11) + 8;
+      // Render enough rows to cover viewport + max parallax offset, so the bg
+      // doesn't end mid-page once scrolling pulls it up.
+      const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      const rows = Math.ceil((window.innerHeight + maxScroll * 0.3) / 11) + 12;
       let out = '';
       const t = time * 0.001;
       for (let y = 0; y < rows; y++) {
@@ -1125,13 +1144,26 @@
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
     // ─── INTERACTIVE TEXT ───
-    // Wrap key text elements in spans for character-level interaction
+    // Each title is split into per-character spans and starts in
+    // data-assemble="pending" (chars scattered + faded). When the title
+    // scrolls into view, an IntersectionObserver flips it to "done" and
+    // the chars land into place with a small per-char stagger.
+    const assembleObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.target.dataset.assemble === 'pending') {
+          entry.target.dataset.assemble = 'done';
+          assembleObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -8% 0px' });
+
     function makeTextAlive(selector) {
       document.querySelectorAll(selector).forEach(el => {
         if (el.classList.contains('text-alive')) return;
         const text = el.textContent;
         el.innerHTML = '';
         el.classList.add('text-alive');
+        el.dataset.assemble = 'pending';
         for (let i = 0; i < text.length; i++) {
           const span = document.createElement('span');
           span.textContent = text[i] === ' ' ? '\u00a0' : text[i];
@@ -1153,14 +1185,23 @@
             spans.forEach(s => s.classList.remove('popped'));
           }, 600);
         });
+
+        assembleObserver.observe(el);
       });
     }
 
-    // Apply to titles and headings
-    makeTextAlive('.project-title');
-    makeTextAlive('.section-heading');
-    makeTextAlive('.callout h3');
-    makeTextAlive('.payment-total');
+    // Apply to every title-like element so they all assemble as you scroll.
+    function applyTextAlive() {
+      makeTextAlive('.project-title');
+      makeTextAlive('.section-heading');
+      makeTextAlive('.callout h3');
+      makeTextAlive('.payment-total');
+      makeTextAlive('.dropdown-title');
+      makeTextAlive('.terms-block h3');
+      makeTextAlive('.client-name');
+      makeTextAlive('.gate-title');
+    }
+    applyTextAlive();
 
     // ─── DROPDOWNS ───
     function toggleDropdown(header) {
@@ -1188,13 +1229,8 @@
         }
       });
 
-      // Re-wrap after language swap
-      setTimeout(() => {
-        makeTextAlive('.project-title');
-        makeTextAlive('.section-heading');
-        makeTextAlive('.callout h3');
-        makeTextAlive('.payment-total');
-      }, 50);
+      // Re-wrap after language swap so titles assemble in the new copy too
+      setTimeout(applyTextAlive, 50);
     }
   </script>
 </body>
