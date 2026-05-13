@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&amp;display=swap');
+    .ic { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 360px; letter-spacing: 0.04em; }
+    .fg { fill: currentColor; }
+    .dot { fill: #00ff88; }
+  </style>
+  <text x="400" y="400" text-anchor="middle" dominant-baseline="central" class="ic">
+    <tspan class="fg">o</tspan><tspan class="dot" dx="0.08em" dy="0">·</tspan><tspan class="fg" dx="0.08em">w</tspan>
+  </text>
+</svg>

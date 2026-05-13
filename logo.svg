@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 400" width="1600" height="400">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&amp;display=swap');
+    .wm { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 180px; letter-spacing: 0.04em; }
+    .fg { fill: currentColor; }
+    .dot { fill: #00ff88; }
+  </style>
+  <text x="800" y="200" text-anchor="middle" dominant-baseline="central" class="wm">
+    <tspan class="fg">offset</tspan><tspan class="dot" dx="0.15em" dy="0">·</tspan><tspan class="fg" dx="0.15em">works</tspan>
+  </text>
+</svg>
