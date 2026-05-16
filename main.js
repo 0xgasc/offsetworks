@@ -384,7 +384,7 @@ const workItems = [
       en: 'website for the king of hearts clothing brand. interactive vintage tv channels turn each drop into a moment, with curated archives and a built-in shop.',
       es: 'sitio web para la marca de ropa king of hearts. canales de tv vintage interactivos convierten cada drop en un momento, con archivos curados y tienda integrada.'
     },
-    link: 'https://tv-landing-app-production.up.railway.app/vol2',
+    link: 'https://sincerelykingofhearts.up.railway.app/admin',
     image: 'images/koh-screenshot.png'
   },
   {
