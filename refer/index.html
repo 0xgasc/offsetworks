@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grow with Offset — Refer a Project | Offset Works</title>
+  <meta name="description" content="Know someone building something? Bring them in. They get a friend rate, you get a small thank-you, we keep building together.">
+
+  <link rel="canonical" href="https://offsetworks.xyz/refer">
+  <link rel="alternate" hreflang="en" href="https://offsetworks.xyz/refer">
+  <link rel="alternate" hreflang="es" href="https://offsetworks.xyz/refer">
+  <link rel="alternate" hreflang="x-default" href="https://offsetworks.xyz/refer">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="offset works">
+  <meta property="og:title" content="Grow with Offset — refer a project">
+  <meta property="og:description" content="Know someone building something? Bring them in. They get a friend rate, you get a small thank-you.">
+  <meta property="og:url" content="https://offsetworks.xyz/refer">
+  <meta property="og:image" content="https://offsetworks.xyz/images/og-en.png">
+
+  <link rel="icon" type="image/jpeg" href="../favicon.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-primary: #050505;
+      --bg-secondary: #0a0a0a;
+      --bg-card: rgba(12, 12, 12, 0.4);
+      --text-primary: #fafafa;
+      --text-secondary: #cccccc;
+      --text-muted: #888888;
+      --accent: #00ff88;
+      --accent-dim: #00cc6a;
+      --border: #1a1a1a;
+      --border-accent: rgba(0, 255, 136, 0.2);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { background: #030303; }
+    body {
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: transparent;
+      color: var(--text-primary);
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 60px 40px 80px;
+      line-height: 1.65;
+      font-size: 15px;
+      position: relative;
+    }
+
+    .mono { font-family: 'Space Mono', 'SF Mono', monospace; }
+    .accent { color: var(--accent); }
+
+    /* ASCII BG */
+    #ascii-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      line-height: 1.15;
+      color: var(--accent);
+      opacity: 0.18;
+      white-space: pre;
+      overflow: hidden;
+      pointer-events: none;
+      transition: color 3s ease;
+    }
+    .content { position: relative; z-index: 1; }
+
+    /* LANG TOGGLE */
+    .lang-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 100;
+      display: flex;
+    }
+    .lang-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      background: rgba(8,8,8,0.4);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .lang-btn:first-child { border-radius: 3px 0 0 3px; }
+    .lang-btn:last-child { border-radius: 0 3px 3px 0; border-left: none; }
+    .lang-btn.active { border-color: var(--accent); color: var(--accent); }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 64px;
+    }
+    .header .brand {
+      font-family: 'Space Mono', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+    .header .brand .dot { color: var(--accent); margin: 0 6px; }
+    .header .back {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .header .back:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero { margin-bottom: 72px; }
+    .hero .eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: 64px;
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      line-height: 1.02;
+      margin-bottom: 24px;
+    }
+    .hero h1 .glow {
+      color: var(--accent);
+      text-shadow: 0 0 30px rgba(0,255,136,0.5), 0 0 60px rgba(0,255,136,0.2);
+      font-weight: 500;
+    }
+    .hero .sub {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 620px;
+      line-height: 1.6;
+    }
+
+    /* SECTIONS */
+    .section { margin-bottom: 64px; }
+    .section-heading {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* HOW IT WORKS */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .step {
+      padding: 22px 22px 24px;
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+    .step .num {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .step .title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .step .desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* WHAT YOU GET */
+    .gets {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .get {
+      padding: 28px 28px 30px;
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+    .get.you { border-color: var(--border-accent); border-left: 3px solid var(--accent); }
+    .get .who {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .get .what {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
+    }
+    .get .desc {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* CTA */
+    .cta {
+      text-align: center;
+      padding: 56px 32px;
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-accent);
+      border-radius: 6px;
+      margin-bottom: 56px;
+    }
+    .cta h2 {
+      font-size: 30px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    .cta p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 0 auto 28px;
+      line-height: 1.6;
+    }
+    .cta a {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .cta a:hover {
+      background: var(--accent);
+      color: var(--bg-primary);
+      box-shadow: 0 0 30px rgba(0,255,136,0.4);
+    }
+
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 700px) {
+      body { padding: 40px 22px 64px; }
+      .hero h1 { font-size: 46px; }
+      .steps, .gets { grid-template-columns: 1fr; }
+      .cta { padding: 40px 22px; }
+      .cta h2 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <pre id="ascii-bg"></pre>
+
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('es')">ES</button>
+  </div>
+
+  <div class="content">
+
+    <header class="header">
+      <div class="brand">offset<span class="dot">·</span>works</div>
+      <a class="back" href="/" data-en="← back to site" data-es="← volver al sitio">← back to site</a>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow" data-en="Referral Program" data-es="Programa de Referidos">Referral Program</div>
+      <h1 data-en="grow with <span class=&quot;glow&quot;>offset</span>." data-es="crece con <span class=&quot;glow&quot;>offset</span>.">grow with <span class="glow">offset</span>.</h1>
+      <p class="sub" data-en="Know someone building something? Bring them in. They get the same friend rate you got. You get a small thank-you. We keep building together." data-es="¿Conocés a alguien construyendo algo? Sumalo. Recibe la misma tarifa friends que vos. Vos recibís un pequeño agradecimiento. Seguimos construyendo juntos.">Know someone building something? Bring them in. They get the same friend rate you got. You get a small thank-you. We keep building together.</p>
+    </section>
+
+    <section class="section">
+      <div class="section-heading" data-en="How it works" data-es="Cómo funciona">How it works</div>
+      <div class="steps">
+        <div class="step">
+          <div class="num">01</div>
+          <div class="title" data-en="Send the intro" data-es="Mandá la intro">Send the intro</div>
+          <div class="desc" data-en="Email us with the person and what they're working on. A sentence is enough." data-es="Mandanos un email con la persona y en qué están trabajando. Una oración alcanza.">Email us with the person and what they're working on. A sentence is enough.</div>
+        </div>
+        <div class="step">
+          <div class="num">02</div>
+          <div class="title" data-en="We take it from there" data-es="Lo seguimos nosotros">We take it from there</div>
+          <div class="desc" data-en="A 15 min intro call, a scoped quote with friends rate, no pressure." data-es="Llamada intro de 15 min, cotización con tarifa friends, sin presión.">A 15 min intro call, a scoped quote with friends rate, no pressure.</div>
+        </div>
+        <div class="step">
+          <div class="num">03</div>
+          <div class="title" data-en="If they sign, you get a thank-you" data-es="Si firman, te agradecemos">If they sign, you get a thank-you</div>
+          <div class="desc" data-en="A $100 credit toward your next project, or just a really good bottle of mezcal. Your call." data-es="$100 de crédito para tu próximo proyecto, o una muy buena botella de mezcal. Vos decidís.">A $100 credit toward your next project, or just a really good bottle of mezcal. Your call.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading" data-en="What everyone gets" data-es="Qué recibe cada uno">What everyone gets</div>
+      <div class="gets">
+        <div class="get you">
+          <div class="who" data-en="The friend you brought in" data-es="El amigo que trajiste">The friend you brought in</div>
+          <div class="what" data-en="A friends &amp; family rate." data-es="Una tarifa friends &amp; family.">A friends &amp; family rate.</div>
+          <div class="desc" data-en="Same deal you got. We treat them like family from day one. The discount, the priority, the direct line. Not because we have to. Because that's how the studio works." data-es="El mismo trato que tuviste. Los tratamos como familia desde el día uno. El descuento, la prioridad, la línea directa. No porque tengamos que. Así trabaja el estudio.">Same deal you got. We treat them like family from day one. The discount, the priority, the direct line. Not because we have to. Because that's how the studio works.</div>
+        </div>
+        <div class="get">
+          <div class="who" data-en="You" data-es="Vos">You</div>
+          <div class="what" data-en="$100 credit, or mezcal." data-es="$100 de crédito, o mezcal.">$100 credit, or mezcal.</div>
+          <div class="desc" data-en="Once they sign and pay the first milestone, we send a $100 credit toward your next project, or a small gift if you'd rather. Either way, our thanks for vouching for us." data-es="Cuando firman y pagan el primer hito, te mandamos $100 de crédito para tu próximo proyecto, o un pequeño regalo si preferís. De cualquier forma, gracias por confiar en nosotros.">Once they sign and pay the first milestone, we send a $100 credit toward your next project, or a small gift if you'd rather. Either way, our thanks for vouching for us.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta">
+      <h2 data-en="Got someone in mind?" data-es="¿Tenés a alguien en mente?">Got someone in mind?</h2>
+      <p data-en="Drop us an intro. Or just forward this page. Both work." data-es="Mandanos una intro. O reenviá esta página. Las dos cosas funcionan.">Drop us an intro. Or just forward this page. Both work.</p>
+      <a href="mailto:offset.works.studio@gmail.com?subject=Referral%20%E2%80%94%20someone%20you%20should%20meet&amp;body=Hey%20%E2%80%94%0A%0AI%27d%20like%20to%20introduce%20you%20to%3A%0A%0AName%3A%20%0AWhat%20they%27re%20working%20on%3A%20%0AHow%20to%20reach%20them%3A%20%0A%0AWhy%20I%20think%20you%27d%20click%3A%0A%0A%E2%80%94" data-en="send an intro →" data-es="mandá una intro →">send an intro →</a>
+    </div>
+
+    <footer class="footer">
+      offset works &nbsp;·&nbsp; nyc &amp; the world
+    </footer>
+
+  </div>
+
+  <script>
+    // ASCII BG — same noise field as the rocola, fixed in viewport, evolves with scroll
+    const bg = document.getElementById('ascii-bg');
+    const chars = ' .-·:;=+x%#@░▒▓█';
+    const bgThemes = [
+      { color: '#00ff88', accent: '#00ff88', dim: '#00cc6a', glow: 'rgba(0,255,136,0.2)' },
+      { color: '#4488ff', accent: '#4488ff', dim: '#3366cc', glow: 'rgba(68,136,255,0.2)' },
+      { color: '#00ff88', accent: '#00ff88', dim: '#00cc6a', glow: 'rgba(0,255,136,0.2)' },
+      { color: '#8866cc', accent: '#8866cc', dim: '#6644aa', glow: 'rgba(136,102,204,0.2)' },
+      { color: '#00ff88', accent: '#00ff88', dim: '#00cc6a', glow: 'rgba(0,255,136,0.2)' },
+      { color: '#2299cc', accent: '#2299cc', dim: '#1177aa', glow: 'rgba(34,153,204,0.2)' },
+    ];
+    let bgIdx = 0;
+    let bgFrame = 0;
+    let scrollY = 0;
+    setInterval(() => {
+      bgIdx = (bgIdx + 1) % bgThemes.length;
+      const t = bgThemes[bgIdx];
+      bg.style.color = t.color;
+      const r = document.documentElement.style;
+      r.setProperty('--accent', t.accent);
+      r.setProperty('--accent-dim', t.dim);
+      r.setProperty('--border-accent', t.glow);
+    }, 5000);
+    window.addEventListener('scroll', () => { scrollY = window.scrollY; }, { passive: true });
+    function animBg(time) {
+      bgFrame++;
+      if (bgFrame % 2 !== 0) { requestAnimationFrame(animBg); return; }
+      const cols = Math.ceil(window.innerWidth / 6) + 4;
+      const rows = Math.ceil(window.innerHeight / 11) + 8;
+      const t = time * 0.001;
+      const sy = scrollY * 0.04;
+      let out = '';
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const cx = x - cols / 2, cy = y - rows / 2 + sy;
+          const dist = Math.sqrt(cx * cx + cy * cy);
+          const v1 = Math.sin(x * 0.04 + t * 0.8);
+          const v2 = Math.cos((y + sy) * 0.06 + t * 0.6);
+          const v3 = Math.sin((x + y + sy) * 0.03 + t * 0.5);
+          const v4 = Math.sin(dist * 0.08 - t * 1.2);
+          const v5 = Math.cos(x * 0.02 - (y + sy) * 0.03 + t * 0.4);
+          const v = (v1 + v2 + v3 + v4 + v5) / 5;
+          const idx = Math.floor((v + 1) * 8);
+          out += chars[Math.max(0, Math.min(chars.length - 1, idx))];
+        }
+        out += '\n';
+      }
+      bg.textContent = out;
+      requestAnimationFrame(animBg);
+    }
+    requestAnimationFrame(animBg);
+
+    // LANGUAGE
+    let currentLang = (location.search.includes('lang=es') ? 'es' : 'en');
+    function setLang(lang) {
+      currentLang = lang;
+      document.querySelectorAll('.lang-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', (i === 0 && lang === 'en') || (i === 1 && lang === 'es'));
+      });
+      document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+        const text = el.getAttribute('data-' + lang);
+        if (text) el.innerHTML = text;
+      });
+      document.documentElement.lang = lang;
+    }
+    setLang(currentLang);
+  </script>
+</body>
+</html>

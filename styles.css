@@ -1321,6 +1321,29 @@ body {
   color: var(--text-dim);
 }
 
+.footer-grow {
+  flex: 1;
+}
+
+.footer-grow a {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+
+.footer-grow a:hover { color: var(--text); }
+.footer-grow .grow-arrow {
+  color: var(--accent);
+  margin-left: 4px;
+  transition: text-shadow 0.2s;
+}
+.footer-grow a:hover .grow-arrow {
+  text-shadow: 0 0 12px rgba(0,255,136,0.6);
+}
+
 /* Glow effects */
 @keyframes glow {
   0%, 100% { filter: drop-shadow(0 0 2px currentColor); }

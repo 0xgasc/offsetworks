@@ -68,6 +68,9 @@ const translations = {
     contact: {
       headline: 'ready to build something?',
       subtext: 'drop us a line. we respond fast.'
+    },
+    footer: {
+      grow: 'know someone building something? <span class="grow-arrow">grow with offset →</span>'
     }
   },
   es: {
@@ -114,6 +117,9 @@ const translations = {
     contact: {
       headline: '¿listo para crear algo?',
       subtext: 'escríbenos. respondemos rápido.'
+    },
+    footer: {
+      grow: '¿conocés a alguien construyendo algo? <span class="grow-arrow">crecé con offset →</span>'
     }
   }
 };
