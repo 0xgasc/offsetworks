@@ -33,7 +33,7 @@
       }
 
       @page {
-        margin: 1.2cm 1.5cm;
+        margin: 1cm 1.2cm;
         size: letter;
       }
 
@@ -42,36 +42,74 @@
         print-color-adjust: exact;
         padding: 0;
         max-width: 100%;
-        font-size: 11px;
-        line-height: 1.45;
+        font-size: 9.5px;
+        line-height: 1.35;
       }
 
-      .spacer { height: 18px; }
-      .spacer-sm { height: 10px; }
+      h2 { font-size: 22px !important; margin-bottom: 2px !important; }
 
-      .section-title { margin-bottom: 10px; padding-bottom: 6px; font-size: 9px; }
+      .spacer { height: 8px; }
+      .spacer-sm { height: 4px; }
 
-      .card { padding: 14px 16px; break-inside: avoid; }
+      .section-title { margin-bottom: 6px; padding-bottom: 4px; font-size: 8px; letter-spacing: 0.15em; }
+
+      .card { padding: 8px 10px; break-inside: avoid; border-radius: 4px; }
       .card-gold { background: var(--bg-card); border-color: var(--gold); }
+      .card ul { line-height: 1.6 !important; font-size: 9px !important; }
+      .card ul li { margin: 0; padding: 0; }
+      .card h3 { font-size: 10px !important; margin-bottom: 4px !important; }
+      .card p { font-size: 9px !important; line-height: 1.4 !important; }
 
-      .callout { padding: 14px 18px; margin: 12px 0 18px 0; break-inside: avoid; }
-      .callout h3 { font-size: 12px; margin-bottom: 6px; }
-      .callout p { font-size: 10.5px; margin-bottom: 6px; line-height: 1.5; }
+      .callout { padding: 8px 12px; margin: 6px 0 8px 0; break-inside: avoid; }
+      .callout h3 { font-size: 10px; margin-bottom: 4px; }
+      .callout p { font-size: 9px; margin-bottom: 3px; line-height: 1.4; }
 
-      .checklist li { padding: 4px 0; font-size: 11px; }
-      .checklist .note { font-size: 9px; }
+      .checklist li { padding: 2px 0; font-size: 9px; gap: 6px; }
+      .checklist .check { font-size: 10px; }
+      .checklist .note { font-size: 8px; }
 
-      .grid-3 { gap: 10px !important; }
-      .grid-2 { gap: 12px !important; }
+      .grid-3 { gap: 6px !important; }
+      .grid-2 { gap: 6px !important; }
 
-      .footer { margin-top: 20px; padding-top: 12px; }
-      .footer p { font-size: 9px; }
+      .label { font-size: 8px !important; letter-spacing: 0.15em; margin-bottom: 2px !important; }
+
+      .mono.gold[style*="font-size:36px"] { font-size: 20px !important; }
+      .mono.gold[style*="font-size:28px"] { font-size: 16px !important; }
+      .mono.gold[style*="font-size:14px"] { font-size: 9px !important; }
+
+      .footer { margin-top: 10px; padding-top: 8px; }
+      .footer p { font-size: 8px; }
 
       .page-break { page-break-before: auto; }
 
       a { color: inherit; }
 
-      header { margin-bottom: 18px !important; padding-bottom: 14px !important; }
+      header { margin-bottom: 10px !important; padding-bottom: 8px !important; }
+      header h1 { font-size: 14px !important; }
+      header p { font-size: 9px !important; }
+      header .mono { font-size: 8px !important; padding: 3px 10px !important; }
+
+      [style*="padding:32px 20px"] { padding: 8px 10px !important; }
+      [style*="margin-bottom:32px"] { margin-bottom: 8px !important; }
+      [style*="margin-bottom:28px"] { margin-bottom: 6px !important; }
+      [style*="margin-bottom:24px"] { margin-bottom: 6px !important; }
+      [style*="margin-bottom:14px"] { margin-bottom: 4px !important; }
+      [style*="margin-top:16px"] { margin-top: 6px !important; }
+      [style*="padding-top:14px"] { padding-top: 6px !important; }
+      [style*="font-size:32px"] { font-size: 18px !important; }
+      [style*="font-size:18px"] { font-size: 12px !important; }
+      [style*="font-size:16px"] { font-size: 10px !important; }
+      [style*="font-size:15px"] { font-size: 9.5px !important; }
+      [style*="font-size:14px"] { font-size: 9px !important; }
+      [style*="font-size:13px"] { font-size: 9px !important; }
+      [style*="font-size:12px"] { font-size: 8.5px !important; }
+      [style*="padding:36px"] { padding: 10px 12px !important; }
+
+      [style*="margin-top:8px"] { margin-top: 3px !important; }
+      [style*="margin-bottom:10px"] { margin-bottom: 4px !important; }
+      [style*="margin-top:6px"] { margin-top: 3px !important; }
+      [style*="margin-bottom:12px"] { margin-bottom: 4px !important; }
+      [style*="margin-bottom:20px"] { margin-bottom: 6px !important; }
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
