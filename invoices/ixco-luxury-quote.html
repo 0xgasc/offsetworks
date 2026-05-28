@@ -232,21 +232,29 @@
       .callout h3 { font-size: 10.5px !important; margin-bottom: 4px !important; }
       .callout p { font-size: 9px !important; margin-bottom: 3px !important; line-height: 1.45 !important; }
 
-      /* ── Checklist — 2-column in print ── */
+      /* ── Checklist — 2-column, never split ── */
       .checklist {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
-        gap: 1px 20px !important;
+        gap: 0px 16px !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
       }
       .checklist li {
-        padding: 2.5px 0 !important;
+        padding: 2px 0 !important;
         font-size: 8.5px !important;
-        gap: 5px !important;
+        gap: 4px !important;
         border-bottom: none !important;
-        line-height: 1.35 !important;
+        line-height: 1.4 !important;
       }
       .checklist .check { font-size: 8px !important; }
       .checklist .note { font-size: 7px !important; display: inline !important; }
+
+      /* Keep checklist title + list together */
+      .checklist-section {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+      }
 
       /* ── Grids ── */
       .grid-3 { gap: 8px !important; }
@@ -487,23 +495,25 @@
   <!-- QUÉ INCLUYE TU PÁGINA                  -->
   <!-- ═══════════════════════════════════════ -->
 
-  <div class="section-title page-break">Tu P&aacute;gina &mdash; Qu&eacute; Incluye</div>
+  <div class="checklist-section">
+    <div class="section-title">Tu P&aacute;gina &mdash; Qu&eacute; Incluye</div>
 
-  <ul class="checklist">
-    <li><span class="check">&#10003;</span> P&aacute;gina de inicio con animaciones de lujo, negro y oro</li>
-    <li><span class="check">&#10003;</span> Cat&aacute;logo completo: relojes, cadenas, pulseras, anillos</li>
-    <li><span class="check">&#10003;</span> Navegaci&oacute;n tipo reel &mdash; como TikTok o Instagram</li>
-    <li><span class="check">&#10003;</span> Bot&oacute;n de WhatsApp en cada producto <span class="note">&mdash; un toque y te escriben</span></li>
-    <li><span class="check">&#10003;</span> Funciona perfecto en celular, Android y iPhone</li>
-    <li><span class="check">&#10003;</span> En espa&ntilde;ol e ingl&eacute;s</li>
-    <li><span class="check">&#10003;</span> Tu propio dominio web (.com)</li>
-    <li><span class="check">&#10003;</span> Aparec&eacute;s en Google</li>
-    <li><span class="check">&#10003;</span> Se ve profesional al compartir por WhatsApp</li>
-    <li><span class="check">&#10003;</span> Tu secci&oacute;n personal con tus fotos y tu estilo</li>
-    <li><span class="check">&#10003;</span> Conectado a tu Instagram @abel_ixco_</li>
-    <li><span class="check">&#10003;</span> Personalizaciones ilimitadas de colores, estilos, y dise&ntilde;o</li>
-    <li><span class="check">&#10003;</span> Sin cobros mensuales <span class="note">&mdash; Q0/mes, siempre</span></li>
-  </ul>
+    <ul class="checklist">
+      <li><span class="check">&#10003;</span> P&aacute;gina de inicio con animaciones de lujo</li>
+      <li><span class="check">&#10003;</span> Cat&aacute;logo: relojes, cadenas, pulseras, anillos</li>
+      <li><span class="check">&#10003;</span> Navegaci&oacute;n tipo reel (TikTok/Instagram)</li>
+      <li><span class="check">&#10003;</span> Bot&oacute;n de WhatsApp en cada producto</li>
+      <li><span class="check">&#10003;</span> Perfecto en celular, Android y iPhone</li>
+      <li><span class="check">&#10003;</span> En espa&ntilde;ol e ingl&eacute;s</li>
+      <li><span class="check">&#10003;</span> Tu propio dominio web (.com)</li>
+      <li><span class="check">&#10003;</span> Aparec&eacute;s en Google</li>
+      <li><span class="check">&#10003;</span> Profesional al compartir por WhatsApp</li>
+      <li><span class="check">&#10003;</span> Tu secci&oacute;n personal con tu estilo</li>
+      <li><span class="check">&#10003;</span> Conectado a tu Instagram @abel_ixco_</li>
+      <li><span class="check">&#10003;</span> Personalizaciones ilimitadas</li>
+      <li><span class="check">&#10003;</span> Sin cobros mensuales <span class="note">&mdash; Q0/mes</span></li>
+    </ul>
+  </div>
 
   <div class="spacer"></div>
 
