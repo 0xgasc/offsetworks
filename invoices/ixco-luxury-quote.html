@@ -23,36 +23,55 @@
     @media print {
       :root {
         --bg: #fff;
-        --bg-card: #fafafa;
+        --bg-card: #f8f8f8;
         --text: #111;
         --text-secondary: #444;
         --text-muted: #777;
         --gold: #8B6914;
         --gold-dim: rgba(139, 105, 20, 0.06);
-        --border: #e2e2e2;
+        --border: #ddd;
       }
+
+      @page {
+        margin: 1.2cm 1.5cm;
+        size: letter;
+      }
+
       body {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
-        padding: 32px 36px;
+        padding: 0;
         max-width: 100%;
-        font-size: 12.5px;
-        line-height: 1.55;
+        font-size: 11px;
+        line-height: 1.45;
       }
-      .spacer { height: 28px; }
-      .spacer-sm { height: 16px; }
-      .section-title { margin-bottom: 16px; padding-bottom: 8px; }
-      .card { padding: 18px; border-color: var(--border); }
+
+      .spacer { height: 18px; }
+      .spacer-sm { height: 10px; }
+
+      .section-title { margin-bottom: 10px; padding-bottom: 6px; font-size: 9px; }
+
+      .card { padding: 14px 16px; break-inside: avoid; }
       .card-gold { background: var(--bg-card); border-color: var(--gold); }
-      .callout { padding: 18px 22px; margin: 16px 0 28px 0; }
-      .callout h3 { font-size: 14px; margin-bottom: 8px; }
-      .callout p { font-size: 12px; margin-bottom: 8px; }
-      .checklist li { padding: 7px 0; font-size: 12.5px; }
-      .checklist .note { font-size: 10px; }
-      .footer { margin-top: 32px; }
-      .page-break { page-break-before: always; }
+
+      .callout { padding: 14px 18px; margin: 12px 0 18px 0; break-inside: avoid; }
+      .callout h3 { font-size: 12px; margin-bottom: 6px; }
+      .callout p { font-size: 10.5px; margin-bottom: 6px; line-height: 1.5; }
+
+      .checklist li { padding: 4px 0; font-size: 11px; }
+      .checklist .note { font-size: 9px; }
+
+      .grid-3 { gap: 10px !important; }
+      .grid-2 { gap: 12px !important; }
+
+      .footer { margin-top: 20px; padding-top: 12px; }
+      .footer p { font-size: 9px; }
+
+      .page-break { page-break-before: auto; }
+
       a { color: inherit; }
-      header { margin-bottom: 28px !important; padding-bottom: 20px !important; }
+
+      header { margin-bottom: 18px !important; padding-bottom: 14px !important; }
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
