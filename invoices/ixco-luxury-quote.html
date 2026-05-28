@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ixco Luxury — Propuesta de Alianza | Offset Works</title>
+  <meta name="author" content="Offset Works">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050505;
+      --bg-card: #0e0e0e;
+      --text: #f0f0f0;
+      --text-secondary: #a0a0a0;
+      --text-muted: #555;
+      --gold: #D4AF37;
+      --gold-dim: rgba(212, 175, 55, 0.15);
+      --border: #1c1c1c;
+    }
+
+    @media print {
+      :root {
+        --bg: #fff;
+        --bg-card: #fafafa;
+        --text: #111;
+        --text-secondary: #444;
+        --text-muted: #777;
+        --gold: #8B6914;
+        --gold-dim: rgba(139, 105, 20, 0.06);
+        --border: #e2e2e2;
+      }
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        padding: 32px 36px;
+        max-width: 100%;
+        font-size: 12.5px;
+        line-height: 1.55;
+      }
+      .spacer { height: 28px; }
+      .spacer-sm { height: 16px; }
+      .section-title { margin-bottom: 16px; padding-bottom: 8px; }
+      .card { padding: 18px; border-color: var(--border); }
+      .card-gold { background: var(--bg-card); border-color: var(--gold); }
+      .callout { padding: 18px 22px; margin: 16px 0 28px 0; }
+      .callout h3 { font-size: 14px; margin-bottom: 8px; }
+      .callout p { font-size: 12px; margin-bottom: 8px; }
+      .checklist li { padding: 7px 0; font-size: 12.5px; }
+      .checklist .note { font-size: 10px; }
+      .footer { margin-top: 32px; }
+      .page-break { page-break-before: always; }
+      a { color: inherit; }
+      header { margin-bottom: 28px !important; padding-bottom: 20px !important; }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 72px 48px;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    /* ─── Typography ─── */
+
+    .mono { font-family: 'Space Mono', monospace; }
+
+    .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .gold { color: var(--gold); }
+
+    .section-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+
+    /* ─── Layout ─── */
+
+    .spacer { height: 64px; }
+    .spacer-sm { height: 40px; }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 64px 0;
+    }
+
+    /* ─── Cards ─── */
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 28px;
+    }
+
+    .card-gold {
+      border-color: rgba(212, 175, 55, 0.25);
+      background: linear-gradient(135deg, var(--bg-card) 0%, rgba(212, 175, 55, 0.04) 100%);
+    }
+
+    /* ─── Callout ─── */
+
+    .callout {
+      border-left: 3px solid var(--gold);
+      padding: 28px 32px;
+      background: var(--bg-card);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .callout h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .callout p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+
+    .callout p:last-child { margin-bottom: 0; }
+
+    /* ─── Checklist ─── */
+
+    .checklist { list-style: none; }
+
+    .checklist li {
+      font-size: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .checklist li:last-child { border-bottom: none; }
+
+    .checklist .check {
+      color: var(--gold);
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .checklist .note {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-left: 4px;
+    }
+
+    /* ─── Footer ─── */
+
+    .footer {
+      margin-top: 72px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .footer p {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    .footer a { color: var(--text-muted); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      body { padding: 40px 24px; }
+      .grid-3 { grid-template-columns: 1fr !important; }
+      .grid-2 { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- HEADER                                  -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <header style="display:flex; justify-content:space-between; align-items:flex-start; padding-bottom:36px; border-bottom:1px solid var(--gold); margin-bottom:56px;">
+    <div>
+      <h1 class="mono" style="font-size:20px; font-weight:700; letter-spacing:0.25em; text-transform:uppercase;">Offset Works</h1>
+      <p style="font-size:13px; color:var(--text-secondary); margin-top:6px;">Gabriel Solomon, CEO<br>g@offsetworks.xyz</p>
+    </div>
+    <div style="text-align:right;">
+      <div class="mono" style="font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold); padding:5px 16px; display:inline-block; margin-bottom:14px;">Propuesta de Alianza</div>
+      <p style="font-size:12px; color:var(--text-secondary);">OW-2026-005<br>28 de mayo, 2026</p>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- FOR / PROJECT                           -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <div class="label">Preparado Para</div>
+  <p style="font-size:18px; font-weight:500; margin-top:8px;">Abel Ixco</p>
+  <p style="font-size:14px; color:var(--text-secondary);">Ixco Luxury &mdash; Relojes y Accesorios</p>
+
+  <div class="spacer"></div>
+
+  <h2 style="font-size:40px; font-weight:700; letter-spacing:-0.02em; line-height:1.1;">Crezcamos Juntos</h2>
+  <p class="mono gold" style="font-size:14px; margin-top:8px; margin-bottom:24px;">Una alianza, no una factura</p>
+  <p style="font-size:16px; color:var(--text-secondary); line-height:1.8; max-width:640px;">
+    Abel, esto no es una cotizaci&oacute;n. Te propongo algo mejor: una alianza donde los dos ganamos.
+    Yo te construyo tu p&aacute;gina completa, gratis. Vos me ayud&aacute;s a crecer en Guatemala.
+  </p>
+
+  <div class="spacer"></div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- LA IDEA                                 -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <div class="callout">
+    <h3>La idea</h3>
+    <p>
+      Vos conoc&eacute;s gente. Vendedores, emprendedores, negocios que necesitan una p&aacute;gina
+      como la tuya. Yo s&eacute; construirlas.
+    </p>
+    <p style="color:var(--text); font-weight:500; font-size:15px;">
+      Vos vend&eacute;s relojes. Yo vendo p&aacute;ginas. Los dos vendemos mejor juntos.
+    </p>
+  </div>
+
+  <div class="spacer"></div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- CÓMO FUNCIONA                           -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <div class="section-title">C&oacute;mo Funciona</div>
+
+  <div class="grid-3" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px;">
+
+    <div class="card">
+      <div class="mono gold" style="font-size:32px; font-weight:700; margin-bottom:12px;">01</div>
+      <h3 style="font-size:16px; font-weight:600; margin-bottom:10px;">Yo te doy tu p&aacute;gina</h3>
+      <p style="font-size:14px; color:var(--text-secondary); line-height:1.7;">
+        Completa, funcionando. Cat&aacute;logo, WhatsApp, todo. Sin costo. Ya est&aacute; hecha.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="mono gold" style="font-size:32px; font-weight:700; margin-bottom:12px;">02</div>
+      <h3 style="font-size:16px; font-weight:600; margin-bottom:10px;">Vos me refer&iacute;s clientes</h3>
+      <p style="font-size:14px; color:var(--text-secondary); line-height:1.7;">
+        Alguien te dice &ldquo;qu&eacute; buena tu p&aacute;gina&rdquo; &mdash; me lo mand&aacute;s. Solo eso.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="mono gold" style="font-size:32px; font-weight:700; margin-bottom:12px;">03</div>
+      <h3 style="font-size:16px; font-weight:600; margin-bottom:10px;">Los dos ganamos</h3>
+      <p style="font-size:14px; color:var(--text-secondary); line-height:1.7;">
+        Vos ten&eacute;s tu p&aacute;gina gratis y gan&aacute;s por cada referido. Yo consigo clientes.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="spacer"></div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- QUÉ PONE CADA UNO                      -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <div class="section-title">Qu&eacute; Pone Cada Uno</div>
+
+  <div class="grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+
+    <div class="card card-gold">
+      <p class="label gold" style="margin-bottom:14px;">Offset Works pone</p>
+      <ul style="list-style:none; font-size:14px; color:var(--text-secondary); line-height:2.2;">
+        <li>&bull; Tu p&aacute;gina web completa, gratis</li>
+        <li>&bull; Dise&ntilde;o de lujo negro y oro</li>
+        <li>&bull; Cat&aacute;logo con todos tus productos</li>
+        <li>&bull; Botones de WhatsApp para vender</li>
+        <li>&bull; Tu propio dominio (.com)</li>
+        <li>&bull; P&aacute;gina en espa&ntilde;ol e ingl&eacute;s</li>
+        <li>&bull; Que te encuentren en Google</li>
+        <li>&bull; Cambios y personalizaciones ilimitadas</li>
+        <li>&bull; Soporte continuo</li>
+        <li>&bull; Fotos profesionales de tus productos</li>
+      </ul>
+    </div>
+
+    <div class="card card-gold">
+      <p class="label gold" style="margin-bottom:14px;">Abel pone</p>
+      <ul style="list-style:none; font-size:14px; color:var(--text-secondary); line-height:2.2;">
+        <li>&bull; Referir gente que necesite p&aacute;gina</li>
+        <li>&bull; Mostrar tu p&aacute;gina a otros vendedores</li>
+        <li>&bull; Compartir el link con tus contactos</li>
+        <li>&bull; Contarle a la gente qui&eacute;n te la hizo</li>
+        <li>&bull; Ser el ejemplo de que funciona</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="spacer"></div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- REFERIDOS                               -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <div class="section-title">El Negocio de Referir</div>
+
+  <div class="callout" style="margin-bottom:32px;">
+    <h3>Vos gan&aacute;s por cada cliente que me mand&eacute;s</h3>
+    <p>
+      Las p&aacute;ginas que yo construyo cuestan entre
+      <strong style="color:var(--text);">Q5,000 y Q15,000</strong>
+      dependiendo del proyecto. Por cada persona que vos me refir&aacute;s
+      y que me contrate, vos te gan&aacute;s el
+      <strong style="color:var(--text);">15%</strong> de esa venta.
+    </p>
+    <p>
+      Ejemplo: refer&iacute;s a alguien, le hago una p&aacute;gina de Q10,000.
+      Vos te gan&aacute;s <strong style="color:var(--gold);">Q1,500</strong>
+      por pasar el contacto. Y tu p&aacute;gina sigue siendo gratis.
+    </p>
+  </div>
+
+  <div class="grid-3" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px;">
+
+    <div class="card" style="text-align:center; padding:32px 20px;">
+      <p class="label" style="margin-bottom:12px;">Tu Comisi&oacute;n</p>
+      <p class="mono gold" style="font-size:36px; font-weight:700;">15%</p>
+      <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">de cada venta referida</p>
+    </div>
+
+    <div class="card" style="text-align:center; padding:32px 20px;">
+      <p class="label" style="margin-bottom:12px;">Gan&aacute;s por Referido</p>
+      <p class="mono gold" style="font-size:28px; font-weight:700;">Q750&ndash;Q2,250</p>
+      <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">dependiendo del proyecto</p>
+    </div>
+
+    <div class="card" style="text-align:center; padding:32px 20px;">
+      <p class="label" style="margin-bottom:12px;">Tu P&aacute;gina</p>
+      <p class="mono gold" style="font-size:36px; font-weight:700;">Gratis</p>
+      <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">mientras dure la alianza</p>
+    </div>
+
+  </div>
+
+  <div class="spacer"></div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- QUÉ INCLUYE TU PÁGINA                  -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <div class="section-title page-break">Tu P&aacute;gina &mdash; Qu&eacute; Incluye</div>
+
+  <ul class="checklist">
+    <li><span class="check">&#10003;</span> P&aacute;gina de inicio con animaciones de lujo, negro y oro</li>
+    <li><span class="check">&#10003;</span> Cat&aacute;logo completo: relojes, cadenas, pulseras, anillos</li>
+    <li><span class="check">&#10003;</span> Navegaci&oacute;n tipo reel &mdash; como TikTok o Instagram</li>
+    <li><span class="check">&#10003;</span> Bot&oacute;n de WhatsApp en cada producto <span class="note">&mdash; un toque y te escriben</span></li>
+    <li><span class="check">&#10003;</span> Funciona perfecto en celular, Android y iPhone</li>
+    <li><span class="check">&#10003;</span> En espa&ntilde;ol e ingl&eacute;s</li>
+    <li><span class="check">&#10003;</span> Tu propio dominio web (.com)</li>
+    <li><span class="check">&#10003;</span> Aparec&eacute;s en Google</li>
+    <li><span class="check">&#10003;</span> Se ve profesional al compartir por WhatsApp</li>
+    <li><span class="check">&#10003;</span> Tu secci&oacute;n personal con tus fotos y tu estilo</li>
+    <li><span class="check">&#10003;</span> Conectado a tu Instagram @abel_ixco_</li>
+    <li><span class="check">&#10003;</span> Personalizaciones ilimitadas de colores, estilos, y dise&ntilde;o</li>
+    <li><span class="check">&#10003;</span> Sin cobros mensuales <span class="note">&mdash; Q0/mes, siempre</span></li>
+  </ul>
+
+  <div class="spacer"></div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- DEMO LINK                               -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <div class="callout">
+    <h3>Tu p&aacute;gina ya est&aacute; en vivo</h3>
+    <p>
+      Ya la constru&iacute;. Abr&iacute; el link en tu celular. Toc&aacute; los productos,
+      desliz&aacute; como en Instagram, prob&aacute; el bot&oacute;n de WhatsApp.
+      Todo funciona. Esto es lo que recib&iacute;s.
+    </p>
+    <div style="margin-top:16px; padding-top:14px; border-top:1px solid var(--border);">
+      <a href="https://abelixco.vercel.app/es" target="_blank" rel="noopener"
+         class="mono gold" style="font-size:14px; font-weight:700; text-decoration:underline; letter-spacing:0.02em;">
+        abelixco.vercel.app/es
+      </a>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SI ESTO FUNCIONA                        -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <div class="section-title">Si Esto Funciona</div>
+
+  <div style="margin-bottom:32px;">
+    <h3 style="font-size:16px; font-weight:600; margin-bottom:10px;">Panel para manejar tu p&aacute;gina solo</h3>
+    <p style="font-size:14px; color:var(--text-secondary); line-height:1.8;">
+      Si quer&eacute;s manejar tu p&aacute;gina vos mismo &mdash; agregar productos,
+      cambiar precios, subir fotos desde tu cel &mdash; lo activamos por
+      <strong style="color:var(--text);">Q150/mes</strong>.
+      Pod&eacute;s cancelar cuando quer&aacute;s.
+    </p>
+  </div>
+
+  <div>
+    <h3 style="font-size:16px; font-weight:600; margin-bottom:10px;">M&aacute;s funciones a futuro</h3>
+    <p style="font-size:14px; color:var(--text-secondary); line-height:1.8;">
+      Pagos en l&iacute;nea, cat&aacute;logo m&aacute;s grande, nuevas secciones &mdash;
+      lo vamos agregando juntos conforme tu negocio crece. A tu ritmo.
+    </p>
+  </div>
+
+  <div class="spacer"></div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- LAS REGLAS                              -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <div class="section-title">Las Reglas</div>
+
+  <div style="margin-bottom:28px;">
+    <h3 style="font-size:16px; font-weight:600; margin-bottom:10px;">Esto es una alianza, no un contrato</h3>
+    <p style="font-size:14px; color:var(--text-secondary); line-height:1.8;">
+      No hay letra chiquita. Si ya no quer&eacute;s seguir, me dec&iacute;s y listo.
+      Tu p&aacute;gina sigue en l&iacute;nea mientras la alianza est&eacute; activa.
+    </p>
+  </div>
+
+  <div style="margin-bottom:28px;">
+    <h3 style="font-size:16px; font-weight:600; margin-bottom:10px;">&iquest;Y si no refiero a nadie?</h3>
+    <p style="font-size:14px; color:var(--text-secondary); line-height:1.8;">
+      No pasa nada. No hay m&iacute;nimos. Pero entre m&aacute;s gente me mand&eacute;s,
+      m&aacute;s gan&aacute;s vos.
+    </p>
+  </div>
+
+  <div>
+    <h3 style="font-size:16px; font-weight:600; margin-bottom:10px;">Todo es tuyo</h3>
+    <p style="font-size:14px; color:var(--text-secondary); line-height:1.8;">
+      El dise&ntilde;o, la marca, el contenido &mdash; todo es de Ixco Luxury.
+      Yo solo pido poder mostrar tu p&aacute;gina como ejemplo de mi trabajo.
+    </p>
+  </div>
+
+  <div class="spacer"></div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- RESUMEN FINAL                           -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <div class="card card-gold" style="padding:36px;">
+    <h3 style="font-size:18px; font-weight:700; margin-bottom:20px;">En resumen</h3>
+    <p style="font-size:15px; color:var(--text-secondary); line-height:1.8; margin-bottom:12px;">
+      <strong style="color:var(--text);">Vos recib&iacute;s:</strong> p&aacute;gina web profesional gratis
+      + personalizaciones ilimitadas + 15% de comisi&oacute;n por cada cliente que me refir&aacute;s.
+    </p>
+    <p style="font-size:15px; color:var(--text-secondary); line-height:1.8; margin-bottom:24px;">
+      <strong style="color:var(--text);">Yo recibo:</strong> un socio en Guatemala que me conecta
+      con gente que necesita lo que yo hago.
+    </p>
+    <p class="mono gold" style="font-size:16px; font-weight:700; letter-spacing:0.02em;">
+      Los dos ganamos.
+    </p>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- FOOTER                                  -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <footer class="footer">
+    <p>Offset Works &nbsp;&bull;&nbsp; Gabriel Solomon &nbsp;&bull;&nbsp; <a href="mailto:g@offsetworks.xyz">g@offsetworks.xyz</a></p>
+  </footer>
+
+</body>
+</html>
