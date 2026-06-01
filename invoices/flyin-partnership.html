@@ -59,6 +59,7 @@
       font-size: 10px; line-height: 1.15;
       color: var(--accent); opacity: 0.18;
       white-space: pre; overflow: hidden;
+      width: 110vw; height: 110vh; left: -5vw; top: -5vh;
       pointer-events: none;
       transition: color 2s ease;
     }
@@ -546,8 +547,10 @@
     function animBg(time) {
       bgFrame++;
       if (bgFrame % 3 !== 0) { requestAnimationFrame(animBg); return; }
-      const cols = Math.ceil(window.innerWidth / 6) + 4;
-      const rows = Math.ceil(window.innerHeight / 11) + 8;
+      const vw = Math.max(window.innerWidth, document.documentElement.clientWidth, screen.width) || 400;
+      const vh = Math.max(window.innerHeight, document.documentElement.clientHeight, screen.height) || 800;
+      const cols = Math.ceil(vw / 5) + 10;
+      const rows = Math.ceil(vh / 10) + 16;
       let out = '';
       const t = time * 0.001;
       const sy = scrollY * 0.04;
