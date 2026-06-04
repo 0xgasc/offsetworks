@@ -349,28 +349,6 @@ const workItems = [
     image: 'images/stash-screenshot.png'
   },
   {
-    title: 'lynx',
-    type: { en: 'one page for artists', es: 'una página para artistas' },
-    badge: 'wip',
-    desc: {
-      en: 'your music, links, store, and tips on a single page. built for independent artists, made to actually get you paid.',
-      es: 'tu música, links, tienda y propinas en una sola página. hecha para artistas independientes, pensada para que cobres de verdad.'
-    },
-    link: '#',
-    image: 'images/lynx-screenshot.png'
-  },
-  {
-    title: 'stok',
-    type: { en: 'inventory for small businesses', es: 'inventario para pequeños negocios' },
-    badge: 'wip',
-    desc: {
-      en: 'know what is in stock at every location, in real time. for restaurants, bars, and small manufacturers ready to grow.',
-      es: 'sabé qué hay en stock en cada lugar, en tiempo real. para restaurantes, bares y pequeños fabricantes listos para crecer.'
-    },
-    link: '#',
-    image: 'images/stok-screenshot.png'
-  },
-  {
     title: 'obro',
     type: { en: 'construction expenses, simplified', es: 'gastos de obra, simplificados' },
     badge: 'live',
@@ -390,21 +368,9 @@ const workItems = [
       en: 'website for the king of hearts clothing brand. interactive vintage tv channels turn each drop into a moment, with curated archives and a built-in shop.',
       es: 'sitio web para la marca de ropa king of hearts. canales de tv vintage interactivos convierten cada drop en un momento, con archivos curados y tienda integrada.'
     },
-    link: 'https://sincerelykingofhearts.up.railway.app/',
+    link: 'https://vol2.sincerelykingofhearts.com/',
     image: 'images/koh-screenshot.png'
   },
-  {
-    title: 'convoca',
-    type: { en: 'civic event discovery', es: 'descubrimiento de eventos cívicos' },
-    badge: 'live',
-    useImage: true,
-    desc: {
-      en: 'find the protests, town halls, and community events near you that you would have missed. ai agents do the digging across instagram, telegram, and city calendars.',
-      es: 'encontrá las protestas, asambleas y eventos comunitarios cerca tuyo que de otra forma se te pasaban. agentes de ia hacen el trabajo entre instagram, telegram y calendarios de la ciudad.'
-    },
-    link: 'https://convoca-web-production.up.railway.app/',
-    image: 'images/convoca-screenshot.png'
-  }
 ];
 
 // Color themes list
