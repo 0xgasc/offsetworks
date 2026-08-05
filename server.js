@@ -91,7 +91,7 @@ const indexPath = path.resolve(__dirname, "index.html");
 const ES_META = {
   title: "offset works — productos digitales que funcionan",
   description:
-    "Estudio boutique de diseño y desarrollo para startups, creativos y fundadores. Sitios web, apps web y experiencias inmersivas — hechas desde cero, lanzadas en semanas.",
+    "Estudio boutique de diseño y desarrollo para startups, creativos y fundadores en todo el mundo. Sitios web, apps web y experiencias inmersivas — hechas desde cero, lanzadas en semanas.",
   canonical: "https://offsetworks.xyz/es",
   ogUrl: "https://offsetworks.xyz/es",
   ogLocale: "es_GT",

@@ -5,7 +5,7 @@
 const seoMeta = {
   en: {
     title: 'offset works — digital products that work',
-    description: 'Boutique design and development studio for startups, creatives and founders. Built from scratch, shipped in weeks.',
+    description: 'Boutique design and development studio working with startups, creatives and founders worldwide. Built from scratch, shipped in weeks.',
     canonical: 'https://offsetworks.xyz/',
     ogLocale: 'en_US',
     ogLocaleAlt: 'es_GT',
@@ -14,7 +14,7 @@ const seoMeta = {
   },
   es: {
     title: 'offset works — productos digitales que funcionan',
-    description: 'Estudio boutique de diseño y desarrollo para startups, creativos y fundadores. Hechos desde cero, lanzados en semanas.',
+    description: 'Estudio boutique de diseño y desarrollo para startups, creativos y fundadores en todo el mundo. Hechos desde cero, lanzados en semanas.',
     canonical: 'https://offsetworks.xyz/es',
     ogLocale: 'es_GT',
     ogLocaleAlt: 'en_US',
@@ -32,7 +32,7 @@ const translations = {
     },
     hero: {
       headline: 'systems that <span class="highlight">work</span>.',
-      subtext: 'boutique design and development studio for startups, creatives and founders.<br>competitive rates, built from scratch.',
+      subtext: 'boutique studio for startups, creatives and founders anywhere in the world.<br>we specialize in international collaborations. competitive rates, built from scratch.',
       cta1: 'start a project →',
       cta2: 'see our work'
     },
@@ -81,7 +81,7 @@ const translations = {
     },
     hero: {
       headline: 'sistemas que <span class="highlight">funcionan</span>.',
-      subtext: 'estudio boutique de diseño y desarrollo para startups, creativos y fundadores.<br>tarifas competitivas, hecho desde cero.',
+      subtext: 'estudio boutique para startups, creativos y fundadores en cualquier parte del mundo.<br>nos especializamos en colaboraciones internacionales. tarifas competitivas, hecho desde cero.',
       cta1: 'empezar proyecto →',
       cta2: 'ver trabajo'
     },
