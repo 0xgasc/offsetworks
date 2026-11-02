@@ -291,7 +291,7 @@ const workItems = [
     },
     link: 'https://flyinguate.com/',
     useImage: true,
-    image: 'images/flyin-screenshot.png'
+    image: 'images/flyin-screenshot.jpg'
   },
   {
     title: 'stablepay',
@@ -325,7 +325,7 @@ const workItems = [
       es: 'cada concierto de unknown mortal orchestra, en un solo lugar. setlists, grabaciones y un historial de cada presentación construido por la comunidad.'
     },
     link: 'https://umo.livemoments.online/songs',
-    image: 'images/umo-screenshot.png'
+    image: 'images/umo-screenshot.jpg'
   },
   {
     title: 'tiqueteo',
@@ -337,7 +337,7 @@ const workItems = [
     },
     link: 'https://www.tiqueteo.xyz/',
     useImage: true,
-    image: 'images/tiqueteo-screenshot.png'
+    image: 'images/tiqueteo-screenshot.jpg'
   },
   {
     title: 'stash',
@@ -360,7 +360,7 @@ const workItems = [
     },
     link: 'https://orbita.offsetworks.xyz/',
     useImage: true,
-    image: 'images/orbita-screenshot.png'
+    image: 'images/orbita-screenshot.jpg'
   },
   {
     title: 'king of hearts',
@@ -524,7 +524,7 @@ function initWorkList() {
       // Lazy-mount: src empty until track is expanded. loading="lazy" alone
       // doesn't reliably fire inside a collapsed (max-height:0) accordion,
       // so we set src on first expand instead.
-      mediaContent = `<div class="work-track-iframe-wrapper" data-link="${item.link}"><iframe class="work-track-iframe" src="about:blank" data-src="${iframeSrc}" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe><div class="iframe-click-overlay"></div></div>`;
+      mediaContent = `<div class="work-track-iframe-wrapper" data-link="${item.link}"><iframe class="work-track-iframe" title="${item.title} preview" src="about:blank" data-src="${iframeSrc}" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe><div class="iframe-click-overlay"></div></div>`;
     } else if (item.image) {
       const zoomClass = needsZoom ? ' work-track-image-zoomed' : '';
       if (hasLink) {
