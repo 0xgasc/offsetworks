@@ -351,16 +351,16 @@ const workItems = [
     image: 'images/stash-screenshot.png'
   },
   {
-    title: 'obro',
-    type: { en: 'construction expenses, simplified', es: 'gastos de obra, simplificados' },
+    title: 'órbita',
+    type: { en: 'digital loyalty cards', es: 'tarjetas de lealtad digitales' },
     badge: 'live',
     desc: {
-      en: 'every cobro, gasto, and documento for your construction site in one app. for the residentes and contratistas who actually run the work.',
-      es: 'cada cobro, gasto y documento de tu obra en una sola app. para los residentes y contratistas que de verdad llevan la obra.'
+      en: 'your stamp card, on your customers\' phones. no app to download, no special hardware. build your card in a few minutes and start free.',
+      es: 'tu tarjeta de sellos, en el celular de tus clientes. sin app que bajar, sin equipo especial. armá tu tarjeta en unos minutos y empezá gratis.'
     },
-    link: 'https://obro-gt.vercel.app',
+    link: 'https://orbita.offsetworks.xyz/',
     useImage: true,
-    image: 'images/obro-screenshot.png'
+    image: 'images/orbita-screenshot.png'
   },
   {
     title: 'king of hearts',
