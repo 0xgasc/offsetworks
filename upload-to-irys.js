@@ -8,7 +8,8 @@ const Irys = require("@irys/sdk");
 const fs = require("fs");
 const path = require("path");
 
-const PRIVATE_KEY = "06da2e1158b524adebddfa182da5fe825bc8fe754888ce20a2f032f4046b6191";
+const PRIVATE_KEY = process.env.IRYS_PRIVATE_KEY;
+if (!PRIVATE_KEY) throw new Error("Set IRYS_PRIVATE_KEY");
 const VIDEO_PATH = "/Users/gs/Desktop/Screen Recording 2026-01-22 at 08.10.22.mov";
 
 async function main() {
@@ -19,7 +20,7 @@ async function main() {
     network: "devnet", // Change to "mainnet" for permanent storage
     token: "ethereum",
     key: PRIVATE_KEY,
-    config: { providerUrl: "https://eth-sepolia.g.alchemy.com/v2/alcht_YbDiff1KAqK0fNAzBgycHfz7G0iz4n" }
+    config: { providerUrl: process.env.SEPOLIA_RPC_URL || "https://ethereum-sepolia-rpc.publicnode.com" }
   });
 
   console.log(`📁 Reading video: ${VIDEO_PATH}`);

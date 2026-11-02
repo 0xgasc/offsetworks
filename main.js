@@ -284,12 +284,13 @@ const workItems = [
   {
     title: 'flyin',
     type: { en: 'helicopter tours, online', es: 'tours en helicóptero, en línea' },
-    badge: 'wip',
+    badge: 'live',
     desc: {
       en: 'helicopter tours over guatemala, booked in seconds. pick a route, pay, and the confirmation hits your inbox before you close the tab.',
       es: 'tours en helicóptero sobre guatemala, reservados en segundos. elegí ruta, pagá, y la confirmación te llega al correo antes de cerrar la pestaña.'
     },
-    link: 'https://flyinguate.vercel.app/',
+    link: 'https://flyinguate.com/',
+    useImage: true,
     image: 'images/flyin-screenshot.png'
   },
   {
@@ -311,7 +312,7 @@ const workItems = [
       en: 'collect rent, handle maintenance requests, and track every lease in one place. built for landlords in guatemala managing more than one property.',
       es: 'cobrá renta, atendé mantenimiento y llevá cada contrato desde un solo lugar. hecho para arrendadores en guatemala con más de una propiedad.'
     },
-    link: 'https://manto-propiedades.vercel.app/',
+    link: 'https://manto.offsetworks.xyz/',
     image: 'images/manto-screenshot.png'
   },
   {
@@ -334,7 +335,8 @@ const workItems = [
       en: 'buy tickets direct from the organizer, or pass them on safely when plans change. one app for going out in guatemala.',
       es: 'comprá tickets directo del organizador, o pasalos de forma segura cuando cambien los planes. una sola app para salir en guatemala.'
     },
-    link: 'https://tiqueteo-v2.vercel.app',
+    link: 'https://www.tiqueteo.xyz/',
+    useImage: true,
     image: 'images/tiqueteo-screenshot.png'
   },
   {
@@ -345,7 +347,7 @@ const workItems = [
       en: 'upload once, keep forever. files live on a network that does not go down — even if the company behind it does.',
       es: 'subí una vez, guardalo para siempre. los archivos viven en una red que no se cae, ni aunque la empresa detrás desaparezca.'
     },
-    link: 'https://aeter-eight.vercel.app/',
+    link: 'https://stash.offsetworks.xyz/',
     image: 'images/stash-screenshot.png'
   },
   {
@@ -357,7 +359,7 @@ const workItems = [
       es: 'cada cobro, gasto y documento de tu obra en una sola app. para los residentes y contratistas que de verdad llevan la obra.'
     },
     link: 'https://obro-gt.vercel.app',
-    iframeSrc: 'https://obro-gt.vercel.app/login?demo=1',
+    useImage: true,
     image: 'images/obro-screenshot.png'
   },
   {

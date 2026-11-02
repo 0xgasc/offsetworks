@@ -1,10 +1,6 @@
 // Tiny Express server that:
 //   - serves the static offsetworks.xyz HTML/CSS/JS
-//   - reverse-proxies /lynx/* to the lynx Next.js service on Railway
-//
-// The lynx app is built with basePath: "/lynx" so all of its internal
-// routes/assets/cookies are scoped under /lynx, and the proxy forwards
-// the full path including the prefix.
+//   - reverse-proxies /umo-frame/* to umo so the work list can embed it
 
 const express = require("express");
 const { createProxyMiddleware } = require("http-proxy-middleware");
@@ -13,21 +9,9 @@ const path = require("path");
 const app = express();
 const port = process.env.PORT || 3000;
 
-const LYNX_TARGET =
-  process.env.LYNX_TARGET ||
-  "https://lynx-production-9436.up.railway.app";
-
 const UMO_TARGET =
   process.env.UMO_TARGET ||
   "https://umo.livemoments.online";
-
-// Match /lynx or /lynx/...
-app.use((req, res, next) => {
-  if (req.path === "/lynx" || req.path.startsWith("/lynx/")) {
-    return lynxProxy(req, res, next);
-  }
-  next();
-});
 
 // Match /umo-frame or /umo-frame/... — proxy to umo.livemoments.online and
 // strip frame-blocking response headers so we can iframe it from the rocola.
@@ -36,13 +20,6 @@ app.use((req, res, next) => {
     return umoProxy(req, res, next);
   }
   next();
-});
-
-const lynxProxy = createProxyMiddleware({
-  target: LYNX_TARGET,
-  changeOrigin: true,
-  ws: true,
-  xfwd: true,
 });
 
 // Strip frame-blocking headers AND inject <base href> into HTML responses so
@@ -165,8 +142,23 @@ function renderLocale(req, res, locale) {
 app.get(["/es", "/es/"], (req, res) => renderLocale(req, res, "es"));
 app.get(["/en", "/en/"], (req, res) => renderLocale(req, res, "en"));
 
+// Only serve the site itself. Everything else in the repo (server.js,
+// package.json, node_modules, READMEs, scripts, docs) stays private.
+const PUBLIC_ENTRIES = new Set([
+  "", "index.html", "styles.css", "main.js", "animations.js", "favicon.jpg",
+  "logo.svg", "logo-icon.svg", "robots.txt", "sitemap.xml",
+  "congreso-digital", "congreso-digital.html", "raise", "raise.html",
+  "images", "demo", "koh", "pez", "refer", "umoarchive", "invoices",
+]);
+
+app.use((req, res, next) => {
+  const top = req.path.split("/")[1] || "";
+  if (!PUBLIC_ENTRIES.has(top)) return res.status(404).send("Not found");
+  next();
+});
+
 app.use(express.static(path.resolve(__dirname), { extensions: ["html"] }));
 
 app.listen(port, () => {
-  console.log(`offsetworks listening on :${port}, /lynx → ${LYNX_TARGET}`);
+  console.log(`offsetworks listening on :${port}`);
 });
