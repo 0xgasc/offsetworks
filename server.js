@@ -147,7 +147,7 @@ app.get(["/en", "/en/"], (req, res) => renderLocale(req, res, "en"));
 const PUBLIC_ENTRIES = new Set([
   "", "index.html", "styles.css", "main.js", "animations.js", "favicon.jpg",
   "logo.svg", "logo-icon.svg", "robots.txt", "sitemap.xml",
-  "congreso-digital", "congreso-digital.html", "raise", "raise.html",
+  "raise", "raise.html",
   "images", "demo", "koh", "pez", "refer", "umoarchive", "invoices",
 ]);
 

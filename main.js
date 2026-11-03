@@ -266,17 +266,17 @@ const services = [
   {
     title: 'digital solutions',
     desc: 'custom websites with modern design and animations. built for performance and conversion.',
-    gif: 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMG8zeGQxbjhqajk0MDQ5N3dwZm1kY3JsMTU3N3ltbHlpb2czMDMweSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bz9PIxJMQtkO943XeS/giphy.gif'
+    gif: 'images/services/digital-solutions'
   },
   {
     title: 'web apps / products',
     desc: 'bespoke applications, tailored solutions and tools built for your specific needs.',
-    gif: 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2VvYzA1bWN3MWhma3F2YTR3bGx4aW1wMjd5cWVuOWZhZG1nZTdzYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wgHY9nSrlTMt2/giphy.gif'
+    gif: 'images/services/web-apps'
   },
   {
     title: 'immersive experiences',
     desc: 'building digital ecosystems for communities. interactive experiences with webgl, 3d, custom animations, and real-time features.',
-    gif: 'https://38.media.tumblr.com/807d0662a240d33e4a8dfce3c128f654/tumblr_nriviszxIb1s2t3cto1_500.gif'
+    gif: 'images/services/immersive'
   }
 ];
 
@@ -415,10 +415,20 @@ function createDitheredGif(gifSrc) {
   const wrapper = document.createElement('div');
   wrapper.className = 'service-gif-wrapper';
 
-  const img = document.createElement('img');
-  img.src = gifSrc;
+  // Self-hosted looping video (was a hotlinked GIF): gifSrc is a path
+  // without extension; .mp4 is the clip, .jpg its first frame.
+  const img = document.createElement('video');
   img.className = 'service-gif';
-  img.alt = '';
+  img.muted = true;
+  img.loop = true;
+  img.autoplay = true;
+  img.playsInline = true;
+  img.setAttribute('muted', '');
+  img.setAttribute('playsinline', '');
+  img.setAttribute('aria-hidden', 'true');
+  img.preload = 'metadata';
+  img.poster = gifSrc + '.jpg';
+  img.src = gifSrc + '.mp4';
 
   // Halftone overlay
   const halftone = document.createElement('div');
@@ -528,9 +538,9 @@ function initWorkList() {
     } else if (item.image) {
       const zoomClass = needsZoom ? ' work-track-image-zoomed' : '';
       if (hasLink) {
-        mediaContent = `<a href="${item.link}" target="_blank" rel="noopener" class="work-track-image-link"><img class="work-track-image${zoomClass}" src="${item.image}" alt="${item.title}" loading="lazy"></a>`;
+        mediaContent = `<a href="${item.link}" target="_blank" rel="noopener" class="work-track-image-link"><img class="work-track-image${zoomClass}" src="${item.image}" alt="${item.title}" width="1600" height="900" loading="lazy"></a>`;
       } else {
-        mediaContent = `<img class="work-track-image${zoomClass}" src="${item.image}" alt="${item.title}" loading="lazy">`;
+        mediaContent = `<img class="work-track-image${zoomClass}" src="${item.image}" alt="${item.title}" width="1600" height="900" loading="lazy">`;
       }
     }
 

@@ -36,9 +36,28 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=59">
+  <link rel="stylesheet" href="styles.css?v=60">
+  <script>
+    // Only hide-then-reveal sections when JS runs and motion is welcome.
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('reveal-ready');
+  </script>
 </head>
 <body>
+  <!-- Film layer: RGB-split filter used on hover, plus grain + vignette + light leak overlays -->
+  <svg class="fx-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <filter id="chroma" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
+      <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
+      <feOffset in="r" dx="-4" dy="0" result="r2"/>
+      <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
+      <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
+      <feOffset in="b" dx="4" dy="0" result="b2"/>
+      <feBlend in="r2" in2="g" mode="screen" result="rg"/>
+      <feBlend in="rg" in2="b2" mode="screen"/>
+    </filter>
+  </svg>
+  <div class="fx-grain" aria-hidden="true"></div>
+  <div class="fx-vignette" aria-hidden="true"></div>
+  <div class="fx-leak" aria-hidden="true"></div>
   <nav class="nav">
     <div class="nav-logo">offset works</div>
     <button class="hamburger" id="hamburger" aria-label="menu">
@@ -57,7 +76,7 @@
   <header class="hero">
     <pre class="section-bg" id="hero-bg"></pre>
     <div class="hero-content">
-      <h1 data-i18n="hero.headline">systems that <span class="highlight">work</span>.</h1>
+      <h1 class="chroma-title" data-i18n="hero.headline">systems that <span class="highlight">work</span>.</h1>
       <p class="hero-sub" data-i18n="hero.subtext">boutique studio for startups, creatives and founders anywhere in the world.<br>we specialize in international collaborations. competitive rates, built from scratch.</p>
       <div class="hero-cta">
         <a href="#contact" class="btn-primary" data-i18n="hero.cta1">start a project →</a>
@@ -106,14 +125,14 @@
 
   <section id="services" class="services">
     <pre class="section-bg" id="services-bg"></pre>
-    <div class="cards-grid" id="services-grid">
+    <div class="cards-grid reveal" id="services-grid">
       <!-- Cards injected by JS with random animations -->
     </div>
   </section>
 
   <section id="process" class="process">
     <pre class="section-bg" id="process-bg"></pre>
-    <div class="timeline">
+    <div class="timeline reveal">
       <div class="timeline-step">
         <div class="step-icon">
           <pre>┌──┐
@@ -121,7 +140,7 @@
 └──┘</pre>
         </div>
         <div class="step-content">
-          <h3 data-i18n="process.step1.title">intro call</h3>
+          <h2 class="step-title" data-i18n="process.step1.title">intro call</h2>
           <p data-i18n="process.step1.desc">15 min to understand your project. free, no pressure.</p>
         </div>
       </div>
@@ -133,7 +152,7 @@
 └──┘</pre>
         </div>
         <div class="step-content">
-          <h3 data-i18n="process.step2.title">proposal</h3>
+          <h2 class="step-title" data-i18n="process.step2.title">proposal</h2>
           <p data-i18n="process.step2.desc">scope, timeline, and fixed price within 48 hours.</p>
         </div>
       </div>
@@ -145,7 +164,7 @@
 └──┘</pre>
         </div>
         <div class="step-content">
-          <h3 data-i18n="process.step3.title">build sprint</h3>
+          <h2 class="step-title" data-i18n="process.step3.title">build sprint</h2>
           <p data-i18n="process.step3.desc">we work fast. most projects ship in 1-4 weeks.</p>
         </div>
       </div>
@@ -157,7 +176,7 @@
 └──┘</pre>
         </div>
         <div class="step-content">
-          <h3 data-i18n="process.step4.title">launch + support</h3>
+          <h2 class="step-title" data-i18n="process.step4.title">launch + support</h2>
           <p data-i18n="process.step4.desc">go live, then optional retainer for ongoing needs.</p>
         </div>
       </div>
@@ -166,7 +185,7 @@
 
   <section id="work" class="work">
     <pre class="section-bg" id="work-bg"></pre>
-    <div class="section-header">
+    <div class="section-header reveal">
       <span class="section-tag" data-i18n="work.tag">recent work</span>
     </div>
     <div id="work-grid">
@@ -176,8 +195,8 @@
 
   <section id="contact" class="contact">
     <pre class="section-bg" id="contact-bg"></pre>
-    <div class="contact-content">
-      <h2 data-i18n="contact.headline">ready to build something?</h2>
+    <div class="contact-content reveal">
+      <h2 class="chroma-title" data-i18n="contact.headline">ready to build something?</h2>
       <p data-i18n="contact.subtext">drop us a line. we respond fast.</p>
       <a href="mailto:offset.works.studio@gmail.com" class="btn-primary btn-large">offset.works.studio@gmail.com</a>
     </div>
@@ -208,7 +227,19 @@
   </footer>
 
   <script src="animations.js?v=48"></script>
-  <script src="main.js?v=81"></script>
+  <script src="main.js?v=82"></script>
+  <script>
+    // Film-dissolve reveal: blocks fade up out of a soft blur as they enter.
+    (function () {
+      if (!document.documentElement.classList.contains('reveal-ready')) return;
+      const els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('in-view')); return; }
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(e => io.observe(e));
+    })();
+  </script>
   <script>
     // Trippy Section Backgrounds
     (function() {
@@ -223,9 +254,21 @@
       };
 
       function resize() {
-        // Smaller char size for better coverage, balanced with performance
-        const charWidth = 8;
-        const charHeight = 12;
+        // Measure the real glyph box so the pattern always reaches both edges
+        let charWidth = 6, charHeight = 11;
+        const probeHost = document.getElementById('hero-bg');
+        if (probeHost) {
+          const probe = document.createElement('span');
+          probe.textContent = '█'.repeat(50);
+          probe.style.cssText = 'position:absolute;visibility:hidden;white-space:pre;font:inherit;line-height:inherit';
+          probeHost.parentElement.appendChild(probe);
+          probe.style.fontFamily = getComputedStyle(probeHost).fontFamily;
+          probe.style.fontSize = getComputedStyle(probeHost).fontSize;
+          probe.style.lineHeight = getComputedStyle(probeHost).lineHeight;
+          const r = probe.getBoundingClientRect();
+          if (r.width > 0) { charWidth = r.width / 50; charHeight = r.height || charHeight; }
+          probe.remove();
+        }
         Object.keys(sections).forEach(id => {
           const el = document.getElementById(id);
           if (el && el.parentElement) {
