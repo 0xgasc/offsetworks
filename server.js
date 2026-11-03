@@ -157,7 +157,19 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static(path.resolve(__dirname), { extensions: ["html"] }));
+app.use(
+  express.static(path.resolve(__dirname), {
+    extensions: ["html"],
+    setHeaders(res, filePath) {
+      // Media rarely changes: cache a week. CSS/JS are cache-busted with ?v=.
+      if (/\.(png|jpe?g|webp|gif|svg|mp4|webm)$/i.test(filePath)) {
+        res.setHeader("Cache-Control", "public, max-age=604800");
+      } else if (/\.(css|js)$/i.test(filePath)) {
+        res.setHeader("Cache-Control", "public, max-age=86400");
+      }
+    },
+  })
+);
 
 app.listen(port, () => {
   console.log(`offsetworks listening on :${port}`);
